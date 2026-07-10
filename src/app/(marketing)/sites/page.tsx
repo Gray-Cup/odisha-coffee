@@ -92,6 +92,24 @@ export default function SitesPage() {
             Visit grayfarms.in →
           </Link>
         </div>
+
+        {/* Indian Green Coffee Card */}
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-semibold text-gray-900">Indian Green Coffee</h2>
+          <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+            Origin guide to India&apos;s green coffee — including Koraput,
+            Odisha — with processing methods, grading, and a catalogue of
+            current lots.
+          </p>
+          <Link
+            href="https://indiangreencoffee.com"
+            className="mt-4 inline-block text-sm font-medium text-primary-600 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Visit indiangreencoffee.com →
+          </Link>
+        </div>
       </section>
 
       {/* Ownership Note */}
