@@ -90,6 +90,19 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
+              "@type": "WebSite",
+              "@id": "https://odishacoffee.com/#website",
+              name: "Odisha Coffee",
+              alternateName: "Odisha Coffee by Gray Cup",
+              url: "https://odishacoffee.com",
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
               "@type": "Organization",
               "@id": "https://odishacoffee.com/#organization",
               name: "Odisha Coffee",
