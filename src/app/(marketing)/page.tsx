@@ -341,7 +341,7 @@ export default function HomePage() {
                   Request Samples
                 </Link>
                 <Link
-                  href="/products"
+                  href="/buy-green-beans"
                   className="inline-block px-6 py-3 bg-transparent text-odisha-black text-sm font-semibold border-2 border-odisha-black hover:bg-odisha-black hover:text-white transition-colors"
                 >
                   View Export Lots

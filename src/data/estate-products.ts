@@ -15,7 +15,15 @@ export type EstateProduct = {
   moisture: string;
   screenSize: string;
   brewingNotes: string;
+  image?: string; // filename relative to /public/
 };
+
+const WEIGHT_OPTIONS: EstateProduct["weightOptions"] = [
+  { label: "1 kg",  grams: 1000  },
+  { label: "5 kg",  grams: 5000  },
+  { label: "25 kg", grams: 25000 },
+  { label: "60 kg", grams: 60000 },
+];
 
 export const estateProducts: EstateProduct[] = [
   {
@@ -26,22 +34,102 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 900,
     shippingPerKg: 60,
+    image: "koraput-washed.jpg",
     description:
-      "Estate-sourced AAA-grade washed Arabica green beans from Koraput's Eastern Ghats. Fully washed and parchment-dried on raised beds for 14–18 days. Screen 17+ sorted, moisture-tested at 10–12%. This lot is ideal for specialty roasters and importers seeking a consistent, traceable Indian Arabica with clean cup character and documented origin.",
+      "The finest grade from Koraput's Eastern Ghats — AAA-grade washed Arabica, screen 17+ sorted, moisture-tested at 10–12%. Fully washed and parchment-dried on raised beds for 14–18 days. Ideal for specialty roasters and importers seeking a consistent, traceable Indian Arabica with clean cup character.",
     flavorNotes: ["Clean", "Mild Citrus", "Chocolate", "Brown Sugar"],
     availability: "in-stock",
-    weightOptions: [
-      { label: "1 kg", grams: 1000 },
-      { label: "5 kg", grams: 5000 },
-      { label: "25 kg", grams: 25000 },
-      { label: "60 kg", grams: 60000 },
-    ],
+    weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
     grade: "AAA — Screen 17+",
     moisture: "10–12%",
     screenSize: "Screen 17+",
     brewingNotes:
       "Recommended roast: medium-light to medium. First crack +20–30s development. The washed process transparency rewards a careful ramp — expect clean citrus on light roasts, chocolate and brown sugar on medium.",
+  },
+  {
+    id: "aa-arabica-washed",
+    name: "AA Green Arabica Washed",
+    variety: "Arabica S795",
+    processing: "washed",
+    roastLevel: "green",
+    pricePerKg: 800,
+    shippingPerKg: 60,
+    image: "koraput-washed.jpg",
+    description:
+      "AA-grade washed Arabica from verified Koraput estates. Screen 16+ sorted, moisture 10–12%, fully washed and raised-bed dried. A reliable workhorse lot for roasters seeking solid cup quality and honest traceability at a practical price point.",
+    flavorNotes: ["Chocolate", "Mild Citrus", "Clean", "Medium Body"],
+    availability: "in-stock",
+    weightOptions: WEIGHT_OPTIONS,
+    minOrder: "1 kg",
+    grade: "AA — Screen 16+",
+    moisture: "10–12%",
+    screenSize: "Screen 16+",
+    brewingNotes:
+      "Recommended roast: medium-light to medium-dark. Versatile across filter, espresso, and blend use. Well-suited to blend components where consistent body and low defect count matter more than peak complexity.",
+  },
+  {
+    id: "a-arabica-washed",
+    name: "A Green Arabica Washed",
+    variety: "Arabica S795 & Catimor",
+    processing: "washed",
+    roastLevel: "green",
+    pricePerKg: 700,
+    shippingPerKg: 60,
+    image: "koraput-washed.jpg",
+    description:
+      "A-grade washed Arabica from Koraput partner estates. Screen 15+ sorted, moisture 10–12%. A good-value entry into Odisha washed Arabica — clean, approachable, and well-suited to medium roast profiles and espresso blending.",
+    flavorNotes: ["Chocolate", "Mild Spice", "Nutty", "Clean Finish"],
+    availability: "in-stock",
+    weightOptions: WEIGHT_OPTIONS,
+    minOrder: "1 kg",
+    grade: "A — Screen 15+",
+    moisture: "10–12%",
+    screenSize: "Screen 15+",
+    brewingNotes:
+      "Recommended roast: medium to medium-dark. Works well as an espresso base or blend anchor. The Catimor component adds structure; roast to first crack +30s for best balance.",
+  },
+  {
+    id: "b-plus-arabica-washed",
+    name: "B+ Green Arabica Washed",
+    variety: "Arabica S795 & Robusta",
+    processing: "washed",
+    roastLevel: "green",
+    pricePerKg: 580,
+    shippingPerKg: 60,
+    image: "koraput-washed.jpg",
+    description:
+      "B+ grade washed green beans — screen 15+, moisture 10–13%. A mixed-variety lot combining Arabica S795 and Robusta from Koraput estates, fully washed and sun-dried. Suited for commodity blenders, large-volume roasters, and buyers seeking consistent Indian green beans at scale.",
+    flavorNotes: ["Cocoa", "Earthy", "Full Body", "Low Acidity"],
+    availability: "in-stock",
+    weightOptions: WEIGHT_OPTIONS,
+    minOrder: "1 kg",
+    grade: "B+ — Screen 15+",
+    moisture: "10–13%",
+    screenSize: "Screen 15+",
+    brewingNotes:
+      "Recommended roast: medium-dark to dark. The Robusta component delivers crema density and caffeine; the Arabica contributes sweetness. Well-suited to espresso blends and commercial roast profiles.",
+  },
+  {
+    id: "b-arabica-washed",
+    name: "B Green Arabica Washed",
+    variety: "Arabica & Robusta Blend",
+    processing: "washed",
+    roastLevel: "green",
+    pricePerKg: 460,
+    shippingPerKg: 60,
+    image: "koraput-washed.jpg",
+    description:
+      "B-grade washed green beans from Koraput — screen 13+ sorted, moisture 11–13%. A practical commodity lot for high-volume buyers, instant coffee producers, and blend manufacturers. Traceable origin with FSSAI documentation.",
+    flavorNotes: ["Earthy", "Cocoa", "Woody", "Neutral"],
+    availability: "in-stock",
+    weightOptions: WEIGHT_OPTIONS,
+    minOrder: "5 kg",
+    grade: "B — Screen 13+",
+    moisture: "11–13%",
+    screenSize: "Screen 13+",
+    brewingNotes:
+      "Recommended roast: medium-dark to dark. Suitable for espresso blends, instant production, and commercial dark roasts. The natural earthiness of Koraput terroir is retained even at darker roast levels.",
   },
   {
     id: "b-plus-arabica-naturals",
@@ -51,16 +139,12 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 750,
     shippingPerKg: 60,
+    image: "koraput-naturals.jpg",
     description:
-      "B+ grade natural-processed green beans sun-dried whole on raised beds for 25–30 days. Cherries are dried with the fruit intact, allowing the bean to absorb natural sugars and develop a rich, fruit-integrated profile. Screen 15+ sorted, moisture-tested at 11–13%. A practical entry-point lot for roasters seeking Koraput naturals with character, depth, and honest traceability.",
+      "B+ grade natural-processed green beans sun-dried whole on raised beds for 25–30 days. Cherries are dried with the fruit intact, developing a rich, fruit-integrated profile. Screen 15+ sorted, moisture 11–13%. A practical entry-point lot for roasters seeking Koraput naturals with character and honest traceability.",
     flavorNotes: ["Dark Fruit", "Chocolate", "Earthy", "Full Body"],
     availability: "in-stock",
-    weightOptions: [
-      { label: "1 kg", grams: 1000 },
-      { label: "5 kg", grams: 5000 },
-      { label: "25 kg", grams: 25000 },
-      { label: "60 kg", grams: 60000 },
-    ],
+    weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
     grade: "B+ — Screen 15+",
     moisture: "11–13%",

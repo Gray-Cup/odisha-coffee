@@ -3,7 +3,8 @@ import { farms } from "@/data/farms";
 
 const quickLinks = [
   { href: "/farms", label: "Partner Farms" },
-  { href: "/products", label: "Products" },
+  { href: "/buy-green-beans", label: "Buy Green Beans" },
+  { href: "/roasted-coffee", label: "Roasted Coffee" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact & Export" },
 ];

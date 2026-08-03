@@ -46,7 +46,7 @@ export default function CartPage() {
         <h1 className="font-serif text-2xl font-bold text-odisha-black mb-2">Your cart is empty</h1>
         <p className="text-odisha-black/50 text-sm mb-8">Add some coffee to get started.</p>
         <Link
-          href="/products"
+          href="/buy-green-beans"
           className="inline-block px-6 py-3 bg-odisha-red text-white text-sm font-semibold border-2 border-odisha-black hover:bg-odisha-red-dark transition-colors"
         >
           Browse Products
@@ -63,7 +63,7 @@ export default function CartPage() {
           <div className="flex items-center gap-3 mb-3">
             <Link href="/" className="text-xs text-white/40 hover:text-white/70 uppercase tracking-widest transition-colors">Home</Link>
             <span className="text-white/20">/</span>
-            <Link href="/products" className="text-xs text-white/40 hover:text-white/70 uppercase tracking-widest transition-colors">Products</Link>
+            <Link href="/buy-green-beans" className="text-xs text-white/40 hover:text-white/70 uppercase tracking-widest transition-colors">Products</Link>
             <span className="text-white/20">/</span>
             <span className="text-xs text-white/60 uppercase tracking-widest">Cart</span>
           </div>
@@ -143,7 +143,7 @@ export default function CartPage() {
 
             <div className="pt-4">
               <Link
-                href="/products"
+                href="/buy-green-beans"
                 className="text-sm text-odisha-black/50 hover:text-odisha-red transition-colors underline underline-offset-2"
               >
                 ← Continue shopping

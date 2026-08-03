@@ -299,7 +299,7 @@ export default function CoffeeFarmsKoraputPage() {
               { href: "/odisha-coffee-varieties", label: "Coffee Varieties in Odisha" },
               { href: "/odisha-coffee-export", label: "Odisha Coffee Export" },
               { href: "/farms", label: "Full Farm Directory" },
-              { href: "/products", label: "Buy Koraput Coffee" },
+              { href: "/buy-green-beans", label: "Buy Koraput Coffee" },
             ].map((l) => (
               <Link
                 key={l.href}

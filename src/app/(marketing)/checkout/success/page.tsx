@@ -33,7 +33,7 @@ export default function CheckoutSuccessPage() {
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
-            href="/products"
+            href="/buy-green-beans"
             className="px-6 py-3 bg-odisha-red text-white text-sm font-semibold border-2 border-odisha-black hover:bg-odisha-red-dark transition-colors"
           >
             Shop More Coffee

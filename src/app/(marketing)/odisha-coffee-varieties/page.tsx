@@ -355,7 +355,7 @@ export default function OdishaCoffeeVarietiesPage() {
           </h3>
           <div className="flex flex-wrap gap-3">
             {[
-              { href: "/products", label: "All Products" },
+              { href: "/buy-green-beans", label: "Buy Green Beans" },
               { href: "/odisha-coffee-export", label: "Export Green Beans" },
               { href: "/farms", label: "Browse All Farms" },
               { href: "/coffee-farms-koraput", label: "Koraput Farm Guide" },
