@@ -26,7 +26,7 @@ function ProductCard({
   const pricing = computeEstateProductTotal(product.pricePerKg, product.shippingPerKg, 1000);
 
   return (
-    <div className="border-2 border-odisha-black -ml-[2px] -mt-[2px] bg-white flex flex-col">
+    <div className="border-2 border-odisha-black bg-white flex flex-col">
       {/* Image */}
       <div className="relative h-44 border-b-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
         {product.image ? (
@@ -253,7 +253,7 @@ export function ProductsCatalog() {
             )}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {estateProducts.map((product) => (
               <ProductCard
                 key={product.id}
