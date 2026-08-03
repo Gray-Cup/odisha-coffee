@@ -1,251 +1,99 @@
-"use client";
+import { Metadata } from "next";
+import { generateTitle, generateDescription } from "@/lib/seo";
+import { MapPin, Phone, Mail, Building2 } from "lucide-react";
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardDescription,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-
-type Tier = {
-  name: string;
-  description: string;
-  cta: string;
-  ctaVariant?: "default" | "blue" | "red";
-  features: string[];
-  flagText?: string;
+export const metadata: Metadata = {
+  title: generateTitle("Contact Us"),
+  description: generateDescription(
+    "Get in touch with Gray Cup Enterprises Private Limited — office address, phone, email and WhatsApp."
+  ),
 };
 
-/* ---------- Single borderless plan column ---------- */
-function PricingCard({
-  tier,
-  columnRef,
-}: {
-  tier: Tier;
-  columnRef?: React.RefObject<HTMLDivElement | null>;
-}) {
+export default function ContactPage() {
   return (
-    <div ref={columnRef} className="relative">
-      <Card className="p-0 shadow-none border-0 rounded-none bg-white">
-        <div className="flex flex-col">
-          <CardHeader className="pt-4">
-            <CardTitle className="text-lg font-semibold">{tier.name}</CardTitle>
-          </CardHeader>
+    <div className="max-w-3xl mx-auto min-h-screen py-10 lg:py-20 px-4">
+      <h1 className="text-3xl md:text-4xl font-semibold text-black mb-3">
+        Contact Us
+      </h1>
+      <p className="text-md md:text-lg text-muted-foreground mb-10">
+        Have a question or want to do business with Gray Cup? Reach out to us
+        directly using any of the details below.
+      </p>
 
-          <CardContent className="p-0">
-            <div className="flex w-full flex-col items-start gap-4 pb-4 px-6">
-              <div className="mb-6 flex flex-col gap-2">
-                <div className="flex items-center gap-2">
-                  <p className="text-sm text-neutral-700">{tier.description}</p>
-                </div>
-              </div>
-              <Button
-                className="w-full h-10 rounded-lg"
-                variant={tier.ctaVariant ?? "default"}
-              >
-                {tier.cta}
-              </Button>
-            </div>
-
-            <Separator className="my-5" />
-
-            <ul className="mt-4 flex flex-col gap-4 px-6 pb-4 text-sm">
-              {tier.features.map((f) => (
-                <li key={f} className="flex items-start gap-3">
-                  #<span>{f}</span>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </div>
-      </Card>
-    </div>
-  );
-}
-
-// tracking-[-0.15rem] for dollars and money
-
-/* ---------- Example data ---------- */
-const tiers: Tier[] = [
-  {
-    name: "General Enquires",
-    description: "We usually respond within 48 hours.",
-    cta: "Send Mail",
-    ctaVariant: "blue",
-    features: ["office@graycup.org"],
-  },
-  {
-    name: "Legal & Compliance",
-    description: "We usually respond within 48 hours.",
-    cta: "Send Mail",
-    ctaVariant: "red",
-    features: ["legal@graycup.org"],
-  },
-  {
-    name: "Marketing & PR",
-    description: "We usually respond within 48 hours.",
-    cta: "Send Mail",
-    features: ["marketing@graycup.org"],
-  },
-  {
-    name: "Call Us",
-    description: "If we miss your call, we'll call you back.",
-    cta: "Call Now",
-    ctaVariant: "blue",
-    features: ["+91 000-work-in-progress"],
-  },
-];
-
-/* ---------- Page ---------- */
-export default function PricingPage() {
-  const frameRef = useRef<HTMLDivElement | null>(null);
-
-  return (
-    <div className="min-h-screen py-20">
-      <div className="max-w-7xl mx-auto px-4 lg:px-6">
-        <div className="mb-16">
-          <h1 className="text-3xl md:text-4xl font-semibold text-black mb-4">
-            Contact Gray Cup
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Have a question or you want to do business with Gray Cup? There is
-            always a way to reach us.
-            <br />
-            Your message matters.
+      <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-6 space-y-5">
+        <div className="flex items-start gap-3">
+          <Building2 className="w-5 h-5 mt-0.5 text-neutral-500 shrink-0" />
+          <p className="text-neutral-800">
+            Gray Cup Enterprises Private Limited
           </p>
         </div>
 
-        <div className="max-w-6xl flex flex-col md:flex-row justify-center items-center max-md:gap-5 md:justify-between mx-auto">
-          <div className="max-w-sm w-full ">
-            <Card className="p-0 border border-gray-200 rounded-2xl bg-white">
-              <div className="flex flex-col ">
-                <CardHeader className="pt-4">
-                  <CardTitle className="text-lg font-semibold">
-                    Sales & Purchases
-                  </CardTitle>
-                </CardHeader>
-
-                <CardContent className="p-0">
-                  <div className="flex w-full flex-col items-start gap-4 px-6 pb-4">
-                    <div className="mb-6 flex flex-col gap-2">
-                      <div className="flex items-center gap-2">
-                        <p className="text-sm text-neutral-700">
-                          We usually respond within 48 hours.
-                        </p>
-                      </div>
-                    </div>
-                    <Button
-                      className="w-full h-10 rounded-lg"
-                      variant="lightgray"
-                    >
-                      Send Mail
-                    </Button>
-                  </div>
-
-                  <Separator className="my-5" />
-
-                  <ul className="mt-4 flex flex-col gap-4 px-6 pb-8 text-sm">
-                    <li className="flex items-start gap-3">
-                      <span>#</span>
-                      <span>sales@graycup.org</span>
-                    </li>
-                  </ul>
-                </CardContent>
-              </div>
-            </Card>
-          </div>
-          <div className="flex-col sm:flex-row flex-wrap hidden lg:flex items-center py-4 gap-4 justify-center">
-            <Image
-              src="/coffee-beans.webp"
-              draggable="false"
-              alt="coffee beans"
-              width="280"
-              height="200"
-            />
-          </div>
-
-          <div className="max-w-sm w-full ">
-            <Card className="p-0 border border-gray-200 rounded-2xl bg-white">
-              <div className="flex flex-col ">
-                <CardHeader className="pt-4">
-                  <CardTitle className="text-lg font-semibold">
-                    Schedule Zoom Meeting
-                  </CardTitle>
-                </CardHeader>
-
-                <CardContent className="p-0">
-                  <div className="flex w-full flex-col items-start gap-4 px-6 pb-4">
-                    <div className="mb-6 flex flex-col gap-2">
-                      <div className="flex items-center gap-2">
-                        <p className="text-sm text-neutral-700">
-                          Arjun will be attending this meeting.
-                        </p>
-                      </div>
-                    </div>
-                    <Button className="w-full h-10 rounded-lg" variant="gray">
-                      Schedule
-                    </Button>
-                  </div>
-
-                  <Separator className="my-5" />
-
-                  <ul className="mt-4 flex flex-col gap-4 px-6 pb-8 text-sm">
-                    <li className="flex items-start gap-3">
-                      <span>#</span>
-                      <span>arjun@graycup.org</span>
-                    </li>
-                  </ul>
-                </CardContent>
-              </div>
-            </Card>
-          </div>
+        <div className="flex items-start gap-3">
+          <MapPin className="w-5 h-5 mt-0.5 text-neutral-500 shrink-0" />
+          <p className="text-neutral-800">
+            Harsha Bhawan, 4th Floor, 13/29 E- Block, Connaught Place, New
+            Delhi-110001
+          </p>
         </div>
-        <div className="flex justify-between py-4">
-          <div className="flex-col sm:flex-row flex-wrap hidden lg:flex items-center gap-4 justify-start">
-            <Image
-              src="/tea-leaves.svg"
-              draggable="false"
-              alt="coffee beans"
-              width="160"
-              height="160"
-            />
-          </div>
-          <div className="flex-col sm:flex-row flex-wrap hidden lg:flex items-center gap-4 justify-end">
-            <Image
-              src="/tea-leaves.svg"
-              draggable="false"
-              alt="coffee beans"
-              width="160"
-              height="160"
-            />
-          </div>
+
+        <div className="flex items-start gap-3">
+          <Phone className="w-5 h-5 mt-0.5 text-neutral-500 shrink-0" />
+          <a
+            href="tel:+918527914317"
+            className="text-neutral-800 hover:underline"
+          >
+            +91 8527914317
+          </a>
         </div>
-        <div className="max-w-6xl mx-auto mt-10">
-          {/* Wrapper must be relative so overlay positions correctly */}
-          <div className="relative">
-            {/* Framed container can be overflow-hidden now; corners stay clean */}
-            <div
-              ref={frameRef}
-              className="rounded-2xl max-md:max-w-sm max-md:mx-auto border border-gray-200 bg-white overflow-hidden"
+
+        <div className="flex items-start gap-3">
+          <Mail className="w-5 h-5 mt-0.5 text-neutral-500 shrink-0" />
+          <div className="flex flex-col gap-1">
+            <a
+              href="mailto:office@graycup.org"
+              className="text-neutral-800 hover:underline"
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-x divide-gray-200">
-                {tiers.map((t) => {
-                  return (
-                    <div key={t.name} className="relative">
-                      <PricingCard tier={t} />
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+              office@graycup.org
+            </a>
+            <a
+              href="mailto:arjun@graycup.in"
+              className="text-neutral-800 hover:underline"
+            >
+              arjun@graycup.in
+            </a>
           </div>
-          {/* end wrapper */}
         </div>
+      </div>
+
+      <a
+        href="https://wa.me/918527914317"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#05aa6c] px-5 py-2.5 text-sm font-medium text-white hover:opacity-90 transition-opacity"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.149-.15.35-.394.53-.592.18-.198.24-.339.359-.567.12-.228.06-.427-.03-.599-.09-.171-.816-1.966-1.116-2.694-.298-.712-.599-.615-.822-.626-.216-.01-.463-.012-.71-.012-.247 0-.647.093-.885.462-.239.37-.912 1.09-.912 2.372 0 1.281.912 2.582 1.04 2.775.128.194 1.795 2.771 4.365 3.98 2.57 1.211 2.57.807 3.036.756.466-.05 1.507-.616 1.72-1.212.212-.596.212-1.107.148-1.213-.064-.106-.297-.169-.594-.318z" />
+          <path d="M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .105 5.365.103 11.955c0 2.096.548 4.14 1.588 5.945L0 24l6.304-1.654a11.94 11.94 0 0 0 5.734 1.464h.005c6.585 0 11.943-5.365 11.946-11.955a11.9 11.9 0 0 0-3.469-8.406zm-8.475 18.4h-.004a9.93 9.93 0 0 1-5.06-1.387l-.363-.216-3.741.981.998-3.648-.237-.375a9.917 9.917 0 0 1-1.522-5.256c.002-5.476 4.455-9.928 9.933-9.928 2.652 0 5.14 1.033 7.014 2.909a9.86 9.86 0 0 1 2.906 7.021c-.003 5.477-4.456 9.899-9.924 9.899z" />
+        </svg>
+        Send us a message on WhatsApp
+      </a>
+
+      <div className="mt-10 rounded-xl overflow-hidden border border-neutral-200">
+        <iframe
+          title="Gray Cup Enterprises office location"
+          src="https://www.google.com/maps?q=Harsha+Bhawan,+13/29+E-Block,+Connaught+Place,+New+Delhi-110001&output=embed"
+          width="100%"
+          height="350"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          style={{ border: 0 }}
+        />
       </div>
     </div>
   );
