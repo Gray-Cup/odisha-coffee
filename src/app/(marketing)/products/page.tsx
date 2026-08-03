@@ -1,14 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { products, roastLabels, availabilityColors, availabilityLabels } from "@/data/products";
-import { processingColors, processingLabels } from "@/data/farms";
+import { farms, processingColors, processingLabels } from "@/data/farms";
+import { estateProducts } from "@/data/estate-products";
 import { ProductActions } from "@/components/products/product-actions";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Odisha Coffee Products — Green Beans, Export & Specialty Lots",
+  title: "Odisha Coffee Products — Estate Green Beans, Export & Specialty Lots",
   description:
-    "Odisha coffee wholesale and export — washed, natural, and honey processed Arabica & Robusta from verified Koraput farms. Export-grade green beans, specialty lots, and bulk supply available.",
+    "Browse all Odisha coffee products — AAA washed and B+ natural green beans from 24 verified Koraput estates, plus specialty roasted lots and export-grade supply from Gray Cup Enterprises.",
+  alternates: { canonical: "/products" },
 };
 
 const BASE_URL = "https://odishacoffee.com";
@@ -120,25 +122,128 @@ export default function ProductsPage() {
           </div>
 
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-            Coffee Lots
+            Products
           </h1>
-          <p className="text-white/70 text-sm max-w-2xl leading-relaxed">
-            Single-origin coffee from verified Gray Cup partner estates in Koraput, Odisha. Roasted specialty lots, green beans, and seasonal micro-lots — all traceable to the farm of origin.
+          <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
+            Estate green beans direct from all {farms.length} partner farms in Koraput, plus
+            specialty roasted lots and export-grade supply from Gray Cup Enterprises. Every
+            product is traceable to its farm of origin.
           </p>
 
-          <div className="flex flex-wrap gap-2 mt-6">
-            {["All", "Washed", "Natural", "Honey", "Export Ready"].map((filter) => (
-              <span
-                key={filter}
-                className={`text-[10px] font-semibold uppercase tracking-widest px-3 py-1.5 border-2 cursor-default ${
-                  filter === "All"
-                    ? "bg-white text-odisha-black border-white"
-                    : "bg-transparent text-white/60 border-white/30 hover:border-white hover:text-white transition-colors"
-                }`}
-              >
-                {filter}
-              </span>
+          <div className="flex flex-wrap gap-6">
+            {[
+              { value: estateProducts.length.toString(), label: "Estate Products" },
+              { value: farms.length.toString(), label: "Partner Farms" },
+              { value: products.filter((p) => !p.isGreen && p.roastLevel !== "green").length.toString(), label: "Roasted Lots" },
+              { value: products.filter((p) => p.exportAvailable).length.toString(), label: "Export Available" },
+            ].map(({ value, label }) => (
+              <div key={label} className="border-l-2 border-white/30 pl-4">
+                <div className="font-serif text-2xl font-bold text-white">{value}</div>
+                <div className="text-[10px] uppercase tracking-widest text-white/60">{label}</div>
+              </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── ESTATE GREEN BEANS ───────────────────────────────────────── */}
+      <section className="bg-white border-b-2 border-odisha-black">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-1 h-6 bg-odisha-green" />
+            <div>
+              <h2 className="font-serif text-2xl font-bold text-odisha-black">
+                Estate Green Beans
+              </h2>
+              <p className="text-xs text-odisha-black/50 mt-0.5">
+                Available direct from all {farms.length} partner farms — click a farm to order
+              </p>
+            </div>
+          </div>
+          <p className="text-sm text-odisha-black/60 mb-8 max-w-2xl leading-relaxed">
+            These lots are available from every Gray Cup partner estate in Koraput. Select a
+            product below to see all farms, or click any farm to go directly to that
+            estate&apos;s product page.
+          </p>
+
+          <div className="space-y-10">
+            {estateProducts.map((ep) => {
+              const totalPerKg = ep.pricePerKg + ep.shippingPerKg;
+              return (
+                <div key={ep.id} className="border-2 border-odisha-black">
+                  {/* Product header */}
+                  <div className="border-b-2 border-odisha-black bg-odisha-offwhite pattachitra-pattern p-5 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex flex-wrap gap-1.5 mb-2">
+                        <span className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 ${processingColors[ep.processing]}`}>
+                          {processingLabels[ep.processing]}
+                        </span>
+                        <span className="text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 bg-odisha-green text-white">
+                          Green Bean
+                        </span>
+                        <span className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 ${
+                          ep.availability === "in-stock"
+                            ? "bg-odisha-green text-white"
+                            : ep.availability === "limited"
+                            ? "bg-odisha-yellow text-black"
+                            : "bg-[#1E3A8A] text-white"
+                        }`}>
+                          {ep.availability === "in-stock" ? "In Stock" : ep.availability === "limited" ? "Limited" : "Seasonal"}
+                        </span>
+                      </div>
+                      <h3 className="font-serif text-xl font-bold text-odisha-black mb-1">
+                        {ep.name}
+                      </h3>
+                      <p className="text-xs text-odisha-black/60 max-w-xl leading-relaxed">
+                        {ep.description}
+                      </p>
+                    </div>
+                    <div className="shrink-0 text-right">
+                      <div className="font-serif text-2xl font-bold text-odisha-black">
+                        ₹{totalPerKg.toLocaleString("en-IN")}
+                        <span className="text-sm font-normal text-odisha-black/50 ml-1">/ kg</span>
+                      </div>
+                      <div className="text-[11px] text-odisha-black/40 mt-0.5">
+                        ₹{ep.pricePerKg} + ₹{ep.shippingPerKg} shipping
+                      </div>
+                      <div className="text-[11px] text-odisha-black/40 mt-0.5">
+                        Grade: {ep.grade} · Min: {ep.minOrder}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Farm grid */}
+                  <div className="p-4">
+                    <div className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-3">
+                      Available from {farms.length} estates — select a farm to order
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-0">
+                      {farms.map((farm) => (
+                        <Link
+                          key={farm.id}
+                          href={`/farms/${farm.id}/products/${ep.id}`}
+                          className="group border border-odisha-black/10 -ml-[1px] -mt-[1px] p-3 bg-white hover:bg-odisha-red hover:border-odisha-red transition-colors"
+                        >
+                          <div className="text-xs font-semibold text-odisha-black group-hover:text-white transition-colors leading-snug mb-1">
+                            {farm.name}
+                          </div>
+                          <div className="text-[10px] text-odisha-black/40 group-hover:text-white/70 transition-colors">
+                            {farm.region}
+                          </div>
+                          {farm.exportReady && (
+                            <div className="mt-1.5">
+                              <span className="text-[9px] font-bold uppercase tracking-widest border border-odisha-green text-odisha-green group-hover:border-white group-hover:text-white px-1 py-0.5 transition-colors">
+                                Export
+                              </span>
+                            </div>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

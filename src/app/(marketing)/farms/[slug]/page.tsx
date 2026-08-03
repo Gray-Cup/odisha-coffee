@@ -379,15 +379,26 @@ export default async function FarmDetailPage({
             </svg>
             All Farms
           </Link>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 text-sm font-semibold bg-odisha-red text-white border-2 border-odisha-red px-6 py-2 hover:bg-odisha-red-dark transition-colors"
-          >
-            Wholesale Inquiry
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link
+              href={`/farms/${farm.id}/products`}
+              className="inline-flex items-center gap-2 text-sm font-semibold bg-odisha-green text-white border-2 border-odisha-green px-5 py-2 hover:bg-odisha-black hover:border-odisha-black transition-colors"
+            >
+              Buy Green Beans
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 text-sm font-semibold bg-odisha-red text-white border-2 border-odisha-red px-6 py-2 hover:bg-odisha-red-dark transition-colors"
+            >
+              Wholesale Inquiry
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
     </div>
