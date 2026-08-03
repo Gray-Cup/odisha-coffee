@@ -68,8 +68,17 @@ export default function AboutPage() {
             Odisha Coffee is run by{" "}
             <span className="font-semibold text-odisha-black">
               Gray Cup Enterprises Private Limited
-            </span>
-            , which handles sourcing, export, and logistics on behalf of the
+            </span>{" "}
+            (
+            <a
+              href="https://graycup.org/"
+              target="_blank"
+              rel="noopener dofollow"
+              className="text-odisha-black hover:text-odisha-red transition-colors underline"
+            >
+              graycup.org
+            </a>
+            ), which handles sourcing, export, and logistics on behalf of the
             farms listed here.
           </p>
 
@@ -99,12 +108,25 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="border-2 border-odisha-black p-5">
               <p className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-1">
+                Company Website
+              </p>
+              <a
+                href="https://graycup.org/"
+                target="_blank"
+                rel="noopener dofollow"
+                className="font-serif font-semibold text-odisha-black hover:text-odisha-red transition-colors"
+              >
+                graycup.org
+              </a>
+            </div>
+            <div className="border-2 border-odisha-black p-5">
+              <p className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-1">
                 Online Store for Consumers
               </p>
               <a
                 href="https://graycup.in/"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener dofollow"
                 className="font-serif font-semibold text-odisha-black hover:text-odisha-red transition-colors"
               >
                 graycup.in
@@ -118,7 +140,7 @@ export default function AboutPage() {
               <a
                 href="https://b2b.graycup.in/"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener dofollow"
                 className="font-serif font-semibold text-odisha-black hover:text-odisha-red transition-colors"
               >
                 b2b.graycup.in
@@ -132,7 +154,7 @@ export default function AboutPage() {
               <a
                 href="https://bulkgreencoffee.com/"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener dofollow"
                 className="font-serif font-semibold text-odisha-black hover:text-odisha-red transition-colors"
               >
                 bulkgreencoffee.com
@@ -146,7 +168,7 @@ export default function AboutPage() {
               <a
                 href="https://indiangreencoffee.com/"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener dofollow"
                 className="font-serif font-semibold text-odisha-black hover:text-odisha-red transition-colors"
               >
                 indiangreencoffee.com
@@ -159,7 +181,7 @@ export default function AboutPage() {
               <a
                 href="https://indianroastedcoffee.com/"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener dofollow"
                 className="font-serif font-semibold text-odisha-black hover:text-odisha-red transition-colors"
               >
                 indianroastedcoffee.com
