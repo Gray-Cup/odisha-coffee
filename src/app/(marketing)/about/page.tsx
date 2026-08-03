@@ -96,7 +96,7 @@ export default function AboutPage() {
           <h2 className="font-serif text-2xl md:text-3xl font-bold text-odisha-black mb-6">
             Other Sites
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="border-2 border-odisha-black p-5">
               <p className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-1">
                 Online Store for Consumers
@@ -127,15 +127,42 @@ export default function AboutPage() {
             </div>
             <div className="border-2 border-odisha-black p-5">
               <p className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-1">
-                IndiaMart
+                Bulk Green Coffee
               </p>
               <a
-                href="https://www.indiamart.com/gray-cup-enterprises/"
+                href="https://bulkgreencoffee.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-serif font-semibold text-odisha-black hover:text-odisha-red transition-colors"
               >
-                indiamart.com/gray-cup-enterprises
+                bulkgreencoffee.com
+              </a>
+              <p className="text-xs text-odisha-black/50 mt-1">Worldwide</p>
+            </div>
+            <div className="border-2 border-odisha-black p-5">
+              <p className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-1">
+                Origin Guide — Green Coffee
+              </p>
+              <a
+                href="https://indiangreencoffee.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-serif font-semibold text-odisha-black hover:text-odisha-red transition-colors"
+              >
+                indiangreencoffee.com
+              </a>
+            </div>
+            <div className="border-2 border-odisha-black p-5">
+              <p className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-1">
+                Roasted Coffee, Shipped to Order
+              </p>
+              <a
+                href="https://indianroastedcoffee.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-serif font-semibold text-odisha-black hover:text-odisha-red transition-colors"
+              >
+                indianroastedcoffee.com
               </a>
             </div>
           </div>
