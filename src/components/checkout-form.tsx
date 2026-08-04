@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Turnstile, useTurnstile } from "@/components/ui/turnstile";
+import { getCashfree } from "@/lib/cashfree-client";
 import type { OdishaOrderRequest } from "@/app/api/create-payment/route";
 
 const NEEDS_CAPTCHA = !!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
@@ -115,7 +116,17 @@ export function CheckoutForm({ products, totalAmount, renderSummary, onBack }: P
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to create payment");
-      window.location.href = data.paymentLink;
+
+      // Orders API + Checkout.js: renders Cashfree's hosted checkout for this
+      // order's payment_session_id, rather than redirecting to a generic
+      // Payment Links page. With no redirectTarget this still navigates the
+      // full page away to complete payment, then back to returnUrl.
+      const cashfree = await getCashfree();
+      const result = await cashfree.checkout({
+        paymentSessionId: data.paymentSessionId,
+        returnUrl: data.returnUrl,
+      });
+      if (result?.error) throw new Error(result.error.message || "Payment failed to start.");
     } catch (err) {
       setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
       setIsLoading(false);

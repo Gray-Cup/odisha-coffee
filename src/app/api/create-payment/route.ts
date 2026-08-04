@@ -10,7 +10,12 @@ import {
   type OrderItem,
 } from "@/lib/pricing";
 
-const CASHFREE_API_URL = "https://api.cashfree.com/pg/links";
+// Orders API + Checkout.js — NOT the Payment Links API (/pg/links). Links are
+// Cashfree's no-code/shareable-link product (email/SMS/WhatsApp collection);
+// Orders + a payment_session_id is the actual storefront checkout flow, and
+// lets the frontend render Cashfree's checkout via the cashfree-js SDK
+// instead of redirecting to a bare payments.cashfree.com/links/... page.
+const CASHFREE_API_URL = "https://api.cashfree.com/pg/orders";
 const CASHFREE_CLIENT_ID = process.env.CASHFREE_CLIENT_ID;
 const CASHFREE_CLIENT_SECRET = process.env.CASHFREE_CLIENT_SECRET;
 
@@ -132,24 +137,25 @@ export async function POST(request: NextRequest) {
       })
       .join(", ");
 
-    const paymentLinkPayload = {
-      link_id: linkId,
-      link_amount: totalAmount,
-      link_currency: "INR",
-      link_purpose: `Odisha Coffee ${orderRef} — ${productSummary}`,
+    const returnUrl = `${origin}/checkout/success?link_id=${linkId}&order_ref=${orderRef}`;
+
+    // `linkId` doubles as Cashfree's order_id — it's already alphanumeric
+    // with underscores, well within the 3-50 char limit, and unique per order.
+    const orderPayload = {
+      order_id: linkId,
+      order_amount: totalAmount,
+      order_currency: "INR",
       customer_details: {
+        customer_id: phone.replace(/\D/g, "").slice(-10) || `guest_${Date.now()}`,
         customer_name: name,
         customer_phone: phone.replace(/\D/g, "").slice(-10),
         ...(email && { customer_email: email }),
       },
-      link_meta: {
-        return_url: `${origin}/checkout/success?link_id=${linkId}&order_ref=${orderRef}`,
+      order_meta: {
+        return_url: returnUrl,
       },
-      link_notify: {
-        send_sms: true,
-        send_email: !!email,
-      },
-      link_expiry_time: expiryTime.toISOString(),
+      order_note: `Odisha Coffee ${orderRef} — ${productSummary}`,
+      order_expiry_time: expiryTime.toISOString(),
     };
 
     const response = await fetch(CASHFREE_API_URL, {
@@ -160,7 +166,7 @@ export async function POST(request: NextRequest) {
         "x-client-secret": CASHFREE_CLIENT_SECRET,
         "x-api-version": "2023-08-01",
       },
-      body: JSON.stringify(paymentLinkPayload),
+      body: JSON.stringify(orderPayload),
     });
 
     const data = await response.json();
@@ -168,18 +174,26 @@ export async function POST(request: NextRequest) {
     if (!response.ok) {
       console.error("Cashfree API error:", data);
       return NextResponse.json(
-        { error: data.message || "Failed to create payment link" },
+        { error: data.message || "Failed to create payment order" },
         { status: response.status }
       );
     }
 
-    if (data.cf_link_id) {
+    // `cf_link_id` originally tracked the Payment Links product's own id;
+    // it's repurposed here to hold Cashfree's internal cf_order_id.
+    if (data.cf_order_id) {
       await db.update(odishaCoffeeOrders)
-        .set({ cf_link_id: String(data.cf_link_id) })
+        .set({ cf_link_id: String(data.cf_order_id) })
         .where(eq(odishaCoffeeOrders.link_id, linkId));
     }
 
-    return NextResponse.json({ success: true, paymentLink: data.link_url, linkId, orderRef });
+    return NextResponse.json({
+      success: true,
+      paymentSessionId: data.payment_session_id,
+      returnUrl,
+      linkId,
+      orderRef,
+    });
   } catch (error) {
     console.error("Payment creation error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
