@@ -122,12 +122,14 @@ export function gramsForResolved(resolved: ResolvedCartItem, weight: string): nu
   return tiersFor(resolved).find((t) => t.label === weight)?.grams ?? 0;
 }
 
-export type OrderItem = { productId: string; weight: string; farmId?: string };
+export type OrderItem = { productId: string; weight: string; farmId?: string; quantity?: number };
 
 /**
  * Recomputes the full order total (product prices + one order-level delivery
  * fee based on total weight) from raw items. Throws if any item is invalid so
- * the caller can reject the request outright.
+ * the caller can reject the request outright. `quantity` (default 1) lets a
+ * single line represent N units of the same product/weight/farm combo — used
+ * by the buy-green-beans "Select" quick-buy flow, which skips the cart.
  */
 export function computeOrderTotal(items: OrderItem[]): number {
   if (items.length === 0) throw new Error("No items in order");
@@ -139,8 +141,9 @@ export function computeOrderTotal(items: OrderItem[]): number {
     if (!resolved) throw new Error(`Invalid product: ${item.productId}`);
     const grams = gramsForResolved(resolved, item.weight);
     if (!grams) throw new Error(`Invalid weight: ${item.weight} for ${item.productId}`);
-    total += computeItemPrice(pricePerKgFor(resolved, grams), grams);
-    totalGrams += grams;
+    const quantity = Math.max(1, Math.floor(item.quantity ?? 1));
+    total += computeItemPrice(pricePerKgFor(resolved, grams), grams) * quantity;
+    totalGrams += grams * quantity;
   }
 
   return total + deliveryFeeForGrams(totalGrams);

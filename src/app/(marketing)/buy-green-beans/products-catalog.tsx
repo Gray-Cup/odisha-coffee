@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ShoppingCart, Check, Minus, Plus, Zap, X } from "lucide-react";
 import { farms, processingColors, processingLabels } from "@/data/farms";
 import { estateProducts } from "@/data/estate-products";
 import type { EstateProduct } from "@/data/estate-products";
 import { useCart } from "@/context/cart-context";
-import { computeItemPrice, bulkDiscountForGrams } from "@/lib/pricing";
+import { computeItemPrice, bulkDiscountForGrams, deliveryFeeForGrams } from "@/lib/pricing";
+
+const MAX_QUANTITY = 20;
 
 // ── Individual product card with its own farm dropdown ──────────────────────
 
@@ -22,25 +25,46 @@ function ProductCard({
 }) {
   const [farmId, setFarmId] = useState(defaultFarmId);
   const [selectedWeight, setSelectedWeight] = useState(product.weightOptions[2] ?? product.weightOptions[0]);
-  const { add, isInCart } = useCart();
+  const [quantity, setQuantity] = useState(1);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [justAdded, setJustAdded] = useState(false);
+  const { add } = useCart();
   const router = useRouter();
 
   useEffect(() => {
     setFarmId(defaultFarmId);
   }, [defaultFarmId]);
 
+  // Reset the quantity stepper whenever the drawer is reopened.
+  useEffect(() => {
+    if (drawerOpen) setQuantity(1);
+  }, [drawerOpen]);
+
   const basePerKg = product.pricePerKg + product.shippingPerKg;
   const discount = bulkDiscountForGrams(selectedWeight.grams);
   const effectivePerKg = Math.round(basePerKg * (1 - discount));
-  const totalPrice = computeItemPrice(effectivePerKg, selectedWeight.grams);
-  const inCart = isInCart(product.id);
+  const unitPrice = computeItemPrice(effectivePerKg, selectedWeight.grams);
+  const drawerSubtotal = unitPrice * quantity;
+  const drawerDelivery = deliveryFeeForGrams(selectedWeight.grams * quantity);
+  const drawerTotal = drawerSubtotal + drawerDelivery;
 
-  const handleSelect = () => {
+  const handleAddToCart = () => {
     add(product.id, selectedWeight.label, farmId);
+    setJustAdded(true);
+    window.setTimeout(() => setJustAdded(false), 1800);
+  };
+
+  const handleCheckout = () => {
+    const params = new URLSearchParams({
+      products: `${product.id}:${selectedWeight.label}:${farmId}:${quantity}`,
+      total: String(drawerTotal),
+    });
+    setDrawerOpen(false);
+    router.push(`/checkout?${params.toString()}`);
   };
 
   return (
-    <div className="border-2 border-odisha-black bg-white flex flex-col">
+    <div className="relative border-2 border-odisha-black bg-white flex flex-col">
       {/* Image */}
       <div className="relative h-44 border-b-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
         {product.image ? (
@@ -128,7 +152,7 @@ function ProductCard({
         <div className="mb-3 border-t border-odisha-black/10 pt-3 flex items-end justify-between">
           <div>
             <span className="font-serif text-xl font-bold text-odisha-black">
-              ₹{totalPrice.toLocaleString("en-IN")}
+              ₹{unitPrice.toLocaleString("en-IN")}
             </span>
             <span className="text-xs text-odisha-black/50 ml-1">for {selectedWeight.label}</span>
           </div>
@@ -137,39 +161,184 @@ function ProductCard({
           </span>
         </div>
 
-        {/* Farm selector + select button */}
-        <div className="space-y-2">
-          <label className="block">
-            <span className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1 block">
-              Select Farm
-            </span>
-            <select
-              value={farmId}
-              onChange={(e) => setFarmId(e.target.value)}
-              className="w-full border-2 border-odisha-black bg-white px-3 py-2 text-xs font-medium text-odisha-black focus:outline-none focus:border-odisha-red cursor-pointer"
-            >
-              {farms.map((f) => (
-                <option key={f.id} value={f.id}>
-                  {f.name} — {f.region}
-                </option>
-              ))}
-            </select>
-          </label>
+        {/* Farm selector */}
+        <label className="block mb-2">
+          <span className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1 block">
+            Select Farm
+          </span>
+          <select
+            value={farmId}
+            onChange={(e) => setFarmId(e.target.value)}
+            className="w-full border-2 border-odisha-black bg-white px-3 py-2 text-xs font-medium text-odisha-black focus:outline-none focus:border-odisha-red cursor-pointer"
+          >
+            {farms.map((f) => (
+              <option key={f.id} value={f.id}>
+                {f.name} — {f.region}
+              </option>
+            ))}
+          </select>
+        </label>
 
+        {/* Select (multi-quantity, skip-cart checkout) + Add to Cart */}
+        <div className="flex gap-2">
           <button
             type="button"
-            onClick={inCart ? () => router.push("/cart") : handleSelect}
-            className={`flex items-center justify-center gap-2 w-full px-4 py-2.5 text-xs font-bold uppercase tracking-widest border-2 transition-colors cursor-pointer ${
-              inCart
-                ? "bg-odisha-black border-odisha-black text-white hover:bg-odisha-red hover:border-odisha-red"
-                : "bg-odisha-red border-odisha-red text-white hover:bg-odisha-black hover:border-odisha-black"
-            }`}
+            onClick={() => setDrawerOpen(true)}
+            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-xs font-bold uppercase tracking-widest border-2 border-odisha-black text-odisha-black bg-white hover:bg-odisha-black hover:text-white transition-colors cursor-pointer"
           >
-            <ShoppingCart className="w-3.5 h-3.5" />
-            {inCart ? "In Cart — View" : "Select"}
+            Select
           </button>
+
+          <motion.button
+            type="button"
+            onClick={handleAddToCart}
+            whileTap={{ scale: 0.94 }}
+            className="flex-1 relative flex items-center justify-center gap-1.5 px-3 py-2.5 text-xs font-bold uppercase tracking-widest border-2 border-odisha-red bg-odisha-red text-white hover:bg-odisha-black hover:border-odisha-black transition-colors cursor-pointer overflow-hidden"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {justAdded ? (
+                <motion.span
+                  key="added"
+                  initial={{ y: 12, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -12, opacity: 0 }}
+                  transition={{ duration: 0.18 }}
+                  className="flex items-center gap-1.5"
+                >
+                  <Check className="w-3.5 h-3.5" />
+                  Added!
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="add"
+                  initial={{ y: 12, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -12, opacity: 0 }}
+                  transition={{ duration: 0.18 }}
+                  className="flex items-center gap-1.5"
+                >
+                  <ShoppingCart className="w-3.5 h-3.5" />
+                  Add to Cart
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
       </div>
+
+      {/* Quantity drawer — pick qty, see total, checkout directly (skips cart) */}
+      <AnimatePresence>
+        {drawerOpen && (
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black/50 z-50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setDrawerOpen(false)}
+            />
+            <motion.div
+              className="fixed bottom-4 left-4 right-4 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 sm:w-full sm:max-w-md
+              max-h-[85vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl border-2 border-odisha-black bg-white p-6 pb-8 shadow-2xl z-50"
+              initial={{ y: "110%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "110%" }}
+              transition={{ type: "spring", damping: 28, stiffness: 300 }}
+            >
+              <div className="w-10 h-1.5 bg-odisha-black/15 rounded-full mx-auto mb-4 sm:hidden" />
+
+              <div className="flex items-center justify-between mb-5">
+                <h3 className="font-serif font-bold text-odisha-black text-base leading-snug pr-4">
+                  {product.name}
+                </h3>
+                <button
+                  className="p-1 border-2 border-odisha-black hover:bg-odisha-red hover:border-odisha-red hover:text-white transition-colors shrink-0 cursor-pointer"
+                  onClick={() => setDrawerOpen(false)}
+                  aria-label="Close"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <span className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-2 block">
+                Select Weight
+              </span>
+              <div className="grid grid-cols-4 gap-2 mb-5">
+                {product.weightOptions.map((opt) => (
+                  <button
+                    key={opt.label}
+                    onClick={() => setSelectedWeight(opt)}
+                    className={`px-2 py-2.5 text-sm font-semibold border-2 transition-colors cursor-pointer ${
+                      selectedWeight.label === opt.label
+                        ? "bg-odisha-red border-odisha-red text-white"
+                        : "bg-white border-odisha-black text-odisha-black hover:bg-odisha-offwhite"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+
+              <span className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-2 block">
+                Quantity
+              </span>
+              <div className="flex items-center gap-3 mb-5">
+                <button
+                  type="button"
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  className="w-10 h-10 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                  disabled={quantity <= 1}
+                  aria-label="Decrease quantity"
+                >
+                  <Minus className="w-4 h-4" />
+                </button>
+                <span className="font-serif text-2xl font-bold text-odisha-black w-12 text-center tabular-nums">
+                  {quantity}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setQuantity((q) => Math.min(MAX_QUANTITY, q + 1))}
+                  className="w-10 h-10 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                  disabled={quantity >= MAX_QUANTITY}
+                  aria-label="Increase quantity"
+                >
+                  <Plus className="w-4 h-4" />
+                </button>
+                <span className="text-xs text-odisha-black/50 ml-1">
+                  × {selectedWeight.label} = {((selectedWeight.grams * quantity) / 1000).toFixed(quantity * selectedWeight.grams % 1000 === 0 ? 0 : 2)} kg
+                </span>
+              </div>
+
+              <div className="border-2 border-odisha-black bg-odisha-offwhite p-4 space-y-1.5 mb-4">
+                <div className="flex justify-between text-xs text-odisha-black/60">
+                  <span>Subtotal ({quantity} × {selectedWeight.label})</span>
+                  <span>₹{drawerSubtotal.toLocaleString("en-IN")}</span>
+                </div>
+                <div className="flex justify-between text-xs text-odisha-black/60">
+                  <span>Delivery</span>
+                  <span>₹{drawerDelivery.toLocaleString("en-IN")}</span>
+                </div>
+                <div className="flex justify-between font-bold text-odisha-black text-base pt-1.5 border-t border-odisha-black/20">
+                  <span>Total</span>
+                  <span>₹{drawerTotal.toLocaleString("en-IN")}</span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleCheckout}
+                className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-odisha-red text-white text-sm font-bold uppercase tracking-widest border-2 border-odisha-red hover:bg-odisha-black hover:border-odisha-black transition-colors cursor-pointer"
+              >
+                <Zap className="w-4 h-4" />
+                Proceed to Checkout
+              </button>
+              <p className="text-[10px] text-odisha-black/40 text-center mt-3">
+                This buys directly — it won&apos;t be added to your cart.
+              </p>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

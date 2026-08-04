@@ -14,7 +14,7 @@ import {
   type ResolvedCartItem,
 } from "@/lib/pricing";
 
-type CheckoutRow = { resolved: ResolvedCartItem; weight: string; price: number; grams: number; entry: string };
+type CheckoutRow = { resolved: ResolvedCartItem; weight: string; quantity: number; price: number; grams: number; entry: string };
 
 function imageSrcFor(resolved: ResolvedCartItem): string | null {
   if (resolved.kind === "product") return resolved.product.image ? `/products/${resolved.product.image}` : null;
@@ -28,13 +28,14 @@ function CheckoutContent() {
   const cartItems: CheckoutRow[] = useMemo(() => {
     if (!productsParam) return [];
     return productsParam.split(",").flatMap((entry) => {
-      const [productId, weight, farmId] = entry.split(":");
+      const [productId, weight, farmId, qty] = entry.split(":");
       const resolved = resolveCartProduct(productId, farmId);
       if (!resolved) return [];
       const tiers = tiersFor(resolved);
       const tier  = tiers.find((t) => t.label === weight) ?? tiers[0];
-      const price = computeItemPrice(pricePerKgFor(resolved, tier.grams), tier.grams);
-      return [{ resolved, weight: tier.label, price, grams: tier.grams, entry }];
+      const quantity = qty ? Math.max(1, Math.floor(Number(qty)) || 1) : 1;
+      const price = computeItemPrice(pricePerKgFor(resolved, tier.grams), tier.grams) * quantity;
+      return [{ resolved, weight: tier.label, quantity, price, grams: tier.grams * quantity, entry }];
     });
   }, [productsParam]);
 
@@ -78,7 +79,7 @@ function CheckoutContent() {
                 Your Order
               </h2>
               <div className="space-y-4 mb-5">
-                {cartItems.map(({ resolved, weight, price }) => {
+                {cartItems.map(({ resolved, weight, quantity, price }) => {
                   const product = resolved.product;
                   const image = imageSrcFor(resolved);
                   return (
@@ -93,7 +94,9 @@ function CheckoutContent() {
                         {resolved.kind === "estate" && (
                           <p className="text-[10px] text-odisha-black/50">From {resolved.farm.name}</p>
                         )}
-                        <p className="text-[10px] text-odisha-black/50 mt-0.5">{weight}</p>
+                        <p className="text-[10px] text-odisha-black/50 mt-0.5">
+                          {weight}{quantity > 1 ? ` × ${quantity}` : ""}
+                        </p>
                       </div>
                       <p className="text-sm font-bold text-odisha-black whitespace-nowrap">
                         ₹{price.toLocaleString("en-IN")}

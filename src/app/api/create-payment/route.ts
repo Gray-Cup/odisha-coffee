@@ -24,7 +24,7 @@ export interface OdishaOrderRequest {
   state?: string;
   gstOrTaxId?: string;
   businessType?: string;
-  products: string[]; // "productId:weight" or "productId:weight:farmId" strings
+  products: string[]; // "productId:weight", "productId:weight:farmId", or "productId:weight:farmId:qty" strings
   totalAmount: number; // INR
 }
 
@@ -45,8 +45,13 @@ export async function POST(request: NextRequest) {
     }
 
     const orderItems: OrderItem[] = products.map((entry) => {
-      const [productId, weight, farmId] = entry.split(":");
-      return { productId, weight: weight ?? "", farmId: farmId || undefined };
+      const [productId, weight, farmId, qty] = entry.split(":");
+      return {
+        productId,
+        weight: weight ?? "",
+        farmId: farmId || undefined,
+        quantity: qty ? Math.max(1, Math.floor(Number(qty)) || 1) : 1,
+      };
     });
 
     // The order total is ALWAYS computed here from our own product/tier
@@ -75,7 +80,8 @@ export async function POST(request: NextRequest) {
     const itemsDetail = orderItems.map((item) => {
       const resolved = resolveCartProduct(item.productId, item.farmId);
       const grams = resolved ? gramsForResolved(resolved, item.weight) : 0;
-      const price = resolved ? computeItemPrice(pricePerKgFor(resolved, grams), grams) : 0;
+      const quantity = item.quantity ?? 1;
+      const price = resolved ? computeItemPrice(pricePerKgFor(resolved, grams), grams) * quantity : 0;
       const image =
         resolved?.kind === "product" && resolved.product.image
           ? `${origin}/products/${resolved.product.image}`
@@ -89,6 +95,7 @@ export async function POST(request: NextRequest) {
         tier: item.weight,
         grams,
         price,
+        quantity,
         ...(resolved?.kind === "estate" && {
           farmId: resolved.farm.id,
           farmName: resolved.farm.name,

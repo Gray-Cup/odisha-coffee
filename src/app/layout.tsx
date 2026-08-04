@@ -5,7 +5,6 @@ import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
 import RootProviders from "@/components/providers";
 import { Analytics } from "@vercel/analytics/next";
-import { WhatsappWidget } from "@/components/whatsapp-widget";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -166,7 +165,6 @@ export default function RootLayout({
         />
         <Analytics />
         <RootProviders>{children}</RootProviders>
-        <WhatsappWidget />
       </body>
     </html>
   );
