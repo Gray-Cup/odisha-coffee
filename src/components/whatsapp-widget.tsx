@@ -1,19 +1,9 @@
-"use client";
-
-import { useCart } from "@/context/cart-context";
-
 export function WhatsappWidget() {
-  // Lifted clear of the floating cart bar on mobile when it's showing, so the
-  // two never overlap.
-  const { count } = useCart();
-
   return (
     <a
       href="https://api.whatsapp.com/send?phone=918527914317&text=Hey!"
       target="_blank"
-      className={`fixed hover:shadow-lg rounded-full scale-121 cursor-pointer duration-200 right-8 ${
-        count > 0 ? "bottom-24 sm:bottom-10" : "bottom-10"
-      }`}
+      className="fixed bottom-10 hover:shadow-lg rounded-full scale-121 cursor-pointer duration-200 right-8"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

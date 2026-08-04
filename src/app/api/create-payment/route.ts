@@ -103,7 +103,7 @@ export async function POST(request: NextRequest) {
       };
     });
 
-    await db.insert(odishaCoffeeOrders).values({
+    const [insertedOrder] = await db.insert(odishaCoffeeOrders).values({
       name,
       phone: phone.replace(/\D/g, "").slice(-12),
       email: email || null,
@@ -119,7 +119,11 @@ export async function POST(request: NextRequest) {
       total_amount: totalAmount,
       link_id: linkId,
       payment_status: "pending",
-    });
+    }).returning({ id: odishaCoffeeOrders.id });
+
+    // Human-friendly sequential order reference derived from the row's own
+    // serial id (e.g. OD-0001, OD-0002, ...) — no separate counter needed.
+    const orderRef = `OD-${String(insertedOrder.id).padStart(4, "0")}`;
 
     const productSummary = products
       .map((p) => {
@@ -132,14 +136,14 @@ export async function POST(request: NextRequest) {
       link_id: linkId,
       link_amount: totalAmount,
       link_currency: "INR",
-      link_purpose: `Odisha Coffee — ${productSummary}`,
+      link_purpose: `Odisha Coffee ${orderRef} — ${productSummary}`,
       customer_details: {
         customer_name: name,
         customer_phone: phone.replace(/\D/g, "").slice(-10),
         ...(email && { customer_email: email }),
       },
       link_meta: {
-        return_url: `${origin}/checkout/success?link_id=${linkId}`,
+        return_url: `${origin}/checkout/success?link_id=${linkId}&order_ref=${orderRef}`,
       },
       link_notify: {
         send_sms: true,
@@ -175,7 +179,7 @@ export async function POST(request: NextRequest) {
         .where(eq(odishaCoffeeOrders.link_id, linkId));
     }
 
-    return NextResponse.json({ success: true, paymentLink: data.link_url, linkId });
+    return NextResponse.json({ success: true, paymentLink: data.link_url, linkId, orderRef });
   } catch (error) {
     console.error("Payment creation error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

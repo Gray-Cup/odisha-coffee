@@ -6,7 +6,13 @@ export const metadata: Metadata = {
   description: "Your Odisha Coffee order has been placed successfully.",
 };
 
-export default function CheckoutSuccessPage() {
+export default async function CheckoutSuccessPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ order_ref?: string }>;
+}) {
+  const { order_ref: orderRef } = await searchParams;
+
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center border-2 border-odisha-black bg-white p-10">
@@ -20,6 +26,14 @@ export default function CheckoutSuccessPage() {
         <h1 className="font-serif text-2xl md:text-3xl font-bold text-odisha-black mb-3">
           Order Confirmed!
         </h1>
+
+        {orderRef && (
+          <div className="inline-block border-2 border-odisha-black bg-odisha-offwhite px-4 py-1.5 mb-4">
+            <span className="text-[10px] uppercase tracking-widest text-odisha-black/50 mr-2">Order ID</span>
+            <span className="font-serif font-bold text-odisha-black">{orderRef}</span>
+          </div>
+        )}
+
         <p className="text-odisha-black/60 text-sm leading-relaxed mb-2">
           Thank you for your order. We&apos;ve received your payment and will prepare your coffee shortly.
         </p>

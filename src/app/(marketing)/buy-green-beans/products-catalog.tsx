@@ -309,10 +309,6 @@ export function ProductsCatalog() {
   const [selectedFarmId, setSelectedFarmId] = useState<string | null>(null);
   const [selections, setSelections] = useState<Record<string, Selection>>({});
   const router = useRouter();
-  // Lifts this bar clear of the global cart floating bar (see
-  // cart-floating-bar.tsx) whenever the persistent cart also has items, so
-  // the two never stack on top of each other.
-  const { count: cartCount } = useCart();
 
   const selectedFarm = selectedFarmId
     ? (farms.find((f) => f.id === selectedFarmId) ?? null)
@@ -470,9 +466,7 @@ export function ProductsCatalog() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ type: "spring", damping: 28, stiffness: 320 }}
-            className={`fixed inset-x-0 z-30 border-t-2 border-odisha-black bg-white shadow-2xl ${
-              cartCount > 0 ? "bottom-16 sm:bottom-20" : "bottom-0"
-            }`}
+            className="fixed inset-x-0 bottom-0 z-30 border-t-2 border-odisha-black bg-white shadow-2xl"
           >
             <div className="max-w-7xl mx-auto px-4 lg:px-6 py-3 flex flex-col sm:flex-row sm:items-center gap-3">
               <div className="flex items-center justify-between sm:justify-start sm:gap-4 flex-1">
@@ -487,9 +481,10 @@ export function ProductsCatalog() {
                 <button
                   type="button"
                   onClick={() => setSelections({})}
-                  className="px-4 py-2.5 text-xs font-bold uppercase tracking-widest border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer"
+                  className="flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-bold uppercase tracking-widest border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer"
                 >
                   <X className="w-3.5 h-3.5" />
+                  Reset
                 </button>
                 <button
                   type="button"
