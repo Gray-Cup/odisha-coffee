@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db, odishaCoffeeOrders } from "@/db";
-import { products as productCatalog } from "@/data/products";
-import { computeOrderTotal, gramsForWeight, computeItemPrice, type OrderItem } from "@/lib/pricing";
+import {
+  computeOrderTotal,
+  resolveCartProduct,
+  gramsForResolved,
+  pricePerKgFor,
+  computeItemPrice,
+  type OrderItem,
+} from "@/lib/pricing";
 
 const CASHFREE_API_URL = "https://api.cashfree.com/pg/links";
 const CASHFREE_CLIENT_ID = process.env.CASHFREE_CLIENT_ID;
@@ -18,7 +24,7 @@ export interface OdishaOrderRequest {
   state?: string;
   gstOrTaxId?: string;
   businessType?: string;
-  products: string[]; // "productId:weight" strings
+  products: string[]; // "productId:weight" or "productId:weight:farmId" strings
   totalAmount: number; // INR
 }
 
@@ -39,8 +45,8 @@ export async function POST(request: NextRequest) {
     }
 
     const orderItems: OrderItem[] = products.map((entry) => {
-      const [productId, weight] = entry.split(":");
-      return { productId, weight: weight ?? "" };
+      const [productId, weight, farmId] = entry.split(":");
+      return { productId, weight: weight ?? "", farmId: farmId || undefined };
     });
 
     // The order total is ALWAYS computed here from our own product/tier
@@ -67,16 +73,26 @@ export async function POST(request: NextRequest) {
     // only place the "how much per item" detail is ever persisted. Prices here
     // are product-only (delivery is one order-level fee, not per item).
     const itemsDetail = orderItems.map((item) => {
-      const product = productCatalog.find((p) => p.id === item.productId);
-      const grams = product ? gramsForWeight(product, item.weight) : 0;
-      const price = product ? computeItemPrice(product.pricePerKg, grams) : 0;
+      const resolved = resolveCartProduct(item.productId, item.farmId);
+      const grams = resolved ? gramsForResolved(resolved, item.weight) : 0;
+      const price = resolved ? computeItemPrice(pricePerKgFor(resolved), grams) : 0;
+      const image =
+        resolved?.kind === "product" && resolved.product.image
+          ? `${origin}/products/${resolved.product.image}`
+          : resolved?.kind === "estate" && resolved.product.image
+          ? `${origin}/${resolved.product.image}`
+          : null;
       return {
         slug: item.productId,
-        name: product?.name ?? item.productId,
-        image: product?.image ? `${origin}/${product.image}` : null,
+        name: resolved?.product.name ?? item.productId,
+        image,
         tier: item.weight,
         grams,
         price,
+        ...(resolved?.kind === "estate" && {
+          farmId: resolved.farm.id,
+          farmName: resolved.farm.name,
+        }),
       };
     });
 

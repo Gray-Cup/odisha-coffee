@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { ShoppingCart, Zap } from "lucide-react";
-import { useCart, ROASTED_TIERS, GREEN_TIERS, computeItemPrice, type WeightLabel } from "@/context/cart-context";
+import { useCart, ROASTED_TIERS, GREEN_TIERS, computeItemPrice } from "@/context/cart-context";
 import { deliveryFeeForGrams } from "@/lib/pricing";
 import type { Product } from "@/data/products";
 
@@ -16,7 +16,7 @@ export function ProductActions({ product }: Props) {
   const inCart = isInCart(product.id);
   const cartItem = items.find((i) => i.productId === product.id);
   const currentTier = tiers.find((t) => t.label === cartItem?.weight) ?? tiers[0];
-  const defaultWeight = tiers[0].label as WeightLabel;
+  const defaultWeight = tiers[0].label;
 
   const handleBuyNow = () => {
     const weight = cartItem?.weight ?? defaultWeight;

@@ -5,11 +5,21 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { CheckoutForm } from "@/components/checkout-form";
-import { products, type Product } from "@/data/products";
-import { ROASTED_TIERS, GREEN_TIERS, computeItemPrice } from "@/context/cart-context";
-import { deliveryFeeForGrams } from "@/lib/pricing";
+import {
+  resolveCartProduct,
+  tiersFor,
+  pricePerKgFor,
+  computeItemPrice,
+  deliveryFeeForGrams,
+  type ResolvedCartItem,
+} from "@/lib/pricing";
 
-type CheckoutRow = { product: Product; weight: string; price: number; grams: number; entry: string };
+type CheckoutRow = { resolved: ResolvedCartItem; weight: string; price: number; grams: number; entry: string };
+
+function imageSrcFor(resolved: ResolvedCartItem): string | null {
+  if (resolved.kind === "product") return resolved.product.image ? `/products/${resolved.product.image}` : null;
+  return resolved.product.image ? `/${resolved.product.image}` : null;
+}
 
 function CheckoutContent() {
   const params = useSearchParams();
@@ -18,13 +28,13 @@ function CheckoutContent() {
   const cartItems: CheckoutRow[] = useMemo(() => {
     if (!productsParam) return [];
     return productsParam.split(",").flatMap((entry) => {
-      const [productId, weight] = entry.split(":");
-      const product = products.find((p) => p.id === productId);
-      if (!product) return [];
-      const tiers = product.isGreen ? GREEN_TIERS : ROASTED_TIERS;
+      const [productId, weight, farmId] = entry.split(":");
+      const resolved = resolveCartProduct(productId, farmId);
+      if (!resolved) return [];
+      const tiers = tiersFor(resolved);
       const tier  = tiers.find((t) => t.label === weight) ?? tiers[0];
-      const price = computeItemPrice(product.pricePerKg, tier.grams);
-      return [{ product, weight: tier.label, price, grams: tier.grams, entry }];
+      const price = computeItemPrice(pricePerKgFor(resolved), tier.grams);
+      return [{ resolved, weight: tier.label, price, grams: tier.grams, entry }];
     });
   }, [productsParam]);
 
@@ -68,22 +78,29 @@ function CheckoutContent() {
                 Your Order
               </h2>
               <div className="space-y-4 mb-5">
-                {cartItems.map(({ product, weight, price }) => (
-                  <div key={product.id} className="flex gap-3">
-                    <div className="w-12 h-12 border-2 border-odisha-black shrink-0 overflow-hidden relative bg-odisha-offwhite">
-                      {product.image && (
-                        <Image src={`/products/${product.image}`} alt={product.name} fill className="object-cover" />
-                      )}
+                {cartItems.map(({ resolved, weight, price }) => {
+                  const product = resolved.product;
+                  const image = imageSrcFor(resolved);
+                  return (
+                    <div key={`${product.id}:${weight}`} className="flex gap-3">
+                      <div className="w-12 h-12 border-2 border-odisha-black shrink-0 overflow-hidden relative bg-odisha-offwhite">
+                        {image && (
+                          <Image src={image} alt={product.name} fill className="object-cover" />
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-xs font-semibold text-odisha-black leading-snug">{product.name}</p>
+                        {resolved.kind === "estate" && (
+                          <p className="text-[10px] text-odisha-black/50">From {resolved.farm.name}</p>
+                        )}
+                        <p className="text-[10px] text-odisha-black/50 mt-0.5">{weight}</p>
+                      </div>
+                      <p className="text-sm font-bold text-odisha-black whitespace-nowrap">
+                        ₹{price.toLocaleString("en-IN")}
+                      </p>
                     </div>
-                    <div className="flex-1">
-                      <p className="text-xs font-semibold text-odisha-black leading-snug">{product.name}</p>
-                      <p className="text-[10px] text-odisha-black/50 mt-0.5">{weight}</p>
-                    </div>
-                    <p className="text-sm font-bold text-odisha-black whitespace-nowrap">
-                      ₹{price.toLocaleString("en-IN")}
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
               <div className="border-t-2 border-odisha-black pt-4 space-y-1.5">
                 <div className="flex justify-between text-xs text-odisha-black/60">

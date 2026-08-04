@@ -13,13 +13,18 @@ import {
 export { ROASTED_TIERS, GREEN_TIERS, computeItemPrice };
 export type { WeightLabel };
 
-export type CartItem = { productId: string; weight: WeightLabel };
+// `weight` is a plain string (not the stricter WeightLabel union) because
+// estate lots carry their own per-product weight tiers ("100 g", "2 kg", ...)
+// that don't belong to the roasted/green tier sets WeightLabel enumerates.
+// `farmId` is only set for estate (green bean) lots, which are farm-agnostic
+// catalogue entries the buyer pairs with a chosen partner farm in the UI.
+export type CartItem = { productId: string; weight: string; farmId?: string };
 
 type CartCtx = {
   items: CartItem[];
-  add: (productId: string, weight: WeightLabel) => void;
+  add: (productId: string, weight: string, farmId?: string) => void;
   remove: (productId: string) => void;
-  updateWeight: (productId: string, weight: WeightLabel) => void;
+  updateWeight: (productId: string, weight: string) => void;
   isInCart: (productId: string) => boolean;
   clear: () => void;
   count: number;
@@ -43,9 +48,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("odisha_cart", JSON.stringify(items));
   }, [items]);
 
-  const add = useCallback((productId: string, weight: WeightLabel) => {
+  const add = useCallback((productId: string, weight: string, farmId?: string) => {
     setItems((prev) =>
-      prev.some((i) => i.productId === productId) ? prev : [...prev, { productId, weight }]
+      prev.some((i) => i.productId === productId)
+        ? prev.map((i) => (i.productId === productId ? { productId, weight, farmId } : i))
+        : [...prev, { productId, weight, farmId }]
     );
   }, []);
 
@@ -53,7 +60,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((prev) => prev.filter((i) => i.productId !== productId));
   }, []);
 
-  const updateWeight = useCallback((productId: string, weight: WeightLabel) => {
+  const updateWeight = useCallback((productId: string, weight: string) => {
     setItems((prev) => prev.map((i) => i.productId === productId ? { ...i, weight } : i));
   }, []);
 

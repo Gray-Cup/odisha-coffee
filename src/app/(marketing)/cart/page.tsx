@@ -4,36 +4,41 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ShoppingCart, Trash2 } from "lucide-react";
+import { useCart, type CartItem } from "@/context/cart-context";
 import {
-  useCart,
-  ROASTED_TIERS,
-  GREEN_TIERS,
+  resolveCartProduct,
+  tiersFor,
+  pricePerKgFor,
   computeItemPrice,
-  type WeightLabel,
-} from "@/context/cart-context";
-import { deliveryFeeForGrams } from "@/lib/pricing";
-import { products, availabilityColors, availabilityLabels, type Product } from "@/data/products";
-import type { CartItem } from "@/context/cart-context";
+  deliveryFeeForGrams,
+  type ResolvedCartItem,
+} from "@/lib/pricing";
+import { availabilityColors, availabilityLabels } from "@/data/products";
 
 type CartRow = {
-  product: Product;
+  resolved: ResolvedCartItem;
   item: CartItem;
-  tiers: typeof ROASTED_TIERS | typeof GREEN_TIERS;
+  tiers: Array<{ label: string; grams: number }>;
   tier: { label: string; grams: number };
   itemPrice: number;
 };
+
+function imageSrcFor(resolved: ResolvedCartItem): string | null {
+  if (resolved.kind === "product") return resolved.product.image ? `/products/${resolved.product.image}` : null;
+  return resolved.product.image ? `/${resolved.product.image}` : null;
+}
 
 export default function CartPage() {
   const { items, remove, updateWeight, count } = useCart();
   const router = useRouter();
 
   const cartProducts: CartRow[] = items.flatMap((item) => {
-    const product = products.find((p) => p.id === item.productId);
-    if (!product) return [];
-    const tiers = product.isGreen ? GREEN_TIERS : ROASTED_TIERS;
-    const tier = (tiers.find((t) => t.label === item.weight) ?? tiers[0]) as CartRow["tier"];
-    const itemPrice = computeItemPrice(product.pricePerKg, tier.grams);
-    return [{ product, item, tiers, tier, itemPrice }];
+    const resolved = resolveCartProduct(item.productId, item.farmId);
+    if (!resolved) return [];
+    const tiers = tiersFor(resolved);
+    const tier = tiers.find((t) => t.label === item.weight) ?? tiers[0];
+    const itemPrice = computeItemPrice(pricePerKgFor(resolved), tier.grams);
+    return [{ resolved, item, tiers, tier, itemPrice }];
   });
 
   const subtotal = cartProducts.reduce((s, { itemPrice }) => s + itemPrice, 0);
@@ -49,7 +54,7 @@ export default function CartPage() {
         <p className="text-odisha-black/50 text-sm mb-8">Add some coffee to get started.</p>
         <Link
           href="/buy-green-beans"
-          className="inline-block px-6 py-3 bg-odisha-red text-white text-sm font-semibold border-2 border-odisha-black hover:bg-odisha-red-dark transition-colors"
+          className="inline-block px-6 py-3 bg-odisha-red text-white text-sm font-semibold border-2 border-odisha-black hover:bg-odisha-red-dark transition-colors cursor-pointer"
         >
           Browse Products
         </Link>
@@ -79,66 +84,73 @@ export default function CartPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart items */}
           <div className="lg:col-span-2 space-y-0">
-            {cartProducts.map(({ product, item, tiers, tier, itemPrice }) => (
-              <div key={product.id} className="border-2 border-odisha-black -mt-[2px] bg-white p-5">
-                <div className="flex gap-4">
-                  {/* Image */}
-                  <div className="w-20 h-20 border-2 border-odisha-black shrink-0 overflow-hidden relative bg-odisha-offwhite">
-                    {product.image ? (
-                      <Image
-                        src={`/products/${product.image}`}
-                        alt={product.name}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-odisha-black/20 text-xs">No image</div>
-                    )}
-                  </div>
+            {cartProducts.map(({ resolved, item, tiers, tier, itemPrice }) => {
+              const product = resolved.product;
+              const image = imageSrcFor(resolved);
+              return (
+                <div key={item.productId} className="border-2 border-odisha-black -mt-[2px] bg-white p-5">
+                  <div className="flex gap-4">
+                    {/* Image */}
+                    <div className="w-20 h-20 border-2 border-odisha-black shrink-0 overflow-hidden relative bg-odisha-offwhite">
+                      {image ? (
+                        <Image
+                          src={image}
+                          alt={product.name}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-odisha-black/20 text-xs">No image</div>
+                      )}
+                    </div>
 
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <div>
-                        <h3 className="font-serif font-bold text-odisha-black text-sm leading-snug">{product.name}</h3>
-                        <span className={`text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 mt-1 inline-block ${availabilityColors[product.availability]}`}>
-                          {availabilityLabels[product.availability]}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <div>
+                          <h3 className="font-serif font-bold text-odisha-black text-sm leading-snug">{product.name}</h3>
+                          {resolved.kind === "estate" && (
+                            <p className="text-[10px] text-odisha-black/50 mt-0.5">From {resolved.farm.name}</p>
+                          )}
+                          <span className={`text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 mt-1 inline-block ${availabilityColors[product.availability]}`}>
+                            {availabilityLabels[product.availability]}
+                          </span>
+                        </div>
+                        <button
+                          onClick={() => remove(item.productId)}
+                          className="p-1 text-odisha-black/30 hover:text-odisha-red transition-colors shrink-0 cursor-pointer"
+                          aria-label="Remove"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+
+                      {/* Weight selector */}
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {tiers.map((t) => (
+                          <button
+                            key={t.label}
+                            onClick={() => updateWeight(item.productId, t.label)}
+                            className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-1 border-2 transition-colors cursor-pointer ${
+                              item.weight === t.label
+                                ? "bg-odisha-red border-odisha-red text-white"
+                                : "border-odisha-black/30 text-odisha-black/60 hover:border-odisha-black"
+                            }`}
+                          >
+                            {t.label}
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="flex items-center justify-end">
+                        <span className="font-bold text-odisha-black text-base">
+                          ₹{itemPrice.toLocaleString("en-IN")}
                         </span>
                       </div>
-                      <button
-                        onClick={() => remove(product.id)}
-                        className="p-1 text-odisha-black/30 hover:text-odisha-red transition-colors shrink-0"
-                        aria-label="Remove"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-
-                    {/* Weight selector */}
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {tiers.map((t) => (
-                        <button
-                          key={t.label}
-                          onClick={() => updateWeight(product.id, t.label as WeightLabel)}
-                          className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-1 border-2 transition-colors cursor-pointer ${
-                            item.weight === t.label
-                              ? "bg-odisha-red border-odisha-red text-white"
-                              : "border-odisha-black/30 text-odisha-black/60 hover:border-odisha-black"
-                          }`}
-                        >
-                          {t.label}
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center justify-end">
-                      <span className="font-bold text-odisha-black text-base">
-                        ₹{itemPrice.toLocaleString("en-IN")}
-                      </span>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
             <div className="pt-4">
               <Link
@@ -158,10 +170,10 @@ export default function CartPage() {
               </h2>
 
               <div className="space-y-2 mb-5">
-                {cartProducts.map(({ product, item, itemPrice }) => (
-                  <div key={product.id} className="flex justify-between text-sm">
+                {cartProducts.map(({ resolved, item, itemPrice }) => (
+                  <div key={item.productId} className="flex justify-between text-sm">
                     <span className="text-odisha-black/60 truncate mr-2">
-                      {product.name.split(" ").slice(0, 3).join(" ")} ({item.weight})
+                      {resolved.product.name.split(" ").slice(0, 3).join(" ")} ({item.weight})
                     </span>
                     <span className="font-medium text-odisha-black whitespace-nowrap">
                       ₹{itemPrice.toLocaleString("en-IN")}
@@ -188,12 +200,12 @@ export default function CartPage() {
               <button
                 onClick={() => {
                   const params = new URLSearchParams({
-                    products: items.map((i) => `${i.productId}:${i.weight}`).join(","),
+                    products: items.map((i) => `${i.productId}:${i.weight}${i.farmId ? `:${i.farmId}` : ""}`).join(","),
                     total: String(total),
                   });
                   router.push(`/checkout?${params.toString()}`);
                 }}
-                className="w-full py-3 bg-odisha-red text-white font-semibold text-sm uppercase tracking-widest border-2 border-odisha-black hover:bg-odisha-red-dark transition-colors"
+                className="w-full py-3 bg-odisha-red text-white font-semibold text-sm uppercase tracking-widest border-2 border-odisha-black hover:bg-odisha-red-dark transition-colors cursor-pointer"
               >
                 Proceed to Checkout
               </button>
