@@ -21,6 +21,46 @@ export type Farm = {
 
 export const farms: Farm[] = [
   {
+    id: "dream-hill-coffee",
+    name: "Dream Hill Coffee — Saptagiri Plantation",
+    region: "Pottangi",
+    district: "Koraput",
+    elevation: "1100–1450m",
+    area: "28 acres",
+    varieties: ["Arabica SLN 9", "Arabica Catuai"],
+    processing: ["washed", "honey"],
+    flavorNotes: ["Jasmine", "Citrus Zest", "Golden Raisin"],
+    harvestSeason: "December – March",
+    established: 2009,
+    description:
+      "Dream Hill Coffee, operating under the Saptagiri Plantation banner, is positioned at the highest elevations in Odisha's coffee belt. At over 1100 metres, the estate produces some of the most refined Arabica coffees from the region, with a bright acidity and aromatic complexity rare in Indian coffees.",
+    story:
+      "Founded with a singular focus on high-altitude specialty production, Dream Hill Coffee has become a benchmark for Odisha Arabica. The founder's background in agronomy brought scientific rigour to cultivation — from soil health monitoring to canopy management — resulting in consistently high cupping scores.",
+    certifications: ["FSSAI", "APEDA", "Rainforest Alliance"],
+    exportReady: true,
+    featured: true,
+  },
+  {
+    id: "brown-valley-coffee-estate",
+    name: "Brown Valley Coffee Estate",
+    region: "Boipariguda",
+    district: "Koraput",
+    elevation: "1050–1300m",
+    area: "32 acres",
+    varieties: ["Arabica S795", "Arabica Catimor", "Robusta"],
+    processing: ["washed", "natural", "honey"],
+    flavorNotes: ["Milk Chocolate", "Hazelnut", "Stone Fruit"],
+    harvestSeason: "November – February",
+    established: 1995,
+    description:
+      "Brown Valley is one of the larger estates in Koraput, spread across the undulating terrain of Boipariguda. The estate runs a fully equipped wet processing station and is one of the few farms in Odisha producing all three major processing styles — washed, natural, and honey.",
+    story:
+      "With over 25 years in cultivation, Brown Valley has become a reference point for quality in Odisha coffee. The estate has invested significantly in post-harvest infrastructure, enabling lot separation by variety and processing method for traceability to individual micro-lots.",
+    certifications: ["FSSAI", "APEDA", "ISO 22000"],
+    exportReady: true,
+    featured: true,
+  },
+  {
     id: "agrawal-plantation",
     name: "Agrawal Plantation",
     region: "Jeypore",
@@ -81,26 +121,6 @@ export const farms: Farm[] = [
     featured: false,
   },
   {
-    id: "brown-valley-coffee-estate",
-    name: "Brown Valley Coffee Estate",
-    region: "Boipariguda",
-    district: "Koraput",
-    elevation: "1050–1300m",
-    area: "32 acres",
-    varieties: ["Arabica S795", "Arabica Catimor", "Robusta"],
-    processing: ["washed", "natural", "honey"],
-    flavorNotes: ["Milk Chocolate", "Hazelnut", "Stone Fruit"],
-    harvestSeason: "November – February",
-    established: 1995,
-    description:
-      "Brown Valley is one of the larger estates in Koraput, spread across the undulating terrain of Boipariguda. The estate runs a fully equipped wet processing station and is one of the few farms in Odisha producing all three major processing styles — washed, natural, and honey.",
-    story:
-      "With over 25 years in cultivation, Brown Valley has become a reference point for quality in Odisha coffee. The estate has invested significantly in post-harvest infrastructure, enabling lot separation by variety and processing method for traceability to individual micro-lots.",
-    certifications: ["FSSAI", "APEDA", "ISO 22000"],
-    exportReady: true,
-    featured: true,
-  },
-  {
     id: "dash-plantation",
     name: "Dash Plantation",
     region: "Koraput Town",
@@ -119,26 +139,6 @@ export const farms: Farm[] = [
     certifications: ["FSSAI"],
     exportReady: false,
     featured: false,
-  },
-  {
-    id: "dream-hill-coffee",
-    name: "Dream Hill Coffee — Saptagiri Plantation",
-    region: "Pottangi",
-    district: "Koraput",
-    elevation: "1100–1450m",
-    area: "28 acres",
-    varieties: ["Arabica SLN 9", "Arabica Catuai"],
-    processing: ["washed", "honey"],
-    flavorNotes: ["Jasmine", "Citrus Zest", "Golden Raisin"],
-    harvestSeason: "December – March",
-    established: 2009,
-    description:
-      "Dream Hill Coffee, operating under the Saptagiri Plantation banner, is positioned at the highest elevations in Odisha's coffee belt. At over 1100 metres, the estate produces some of the most refined Arabica coffees from the region, with a bright acidity and aromatic complexity rare in Indian coffees.",
-    story:
-      "Founded with a singular focus on high-altitude specialty production, Dream Hill Coffee has become a benchmark for Odisha Arabica. The founder's background in agronomy brought scientific rigour to cultivation — from soil health monitoring to canopy management — resulting in consistently high cupping scores.",
-    certifications: ["FSSAI", "APEDA", "Rainforest Alliance"],
-    exportReady: true,
-    featured: true,
   },
   {
     id: "durga-madhav-coffee-estate",
