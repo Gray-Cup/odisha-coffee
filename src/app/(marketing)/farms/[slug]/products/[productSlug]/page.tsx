@@ -1,8 +1,8 @@
 "use client";
 
-import { notFound } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { use, useState } from "react";
+import { use, useState, Suspense } from "react";
 import { getFarmBySlug } from "@/data/farms";
 import { getEstateProductById, computeEstateProductTotal } from "@/data/estate-products";
 import { processingColors, processingLabels } from "@/data/farms";
@@ -10,7 +10,7 @@ import { processingColors, processingLabels } from "@/data/farms";
 // Static params are handled by the parent [slug] segment; this page is
 // fully dynamic at the productSlug level since products may be added at runtime.
 
-export default function FarmProductDetailPage({
+function FarmProductDetailContent({
   params,
 }: {
   params: Promise<{ slug: string; productSlug: string }>;
@@ -21,7 +21,11 @@ export default function FarmProductDetailPage({
 
   if (!farm || !product) notFound();
 
-  const [selectedWeight, setSelectedWeight] = useState(product.weightOptions[0]);
+  const searchParams = useSearchParams();
+  const requestedWeight = searchParams.get("weight");
+  const [selectedWeight, setSelectedWeight] = useState(
+    product.weightOptions.find((w) => w.label === requestedWeight) ?? product.weightOptions[0]
+  );
 
   const pricing = computeEstateProductTotal(
     product.pricePerKg,
@@ -307,5 +311,15 @@ export default function FarmProductDetailPage({
         </div>
       </section>
     </div>
+  );
+}
+
+export default function FarmProductDetailPage(props: {
+  params: Promise<{ slug: string; productSlug: string }>;
+}) {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-odisha-black/40">Loading…</div>}>
+      <FarmProductDetailContent {...props} />
+    </Suspense>
   );
 }

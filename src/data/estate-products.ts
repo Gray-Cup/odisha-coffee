@@ -19,10 +19,13 @@ export type EstateProduct = {
 };
 
 const WEIGHT_OPTIONS: EstateProduct["weightOptions"] = [
+  { label: "100 g", grams: 100   },
+  { label: "500 g", grams: 500   },
   { label: "1 kg",  grams: 1000  },
+  { label: "2 kg",  grams: 2000  },
   { label: "5 kg",  grams: 5000  },
-  { label: "25 kg", grams: 25000 },
-  { label: "60 kg", grams: 60000 },
+  { label: "10 kg", grams: 10000 },
+  { label: "20 kg", grams: 20000 },
 ];
 
 export const estateProducts: EstateProduct[] = [
