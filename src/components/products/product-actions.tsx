@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { ShoppingCart, Zap } from "lucide-react";
 import { useCart, ROASTED_TIERS, GREEN_TIERS, computeItemPrice, type WeightLabel } from "@/context/cart-context";
+import { deliveryFeeForGrams } from "@/lib/pricing";
 import type { Product } from "@/data/products";
 
 type Props = { product: Product };
@@ -20,7 +21,7 @@ export function ProductActions({ product }: Props) {
   const handleBuyNow = () => {
     const weight = cartItem?.weight ?? defaultWeight;
     const tier = tiers.find((t) => t.label === weight) ?? tiers[0];
-    const price = computeItemPrice(product.pricePerKg, tier.grams) + tier.delivery;
+    const price = computeItemPrice(product.pricePerKg, tier.grams) + deliveryFeeForGrams(tier.grams);
     const params = new URLSearchParams({
       products: `${product.id}:${weight}`,
       total: String(price),

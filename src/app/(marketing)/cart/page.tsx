@@ -11,6 +11,7 @@ import {
   computeItemPrice,
   type WeightLabel,
 } from "@/context/cart-context";
+import { deliveryFeeForGrams } from "@/lib/pricing";
 import { products, availabilityColors, availabilityLabels, type Product } from "@/data/products";
 import type { CartItem } from "@/context/cart-context";
 
@@ -18,7 +19,7 @@ type CartRow = {
   product: Product;
   item: CartItem;
   tiers: typeof ROASTED_TIERS | typeof GREEN_TIERS;
-  tier: { label: string; grams: number; delivery: number };
+  tier: { label: string; grams: number };
   itemPrice: number;
 };
 
@@ -31,12 +32,13 @@ export default function CartPage() {
     if (!product) return [];
     const tiers = product.isGreen ? GREEN_TIERS : ROASTED_TIERS;
     const tier = (tiers.find((t) => t.label === item.weight) ?? tiers[0]) as CartRow["tier"];
-    const itemPrice = computeItemPrice(product.pricePerKg, tier.grams) + tier.delivery;
+    const itemPrice = computeItemPrice(product.pricePerKg, tier.grams);
     return [{ product, item, tiers, tier, itemPrice }];
   });
 
-  const subtotal = cartProducts.reduce((s, { itemPrice, tier }) => s + itemPrice - tier.delivery, 0);
-  const delivery = cartProducts.reduce((s, { tier }) => s + tier.delivery, 0);
+  const subtotal = cartProducts.reduce((s, { itemPrice }) => s + itemPrice, 0);
+  const totalGrams = cartProducts.reduce((s, { tier }) => s + tier.grams, 0);
+  const delivery = deliveryFeeForGrams(totalGrams);
   const total    = subtotal + delivery;
 
   if (count === 0) {
@@ -128,10 +130,7 @@ export default function CartPage() {
                       ))}
                     </div>
 
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] text-odisha-black/40 uppercase tracking-widest">
-                        +₹{tier.delivery} delivery
-                      </span>
+                    <div className="flex items-center justify-end">
                       <span className="font-bold text-odisha-black text-base">
                         ₹{itemPrice.toLocaleString("en-IN")}
                       </span>
@@ -159,13 +158,13 @@ export default function CartPage() {
               </h2>
 
               <div className="space-y-2 mb-5">
-                {cartProducts.map(({ product, item, itemPrice, tier }) => (
+                {cartProducts.map(({ product, item, itemPrice }) => (
                   <div key={product.id} className="flex justify-between text-sm">
                     <span className="text-odisha-black/60 truncate mr-2">
                       {product.name.split(" ").slice(0, 3).join(" ")} ({item.weight})
                     </span>
                     <span className="font-medium text-odisha-black whitespace-nowrap">
-                      ₹{(itemPrice - tier.delivery).toLocaleString("en-IN")}
+                      ₹{itemPrice.toLocaleString("en-IN")}
                     </span>
                   </div>
                 ))}

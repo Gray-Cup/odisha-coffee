@@ -2,14 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db, odishaCoffeeOrders } from "@/db";
 import { products as productCatalog } from "@/data/products";
-
-/** "1kg" -> 1000, "250g" -> 250 */
-function parseWeightToGrams(weight: string): number {
-  const match = weight.trim().match(/^([\d.]+)\s*(kg|g)$/i);
-  if (!match) return 0;
-  const n = parseFloat(match[1]);
-  return match[2].toLowerCase() === "kg" ? Math.round(n * 1000) : Math.round(n);
-}
+import { computeOrderTotal, gramsForWeight, computeItemPrice, type OrderItem } from "@/lib/pricing";
 
 const CASHFREE_API_URL = "https://api.cashfree.com/pg/links";
 const CASHFREE_CLIENT_ID = process.env.CASHFREE_CLIENT_ID;
@@ -36,12 +29,30 @@ export async function POST(request: NextRequest) {
     }
 
     const body: OdishaOrderRequest = await request.json();
-    const { name, phone, email, country, pincode, address, state, gstOrTaxId, businessType, products, totalAmount } = body;
+    const { name, phone, email, country, pincode, address, state, gstOrTaxId, businessType, products } = body;
 
     if (!name || !phone || !address || !pincode || products.length === 0) {
       return NextResponse.json(
         { error: "Name, phone, address, pincode and at least one product are required" },
         { status: 400 }
+      );
+    }
+
+    const orderItems: OrderItem[] = products.map((entry) => {
+      const [productId, weight] = entry.split(":");
+      return { productId, weight: weight ?? "" };
+    });
+
+    // The order total is ALWAYS computed here from our own product/tier
+    // catalogue - the client cannot influence the charged amount by editing
+    // the request body. computeOrderTotal throws if any product/weight is invalid.
+    let totalAmount: number;
+    try {
+      totalAmount = computeOrderTotal(orderItems);
+    } catch (err) {
+      return NextResponse.json(
+        { error: err instanceof Error ? err.message : "Invalid order items" },
+        { status: 400 },
       );
     }
 
@@ -52,17 +63,18 @@ export async function POST(request: NextRequest) {
     const origin = request.headers.get("origin") || "https://odishacoffee.com";
 
     // Per-item breakdown (name/image/price/weight) for the orders-graycup admin
-    // dashboard - each entry is "productId:weight" with its own weight.
-    const itemsDetail = products.map((entry) => {
-      const [id, weight] = entry.split(":");
-      const product = productCatalog.find((p) => p.id === id);
-      const grams = parseWeightToGrams(weight ?? "");
-      const price = product ? Math.round((product.pricePerKg * grams) / 1000) : 0;
+    // dashboard - the order row only stores the aggregate total, so this is the
+    // only place the "how much per item" detail is ever persisted. Prices here
+    // are product-only (delivery is one order-level fee, not per item).
+    const itemsDetail = orderItems.map((item) => {
+      const product = productCatalog.find((p) => p.id === item.productId);
+      const grams = product ? gramsForWeight(product, item.weight) : 0;
+      const price = product ? computeItemPrice(product.pricePerKg, grams) : 0;
       return {
-        slug: id,
-        name: product?.name ?? id,
+        slug: item.productId,
+        name: product?.name ?? item.productId,
         image: product?.image ? `${origin}/${product.image}` : null,
-        tier: weight ?? "",
+        tier: item.weight,
         grams,
         price,
       };

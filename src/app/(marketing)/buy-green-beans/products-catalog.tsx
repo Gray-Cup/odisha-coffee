@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { farms, processingColors, processingLabels } from "@/data/farms";
-import { estateProducts, computeEstateProductTotal } from "@/data/estate-products";
+import { estateProducts } from "@/data/estate-products";
 import type { EstateProduct } from "@/data/estate-products";
 
 // ── Individual product card with its own farm dropdown ──────────────────────
@@ -23,7 +23,6 @@ function ProductCard({
   }, [defaultFarmId]);
 
   const farm = farms.find((f) => f.id === farmId) ?? farms[0];
-  const pricing = computeEstateProductTotal(product.pricePerKg, product.shippingPerKg, 1000);
 
   return (
     <div className="border-2 border-odisha-black bg-white flex flex-col">
@@ -103,16 +102,11 @@ function ProductCard({
         </div>
 
         {/* Price */}
-        <div className="flex items-baseline justify-between mb-3 border-t border-odisha-black/10 pt-3">
-          <div>
-            <span className="font-serif text-xl font-bold text-odisha-black">
-              ₹{(product.pricePerKg + product.shippingPerKg).toLocaleString("en-IN")}
-            </span>
-            <span className="text-xs text-odisha-black/50 ml-1">/ kg</span>
-          </div>
-          <span className="text-[10px] text-odisha-black/40">
-            ₹{product.pricePerKg} + ₹{product.shippingPerKg} ship
+        <div className="mb-3 border-t border-odisha-black/10 pt-3">
+          <span className="font-serif text-xl font-bold text-odisha-black">
+            ₹{(product.pricePerKg + product.shippingPerKg).toLocaleString("en-IN")}
           </span>
+          <span className="text-xs text-odisha-black/50 ml-1">/ kg</span>
         </div>
 
         {/* Farm selector + order button */}

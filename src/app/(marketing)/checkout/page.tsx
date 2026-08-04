@@ -7,13 +7,13 @@ import Image from "next/image";
 import { CheckoutForm } from "@/components/checkout-form";
 import { products, type Product } from "@/data/products";
 import { ROASTED_TIERS, GREEN_TIERS, computeItemPrice } from "@/context/cart-context";
+import { deliveryFeeForGrams } from "@/lib/pricing";
 
-type CheckoutRow = { product: Product; weight: string; price: number; delivery: number; entry: string };
+type CheckoutRow = { product: Product; weight: string; price: number; grams: number; entry: string };
 
 function CheckoutContent() {
   const params = useSearchParams();
   const productsParam = params.get("products") || "";
-  const totalParam    = Number(params.get("total") || 0);
 
   const cartItems: CheckoutRow[] = useMemo(() => {
     if (!productsParam) return [];
@@ -24,12 +24,15 @@ function CheckoutContent() {
       const tiers = product.isGreen ? GREEN_TIERS : ROASTED_TIERS;
       const tier  = tiers.find((t) => t.label === weight) ?? tiers[0];
       const price = computeItemPrice(product.pricePerKg, tier.grams);
-      return [{ product, weight: tier.label, price, delivery: tier.delivery, entry }];
+      return [{ product, weight: tier.label, price, grams: tier.grams, entry }];
     });
   }, [productsParam]);
 
   const productStrings = cartItems.map((i) => i.entry);
-  const total = totalParam || cartItems.reduce((s, i) => s + i.price + i.delivery, 0);
+  const subtotal = cartItems.reduce((s, i) => s + i.price, 0);
+  const totalGrams = cartItems.reduce((s, i) => s + i.grams, 0);
+  const deliveryFee = deliveryFeeForGrams(totalGrams);
+  const total = subtotal + deliveryFee;
 
   return (
     <div>
@@ -65,7 +68,7 @@ function CheckoutContent() {
                 Your Order
               </h2>
               <div className="space-y-4 mb-5">
-                {cartItems.map(({ product, weight, price, delivery }) => (
+                {cartItems.map(({ product, weight, price }) => (
                   <div key={product.id} className="flex gap-3">
                     <div className="w-12 h-12 border-2 border-odisha-black shrink-0 overflow-hidden relative bg-odisha-offwhite">
                       {product.image && (
@@ -74,16 +77,24 @@ function CheckoutContent() {
                     </div>
                     <div className="flex-1">
                       <p className="text-xs font-semibold text-odisha-black leading-snug">{product.name}</p>
-                      <p className="text-[10px] text-odisha-black/50 mt-0.5">{weight} · +₹{delivery} delivery</p>
+                      <p className="text-[10px] text-odisha-black/50 mt-0.5">{weight}</p>
                     </div>
                     <p className="text-sm font-bold text-odisha-black whitespace-nowrap">
-                      ₹{(price + delivery).toLocaleString("en-IN")}
+                      ₹{price.toLocaleString("en-IN")}
                     </p>
                   </div>
                 ))}
               </div>
-              <div className="border-t-2 border-odisha-black pt-4">
-                <div className="flex justify-between font-bold text-odisha-black text-base">
+              <div className="border-t-2 border-odisha-black pt-4 space-y-1.5">
+                <div className="flex justify-between text-xs text-odisha-black/60">
+                  <span>Subtotal</span>
+                  <span>₹{subtotal.toLocaleString("en-IN")}</span>
+                </div>
+                <div className="flex justify-between text-xs text-odisha-black/60">
+                  <span>Delivery</span>
+                  <span>₹{deliveryFee.toLocaleString("en-IN")}</span>
+                </div>
+                <div className="flex justify-between font-bold text-odisha-black text-base pt-1.5 border-t border-odisha-black/10">
                   <span>Total</span>
                   <span>₹{total.toLocaleString("en-IN")}</span>
                 </div>

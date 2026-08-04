@@ -157,19 +157,10 @@ export default async function FarmProductsPage({
 
                     {/* Pricing */}
                     <div className="border-t-2 border-odisha-black/10 pt-3">
-                      <div className="flex items-baseline justify-between">
-                        <div>
-                          <span className="font-serif text-xl font-bold text-odisha-black">
-                            ₹{totalPerKg.toLocaleString("en-IN")}
-                          </span>
-                          <span className="text-xs text-odisha-black/50 ml-1">/ kg</span>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-[10px] text-odisha-black/40">
-                            ₹{product.pricePerKg} + ₹{product.shippingPerKg} shipping
-                          </div>
-                        </div>
-                      </div>
+                      <span className="font-serif text-xl font-bold text-odisha-black">
+                        ₹{totalPerKg.toLocaleString("en-IN")}
+                      </span>
+                      <span className="text-xs text-odisha-black/50 ml-1">/ kg</span>
                     </div>
                   </div>
 
