@@ -42,7 +42,7 @@ export function ProductActions({ product }: Props) {
 
       <div className="flex gap-2">
         <button
-          onClick={() => inCart ? remove(product.id) : add(product.id, defaultWeight)}
+          onClick={() => (inCart && cartItem) ? remove(cartItem.id) : add(product.id, defaultWeight)}
           className={`flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold uppercase tracking-widest py-2 border-2 transition-colors cursor-pointer ${
             inCart
               ? "bg-odisha-black border-odisha-black text-white hover:bg-odisha-red hover:border-odisha-red"

@@ -88,7 +88,7 @@ export default function CartPage() {
               const product = resolved.product;
               const image = imageSrcFor(resolved);
               return (
-                <div key={item.productId} className="border-2 border-odisha-black -mt-[2px] bg-white p-5">
+                <div key={item.id} className="border-2 border-odisha-black -mt-[2px] bg-white p-5">
                   <div className="flex gap-4">
                     {/* Image */}
                     <div className="w-20 h-20 border-2 border-odisha-black shrink-0 overflow-hidden relative bg-odisha-offwhite">
@@ -116,7 +116,7 @@ export default function CartPage() {
                           </span>
                         </div>
                         <button
-                          onClick={() => remove(item.productId)}
+                          onClick={() => remove(item.id)}
                           className="p-1 text-odisha-black/30 hover:text-odisha-red transition-colors shrink-0 cursor-pointer"
                           aria-label="Remove"
                         >
@@ -129,7 +129,7 @@ export default function CartPage() {
                         {tiers.map((t) => (
                           <button
                             key={t.label}
-                            onClick={() => updateWeight(item.productId, t.label)}
+                            onClick={() => updateWeight(item.id, t.label)}
                             className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-1 border-2 transition-colors cursor-pointer ${
                               item.weight === t.label
                                 ? "bg-odisha-red border-odisha-red text-white"
@@ -171,7 +171,7 @@ export default function CartPage() {
 
               <div className="space-y-2 mb-5">
                 {cartProducts.map(({ resolved, item, itemPrice }) => (
-                  <div key={item.productId} className="flex justify-between text-sm">
+                  <div key={item.id} className="flex justify-between text-sm">
                     <span className="text-odisha-black/60 truncate mr-2">
                       {resolved.product.name.split(" ").slice(0, 3).join(" ")} ({item.weight})
                     </span>

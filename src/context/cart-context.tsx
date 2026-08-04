@@ -18,13 +18,21 @@ export type { WeightLabel };
 // that don't belong to the roasted/green tier sets WeightLabel enumerates.
 // `farmId` is only set for estate (green bean) lots, which are farm-agnostic
 // catalogue entries the buyer pairs with a chosen partner farm in the UI.
-export type CartItem = { productId: string; weight: string; farmId?: string };
+//
+// `id` identifies a distinct cart LINE (productId+weight+farmId combo), not
+// just the product — so 1kg and 500g of the same product are two separate
+// rows instead of one overwriting the other.
+export type CartItem = { id: string; productId: string; weight: string; farmId?: string };
+
+export function cartLineId(productId: string, weight: string, farmId?: string): string {
+  return `${productId}::${weight}::${farmId ?? ""}`;
+}
 
 type CartCtx = {
   items: CartItem[];
   add: (productId: string, weight: string, farmId?: string) => void;
-  remove: (productId: string) => void;
-  updateWeight: (productId: string, weight: string) => void;
+  remove: (id: string) => void;
+  updateWeight: (id: string, weight: string) => void;
   isInCart: (productId: string) => boolean;
   clear: () => void;
   count: number;
@@ -49,19 +57,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [items]);
 
   const add = useCallback((productId: string, weight: string, farmId?: string) => {
+    const id = cartLineId(productId, weight, farmId);
+    setItems((prev) => (prev.some((i) => i.id === id) ? prev : [...prev, { id, productId, weight, farmId }]));
+  }, []);
+
+  const remove = useCallback((id: string) => {
+    setItems((prev) => prev.filter((i) => i.id !== id));
+  }, []);
+
+  const updateWeight = useCallback((id: string, weight: string) => {
     setItems((prev) =>
-      prev.some((i) => i.productId === productId)
-        ? prev.map((i) => (i.productId === productId ? { productId, weight, farmId } : i))
-        : [...prev, { productId, weight, farmId }]
+      prev.map((i) => (i.id === id ? { ...i, weight, id: cartLineId(i.productId, weight, i.farmId) } : i))
     );
-  }, []);
-
-  const remove = useCallback((productId: string) => {
-    setItems((prev) => prev.filter((i) => i.productId !== productId));
-  }, []);
-
-  const updateWeight = useCallback((productId: string, weight: string) => {
-    setItems((prev) => prev.map((i) => i.productId === productId ? { ...i, weight } : i));
   }, []);
 
   const isInCart = useCallback(

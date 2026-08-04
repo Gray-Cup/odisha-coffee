@@ -14,9 +14,13 @@ import { computeItemPrice, bulkDiscountForGrams, deliveryFeeForGrams } from "@/l
 
 const MAX_QUANTITY = 20;
 
-// A card "selected" for the multi-product quick-checkout flow — kept
-// entirely separate from the persistent cart (see ProductsCatalog below).
-type Selection = {
+// A line picked with "Select" for the multi-product quick-checkout flow —
+// kept entirely separate from the persistent cart. Keyed by product+weight+
+// farm (see `lineKey`) so 1kg and 500g of the same product are two
+// independent lines instead of one overwriting the other.
+type SelectionLine = {
+  key: string;
+  productId: string;
   weight: string;
   grams: number;
   farmId: string;
@@ -24,18 +28,26 @@ type Selection = {
   unitPrice: number;
 };
 
+function lineKey(productId: string, weight: string, farmId: string): string {
+  return `${productId}::${weight}::${farmId}`;
+}
+
 // ── Individual product card with its own farm dropdown ──────────────────────
 
 function ProductCard({
   product,
   defaultFarmId,
-  selection,
-  onSelectionChange,
+  lines,
+  onAddLine,
+  onRemoveLine,
+  onChangeQuantity,
 }: {
   product: EstateProduct;
   defaultFarmId: string;
-  selection: Selection | undefined;
-  onSelectionChange: (next: Selection | null) => void;
+  lines: SelectionLine[];
+  onAddLine: (line: SelectionLine) => void;
+  onRemoveLine: (key: string) => void;
+  onChangeQuantity: (key: string, delta: number) => void;
 }) {
   const [farmId, setFarmId] = useState(defaultFarmId);
   const [selectedWeight, setSelectedWeight] = useState(product.weightOptions[2] ?? product.weightOptions[0]);
@@ -50,40 +62,17 @@ function ProductCard({
   const discount = bulkDiscountForGrams(selectedWeight.grams);
   const effectivePerKg = Math.round(basePerKg * (1 - discount));
   const unitPrice = computeItemPrice(effectivePerKg, selectedWeight.grams);
-  const isSelected = !!selection;
 
-  // Keep an active selection in sync if the shopper changes weight/farm
-  // after selecting the card (quantity is left untouched).
-  useEffect(() => {
-    if (!isSelected) return;
-    onSelectionChange({
+  const handleSelect = () => {
+    onAddLine({
+      key: lineKey(product.id, selectedWeight.label, farmId),
+      productId: product.id,
       weight: selectedWeight.label,
       grams: selectedWeight.grams,
       farmId,
-      quantity: selection!.quantity,
+      quantity: 1,
       unitPrice,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedWeight, farmId]);
-
-  const toggleSelected = () => {
-    if (isSelected) {
-      onSelectionChange(null);
-    } else {
-      onSelectionChange({
-        weight: selectedWeight.label,
-        grams: selectedWeight.grams,
-        farmId,
-        quantity: 1,
-        unitPrice,
-      });
-    }
-  };
-
-  const changeQuantity = (delta: number) => {
-    if (!selection) return;
-    const quantity = Math.min(MAX_QUANTITY, Math.max(1, selection.quantity + delta));
-    onSelectionChange({ ...selection, quantity });
   };
 
   const handleAddToCart = () => {
@@ -93,7 +82,7 @@ function ProductCard({
   };
 
   return (
-    <div className={`relative border-2 bg-white flex flex-col transition-colors ${isSelected ? "border-odisha-red" : "border-odisha-black"}`}>
+    <div className={`relative border-2 bg-white flex flex-col transition-colors ${lines.length > 0 ? "border-odisha-red" : "border-odisha-black"}`}>
       {/* Image */}
       <div className="relative h-44 border-b-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
         {product.image ? (
@@ -208,9 +197,10 @@ function ProductCard({
           </select>
         </label>
 
-        {/* Quantity stepper — only shown once the card is selected */}
+        {/* Selected lines for THIS product — each weight/farm picked is its
+            own row, independently adjustable, so 1kg and 500g coexist. */}
         <AnimatePresence initial={false}>
-          {isSelected && (
+          {lines.length > 0 && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
@@ -218,49 +208,64 @@ function ProductCard({
               transition={{ duration: 0.2 }}
               className="overflow-hidden"
             >
-              <div className="flex items-center justify-between gap-2 mb-2 bg-odisha-offwhite border-2 border-odisha-black px-3 py-1.5">
-                <span className="text-[10px] uppercase tracking-widest text-odisha-black/50">Quantity</span>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => changeQuantity(-1)}
-                    disabled={selection!.quantity <= 1}
-                    className="w-6 h-6 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
-                    aria-label="Decrease quantity"
+              <div className="space-y-1.5 mb-2">
+                {lines.map((line) => (
+                  <div
+                    key={line.key}
+                    className="flex items-center justify-between gap-2 bg-odisha-offwhite border-2 border-odisha-black px-2.5 py-1.5"
                   >
-                    <Minus className="w-3 h-3" />
-                  </button>
-                  <span className="font-bold text-odisha-black text-sm w-5 text-center tabular-nums">
-                    {selection!.quantity}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => changeQuantity(1)}
-                    disabled={selection!.quantity >= MAX_QUANTITY}
-                    className="w-6 h-6 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
-                    aria-label="Increase quantity"
-                  >
-                    <Plus className="w-3 h-3" />
-                  </button>
-                </div>
+                    <span className="text-[11px] font-semibold text-odisha-black">
+                      {line.weight}
+                      <span className="text-odisha-black/40 font-normal ml-1">
+                        ({farms.find((f) => f.id === line.farmId)?.name.split(/\s+/).slice(0, 2).join(" ")})
+                      </span>
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => onChangeQuantity(line.key, -1)}
+                        disabled={line.quantity <= 1}
+                        className="w-5 h-5 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                        aria-label="Decrease quantity"
+                      >
+                        <Minus className="w-2.5 h-2.5" />
+                      </button>
+                      <span className="font-bold text-odisha-black text-xs w-4 text-center tabular-nums">
+                        {line.quantity}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => onChangeQuantity(line.key, 1)}
+                        disabled={line.quantity >= MAX_QUANTITY}
+                        className="w-5 h-5 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                        aria-label="Increase quantity"
+                      >
+                        <Plus className="w-2.5 h-2.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => onRemoveLine(line.key)}
+                        className="w-5 h-5 flex items-center justify-center text-odisha-black/40 hover:text-odisha-red transition-colors cursor-pointer"
+                        aria-label="Remove"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Select (adds to the cross-card quick-checkout list) + Add to Cart */}
+        {/* Select (adds this weight/farm as its own line) + Add to Cart */}
         <div className="flex gap-2">
           <button
             type="button"
-            onClick={toggleSelected}
-            className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-xs font-bold uppercase tracking-widest border-2 transition-colors cursor-pointer ${
-              isSelected
-                ? "bg-odisha-red border-odisha-red text-white hover:bg-odisha-black hover:border-odisha-black"
-                : "bg-white border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white"
-            }`}
+            onClick={handleSelect}
+            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-xs font-bold uppercase tracking-widest border-2 border-odisha-black text-odisha-black bg-white hover:bg-odisha-black hover:text-white transition-colors cursor-pointer"
           >
-            {isSelected && <Check className="w-3.5 h-3.5" />}
-            {isSelected ? "Selected" : "Select"}
+            Select
           </button>
 
           <motion.button
@@ -307,7 +312,7 @@ function ProductCard({
 
 export function ProductsCatalog() {
   const [selectedFarmId, setSelectedFarmId] = useState<string | null>(null);
-  const [selections, setSelections] = useState<Record<string, Selection>>({});
+  const [selections, setSelections] = useState<Record<string, SelectionLine>>({});
   const router = useRouter();
 
   const selectedFarm = selectedFarmId
@@ -316,25 +321,46 @@ export function ProductsCatalog() {
 
   const defaultFarmId = selectedFarm?.id ?? farms[0].id;
 
-  const selectionEntries = Object.entries(selections);
-  const selectionCount = selectionEntries.length;
-  const selectionSubtotal = selectionEntries.reduce((sum, [, sel]) => sum + sel.unitPrice * sel.quantity, 0);
-  const selectionGrams = selectionEntries.reduce((sum, [, sel]) => sum + sel.grams * sel.quantity, 0);
+  const selectionLines = Object.values(selections);
+  const selectionCount = selectionLines.length;
+  const selectionSubtotal = selectionLines.reduce((sum, l) => sum + l.unitPrice * l.quantity, 0);
+  const selectionGrams = selectionLines.reduce((sum, l) => sum + l.grams * l.quantity, 0);
   const selectionDelivery = selectionCount > 0 ? deliveryFeeForGrams(selectionGrams) : 0;
   const selectionTotal = selectionSubtotal + selectionDelivery;
 
-  const setSelection = (productId: string, next: Selection | null) => {
+  const addLine = (line: SelectionLine) => {
+    setSelections((prev) => {
+      const existing = prev[line.key];
+      if (existing) {
+        return {
+          ...prev,
+          [line.key]: { ...existing, quantity: Math.min(MAX_QUANTITY, existing.quantity + 1) },
+        };
+      }
+      return { ...prev, [line.key]: line };
+    });
+  };
+
+  const removeLine = (key: string) => {
     setSelections((prev) => {
       const copy = { ...prev };
-      if (next) copy[productId] = next;
-      else delete copy[productId];
+      delete copy[key];
       return copy;
     });
   };
 
+  const changeLineQuantity = (key: string, delta: number) => {
+    setSelections((prev) => {
+      const existing = prev[key];
+      if (!existing) return prev;
+      const quantity = Math.min(MAX_QUANTITY, Math.max(1, existing.quantity + delta));
+      return { ...prev, [key]: { ...existing, quantity } };
+    });
+  };
+
   const handleProceedToCheckout = () => {
-    const products = selectionEntries
-      .map(([productId, sel]) => `${productId}:${sel.weight}:${sel.farmId}:${sel.quantity}`)
+    const products = selectionLines
+      .map((l) => `${l.productId}:${l.weight}:${l.farmId}:${l.quantity}`)
       .join(",");
     router.push(`/checkout?products=${encodeURIComponent(products)}&total=${selectionTotal}`);
   };
@@ -428,8 +454,10 @@ export function ProductsCatalog() {
                 key={product.id}
                 product={product}
                 defaultFarmId={defaultFarmId}
-                selection={selections[product.id]}
-                onSelectionChange={(next) => setSelection(product.id, next)}
+                lines={selectionLines.filter((l) => l.productId === product.id)}
+                onAddLine={addLine}
+                onRemoveLine={removeLine}
+                onChangeQuantity={changeLineQuantity}
               />
             ))}
           </div>
@@ -458,7 +486,8 @@ export function ProductsCatalog() {
       </section>
 
       {/* Multi-select checkout bar — everything picked with "Select" across
-          any number of cards, checked out together, never touching the cart. */}
+          any number of cards (and any number of weights per card), checked
+          out together, never touching the cart. */}
       <AnimatePresence>
         {selectionCount > 0 && (
           <motion.div
@@ -471,7 +500,7 @@ export function ProductsCatalog() {
             <div className="max-w-7xl mx-auto px-4 lg:px-6 py-3 flex flex-col sm:flex-row sm:items-center gap-3">
               <div className="flex items-center justify-between sm:justify-start sm:gap-4 flex-1">
                 <span className="text-sm font-semibold text-odisha-black">
-                  {selectionCount} {selectionCount === 1 ? "product" : "products"} selected
+                  {selectionCount} {selectionCount === 1 ? "line" : "lines"} selected
                 </span>
                 <span className="font-serif text-lg font-bold text-odisha-black">
                   ₹{selectionTotal.toLocaleString("en-IN")}
