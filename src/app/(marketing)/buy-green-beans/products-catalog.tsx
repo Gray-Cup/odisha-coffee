@@ -37,17 +37,13 @@ function lineKey(productId: string, weight: string, farmId: string): string {
 function ProductCard({
   product,
   defaultFarmId,
-  lines,
+  hasSelection,
   onAddLine,
-  onRemoveLine,
-  onChangeQuantity,
 }: {
   product: EstateProduct;
   defaultFarmId: string;
-  lines: SelectionLine[];
+  hasSelection: boolean;
   onAddLine: (line: SelectionLine) => void;
-  onRemoveLine: (key: string) => void;
-  onChangeQuantity: (key: string, delta: number) => void;
 }) {
   const [farmId, setFarmId] = useState(defaultFarmId);
   const [selectedWeight, setSelectedWeight] = useState(product.weightOptions[2] ?? product.weightOptions[0]);
@@ -82,7 +78,7 @@ function ProductCard({
   };
 
   return (
-    <div className={`relative border-2 bg-white flex flex-col transition-colors ${lines.length > 0 ? "border-odisha-red" : "border-odisha-black"}`}>
+    <div className={`relative border-2 bg-white flex flex-col transition-colors ${hasSelection ? "border-odisha-red" : "border-odisha-black"}`}>
       {/* Image */}
       <div className="relative h-44 border-b-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
         {product.image ? (
@@ -197,67 +193,6 @@ function ProductCard({
           </select>
         </label>
 
-        {/* Selected lines for THIS product — each weight/farm picked is its
-            own row, independently adjustable, so 1kg and 500g coexist. */}
-        <AnimatePresence initial={false}>
-          {lines.length > 0 && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="overflow-hidden"
-            >
-              <div className="space-y-1.5 mb-2">
-                {lines.map((line) => (
-                  <div
-                    key={line.key}
-                    className="flex items-center justify-between gap-2 bg-odisha-offwhite border-2 border-odisha-black px-2.5 py-1.5"
-                  >
-                    <span className="text-[11px] font-semibold text-odisha-black">
-                      {line.weight}
-                      <span className="text-odisha-black/40 font-normal ml-1">
-                        ({farms.find((f) => f.id === line.farmId)?.name.split(/\s+/).slice(0, 2).join(" ")})
-                      </span>
-                    </span>
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        type="button"
-                        onClick={() => onChangeQuantity(line.key, -1)}
-                        disabled={line.quantity <= 1}
-                        className="w-5 h-5 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
-                        aria-label="Decrease quantity"
-                      >
-                        <Minus className="w-2.5 h-2.5" />
-                      </button>
-                      <span className="font-bold text-odisha-black text-xs w-4 text-center tabular-nums">
-                        {line.quantity}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => onChangeQuantity(line.key, 1)}
-                        disabled={line.quantity >= MAX_QUANTITY}
-                        className="w-5 h-5 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
-                        aria-label="Increase quantity"
-                      >
-                        <Plus className="w-2.5 h-2.5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => onRemoveLine(line.key)}
-                        className="w-5 h-5 flex items-center justify-center text-odisha-black/40 hover:text-odisha-red transition-colors cursor-pointer"
-                        aria-label="Remove"
-                      >
-                        <X className="w-3 h-3" />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
         {/* Select (adds this weight/farm as its own line) + Add to Cart */}
         <div className="flex gap-2">
           <button
@@ -313,6 +248,7 @@ function ProductCard({
 export function ProductsCatalog() {
   const [selectedFarmId, setSelectedFarmId] = useState<string | null>(null);
   const [selections, setSelections] = useState<Record<string, SelectionLine>>({});
+  const [itemsDialogOpen, setItemsDialogOpen] = useState(false);
   const router = useRouter();
 
   const selectedFarm = selectedFarmId
@@ -454,10 +390,8 @@ export function ProductsCatalog() {
                 key={product.id}
                 product={product}
                 defaultFarmId={defaultFarmId}
-                lines={selectionLines.filter((l) => l.productId === product.id)}
+                hasSelection={selectionLines.some((l) => l.productId === product.id)}
                 onAddLine={addLine}
-                onRemoveLine={removeLine}
-                onChangeQuantity={changeLineQuantity}
               />
             ))}
           </div>
@@ -517,6 +451,13 @@ export function ProductsCatalog() {
                 </button>
                 <button
                   type="button"
+                  onClick={() => setItemsDialogOpen(true)}
+                  className="flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-bold uppercase tracking-widest border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer"
+                >
+                  Show Items
+                </button>
+                <button
+                  type="button"
                   onClick={handleProceedToCheckout}
                   className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-odisha-red text-white text-xs font-bold uppercase tracking-widest border-2 border-odisha-red hover:bg-odisha-black hover:border-odisha-black transition-colors cursor-pointer whitespace-nowrap"
                 >
@@ -526,6 +467,132 @@ export function ProductsCatalog() {
               </div>
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Big dialog listing every selected line, with its own quantity/remove controls */}
+      <AnimatePresence>
+        {itemsDialogOpen && (
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black/60 z-[60]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setItemsDialogOpen(false)}
+            />
+            <motion.div
+              className="fixed inset-4 sm:inset-x-auto sm:inset-y-0 sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2
+              sm:w-full sm:max-w-2xl sm:max-h-[85vh] max-h-[90vh] overflow-y-auto rounded-2xl border-2 border-odisha-black bg-white shadow-2xl z-[60] flex flex-col"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ type: "spring", damping: 28, stiffness: 320 }}
+            >
+              <div className="flex items-center justify-between border-b-2 border-odisha-black px-6 py-4 shrink-0">
+                <h2 className="font-serif text-xl font-bold text-odisha-black">
+                  Selected Items <span className="text-odisha-black/40 font-normal text-base">({selectionCount})</span>
+                </h2>
+                <button
+                  className="p-1.5 border-2 border-odisha-black hover:bg-odisha-red hover:border-odisha-red hover:text-white transition-colors cursor-pointer"
+                  onClick={() => setItemsDialogOpen(false)}
+                  aria-label="Close"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-6 space-y-3">
+                {selectionLines.length === 0 ? (
+                  <p className="text-sm text-odisha-black/50 text-center py-8">No items selected.</p>
+                ) : (
+                  selectionLines.map((line) => {
+                    const product = estateProducts.find((p) => p.id === line.productId);
+                    const farm = farms.find((f) => f.id === line.farmId);
+                    return (
+                      <div
+                        key={line.key}
+                        className="flex items-center gap-3 border-2 border-odisha-black p-3"
+                      >
+                        <div className="relative w-14 h-14 shrink-0 border-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
+                          {product?.image && (
+                            <Image src={`/${product.image}`} alt={product.name} fill className="object-cover" />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-serif font-bold text-odisha-black text-sm leading-snug truncate">
+                            {product?.name ?? line.productId}
+                          </p>
+                          <p className="text-xs text-odisha-black/50 mt-0.5">
+                            {line.weight} · {farm?.name ?? "Unknown farm"}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <button
+                            type="button"
+                            onClick={() => changeLineQuantity(line.key, -1)}
+                            disabled={line.quantity <= 1}
+                            className="w-6 h-6 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                            aria-label="Decrease quantity"
+                          >
+                            <Minus className="w-3 h-3" />
+                          </button>
+                          <span className="font-bold text-odisha-black text-sm w-5 text-center tabular-nums">
+                            {line.quantity}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => changeLineQuantity(line.key, 1)}
+                            disabled={line.quantity >= MAX_QUANTITY}
+                            className="w-6 h-6 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                            aria-label="Increase quantity"
+                          >
+                            <Plus className="w-3 h-3" />
+                          </button>
+                        </div>
+                        <span className="font-serif font-bold text-odisha-black text-sm w-16 text-right shrink-0">
+                          ₹{(line.unitPrice * line.quantity).toLocaleString("en-IN")}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => removeLine(line.key)}
+                          className="w-6 h-6 flex items-center justify-center text-odisha-black/40 hover:text-odisha-red transition-colors cursor-pointer shrink-0"
+                          aria-label="Remove"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+
+              {selectionLines.length > 0 && (
+                <div className="border-t-2 border-odisha-black p-6 shrink-0 space-y-3">
+                  <div className="flex justify-between text-sm text-odisha-black/60">
+                    <span>Subtotal</span>
+                    <span>₹{selectionSubtotal.toLocaleString("en-IN")}</span>
+                  </div>
+                  <div className="flex justify-between text-sm text-odisha-black/60">
+                    <span>Delivery</span>
+                    <span>₹{selectionDelivery.toLocaleString("en-IN")}</span>
+                  </div>
+                  <div className="flex justify-between font-bold text-odisha-black text-lg border-t border-odisha-black/10 pt-3">
+                    <span>Total</span>
+                    <span>₹{selectionTotal.toLocaleString("en-IN")}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleProceedToCheckout}
+                    className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-odisha-red text-white text-sm font-bold uppercase tracking-widest border-2 border-odisha-red hover:bg-odisha-black hover:border-odisha-black transition-colors cursor-pointer"
+                  >
+                    <Zap className="w-4 h-4" />
+                    Proceed to Checkout
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </div>
