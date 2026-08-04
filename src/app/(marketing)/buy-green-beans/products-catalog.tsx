@@ -32,6 +32,29 @@ function lineKey(productId: string, weight: string, farmId: string): string {
   return `${productId}::${weight}::${farmId}`;
 }
 
+// Selections (from "Select") are cached to the browser for 30 minutes, so a
+// reload or an accidental tab close doesn't lose them — mirrors the cart's
+// own localStorage persistence but with a hard expiry since these are meant
+// to be a short-lived quick-checkout list, not a permanent cart.
+const SELECTIONS_STORAGE_KEY = "odisha_selections";
+const SELECTIONS_TTL_MS = 30 * 60 * 1000;
+
+function loadStoredSelections(): Record<string, SelectionLine> {
+  try {
+    const raw = localStorage.getItem(SELECTIONS_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed.savedAt !== "number" || !parsed.selections) return {};
+    if (Date.now() - parsed.savedAt > SELECTIONS_TTL_MS) {
+      localStorage.removeItem(SELECTIONS_STORAGE_KEY);
+      return {};
+    }
+    return parsed.selections;
+  } catch {
+    return {};
+  }
+}
+
 // ── Individual product card with its own farm dropdown ──────────────────────
 
 function ProductCard({
@@ -250,6 +273,22 @@ export function ProductsCatalog() {
   const [selections, setSelections] = useState<Record<string, SelectionLine>>({});
   const [itemsDialogOpen, setItemsDialogOpen] = useState(false);
   const router = useRouter();
+
+  // Restore any not-yet-expired selections after mount (avoids a
+  // server/client hydration mismatch from reading localStorage during render).
+  useEffect(() => {
+    const restored = loadStoredSelections();
+    if (Object.keys(restored).length > 0) setSelections(restored);
+  }, []);
+
+  // Re-cache on every change, refreshing the 30-minute expiry window.
+  useEffect(() => {
+    if (Object.keys(selections).length === 0) {
+      localStorage.removeItem(SELECTIONS_STORAGE_KEY);
+      return;
+    }
+    localStorage.setItem(SELECTIONS_STORAGE_KEY, JSON.stringify({ savedAt: Date.now(), selections }));
+  }, [selections]);
 
   const selectedFarm = selectedFarmId
     ? (farms.find((f) => f.id === selectedFarmId) ?? null)
@@ -482,19 +521,19 @@ export function ProductsCatalog() {
               onClick={() => setItemsDialogOpen(false)}
             />
             <motion.div
-              className="fixed inset-4 sm:inset-x-auto sm:inset-y-0 sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2
-              sm:w-full sm:max-w-2xl sm:max-h-[85vh] max-h-[90vh] overflow-y-auto rounded-2xl border-2 border-odisha-black bg-white shadow-2xl z-[60] flex flex-col"
+              className="fixed inset-2 sm:inset-x-auto sm:inset-y-0 sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2
+              sm:w-full sm:max-w-3xl sm:h-[94vh] h-[98vh] rounded-2xl border-2 border-odisha-black bg-white shadow-2xl z-[60] flex flex-col"
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ type: "spring", damping: 28, stiffness: 320 }}
             >
-              <div className="flex items-center justify-between border-b-2 border-odisha-black px-6 py-4 shrink-0">
-                <h2 className="font-serif text-xl font-bold text-odisha-black">
-                  Selected Items <span className="text-odisha-black/40 font-normal text-base">({selectionCount})</span>
+              <div className="flex items-center justify-between border-b-2 border-odisha-black px-4 py-2.5 shrink-0">
+                <h2 className="font-serif text-base font-bold text-odisha-black">
+                  Selected Items <span className="text-odisha-black/40 font-normal text-sm">({selectionCount})</span>
                 </h2>
                 <button
-                  className="p-1.5 border-2 border-odisha-black hover:bg-odisha-red hover:border-odisha-red hover:text-white transition-colors cursor-pointer"
+                  className="p-1 border-2 border-odisha-black hover:bg-odisha-red hover:border-odisha-red hover:text-white transition-colors cursor-pointer"
                   onClick={() => setItemsDialogOpen(false)}
                   aria-label="Close"
                 >
@@ -502,7 +541,7 @@ export function ProductsCatalog() {
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-6">
+              <div className="flex-1 overflow-y-auto p-4">
                 {selectionLines.length === 0 ? (
                   <p className="text-sm text-odisha-black/50 text-center py-8">No items selected.</p>
                 ) : (
@@ -573,17 +612,16 @@ export function ProductsCatalog() {
               </div>
 
               {selectionLines.length > 0 && (
-                <div className="border-t-2 border-odisha-black p-6 shrink-0 space-y-3">
-                  <div className="flex justify-between font-bold text-odisha-black text-lg">
-                    <span>Total</span>
-                    <span>₹{selectionTotal.toLocaleString("en-IN")}</span>
-                  </div>
+                <div className="border-t-2 border-odisha-black px-4 py-2.5 shrink-0 flex items-center gap-3">
+                  <span className="font-bold text-odisha-black text-sm whitespace-nowrap">
+                    Total ₹{selectionTotal.toLocaleString("en-IN")}
+                  </span>
                   <button
                     type="button"
                     onClick={handleProceedToCheckout}
-                    className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-odisha-red text-white text-sm font-bold uppercase tracking-widest border-2 border-odisha-red hover:bg-odisha-black hover:border-odisha-black transition-colors cursor-pointer"
+                    className="flex-1 flex items-center justify-center gap-1.5 px-4 py-2 bg-odisha-red text-white text-[11px] font-bold uppercase tracking-widest border-2 border-odisha-red hover:bg-odisha-black hover:border-odisha-black transition-colors cursor-pointer"
                   >
-                    <Zap className="w-4 h-4" />
+                    <Zap className="w-3.5 h-3.5" />
                     Proceed to Checkout
                   </button>
                 </div>
