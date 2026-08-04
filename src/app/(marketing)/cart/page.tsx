@@ -37,7 +37,7 @@ export default function CartPage() {
     if (!resolved) return [];
     const tiers = tiersFor(resolved);
     const tier = tiers.find((t) => t.label === item.weight) ?? tiers[0];
-    const itemPrice = computeItemPrice(pricePerKgFor(resolved), tier.grams);
+    const itemPrice = computeItemPrice(pricePerKgFor(resolved, tier.grams), tier.grams);
     return [{ resolved, item, tiers, tier, itemPrice }];
   });
 

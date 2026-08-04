@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart, Zap } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { farms, processingColors, processingLabels } from "@/data/farms";
 import { estateProducts } from "@/data/estate-products";
 import type { EstateProduct } from "@/data/estate-products";
 import { useCart } from "@/context/cart-context";
-import { computeItemPrice, deliveryFeeForGrams } from "@/lib/pricing";
+import { computeItemPrice, bulkDiscountForGrams } from "@/lib/pricing";
 
 // ── Individual product card with its own farm dropdown ──────────────────────
 
@@ -22,7 +22,6 @@ function ProductCard({
 }) {
   const [farmId, setFarmId] = useState(defaultFarmId);
   const [selectedWeight, setSelectedWeight] = useState(product.weightOptions[2] ?? product.weightOptions[0]);
-  const [weightDrawerOpen, setWeightDrawerOpen] = useState(false);
   const { add, isInCart } = useCart();
   const router = useRouter();
 
@@ -30,27 +29,14 @@ function ProductCard({
     setFarmId(defaultFarmId);
   }, [defaultFarmId]);
 
-  const farm = farms.find((f) => f.id === farmId) ?? farms[0];
-  const totalPerKg = product.pricePerKg + product.shippingPerKg;
-  const totalPrice = computeItemPrice(totalPerKg, selectedWeight.grams);
+  const basePerKg = product.pricePerKg + product.shippingPerKg;
+  const discount = bulkDiscountForGrams(selectedWeight.grams);
+  const effectivePerKg = Math.round(basePerKg * (1 - discount));
+  const totalPrice = computeItemPrice(effectivePerKg, selectedWeight.grams);
   const inCart = isInCart(product.id);
 
-  const handleAddToCart = () => {
+  const handleSelect = () => {
     add(product.id, selectedWeight.label, farmId);
-    setWeightDrawerOpen(false);
-  };
-
-  const handleCheckout = () => {
-    // Mirrors the roasted-coffee "Buy Now" flow: checkout is driven entirely
-    // by the URL params below, not the persisted cart, so this is a one-off
-    // purchase that skips adding the item to the cart.
-    const price = totalPrice + deliveryFeeForGrams(selectedWeight.grams);
-    const params = new URLSearchParams({
-      products: `${product.id}:${selectedWeight.label}:${farmId}`,
-      total: String(price),
-    });
-    setWeightDrawerOpen(false);
-    router.push(`/checkout?${params.toString()}`);
   };
 
   return (
@@ -105,17 +91,55 @@ function ProductCard({
           {product.name}
         </h3>
 
-        <div className="flex-1" />
-
-        {/* Price */}
-        <div className="mb-3 border-t border-odisha-black/10 pt-3">
-          <span className="font-serif text-xl font-bold text-odisha-black">
-            ₹{totalPerKg.toLocaleString("en-IN")}
+        {/* Weight chips — each shows its own discounted ₹/kg rate */}
+        <div className="mb-3">
+          <span className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1.5 block">
+            Select Weight
           </span>
-          <span className="text-xs text-odisha-black/50 ml-1">/ kg</span>
+          <div className="grid grid-cols-4 gap-1.5">
+            {product.weightOptions.map((opt) => {
+              const optDiscount = bulkDiscountForGrams(opt.grams);
+              const optPerKg = Math.round(basePerKg * (1 - optDiscount));
+              const active = selectedWeight.label === opt.label;
+              return (
+                <button
+                  key={opt.label}
+                  type="button"
+                  onClick={() => setSelectedWeight(opt)}
+                  className={`flex flex-col items-center justify-center gap-0.5 px-1 py-1.5 border-2 transition-colors cursor-pointer ${
+                    active
+                      ? "bg-odisha-red border-odisha-red text-white"
+                      : "bg-white border-odisha-black/20 text-odisha-black hover:border-odisha-black"
+                  }`}
+                >
+                  <span className="text-[11px] font-bold leading-none">{opt.label}</span>
+                  <span className={`text-[9px] leading-none ${active ? "text-white/80" : "text-odisha-black/50"}`}>
+                    ₹{optPerKg.toLocaleString("en-IN")}/kg
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Farm selector + quantity + cart actions */}
+        <div className="flex-1" />
+
+        {/* Price for selected weight */}
+        <div className="mb-3 border-t border-odisha-black/10 pt-3 flex items-end justify-between">
+          <div>
+            <span className="font-serif text-xl font-bold text-odisha-black">
+              ₹{totalPrice.toLocaleString("en-IN")}
+            </span>
+            <span className="text-xs text-odisha-black/50 ml-1">for {selectedWeight.label}</span>
+          </div>
+          {discount > 0 && (
+            <span className="text-[10px] font-bold uppercase tracking-widest text-odisha-green">
+              -{Math.round(discount * 100)}%
+            </span>
+          )}
+        </div>
+
+        {/* Farm selector + select button */}
         <div className="space-y-2">
           <label className="block">
             <span className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1 block">
@@ -136,117 +160,16 @@ function ProductCard({
 
           <button
             type="button"
-            onClick={() => setWeightDrawerOpen(true)}
-            className="flex items-center justify-between gap-2 w-full px-3 py-2.5 bg-white text-odisha-black text-xs font-semibold border-2 border-odisha-black hover:border-odisha-red transition-colors cursor-pointer"
+            onClick={inCart ? () => router.push("/cart") : handleSelect}
+            className={`flex items-center justify-center gap-2 w-full px-4 py-2.5 text-xs font-bold uppercase tracking-widest border-2 transition-colors cursor-pointer ${
+              inCart
+                ? "bg-odisha-black border-odisha-black text-white hover:bg-odisha-red hover:border-odisha-red"
+                : "bg-odisha-red border-odisha-red text-white hover:bg-odisha-black hover:border-odisha-black"
+            }`}
           >
-            <span>Select Quantity — {selectedWeight.label}</span>
-            <svg className="w-3.5 h-3.5 text-odisha-black/40 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
+            <ShoppingCart className="w-3.5 h-3.5" />
+            {inCart ? "In Cart — View" : "Select"}
           </button>
-
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={inCart ? () => router.push("/cart") : handleAddToCart}
-              className={`flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold uppercase tracking-widest py-2.5 border-2 transition-colors cursor-pointer ${
-                inCart
-                  ? "bg-odisha-black border-odisha-black text-white hover:bg-odisha-red hover:border-odisha-red"
-                  : "bg-transparent border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white"
-              }`}
-            >
-              <ShoppingCart className="w-3.5 h-3.5" />
-              {inCart ? "In Cart" : "Add to Cart"}
-            </button>
-            <button
-              type="button"
-              onClick={handleCheckout}
-              className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold uppercase tracking-widest py-2.5 bg-odisha-red text-white border-2 border-odisha-red hover:bg-odisha-black hover:border-odisha-black transition-colors cursor-pointer"
-            >
-              <Zap className="w-3.5 h-3.5" />
-              Checkout
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Quantity bottom drawer */}
-      <div
-        className={`fixed inset-0 z-50 transition-opacity duration-300 ${
-          weightDrawerOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <div className="absolute inset-0 bg-black/50" onClick={() => setWeightDrawerOpen(false)} />
-        <div
-          className={`absolute bottom-4 left-4 right-4 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 sm:w-full sm:max-w-lg
-          max-h-[80vh] overflow-y-auto rounded-t-2xl border-2 border-odisha-black bg-white p-6 pb-8 shadow-2xl
-          transform transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
-          ${weightDrawerOpen ? "translate-y-0" : "translate-y-[calc(100%+2rem)]"}`}
-        >
-          {/* Drag handle */}
-          <div className="w-10 h-1.5 bg-odisha-black/15 rounded-full mx-auto mb-4" />
-
-          <div className="flex items-center justify-between mb-5">
-            <h3 className="font-serif font-bold text-odisha-black text-base leading-snug pr-4">
-              {product.name}
-            </h3>
-            <button
-              className="p-1 border-2 border-odisha-black hover:bg-odisha-red hover:border-odisha-red hover:text-white transition-colors shrink-0 cursor-pointer"
-              onClick={() => setWeightDrawerOpen(false)}
-              aria-label="Close"
-            >
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          <span className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-2 block">
-            Select Quantity
-          </span>
-          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-            {product.weightOptions.map((opt) => (
-              <button
-                key={opt.label}
-                onClick={() => setSelectedWeight(opt)}
-                className={`px-3 py-3 text-sm font-semibold border-2 transition-colors cursor-pointer ${
-                  selectedWeight.label === opt.label
-                    ? "bg-odisha-red border-odisha-red text-white"
-                    : "bg-white border-odisha-black text-odisha-black hover:bg-odisha-offwhite"
-                }`}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="mt-5 border-2 border-odisha-black bg-odisha-offwhite p-4 flex items-center justify-between">
-            <span className="text-sm font-semibold text-odisha-black uppercase tracking-widest text-xs">
-              Total for {selectedWeight.label}
-            </span>
-            <span className="font-serif text-2xl font-bold text-odisha-black">
-              ₹{totalPrice.toLocaleString("en-IN")}
-            </span>
-          </div>
-
-          <div className="flex gap-2 mt-4">
-            <button
-              type="button"
-              onClick={handleAddToCart}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-transparent text-odisha-black text-sm font-bold uppercase tracking-widest border-2 border-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer"
-            >
-              <ShoppingCart className="w-4 h-4" />
-              Add to Cart
-            </button>
-            <button
-              type="button"
-              onClick={handleCheckout}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-odisha-red text-white text-sm font-bold uppercase tracking-widest border-2 border-odisha-red hover:bg-odisha-black hover:border-odisha-black transition-colors cursor-pointer"
-            >
-              <Zap className="w-4 h-4" />
-              Checkout
-            </button>
-          </div>
         </div>
       </div>
     </div>

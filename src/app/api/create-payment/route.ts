@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
     const itemsDetail = orderItems.map((item) => {
       const resolved = resolveCartProduct(item.productId, item.farmId);
       const grams = resolved ? gramsForResolved(resolved, item.weight) : 0;
-      const price = resolved ? computeItemPrice(pricePerKgFor(resolved), grams) : 0;
+      const price = resolved ? computeItemPrice(pricePerKgFor(resolved, grams), grams) : 0;
       const image =
         resolved?.kind === "product" && resolved.product.image
           ? `${origin}/products/${resolved.product.image}`

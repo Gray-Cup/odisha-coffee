@@ -33,7 +33,7 @@ function CheckoutContent() {
       if (!resolved) return [];
       const tiers = tiersFor(resolved);
       const tier  = tiers.find((t) => t.label === weight) ?? tiers[0];
-      const price = computeItemPrice(pricePerKgFor(resolved), tier.grams);
+      const price = computeItemPrice(pricePerKgFor(resolved, tier.grams), tier.grams);
       return [{ resolved, weight: tier.label, price, grams: tier.grams, entry }];
     });
   }, [productsParam]);

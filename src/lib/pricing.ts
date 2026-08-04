@@ -79,10 +79,43 @@ export function tiersFor(resolved: ResolvedCartItem): Array<{ label: string; gra
   return resolved.kind === "estate" ? resolved.product.weightOptions : [...tiersForProduct(resolved.product)];
 }
 
-export function pricePerKgFor(resolved: ResolvedCartItem): number {
-  return resolved.kind === "estate"
-    ? resolved.product.pricePerKg + resolved.product.shippingPerKg
-    : resolved.product.pricePerKg;
+/**
+ * Bulk discount schedule for estate (green bean) lots: the more you buy, the
+ * lower the effective ₹/kg rate, up to MAX_BULK_DISCOUNT. Smaller weights get
+ * little to no discount; discount steps up with quantity and then caps out
+ * rather than growing without bound.
+ */
+export const MAX_BULK_DISCOUNT = 0.15;
+
+export const BULK_DISCOUNT_TIERS: Array<{ grams: number; discount: number }> = [
+  { grams: 100,   discount: 0 },
+  { grams: 500,   discount: 0.02 },
+  { grams: 1000,  discount: 0.05 },
+  { grams: 2000,  discount: 0.08 },
+  { grams: 5000,  discount: 0.10 },
+  { grams: 10000, discount: 0.13 },
+  { grams: 20000, discount: MAX_BULK_DISCOUNT },
+];
+
+export function bulkDiscountForGrams(grams: number): number {
+  let discount = 0;
+  for (const tier of BULK_DISCOUNT_TIERS) {
+    if (grams >= tier.grams) discount = tier.discount;
+  }
+  return Math.min(discount, MAX_BULK_DISCOUNT);
+}
+
+/**
+ * Effective ₹/kg for a resolved cart item. For estate lots this folds in the
+ * lot's own shippingPerKg AND, when `grams` is given, the bulk discount for
+ * that quantity — so the rest of the pipeline (cart/checkout/payment) always
+ * charges the discounted rate rather than applying it only cosmetically.
+ */
+export function pricePerKgFor(resolved: ResolvedCartItem, grams?: number): number {
+  if (resolved.kind !== "estate") return resolved.product.pricePerKg;
+  const base = resolved.product.pricePerKg + resolved.product.shippingPerKg;
+  if (grams == null) return base;
+  return Math.round(base * (1 - bulkDiscountForGrams(grams)));
 }
 
 export function gramsForResolved(resolved: ResolvedCartItem, weight: string): number {
@@ -106,7 +139,7 @@ export function computeOrderTotal(items: OrderItem[]): number {
     if (!resolved) throw new Error(`Invalid product: ${item.productId}`);
     const grams = gramsForResolved(resolved, item.weight);
     if (!grams) throw new Error(`Invalid weight: ${item.weight} for ${item.productId}`);
-    total += computeItemPrice(pricePerKgFor(resolved), grams);
+    total += computeItemPrice(pricePerKgFor(resolved, grams), grams);
     totalGrams += grams;
   }
 
