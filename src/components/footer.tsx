@@ -5,6 +5,7 @@ const quickLinks = [
   { href: "/farms", label: "Partner Farms" },
   { href: "/buy-green-beans", label: "Buy Green Beans" },
   { href: "/roasted-coffee", label: "Roasted Coffee" },
+  { href: "/spices", label: "Spices" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact & Export" },
 ];

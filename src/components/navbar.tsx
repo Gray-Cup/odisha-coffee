@@ -9,6 +9,7 @@ const navLinks = [
   { label: "Farms", href: "/farms" },
   { label: "Buy Green Beans", href: "/buy-green-beans" },
   { label: "Roasted Coffee", href: "/roasted-coffee" },
+  { label: "Spices", href: "/spices" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
