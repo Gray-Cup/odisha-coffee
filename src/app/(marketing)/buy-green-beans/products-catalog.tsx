@@ -132,11 +132,9 @@ function ProductCard({
             </span>
             <span className="text-xs text-odisha-black/50 ml-1">for {selectedWeight.label}</span>
           </div>
-          {discount > 0 && (
-            <span className="text-[10px] font-bold uppercase tracking-widest text-odisha-green">
-              -{Math.round(discount * 100)}%
-            </span>
-          )}
+          <span className="text-[10px] font-bold uppercase tracking-widest text-odisha-black/40">
+            ₹{effectivePerKg.toLocaleString("en-IN")}/kg
+          </span>
         </div>
 
         {/* Farm selector + select button */}
