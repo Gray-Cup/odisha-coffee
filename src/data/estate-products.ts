@@ -157,7 +157,7 @@ export const estateProducts: EstateProduct[] = [
   },
   {
     id: "hsd-commercial",
-    name: "HSD Commercial Washed",
+    name: "Arabica HSD Commercial",
     variety: "Arabica HSD (Hibrido de Timor)",
     processing: "washed",
     roastLevel: "green",
@@ -178,7 +178,7 @@ export const estateProducts: EstateProduct[] = [
   },
   {
     id: "hsd-specialty",
-    name: "HSD Specialty Washed",
+    name: "Arabica HSD Specialty",
     variety: "Arabica HSD (Hibrido de Timor)",
     processing: "washed",
     roastLevel: "green",

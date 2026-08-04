@@ -502,82 +502,79 @@ export function ProductsCatalog() {
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-6 space-y-3">
+              <div className="flex-1 overflow-y-auto p-6">
                 {selectionLines.length === 0 ? (
                   <p className="text-sm text-odisha-black/50 text-center py-8">No items selected.</p>
                 ) : (
-                  selectionLines.map((line) => {
-                    const product = estateProducts.find((p) => p.id === line.productId);
-                    const farm = farms.find((f) => f.id === line.farmId);
-                    return (
-                      <div
-                        key={line.key}
-                        className="flex items-center gap-3 border-2 border-odisha-black p-3"
-                      >
-                        <div className="relative w-14 h-14 shrink-0 border-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
-                          {product?.image && (
-                            <Image src={`/${product.image}`} alt={product.name} fill className="object-cover" />
-                          )}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-serif font-bold text-odisha-black text-sm leading-snug truncate">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    {selectionLines.map((line) => {
+                      const product = estateProducts.find((p) => p.id === line.productId);
+                      const farm = farms.find((f) => f.id === line.farmId);
+                      return (
+                        <div
+                          key={line.key}
+                          className="relative flex flex-col border-2 border-odisha-black p-2.5"
+                        >
+                          <button
+                            type="button"
+                            onClick={() => removeLine(line.key)}
+                            className="absolute top-1.5 right-1.5 w-5 h-5 flex items-center justify-center bg-white border-2 border-odisha-black text-odisha-black/50 hover:text-odisha-red transition-colors cursor-pointer z-10"
+                            aria-label="Remove"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+
+                          <div className="relative w-full aspect-square border-2 border-odisha-black overflow-hidden bg-odisha-offwhite mb-2">
+                            {product?.image && (
+                              <Image src={`/${product.image}`} alt={product.name} fill className="object-cover" />
+                            )}
+                          </div>
+
+                          <p className="font-serif font-bold text-odisha-black text-xs leading-snug line-clamp-2 mb-0.5">
                             {product?.name ?? line.productId}
                           </p>
-                          <p className="text-xs text-odisha-black/50 mt-0.5">
-                            {line.weight} · {farm?.name ?? "Unknown farm"}
+                          <p className="text-[10px] text-odisha-black/50 mb-2">
+                            {line.weight} · {farm?.name.split(/\s+/).slice(0, 2).join(" ") ?? "Unknown farm"}
                           </p>
+
+                          <div className="mt-auto flex items-center justify-between gap-1">
+                            <div className="flex items-center gap-1">
+                              <button
+                                type="button"
+                                onClick={() => changeLineQuantity(line.key, -1)}
+                                disabled={line.quantity <= 1}
+                                className="w-5 h-5 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                                aria-label="Decrease quantity"
+                              >
+                                <Minus className="w-2.5 h-2.5" />
+                              </button>
+                              <span className="font-bold text-odisha-black text-xs w-4 text-center tabular-nums">
+                                {line.quantity}
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => changeLineQuantity(line.key, 1)}
+                                disabled={line.quantity >= MAX_QUANTITY}
+                                className="w-5 h-5 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                                aria-label="Increase quantity"
+                              >
+                                <Plus className="w-2.5 h-2.5" />
+                              </button>
+                            </div>
+                            <span className="font-serif font-bold text-odisha-black text-xs">
+                              ₹{(line.unitPrice * line.quantity).toLocaleString("en-IN")}
+                            </span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-1.5 shrink-0">
-                          <button
-                            type="button"
-                            onClick={() => changeLineQuantity(line.key, -1)}
-                            disabled={line.quantity <= 1}
-                            className="w-6 h-6 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
-                            aria-label="Decrease quantity"
-                          >
-                            <Minus className="w-3 h-3" />
-                          </button>
-                          <span className="font-bold text-odisha-black text-sm w-5 text-center tabular-nums">
-                            {line.quantity}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => changeLineQuantity(line.key, 1)}
-                            disabled={line.quantity >= MAX_QUANTITY}
-                            className="w-6 h-6 flex items-center justify-center border-2 border-odisha-black text-odisha-black hover:bg-odisha-black hover:text-white transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
-                            aria-label="Increase quantity"
-                          >
-                            <Plus className="w-3 h-3" />
-                          </button>
-                        </div>
-                        <span className="font-serif font-bold text-odisha-black text-sm w-16 text-right shrink-0">
-                          ₹{(line.unitPrice * line.quantity).toLocaleString("en-IN")}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => removeLine(line.key)}
-                          className="w-6 h-6 flex items-center justify-center text-odisha-black/40 hover:text-odisha-red transition-colors cursor-pointer shrink-0"
-                          aria-label="Remove"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                      </div>
-                    );
-                  })
+                      );
+                    })}
+                  </div>
                 )}
               </div>
 
               {selectionLines.length > 0 && (
                 <div className="border-t-2 border-odisha-black p-6 shrink-0 space-y-3">
-                  <div className="flex justify-between text-sm text-odisha-black/60">
-                    <span>Subtotal</span>
-                    <span>₹{selectionSubtotal.toLocaleString("en-IN")}</span>
-                  </div>
-                  <div className="flex justify-between text-sm text-odisha-black/60">
-                    <span>Delivery</span>
-                    <span>₹{selectionDelivery.toLocaleString("en-IN")}</span>
-                  </div>
-                  <div className="flex justify-between font-bold text-odisha-black text-lg border-t border-odisha-black/10 pt-3">
+                  <div className="flex justify-between font-bold text-odisha-black text-lg">
                     <span>Total</span>
                     <span>₹{selectionTotal.toLocaleString("en-IN")}</span>
                   </div>
