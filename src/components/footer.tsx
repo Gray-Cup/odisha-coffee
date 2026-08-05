@@ -15,6 +15,7 @@ const infoLinks = [
   { href: "/terms", label: "Terms of Use" },
   { href: "/refunds", label: "Refunds & Cancellations" },
   { href: "/shipping", label: "Shipping Policy" },
+  { href: "/order-builder", label: "Order Builder" },
   { href: "/sitemap.xml", label: "Sitemap" },
 ];
 

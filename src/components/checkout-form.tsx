@@ -12,6 +12,48 @@ import type { OdishaOrderRequest } from "@/app/api/create-payment/route";
 
 const NEEDS_CAPTCHA = !!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
+// Remembers the buyer's own details (not order contents) across visits so
+// they never have to retype them - refreshed to a fresh 1-year window on
+// every edit, and never sent anywhere; it's purely a localStorage mirror of
+// the form fields below.
+const BUYER_CACHE_KEY = "odisha_buyer_info";
+const BUYER_CACHE_MAX_AGE_MS = 365 * 24 * 60 * 60 * 1000;
+
+type CachedBuyerInfo = {
+  customerType: "individual" | "business";
+  country: string;
+  name: string;
+  phone: string;
+  email: string;
+  pincode: string;
+  address: string;
+  state: string;
+  gstOrTaxId: string;
+  businessType: string;
+};
+
+function loadCachedBuyerInfo(): Partial<CachedBuyerInfo> | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(BUYER_CACHE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as { savedAt: number; data: Partial<CachedBuyerInfo> };
+    if (!parsed?.data || Date.now() - parsed.savedAt > BUYER_CACHE_MAX_AGE_MS) return null;
+    return parsed.data;
+  } catch {
+    return null;
+  }
+}
+
+function saveCachedBuyerInfo(data: CachedBuyerInfo) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(BUYER_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), data }));
+  } catch {
+    // ignore quota errors
+  }
+}
+
 const businessCategories = [
   { id: "roastery",   label: "Roastery" },
   { id: "cafe",       label: "Cafe" },
@@ -71,6 +113,24 @@ export function CheckoutForm({ products, totalAmount, renderSummary, onBack }: P
   const errors = validate(fieldValues);
   const hasErrors = Object.keys(errors).length > 0;
 
+  // Pre-fill from a cached previous visit, if any (before the geo lookup
+  // below runs, so a returning buyer's own country isn't clobbered by IP
+  // detection).
+  useEffect(() => {
+    const cached = loadCachedBuyerInfo();
+    if (!cached) return;
+    if (cached.customerType)  setCustomerType(cached.customerType);
+    if (cached.country)       setCountry(cached.country);
+    if (cached.name)          setName(cached.name);
+    if (cached.phone)         setPhone(cached.phone);
+    if (cached.email)         setEmail(cached.email);
+    if (cached.pincode)       setPincode(cached.pincode);
+    if (cached.address)       setAddress(cached.address);
+    if (cached.state)         setState(cached.state);
+    if (cached.gstOrTaxId)    setGstOrTaxId(cached.gstOrTaxId);
+    if (cached.businessType)  setBusinessType(cached.businessType);
+  }, []);
+
   useEffect(() => {
     fetch("/api/geo")
       .then((r) => r.json())
@@ -78,13 +138,25 @@ export function CheckoutForm({ products, totalAmount, renderSummary, onBack }: P
         if (!d.country) return;
         try {
           const detected = new Intl.DisplayNames(["en"], { type: "region" }).of(d.country);
-          if (detected) setCountry(detected);
+          // Functional update so an already-cached/user-entered country (set
+          // by the effect above) never gets overwritten once this resolves.
+          if (detected) setCountry((prev) => prev || detected);
         } catch {
-          setCountry(d.country);
+          setCountry((prev) => prev || d.country);
         }
       })
       .catch(() => {});
   }, []);
+
+  // Keep the cache in sync with whatever the buyer has typed - every edit
+  // refreshes the 1-year window, and the field stays editable/overwritable
+  // exactly like any other controlled input.
+  useEffect(() => {
+    if (!name && !phone && !email && !address && !pincode && !state && !gstOrTaxId) return;
+    saveCachedBuyerInfo({
+      customerType, country, name, phone, email, pincode, address, state, gstOrTaxId, businessType,
+    });
+  }, [customerType, country, name, phone, email, pincode, address, state, gstOrTaxId, businessType]);
 
   const isIndia    = country.trim().toLowerCase() === "india";
   const isBusiness = customerType === "business";
