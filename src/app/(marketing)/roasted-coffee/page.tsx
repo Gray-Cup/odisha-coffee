@@ -91,7 +91,7 @@ export default function RoastedCoffeePage() {
               Roasted Coffee
             </h1>
             <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
-              Small-batch roasted coffee from Koraput partner estates — single-origin Arabica and Robusta,
+              Small-batch roasted coffee from Koraput partner estates — single-origin Arabica,
               specialty espresso blends, and limited seasonal micro-lots. All beans are sourced directly
               from verified farms and roasted by Gray Cup.
             </p>
