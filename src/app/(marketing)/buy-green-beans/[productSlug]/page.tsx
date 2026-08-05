@@ -22,7 +22,7 @@ export async function generateMetadata({
   if (!product) return { title: "Product Not Found" };
 
   return {
-    title: generateTitle(`${product.name} — Koraput, Odisha Green Coffee`),
+    title: generateTitle(`${product.name} Green Coffee from Koraput, Odisha`),
     description: generateDescription(
       `${product.name} — ${product.grade} green Arabica from Koraput, Odisha. ${product.description}`
     ),
@@ -77,7 +77,7 @@ export default async function GreenCoffeeProductPage({
           </div>
 
           <h1 className="font-serif text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">
-            {product.name} — Koraput, Odisha Green Coffee
+            {product.name} Green Coffee from Koraput, Odisha
           </h1>
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed">
             {product.description}
