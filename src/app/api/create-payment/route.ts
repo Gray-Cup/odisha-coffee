@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
 
     const linkId = `odisha_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
     const expiryTime = new Date();
-    expiryTime.setMinutes(expiryTime.getMinutes() + 30);
+    expiryTime.setHours(expiryTime.getHours() + 24);
 
     const origin = request.headers.get("origin") || "https://odishacoffee.com";
 
