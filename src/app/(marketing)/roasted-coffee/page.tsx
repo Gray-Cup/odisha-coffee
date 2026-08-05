@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Roasted Coffee — Odisha Single Origin & Specialty Lots",
   description:
-    "Specialty roasted coffee from Koraput's Eastern Ghats — washed, natural and honey processed Arabica & Robusta, roasted in small batches by Gray Cup. Espresso blends, filter lots, and seasonal micro-lots.",
+    "Specialty roasted coffee from Koraput's Eastern Ghats — washed, natural and honey processed Arabica, roasted in small batches by Gray Cup. Espresso blends, filter lots, and seasonal micro-lots.",
   alternates: { canonical: "/roasted-coffee" },
 };
 

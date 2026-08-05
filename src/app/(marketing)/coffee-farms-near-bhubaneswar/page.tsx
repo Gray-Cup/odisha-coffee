@@ -64,8 +64,8 @@ export default function CoffeeFarmsNearBhubaneswarPage() {
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
             Odisha&apos;s coffee country lies in Koraput district — approximately 400 kilometres
             south of Bhubaneswar in the Eastern Ghats highlands. This is where Gray Cup
-            Enterprises sources from {farms.length} verified coffee estates growing Arabica and
-            Robusta at elevations between 800 and 1450 metres. Whether you&apos;re looking to
+            Enterprises sources from {farms.length} verified coffee estates growing Arabica
+            at elevations between 800 and 1450 metres. Whether you&apos;re looking to
             visit a farm, buy Odisha coffee, or source for your business, this page has you
             covered.
           </p>
