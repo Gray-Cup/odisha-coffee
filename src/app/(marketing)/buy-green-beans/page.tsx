@@ -5,14 +5,14 @@ import { ProductsCatalog } from "./products-catalog";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Odisha Coffee Green Beans — All Grades, All Farms",
+  title: "Koraput, Odisha Green Coffee Beans — All Grades, All Farms",
   description:
-    "Buy green Arabica from all 24 Koraput partner estates. AAA, AA, A, B+ and B grade washed and natural lots — select your farm, choose your grade, order direct. Gray Cup Enterprises.",
+    "Buy Koraput, Odisha green Arabica from all 24 partner estates. AAA, AA, A, B+ and B grade washed, natural and honey lots — select your farm, choose your grade, order direct. Gray Cup Enterprises.",
   alternates: { canonical: "/buy-green-beans" },
   openGraph: {
-    title: "Odisha Coffee Green Beans — All Grades, All Farms",
+    title: "Koraput, Odisha Green Coffee Beans — All Grades, All Farms",
     description:
-      "AAA to B grade washed and natural green Arabica from 24 verified Koraput estates. Select farm and grade, order direct from Gray Cup Enterprises.",
+      "AAA to B grade washed, natural and honey green Arabica from 24 verified Koraput, Odisha estates. Select farm and grade, order direct from Gray Cup Enterprises.",
     url: "https://odishacoffee.com/buy-green-beans",
     locale: "en_IN",
   },
@@ -38,7 +38,7 @@ export default function BuyGreenBeansPage() {
           </div>
 
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-            Green Coffee Beans
+            Koraput, Odisha Green Coffee Beans
           </h1>
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
             {estateProducts.length} grade lots available from every one of our {farms.length} partner
@@ -51,7 +51,7 @@ export default function BuyGreenBeansPage() {
               { value: estateProducts.length.toString(), label: "Grade Lots" },
               { value: farms.length.toString(), label: "Partner Farms" },
               { value: exportReadyFarms.length.toString(), label: "Export Ready" },
-              { value: "₹460–₹960", label: "Per kg (incl. ship)" },
+              { value: "₹520–₹1060", label: "Per kg (incl. ship)" },
             ].map(({ value, label }) => (
               <div key={label} className="border-l-2 border-white/30 pl-4">
                 <div className="font-serif text-2xl font-bold text-white">{value}</div>

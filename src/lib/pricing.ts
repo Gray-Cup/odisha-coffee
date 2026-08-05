@@ -32,8 +32,17 @@ export function gramsForWeight(product: Pick<Product, "isGreen">, weight: string
   return tiersForProduct(product).find((t) => t.label === weight)?.grams ?? 0;
 }
 
+/**
+ * Every customer-facing rupee amount (₹/kg rates and line totals) is rounded
+ * to the nearest 5 so prices never end in an odd single digit — e.g. 754
+ * becomes 755, 752 becomes 750.
+ */
+export function roundToNearest5(amount: number): number {
+  return Math.round(amount / 5) * 5;
+}
+
 export function computeItemPrice(pricePerKg: number, grams: number): number {
-  return Math.ceil((pricePerKg / 1000) * grams);
+  return roundToNearest5(Math.ceil((pricePerKg / 1000) * grams));
 }
 
 /**
@@ -116,8 +125,8 @@ export function bulkDiscountForGrams(grams: number): number {
 export function pricePerKgFor(resolved: ResolvedCartItem, grams?: number): number {
   if (resolved.kind !== "estate") return resolved.product.pricePerKg;
   const base = resolved.product.pricePerKg + resolved.product.shippingPerKg;
-  if (grams == null) return base;
-  return Math.round(base * (1 - bulkDiscountForGrams(grams)));
+  if (grams == null) return roundToNearest5(base);
+  return roundToNearest5(base * (1 - bulkDiscountForGrams(grams)));
 }
 
 export function gramsForResolved(resolved: ResolvedCartItem, weight: string): number {

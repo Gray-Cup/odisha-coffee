@@ -10,7 +10,7 @@ import { farms, processingColors, processingLabels } from "@/data/farms";
 import { estateProducts } from "@/data/estate-products";
 import type { EstateProduct } from "@/data/estate-products";
 import { useCart } from "@/context/cart-context";
-import { computeItemPrice, bulkDiscountForGrams, deliveryFeeForGrams } from "@/lib/pricing";
+import { computeItemPrice, bulkDiscountForGrams, deliveryFeeForGrams, roundToNearest5 } from "@/lib/pricing";
 
 const MAX_QUANTITY = 20;
 
@@ -79,7 +79,7 @@ function ProductCard({
 
   const basePerKg = product.pricePerKg + product.shippingPerKg;
   const discount = bulkDiscountForGrams(selectedWeight.grams);
-  const effectivePerKg = Math.round(basePerKg * (1 - discount));
+  const effectivePerKg = roundToNearest5(basePerKg * (1 - discount));
   const unitPrice = computeItemPrice(effectivePerKg, selectedWeight.grams);
 
   const handleSelect = () => {
@@ -149,7 +149,9 @@ function ProductCard({
       <div className="p-4 flex flex-col flex-1">
         {/* Name */}
         <h3 className="font-serif font-bold text-odisha-black text-base leading-snug mb-2">
-          {product.name}
+          <Link href={`/buy-green-beans/${product.id}`} className="hover:text-odisha-red transition-colors">
+            {product.name}
+          </Link>
         </h3>
 
         {/* Weight chips — each shows its own discounted ₹/kg rate */}
@@ -160,7 +162,7 @@ function ProductCard({
           <div className="grid grid-cols-4 gap-1.5">
             {product.weightOptions.map((opt) => {
               const optDiscount = bulkDiscountForGrams(opt.grams);
-              const optPerKg = Math.round(basePerKg * (1 - optDiscount));
+              const optPerKg = roundToNearest5(basePerKg * (1 - optDiscount));
               const active = selectedWeight.label === opt.label;
               return (
                 <button
