@@ -68,9 +68,9 @@ export function OrderPanel({
         </label>
       )}
       <div className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-3">
-        Price by Quantity — Select One
+        PRICE BY QUANTITY
       </div>
-      <div className="space-y-1.5 mb-4">
+      <div className="grid grid-cols-2 gap-1.5 mb-4">
         {product.weightOptions.map((opt) => {
           const perKg = pricePerKgFor(resolved, opt.grams);
           const optTotal = computeItemPrice(perKg, opt.grams);
@@ -80,7 +80,7 @@ export function OrderPanel({
               key={opt.label}
               type="button"
               onClick={() => setSelectedWeight(opt)}
-              className={`flex items-center justify-between w-full text-sm border-2 px-3 py-2 transition-colors cursor-pointer ${
+              className={`flex flex-col items-start gap-0.5 w-full text-sm border-2 px-3 py-2 transition-colors cursor-pointer ${
                 active
                   ? "bg-odisha-red border-odisha-red text-white"
                   : "bg-white border-odisha-black/20 text-odisha-black hover:border-odisha-black"
