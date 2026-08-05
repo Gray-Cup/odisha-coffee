@@ -7,12 +7,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Odisha Coffee Export — Green Beans, FOB India, Gray Cup",
   description:
-    "Export Odisha coffee through Gray Cup Enterprises. APEDA-registered, phytosanitary certified green bean lots from Koraput's Eastern Ghats — Arabica S795, SLN 9, HSD and Robusta. FCL and LCL quantities.",
+    "Export Odisha coffee through Gray Cup Enterprises. APEDA-registered, phytosanitary certified green bean lots from Koraput's Eastern Ghats — Arabica S795, SLN 9, and HSD. FCL and LCL quantities.",
   alternates: { canonical: "/odisha-coffee-export" },
   openGraph: {
     title: "Odisha Coffee Export — Green Beans, FOB India",
     description:
-      "APEDA-registered export green beans from 24 verified Koraput estates. Arabica S795, SLN 9, HSD and Robusta — traceable, certified, available in FCL and LCL. Gray Cup Enterprises.",
+      "APEDA-registered export green beans from 24 verified Koraput estates. Arabica S795, SLN 9, and HSD — traceable, certified, available in FCL and LCL. Gray Cup Enterprises.",
     url: "https://odishacoffee.com/odisha-coffee-export",
     locale: "en_IN",
   },
@@ -115,7 +115,7 @@ export default function OdishaCoffeeExportPage() {
           </h1>
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
             Gray Cup Enterprises exports verified green coffee from {exportFarms.length} APEDA-registered
-            farms across Koraput district, Odisha. Arabica S795, SLN 9, HSD, Catuai, and Robusta —
+            farms across Koraput district, Odisha. Arabica S795, SLN 9, HSD, and Catuai —
             all fully traceable to the farm level, with phytosanitary certification and ICO
             registration. Available in LCL and FCL quantities, FOB Visakhapatnam or Chennai.
           </p>
@@ -352,7 +352,7 @@ export default function OdishaCoffeeExportPage() {
             {[
               {
                 q: "What is the minimum export order quantity?",
-                a: "Minimums vary by lot. Our export-grade pooled lots (Arabica S795 washed, Robusta natural) start at 500–1000kg. Single-estate specialty lots can be as low as 50–200kg. Contact us with your requirement and we will confirm availability.",
+                a: "Minimums vary by lot. Our export-grade pooled lots (Arabica S795 washed and natural) start at 500–1000kg. Single-estate specialty lots can be as low as 50–200kg. Contact us with your requirement and we will confirm availability.",
               },
               {
                 q: "Which ports does Gray Cup ship from?",

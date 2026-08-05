@@ -127,7 +127,7 @@ export default function Footer() {
         <div className="mt-10 pt-6 border-t border-odisha-black/10 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-xs text-odisha-black/40">
           <p>© {new Date().getFullYear()} Gray Cup Enterprises Private Limited. All rights reserved.</p>
           <p>
-            Koraput Arabica &amp; Robusta — Eastern Ghats, Odisha, India &nbsp;·&nbsp; FSSAI Licensed &nbsp;·&nbsp; APEDA Registered &nbsp;·&nbsp; IEC Certified
+            Koraput Arabica — Eastern Ghats, Odisha, India &nbsp;·&nbsp; FSSAI Licensed &nbsp;·&nbsp; APEDA Registered &nbsp;·&nbsp; IEC Certified
           </p>
         </div>
       </div>

@@ -6,12 +6,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Coffee Farms of Odisha — Estates, Regions & Varieties",
   description:
-    "Explore all coffee farms of Odisha sourced by Gray Cup Enterprises. 24 verified estates across Koraput, Nabarangpur and the Eastern Ghats — Arabica, Robusta, washed and natural lots.",
+    "Explore all coffee farms of Odisha sourced by Gray Cup Enterprises. 24 verified estates across Koraput, Nabarangpur and the Eastern Ghats — Arabica, washed and natural lots.",
   alternates: { canonical: "/coffee-farms-odisha" },
   openGraph: {
     title: "Coffee Farms of Odisha — Estates, Regions & Varieties",
     description:
-      "24 verified coffee estates across Koraput and the Eastern Ghats. Traceable Arabica & Robusta from Odisha's highland coffee belt, sourced by Gray Cup Enterprises.",
+      "24 verified coffee estates across Koraput and the Eastern Ghats. Traceable Arabica from Odisha's highland coffee belt, sourced by Gray Cup Enterprises.",
     url: "https://odishacoffee.com/coffee-farms-odisha",
     locale: "en_IN",
   },
@@ -32,7 +32,7 @@ const regions = [
     name: "Koraput District",
     subtitle: "Odisha's Primary Coffee Belt",
     description:
-      "Koraput is the heartland of Odisha coffee — a highland district in the southern Eastern Ghats where elevations between 800 and 1450 metres create ideal conditions for both Arabica and Robusta cultivation. The district encompasses distinct growing pockets across Jeypore, Pottangi, Semiliguda, Sunabeda, Boipariguda, Similiguda, Narayanpatna, and Koraput town.",
+      "Koraput is the heartland of Odisha coffee — a highland district in the southern Eastern Ghats where elevations between 800 and 1450 metres create ideal conditions for Arabica cultivation. The district encompasses distinct growing pockets across Jeypore, Pottangi, Semiliguda, Sunabeda, Boipariguda, Similiguda, Narayanpatna, and Koraput town.",
     farmCount: farms.filter((f) => f.district === "Koraput").length,
   },
   {
@@ -75,7 +75,7 @@ export default function CoffeeFarmsOdishaPage() {
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
             Odisha is one of India&apos;s least-known yet most distinctive coffee-growing
             states. Nestled in the Eastern Ghats, farms across Koraput and Nabarangpur
-            districts produce Arabica and Robusta at elevations between 800 and 1450 metres
+            districts produce Arabica at elevations between 800 and 1450 metres
             — under forest shade, with minimal chemical inputs, and with growing
             traceability. Gray Cup Enterprises sources directly from{" "}
             {farms.length} verified estates here.
@@ -178,7 +178,7 @@ export default function CoffeeFarmsOdishaPage() {
                 },
                 {
                   label: "Primary Varieties",
-                  value: "Arabica S795, SLN 9, Catuai, HSD · Robusta",
+                  value: "Arabica S795, SLN 9, Catuai, HSD, Chandragiri",
                   note: null,
                 },
                 {
@@ -325,17 +325,15 @@ export default function CoffeeFarmsOdishaPage() {
             <p>
               <strong className="text-odisha-black">What coffee varieties are grown in Odisha?</strong>{" "}
               The dominant Arabica varieties are S795 (a hybrid developed by the Coffee Board of
-              India), SLN 9, Catuai, Catimor, and HSD (Hibrido de Timor). Robusta is widely
-              cultivated across mid-elevation estates and forms the backbone of several export
-              blends. A small number of farms are experimenting with anaerobic naturals and
-              barrel-aged processing, producing micro-lots that have attracted specialty buyers
-              in Mumbai, Bangalore, and abroad.
+              India), SLN 9, Catuai, Chandragiri, and HSD (Hibrido de Timor). A small number of
+              farms are experimenting with anaerobic naturals and barrel-aged processing, producing
+              micro-lots that have attracted specialty buyers in Mumbai, Bangalore, and abroad.
             </p>
             <p>
               <strong className="text-odisha-black">How is Odisha coffee processed?</strong>{" "}
               The region supports all major processing methods. Washed processing is most common
               on estates with wet mill access; natural processing (whole-cherry sun drying) is
-              widely practised across the region, particularly for Robusta; honey processing —
+              widely practised across the region; honey processing —
               drying with mucilage intact — has been adopted by several forward-looking estates
               seeking differentiated cup profiles. A few farms also produce pulped-natural lots.
             </p>
