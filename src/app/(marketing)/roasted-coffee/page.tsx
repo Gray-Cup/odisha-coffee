@@ -1,8 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
-import { products, roastLabels, availabilityColors, availabilityLabels } from "@/data/products";
-import { processingColors, processingLabels } from "@/data/farms";
-import { ProductActions } from "@/components/products/product-actions";
+import { products } from "@/data/products";
+import { RoastedCatalog } from "@/components/products/roasted-catalog";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -114,111 +112,7 @@ export default function RoastedCoffeePage() {
           </div>
         </section>
 
-        {/* Roasted grid */}
-        <section className="bg-odisha-offwhite border-b-2 border-odisha-black pattachitra-pattern">
-          <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-1 h-6 bg-odisha-red" />
-              <div>
-                <h2 className="font-serif text-2xl font-bold text-odisha-black">Roasted Lots</h2>
-                <p className="text-xs text-odisha-black/50 mt-0.5">Small-batch roasted, dispatched fresh within 48 hours of roast</p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-0">
-              {roastedProducts.map((product) => (
-                <div key={product.id} className="border-2 border-odisha-black -ml-[2px] -mt-[2px] bg-white flex flex-col">
-                  <div className="relative h-40 bg-odisha-offwhite border-b-2 border-odisha-black overflow-hidden">
-                    {product.image ? (
-                      <Image src={`/products/${product.image}`} alt={product.name} fill className="object-cover" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-odisha-black/20 text-xs">No image</div>
-                    )}
-                    <span className={`absolute top-2 right-2 text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 ${availabilityColors[product.availability]}`}>
-                      {availabilityLabels[product.availability]}
-                    </span>
-                  </div>
-
-                  <div className="p-4 flex flex-col flex-1">
-                    <h3 className="font-serif font-bold text-odisha-black text-sm leading-snug mb-2">{product.name}</h3>
-
-                    <div className="flex flex-wrap gap-1.5 mb-2">
-                      <span className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 ${processingColors[product.processing]}`}>
-                        {processingLabels[product.processing]}
-                      </span>
-                      <span className="text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 bg-odisha-offwhite border border-odisha-black/30 text-odisha-black">
-                        {roastLabels[product.roastLevel]}
-                      </span>
-                    </div>
-
-                    <div className="flex flex-wrap gap-1 mb-3 flex-1">
-                      {product.flavorNotes.slice(0, 3).map((note) => (
-                        <span key={note} className="text-[10px] px-1.5 py-0.5 bg-odisha-offwhite border border-odisha-black/20 text-odisha-black/60">
-                          {note}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="border-t-2 border-odisha-black pt-3 mt-auto">
-                      <ProductActions product={product} />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Specialty & Seasonal */}
-        {specialtyLots.length > 0 && (
-          <section className="bg-white border-b-2 border-odisha-black">
-            <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-1 h-6 bg-odisha-yellow" />
-                <div>
-                  <h2 className="font-serif text-2xl font-bold text-odisha-black">Specialty & Seasonal Lots</h2>
-                  <p className="text-xs text-odisha-black/50 mt-0.5">Single-farm micro-lots, limited availability</p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-                {specialtyLots.map((product) => (
-                  <div key={product.id} className="border-2 border-odisha-black -ml-[2px] -mt-[2px] p-6 bg-odisha-offwhite">
-                    <div className="flex flex-wrap items-center gap-2 mb-3">
-                      <h3 className="font-serif font-bold text-odisha-black text-lg">{product.name}</h3>
-                      <span className={`text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 ${availabilityColors[product.availability]}`}>
-                        {availabilityLabels[product.availability]}
-                      </span>
-                    </div>
-
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      <span className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 ${processingColors[product.processing]}`}>
-                        {processingLabels[product.processing]}
-                      </span>
-                    </div>
-
-                    <div className="text-xs text-odisha-black/60 space-y-1 mb-3">
-                      <p><span className="font-medium text-odisha-black/80">Farm:</span>{" "}
-                        <Link href={`/farms/${product.farmId}`} className="hover:text-odisha-red transition-colors">{product.farmName}</Link>
-                      </p>
-                      <p><span className="font-medium text-odisha-black/80">Variety:</span> {product.variety}</p>
-                      <p><span className="font-medium text-odisha-black/80">Roast:</span> {roastLabels[product.roastLevel]}</p>
-                    </div>
-
-                    <p className="text-xs text-odisha-black/60 leading-relaxed mb-3">{product.description}</p>
-
-                    <div className="border-t border-odisha-black/10 pt-3 mb-4">
-                      <div className="text-[10px] font-semibold uppercase tracking-widest text-odisha-black/40 mb-1.5">Brewing Notes</div>
-                      <p className="text-xs text-odisha-black/55 leading-relaxed">{product.brewingNotes}</p>
-                    </div>
-
-                    <ProductActions product={product} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+        <RoastedCatalog roastedProducts={roastedProducts} specialtyLots={specialtyLots} />
 
         {/* Green beans nudge */}
         <section className="bg-odisha-offwhite border-b-2 border-odisha-black">
