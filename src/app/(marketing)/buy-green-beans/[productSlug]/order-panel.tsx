@@ -7,6 +7,7 @@ import type { EstateProduct } from "@/data/estate-products";
 import type { Farm } from "@/data/farms";
 import { useCart } from "@/context/cart-context";
 import { pricePerKgFor, computeItemPrice, deliveryFeeForGrams } from "@/lib/pricing";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const MAX_QUANTITY = 10;
 
@@ -50,22 +51,23 @@ export function OrderPanel({
   return (
     <div className="p-5">
       {!exclusive && (
-        <label className="block mb-4">
+        <div className="block mb-4">
           <span className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-1 block">
             Select Farm
           </span>
-          <select
-            value={farmId}
-            onChange={(e) => setFarmId(e.target.value)}
-            className="w-full border-2 border-odisha-black bg-white px-3 py-2 text-xs font-medium text-odisha-black focus:outline-none focus:border-odisha-red cursor-pointer"
-          >
-            {farms.map((f) => (
-              <option key={f.id} value={f.id}>
-                {f.name} — {f.region}
-              </option>
-            ))}
-          </select>
-        </label>
+          <Select value={farmId} onValueChange={setFarmId}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {farms.map((f) => (
+                <SelectItem key={f.id} value={f.id}>
+                  {f.name} — {f.region}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       )}
       <div className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-3">
         PRICE BY QUANTITY
