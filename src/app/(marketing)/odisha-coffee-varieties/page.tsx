@@ -3,14 +3,14 @@ import { farms } from "@/data/farms";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Coffee Varieties in Odisha — Arabica & Robusta Guide",
+  title: "Coffee Varieties in Odisha — Arabica Variety Guide",
   description:
-    "A complete guide to coffee varieties grown in Odisha. Arabica S795, SLN 9, Catuai, HSD, Catimor and Robusta — flavor profiles, elevations, and which Koraput farms grow each variety.",
+    "A complete guide to Arabica coffee varieties grown in Odisha. S795, SLN 9, Catuai, HSD and Chandragiri — flavor profiles, elevations, and which Koraput farms grow each variety.",
   alternates: { canonical: "/odisha-coffee-varieties" },
   openGraph: {
-    title: "Coffee Varieties in Odisha — Arabica & Robusta Guide",
+    title: "Coffee Varieties in Odisha — Arabica Variety Guide",
     description:
-      "Arabica S795, SLN 9, Catuai, HSD, Catimor and Robusta from Koraput's Eastern Ghats. Cup profiles, growing conditions, and farm sources for every variety.",
+      "Arabica S795, SLN 9, Catuai, HSD and Chandragiri from Koraput's Eastern Ghats. Cup profiles, growing conditions, and farm sources for every variety.",
     url: "https://odishacoffee.com/odisha-coffee-varieties",
     locale: "en_IN",
   },
@@ -47,7 +47,7 @@ const varieties = [
   },
   {
     id: "catuai",
-    name: "Arabica Catuai",
+    name: "Chandragiri",
     type: "Arabica",
     origin: "Brazilian Catuai selection — Mundo Novo × Caturra",
     elevation: "900–1200m",
@@ -63,52 +63,35 @@ const varieties = [
     id: "hsd",
     name: "Arabica HSD (Hibrido de Timor)",
     type: "Arabica",
-    origin: "Natural Arabica × Robusta hybrid from Timor-Leste",
+    origin: "Disease-resistant Arabica hybrid variety originating in Timor-Leste",
     elevation: "800–1100m",
     cupProfile: ["Citrus", "Green Apple", "Bright Acidity", "Clean"],
     harvest: "November – February",
     characteristics:
-      "HSD (Hybrido de Timor / Hibrido de Timor) is a disease-resistant Arabica-Robusta hybrid that Gray Cup processes as specialty-grade green beans. The variety is export-grade certified from Koraput, offering importers a traceable Indian HSD with clean acidity and bright character that distinguishes it from South Indian HSD lots. Ideal for roasters seeking transparency at the variety level.",
+      "HSD (Hybrido de Timor / Hibrido de Timor) is a disease-resistant Arabica hybrid variety that Gray Cup processes as specialty-grade green beans. The variety is export-grade certified from Koraput, offering importers a traceable Indian HSD with clean acidity and bright character that distinguishes it from South Indian HSD lots. Ideal for roasters seeking transparency at the variety level.",
     processing: ["Washed"],
     farmExamples: ["Multiple Gray Cup Partner Farms"],
     exportAvailable: true,
   },
   {
-    id: "catimor",
-    name: "Arabica Catimor",
+    id: "chandragiri",
+    name: "Arabica Chandragiri",
     type: "Arabica",
-    origin: "Caturra × Hibrido de Timor — Portuguese development",
+    origin: "Indian Arabica selection bred for disease resistance and consistent yield",
     elevation: "850–1100m",
     cupProfile: ["Red Apple", "Brown Sugar", "Mild Citrus", "Medium Body"],
     harvest: "November – February",
     characteristics:
-      "Catimor is valued in Odisha for its robust disease resistance and consistent yield, making it a practical choice for estates expanding into coffee without specialist infrastructure. The cup quality, while less complex than S795 or SLN 9 at equivalent processing, can be elevated significantly through careful washed or pulped-natural processing — as Ekayani Plantation has demonstrated.",
+      "Chandragiri is valued in Odisha for its robust disease resistance and consistent yield, making it a practical choice for estates expanding into coffee without specialist infrastructure. The cup quality, while less complex than S795 or SLN 9 at equivalent processing, can be elevated significantly through careful washed or pulped-natural processing — as Ekayani Plantation has demonstrated.",
     processing: ["Washed", "Pulped Natural"],
     farmExamples: ["Ekayani Plantation", "Brown Valley Coffee Estate", "Maa Sarala Plantation"],
     exportAvailable: false,
-  },
-  {
-    id: "robusta",
-    name: "Robusta (Coffea canephora)",
-    type: "Robusta",
-    origin: "Indigenous Robusta selections and Coffee Board varieties",
-    elevation: "600–1000m",
-    cupProfile: ["Dark Chocolate", "Earthy", "Full Body", "Low Acidity"],
-    harvest: "November – January",
-    characteristics:
-      "Robusta is widely cultivated across Koraput's mid-elevation zones (600–1000m) and forms the backbone of Gray Cup's export green bean programme. Koraput Robusta is characterised by lower bitterness than many commodity Robustas, high crema-forming potential, and a distinctive earthy-chocolate profile that blends well with Arabica for espresso. Natural-processed Koraput Robusta lots challenge preconceptions of the species — Jayadhar Garden's fruit-forward natural Robusta is a notable example.",
-    processing: ["Natural", "Washed"],
-    farmExamples: ["Koraput A-1 Coffee", "Bighneswari Plantation", "Laxmi Plantation", "Jayadhar Garden"],
-    exportAvailable: true,
   },
 ];
 
 export default function OdishaCoffeeVarietiesPage() {
   const arabicaFarms = farms.filter((f) =>
     f.varieties.some((v) => v.toLowerCase().includes("arabica"))
-  );
-  const robustaFarms = farms.filter((f) =>
-    f.varieties.some((v) => v.toLowerCase().includes("robusta"))
   );
 
   return (
@@ -133,8 +116,8 @@ export default function OdishaCoffeeVarietiesPage() {
             Coffee Varieties in Odisha
           </h1>
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
-            Odisha&apos;s coffee belt in Koraput district grows a diverse range of Arabica and
-            Robusta varieties — from the widely planted S795 to the rare high-altitude SLN 9 of
+            Odisha&apos;s coffee belt in Koraput district grows a diverse range of Arabica
+            varieties — from the widely planted S795 to the rare high-altitude SLN 9 of
             Pottangi. Each variety expresses the Eastern Ghats terroir differently, and processing
             method compounds the variation further. This guide covers every variety in the Gray Cup
             sourcing network.
@@ -143,9 +126,7 @@ export default function OdishaCoffeeVarietiesPage() {
           <div className="flex flex-wrap gap-6">
             {[
               { value: "5", label: "Arabica Varieties" },
-              { value: "1", label: "Robusta Type" },
               { value: arabicaFarms.length.toString(), label: "Farms Grow Arabica" },
-              { value: robustaFarms.length.toString(), label: "Farms Grow Robusta" },
             ].map(({ value, label }) => (
               <div key={label} className="border-l-2 border-white/30 pl-4">
                 <div className="font-serif text-2xl font-bold text-white">{value}</div>

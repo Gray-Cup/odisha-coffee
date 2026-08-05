@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Odisha Coffee Farms — All 24 Partner Estates, Koraput",
   description:
-    "Browse all 24 Odisha coffee farms sourced by Gray Cup Enterprises. Single-origin Arabica & Robusta lots from Koraput's Eastern Ghats — traceable, export-ready, and documented by farm.",
+    "Browse all 24 Odisha coffee farms sourced by Gray Cup Enterprises. Single-origin Arabica lots from Koraput's Eastern Ghats — traceable, export-ready, and documented by farm.",
 };
 
 function ProcessingTag({ method }: { method: ProcessingMethod }) {

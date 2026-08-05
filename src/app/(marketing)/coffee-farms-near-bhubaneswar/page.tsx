@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Coffee Farms Near Bhubaneswar — Odisha Coffee Belt, Koraput",
     description:
-      "Odisha's coffee farms are in Koraput, ~400km from Bhubaneswar. 24 verified estates growing Arabica and Robusta at 800–1450m elevation. Sourced by Gray Cup Enterprises.",
+      "Odisha's coffee farms are in Koraput, ~400km from Bhubaneswar. 24 verified estates growing Arabica at 800–1450m elevation. Sourced by Gray Cup Enterprises.",
     url: "https://odishacoffee.com/coffee-farms-near-bhubaneswar",
     locale: "en_IN",
   },

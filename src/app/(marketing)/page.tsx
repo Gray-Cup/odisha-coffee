@@ -6,12 +6,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Odisha Coffee — Wholesale, Export & Farm Sourcing",
   description:
-    "Buy Odisha Coffee wholesale — traceable Arabica & Robusta from 24 verified farms in Koraput's Eastern Ghats. Export lots, green bean wholesale, and direct farm sourcing by Gray Cup Enterprises.",
+    "Buy Odisha Coffee wholesale — traceable Arabica from 24 verified farms in Koraput's Eastern Ghats. Export lots, green bean wholesale, and direct farm sourcing by Gray Cup Enterprises.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Odisha Coffee — Wholesale, Export & Farm Sourcing",
     description:
-      "Traceable Arabica & Robusta from 24 verified farms in Koraput's Eastern Ghats. Wholesale, export, and direct farm sourcing by Gray Cup Enterprises.",
+      "Traceable Arabica from 24 verified farms in Koraput's Eastern Ghats. Wholesale, export, and direct farm sourcing by Gray Cup Enterprises.",
     url: "https://odishacoffee.com",
     locale: "en_IN",
   },

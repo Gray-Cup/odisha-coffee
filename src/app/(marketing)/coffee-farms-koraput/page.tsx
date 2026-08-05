@@ -6,12 +6,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Coffee Farms in Koraput — Odisha's Eastern Ghats Coffee Belt",
   description:
-    "Discover coffee farms in Koraput district, Odisha. 23 verified estates across Jeypore, Pottangi, Semiliguda and Sunabeda — Arabica and Robusta from 800–1450m elevation. Sourced by Gray Cup Enterprises.",
+    "Discover coffee farms in Koraput district, Odisha. 23 verified estates across Jeypore, Pottangi, Semiliguda and Sunabeda — Arabica from 800–1450m elevation. Sourced by Gray Cup Enterprises.",
   alternates: { canonical: "/coffee-farms-koraput" },
   openGraph: {
     title: "Coffee Farms in Koraput — Odisha's Eastern Ghats Coffee Belt",
     description:
-      "23 verified coffee estates in Koraput district. Arabica S795, SLN 9, Catuai and Robusta at 800–1450m — traceable, export-ready lots from Odisha's highland coffee belt.",
+      "23 verified coffee estates in Koraput district. Arabica S795, SLN 9, Catuai and Chandragiri at 800–1450m — traceable, export-ready lots from Odisha's highland coffee belt.",
     url: "https://odishacoffee.com/coffee-farms-koraput",
     locale: "en_IN",
   },
@@ -43,7 +43,7 @@ const koraputZones = [
   {
     name: "Jeypore Belt",
     elevation: "870–1100m",
-    character: "Established coffee corridor with rich laterite soils. Well-balanced Arabica and Robusta.",
+    character: "Established coffee corridor with rich laterite soils. Well-balanced, chocolatey Arabica.",
     farms: ["Agrawal Plantation", "Jayadhar Garden", "Maa Mangala Coffee Plantation"],
   },
   {
@@ -61,7 +61,7 @@ const koraputZones = [
   {
     name: "Narayanpatna",
     elevation: "880–1060m",
-    character: "Tribal heartland with integrated farming. Full-bodied Robusta and well-structured blended lots.",
+    character: "Tribal heartland with integrated farming. Full-bodied, well-structured Arabica lots.",
     farms: ["Bighneswari Plantation", "Trinetra Agro"],
   },
 ];
@@ -101,7 +101,7 @@ export default function CoffeeFarmsKoraputPage() {
           </h1>
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
             Koraput district is the core of Odisha&apos;s coffee belt — a highland territory in
-            the southern Eastern Ghats where over two dozen estates cultivate Arabica and Robusta
+            the southern Eastern Ghats where over two dozen estates cultivate Arabica
             at elevations from 800 to 1450 metres. Gray Cup Enterprises sources from{" "}
             {koraputFarms.length} verified farms here, spanning the full range of Koraput&apos;s
             diverse growing zones.

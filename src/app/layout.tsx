@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s | Odisha Coffee",
   },
   description:
-    "Odisha Coffee — single-origin coffee from the Eastern Ghats of Koraput, Odisha. Wholesale green beans, export lots, and direct farm sourcing by Gray Cup Enterprises. Traceable Arabica & Robusta from 24 verified Odisha coffee farms.",
+    "Odisha Coffee — single-origin coffee from the Eastern Ghats of Koraput, Odisha. Wholesale green beans, export lots, and direct farm sourcing by Gray Cup Enterprises. Traceable Arabica from 24 verified Odisha coffee farms.",
   keywords: [
     "Odisha coffee",
     "Odisha coffee wholesale",
@@ -40,7 +40,6 @@ export const metadata: Metadata = {
     "buy Odisha coffee",
     "Koraput coffee",
     "Koraput Arabica",
-    "Koraput Robusta",
     "Odisha coffee farms",
     "Indian single origin coffee",
     "Indian specialty coffee export",

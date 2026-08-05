@@ -137,7 +137,7 @@ export const products: Product[] = [
     farmName: "Dream Hill Coffee × Gray Cup Roastery",
     region: "Pottangi, Koraput",
     processing: "natural",
-    variety: "Arabica Catuai",
+    variety: "Chandragiri",
     roastLevel: "medium-dark",
     flavorNotes: ["Toasted Oak", "Molasses", "Vanilla", "Dark Fruit", "Spirit Warmth"],
     description:
@@ -221,7 +221,7 @@ export const products: Product[] = [
     farmName: "Dream Hill Coffee — Saptagiri Plantation",
     region: "Pottangi, Koraput",
     processing: "honey",
-    variety: "Arabica Catuai",
+    variety: "Chandragiri",
     roastLevel: "medium",
     flavorNotes: ["Jasmine", "Golden Raisin", "Orange Blossom", "Caramel Finish"],
     description:
@@ -242,7 +242,7 @@ export const products: Product[] = [
     farmName: "Annapurna Coffee Estate",
     region: "Sunabeda, Koraput",
     processing: "washed",
-    variety: "Arabica Catuai",
+    variety: "Chandragiri",
     roastLevel: "light",
     flavorNotes: ["Floral", "Peach", "Light Caramel", "Delicate"],
     description:
