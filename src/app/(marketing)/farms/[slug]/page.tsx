@@ -381,10 +381,19 @@ export default async function FarmDetailPage({
           </Link>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
-              href={`/farms/${farm.id}/products`}
+              href={`/farms/${farm.id}/green-coffee`}
               className="inline-flex items-center gap-2 text-sm font-semibold bg-odisha-green text-white border-2 border-odisha-green px-5 py-2 hover:bg-odisha-black hover:border-odisha-black transition-colors"
             >
               Buy Green Beans
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+            <Link
+              href={`/farms/${farm.id}/roasted-coffee`}
+              className="inline-flex items-center gap-2 text-sm font-semibold bg-odisha-yellow text-odisha-black border-2 border-odisha-yellow px-5 py-2 hover:bg-odisha-black hover:border-odisha-black hover:text-white transition-colors"
+            >
+              Roasted Coffee
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

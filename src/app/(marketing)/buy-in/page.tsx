@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buyerCities } from "@/data/buyer-cities";
+import { INDIA_STATES } from "@/data/locations/india-states";
+import { countryDestinations } from "@/data/locations/countries";
 import { generateTitle, generateDescription } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -73,15 +75,61 @@ export default function BuyInPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* All Indian states */}
+      <section className="border-t-2 border-odisha-black bg-white">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 py-14">
+          <h2 className="font-serif text-2xl font-bold text-odisha-black mb-2">
+            Browse Green Coffee By State
+          </h2>
+          <p className="text-odisha-black/60 text-sm mb-6">
+            Select a grade, choose your farm, and order online — anywhere in India.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {INDIA_STATES.map((s) => (
+              <Link
+                key={s.slug}
+                href={`/india/${s.slug}/green-coffee`}
+                className="text-xs font-medium px-3 py-2 border-2 border-odisha-black/20 text-odisha-black hover:border-odisha-red hover:text-odisha-red transition-colors"
+              >
+                {s.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Countries we export to */}
       <section className="border-t-2 border-odisha-black bg-odisha-offwhite">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 py-14">
+          <h2 className="font-serif text-2xl font-bold text-odisha-black mb-2">
+            Countries We Export To
+          </h2>
+          <p className="text-odisha-black/60 text-sm mb-6">
+            Export-ready Koraput green coffee, shipped worldwide with full APEDA and phytosanitary documentation.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {countryDestinations.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/${c.slug}/green-coffee`}
+                className="text-xs font-medium px-3 py-2 border-2 border-odisha-black/20 bg-white text-odisha-black hover:border-odisha-red hover:text-odisha-red transition-colors"
+              >
+                {c.flag} {c.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="border-t-2 border-odisha-black bg-white">
         <div className="max-w-3xl mx-auto px-4 py-14 text-center">
           <h2 className="font-serif text-2xl font-bold text-odisha-black mb-3">
             Your City Not Listed?
           </h2>
           <p className="text-odisha-black/70 mb-6">
-            We ship Koraput green coffee across India. If your city is not listed, contact us and
-            we&apos;ll arrange delivery and provide current lot availability.
+            We ship Koraput green coffee across India and worldwide. If your city or country is not
+            listed, contact us and we&apos;ll arrange delivery and provide current lot availability.
           </p>
           <Link
             href="/contact"

@@ -17,9 +17,9 @@ export async function generateMetadata({
   const farm = getFarmBySlug(slug);
   if (!farm) return { title: "Farm Not Found" };
   return {
-    title: `Buy Green Coffee from ${farm.name} — Koraput, Odisha`,
-    description: `AAA-grade green Arabica washed beans from ${farm.name}, ${farm.region}, Koraput. ₹900/kg + ₹60/kg shipping. Direct from farm — traceable, export-ready.`,
-    alternates: { canonical: `/farms/${slug}/products` },
+    title: `${farm.name} Green Coffee Beans — Koraput, Odisha`,
+    description: `Buy green (unroasted) Arabica coffee beans direct from ${farm.name}, ${farm.region}, Koraput. AAA-grade washed and natural lots — traceable, export-ready. Select a grade and order online.`,
+    alternates: { canonical: `/farms/${slug}/green-coffee` },
   };
 }
 
@@ -29,7 +29,7 @@ const availabilityStyles = {
   seasonal: { bg: "bg-[#1E3A8A] text-white", label: "Seasonal" },
 };
 
-export default async function FarmProductsPage({
+export default async function FarmGreenCoffeePage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -56,11 +56,11 @@ export default async function FarmProductsPage({
             <span className="text-white/30">/</span>
             <Link href={`/farms/${slug}`} className="text-white/60 hover:text-white uppercase tracking-widest transition-colors">{farm.name}</Link>
             <span className="text-white/30">/</span>
-            <span className="text-white/80 uppercase tracking-widest">Products</span>
+            <span className="text-white/80 uppercase tracking-widest">Green Coffee</span>
           </div>
 
           <h1 className="font-serif text-3xl md:text-4xl font-bold text-white mb-2 leading-tight">
-            Buy from {farm.name}
+            {farm.name} Green Coffee Beans
           </h1>
           <p className="text-white/70 text-sm max-w-xl leading-relaxed">
             {farm.region}, {farm.district} District · {farm.elevation} · Est. {farm.established}

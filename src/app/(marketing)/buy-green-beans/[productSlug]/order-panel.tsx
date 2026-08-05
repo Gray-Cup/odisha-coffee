@@ -2,19 +2,33 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Minus, Plus, Zap } from "lucide-react";
+import { Minus, Plus, Zap, ShoppingCart } from "lucide-react";
 import type { EstateProduct } from "@/data/estate-products";
 import type { Farm } from "@/data/farms";
+import { useCart } from "@/context/cart-context";
 import { pricePerKgFor, computeItemPrice, deliveryFeeForGrams } from "@/lib/pricing";
 
 const MAX_QUANTITY = 10;
 
-export function ExclusiveOrderPanel({ product, farm }: { product: EstateProduct; farm: Farm }) {
+export function OrderPanel({
+  product,
+  farm,
+  farms,
+  exclusive,
+}: {
+  product: EstateProduct;
+  farm: Farm;
+  farms: Farm[];
+  exclusive: boolean;
+}) {
   const [selectedWeight, setSelectedWeight] = useState(product.weightOptions[2] ?? product.weightOptions[0]);
   const [quantity, setQuantity] = useState(1);
+  const [farmId, setFarmId] = useState(farm.id);
   const router = useRouter();
+  const { add } = useCart();
 
-  const resolved = { kind: "estate" as const, product, farm };
+  const selectedFarm = farms.find((f) => f.id === farmId) ?? farm;
+  const resolved = { kind: "estate" as const, product, farm: selectedFarm };
   const unitPerKg = pricePerKgFor(resolved, selectedWeight.grams);
   const unitPrice = computeItemPrice(unitPerKg, selectedWeight.grams);
   const subtotal = unitPrice * quantity;
@@ -23,14 +37,36 @@ export function ExclusiveOrderPanel({ product, farm }: { product: EstateProduct;
 
   const handleBuy = () => {
     const params = new URLSearchParams({
-      products: `${product.id}:${selectedWeight.label}:${farm.id}:${quantity}`,
+      products: `${product.id}:${selectedWeight.label}:${selectedFarm.id}:${quantity}`,
       total: String(total),
     });
     router.push(`/checkout?${params.toString()}`);
   };
 
+  const handleAddToCart = () => {
+    add(product.id, selectedWeight.label, selectedFarm.id);
+  };
+
   return (
     <div className="p-5">
+      {!exclusive && (
+        <label className="block mb-4">
+          <span className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-1 block">
+            Select Farm
+          </span>
+          <select
+            value={farmId}
+            onChange={(e) => setFarmId(e.target.value)}
+            className="w-full border-2 border-odisha-black bg-white px-3 py-2 text-xs font-medium text-odisha-black focus:outline-none focus:border-odisha-red cursor-pointer"
+          >
+            {farms.map((f) => (
+              <option key={f.id} value={f.id}>
+                {f.name} — {f.region}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
       <div className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-3">
         Price by Quantity — Select One
       </div>
@@ -103,16 +139,26 @@ export function ExclusiveOrderPanel({ product, farm }: { product: EstateProduct;
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={handleBuy}
-        className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-odisha-red text-white text-sm font-bold uppercase tracking-widest border-2 border-odisha-red hover:bg-odisha-black hover:border-odisha-black transition-colors cursor-pointer"
-      >
-        <Zap className="w-4 h-4" />
-        Buy Now
-      </button>
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={handleAddToCart}
+          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-3 text-xs font-bold uppercase tracking-widest border-2 border-odisha-black text-odisha-black bg-white hover:bg-odisha-black hover:text-white transition-colors cursor-pointer"
+        >
+          <ShoppingCart className="w-3.5 h-3.5" />
+          Add to Cart
+        </button>
+        <button
+          type="button"
+          onClick={handleBuy}
+          className="flex-1 flex items-center justify-center gap-2 px-3 py-3 bg-odisha-red text-white text-xs font-bold uppercase tracking-widest border-2 border-odisha-red hover:bg-odisha-black hover:border-odisha-black transition-colors cursor-pointer"
+        >
+          <Zap className="w-4 h-4" />
+          Buy Now
+        </button>
+      </div>
       <p className="text-[10px] text-odisha-black/40 text-center mt-3 leading-relaxed">
-        Exclusively sourced from {farm.name}.{" "}
+        {exclusive ? `Exclusively sourced from ${farm.name}.` : `Sourced from ${selectedFarm.name}.`}{" "}
         <a href="/contact" className="underline hover:text-odisha-red">
           Need 50+ kg? Enquire here
         </a>

@@ -50,7 +50,7 @@ function FarmProductDetailContent({
             <span className="text-white/30">/</span>
             <Link href={`/farms/${slug}`} className="text-white/60 hover:text-white uppercase tracking-widest transition-colors">{farm.name}</Link>
             <span className="text-white/30">/</span>
-            <Link href={`/farms/${slug}/products`} className="text-white/60 hover:text-white uppercase tracking-widest transition-colors">Products</Link>
+            <Link href={`/farms/${slug}/green-coffee`} className="text-white/60 hover:text-white uppercase tracking-widest transition-colors">Green Coffee</Link>
             <span className="text-white/30">/</span>
             <span className="text-white/80 uppercase tracking-widest">{product.name}</span>
           </div>
@@ -295,7 +295,7 @@ function FarmProductDetailContent({
       <section className="bg-odisha-offwhite border-b-2 border-odisha-black">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Link
-            href={`/farms/${slug}/products`}
+            href={`/farms/${slug}/green-coffee`}
             className="inline-flex items-center gap-2 text-sm font-semibold text-odisha-black border-2 border-odisha-black px-4 py-2 hover:bg-odisha-red hover:border-odisha-red hover:text-white transition-colors"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
