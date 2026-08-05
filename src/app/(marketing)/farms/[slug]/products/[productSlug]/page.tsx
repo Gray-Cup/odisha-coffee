@@ -20,6 +20,7 @@ function FarmProductDetailContent({
   const product = getEstateProductById(productSlug);
 
   if (!farm || !product) notFound();
+  if (product.exclusiveFarmId && product.exclusiveFarmId !== slug) notFound();
 
   const searchParams = useSearchParams();
   const requestedWeight = searchParams.get("weight");

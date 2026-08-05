@@ -15,7 +15,18 @@ export type EstateProduct = {
   moisture: string;
   screenSize: string;
   brewingNotes: string;
-  image?: string; // filename relative to /public/
+  image?: string; // filename relative to /public/ — used as the card/thumbnail image
+  images?: string[]; // optional extra gallery shots (paths relative to /public/) for the product's own page
+  // Most lots are farm-agnostic — the buyer pairs any lot with any partner
+  // farm via the dropdown. A handful of genuinely rare items (e.g. wild
+  // civet cat coffee) only exist at one specific estate, so this locks the
+  // product to that farm instead of offering a farm choice.
+  exclusiveFarmId?: string;
+  // Grams -> exact ₹/kg override. When set for a given weight tier, this
+  // replaces the standard base+bulkDiscountForGrams formula entirely for
+  // that tier — used for one-off lots priced by hand rather than by the
+  // shared percentage schedule (e.g. wild civet cat coffee).
+  customPricing?: Record<number, number>;
 };
 
 const WEIGHT_OPTIONS: EstateProduct["weightOptions"] = [
@@ -280,6 +291,42 @@ export const estateProducts: EstateProduct[] = [
     screenSize: "Screen 16+",
     brewingNotes:
       "Recommended roast: medium, extended development (DTR 22–26%) to fully resolve fruit sugars without ferment-y sharpness. Outstanding on French press or moka pot; also excellent as a single-origin espresso.",
+  },
+  {
+    id: "wild-civet-cat-coffee",
+    name: "Wild Civet Cat Coffee (Kopi Luwak)",
+    variety: "Arabica S795",
+    processing: "natural",
+    roastLevel: "green",
+    pricePerKg: 1840,
+    shippingPerKg: 60,
+    image: "civet-cat/kopi-luwak-brown-valley.jpg",
+    images: [
+      "civet-cat/kopi-luwak-brown-valley.jpg",
+      "civet-cat/cat1.jpg",
+      "civet-cat/cat2.jpg",
+    ],
+    description:
+      "A genuine rarity from Koraput, Odisha — wild civet cat coffee, exclusively foraged at Brown Valley Coffee Estate. Also known as Kopi Luwak, it's made by passing coffee cherries through the digestive tract of the wild Asian palm civet, where they undergo natural fermentation and enzymatic changes before being hand-collected from the animal's droppings, thoroughly cleaned, and sun-dried. Wild-foraged (never caged), seasonal, and available only in small quantities.",
+    flavorNotes: ["Earthy", "Low Acidity", "Syrupy Body", "Musky Sweetness"],
+    availability: "limited",
+    weightOptions: WEIGHT_OPTIONS,
+    minOrder: "100 g",
+    grade: "Wild Kopi Luwak — Hand-Collected",
+    moisture: "10–12%",
+    screenSize: "Hand-Sorted",
+    brewingNotes:
+      "Recommended roast: medium, kept gentle to preserve the low-acid, syrupy body the fermentation produces. Best brewed as pour-over or French press, where the earthy sweetness has room to come through.",
+    exclusiveFarmId: "brown-valley-coffee-estate",
+    customPricing: {
+      100: 2100,
+      500: 1975,
+      1000: 1900,
+      2000: 1880,
+      5000: 1850,
+      10000: 1830,
+      20000: 1800,
+    },
   },
 ];
 

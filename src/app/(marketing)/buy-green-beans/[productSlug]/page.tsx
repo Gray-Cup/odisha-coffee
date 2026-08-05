@@ -48,6 +48,7 @@ export default async function GreenCoffeeProductPage({
   const basePerKg = roundToNearest5(rawBasePerKg);
   const avail = availabilityStyles[product.availability];
   const exportReadyFarms = farms.filter((f) => f.exportReady);
+  const exclusiveFarm = product.exclusiveFarmId ? farms.find((f) => f.id === product.exclusiveFarmId) : undefined;
 
   return (
     <div>
@@ -89,10 +90,25 @@ export default async function GreenCoffeeProductPage({
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left */}
             <div className="lg:col-span-2 space-y-8">
-              {product.image && (
-                <div className="relative h-64 border-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
-                  <Image src={`/${product.image}`} alt={product.name} fill className="object-cover" />
+              {product.images && product.images.length > 0 ? (
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="relative h-64 col-span-3 sm:col-span-2 border-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
+                    <Image src={`/${product.images[0]}`} alt={product.name} fill className="object-cover" />
+                  </div>
+                  <div className="col-span-3 sm:col-span-1 grid grid-cols-2 sm:grid-cols-1 gap-2">
+                    {product.images.slice(1).map((src) => (
+                      <div key={src} className="relative h-[123px] border-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
+                        <Image src={`/${src}`} alt={product.name} fill className="object-cover" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              ) : (
+                product.image && (
+                  <div className="relative h-64 border-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
+                    <Image src={`/${product.image}`} alt={product.name} fill className="object-cover" />
+                  </div>
+                )
               )}
 
               {/* Specs */}
@@ -153,20 +169,34 @@ export default async function GreenCoffeeProductPage({
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-1 h-6 bg-odisha-black" />
                   <h2 className="font-serif text-xl font-bold text-odisha-black">
-                    Available From Any of Our {farms.length} Koraput Partner Farms
+                    {exclusiveFarm
+                      ? "Exclusively Available From"
+                      : `Available From Any of Our ${farms.length} Koraput Partner Farms`}
                   </h2>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {farms.map((farm) => (
-                    <Link
-                      key={farm.id}
-                      href={`/farms/${farm.id}/products/${product.id}`}
-                      className="text-xs font-medium px-3 py-2 border-2 border-odisha-black/20 text-odisha-black hover:border-odisha-red hover:text-odisha-red transition-colors"
-                    >
-                      {farm.name}
-                    </Link>
-                  ))}
-                </div>
+                {exclusiveFarm ? (
+                  <Link
+                    href={`/farms/${exclusiveFarm.id}/products/${product.id}`}
+                    className="inline-flex flex-col gap-0.5 px-4 py-3 border-2 border-odisha-black bg-odisha-offwhite hover:border-odisha-red transition-colors"
+                  >
+                    <span className="font-serif font-bold text-odisha-black">{exclusiveFarm.name}</span>
+                    <span className="text-xs text-odisha-black/50">
+                      {exclusiveFarm.region}, {exclusiveFarm.district} District
+                    </span>
+                  </Link>
+                ) : (
+                  <div className="flex flex-wrap gap-2">
+                    {farms.map((farm) => (
+                      <Link
+                        key={farm.id}
+                        href={`/farms/${farm.id}/products/${product.id}`}
+                        className="text-xs font-medium px-3 py-2 border-2 border-odisha-black/20 text-odisha-black hover:border-odisha-red hover:text-odisha-red transition-colors"
+                      >
+                        {farm.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -189,8 +219,9 @@ export default async function GreenCoffeeProductPage({
                   </div>
                   <div className="space-y-1.5">
                     {product.weightOptions.map((opt) => {
-                      const discount = bulkDiscountForGrams(opt.grams);
-                      const perKg = roundToNearest5(rawBasePerKg * (1 - discount));
+                      const perKg =
+                        product.customPricing?.[opt.grams] ??
+                        roundToNearest5(rawBasePerKg * (1 - bulkDiscountForGrams(opt.grams)));
                       const total = computeItemPrice(perKg, opt.grams);
                       return (
                         <div key={opt.label} className="flex items-center justify-between text-sm border-b border-odisha-black/10 pb-1.5">
@@ -203,13 +234,19 @@ export default async function GreenCoffeeProductPage({
                   </div>
 
                   <Link
-                    href="/buy-green-beans"
+                    href={
+                      exclusiveFarm
+                        ? `/farms/${exclusiveFarm.id}/products/${product.id}`
+                        : "/buy-green-beans"
+                    }
                     className="mt-5 flex items-center justify-center gap-2 w-full px-4 py-3 bg-odisha-red text-white text-sm font-bold uppercase tracking-widest border-2 border-odisha-red hover:bg-odisha-black hover:border-odisha-black transition-colors"
                   >
-                    Select Farm &amp; Order
+                    {exclusiveFarm ? "Order This Lot" : "Select Farm & Order"}
                   </Link>
                   <p className="text-[10px] text-odisha-black/40 text-center mt-3 leading-relaxed">
-                    Choose your partner farm and quantity on the Buy Green Beans page.
+                    {exclusiveFarm
+                      ? `Exclusively sourced from ${exclusiveFarm.name}.`
+                      : "Choose your partner farm and quantity on the Buy Green Beans page."}
                   </p>
                 </div>
               </div>

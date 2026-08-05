@@ -38,6 +38,12 @@ export default async function FarmProductsPage({
   const farm = getFarmBySlug(slug);
   if (!farm) notFound();
 
+  // Most lots are available from every farm; a handful of exclusive lots
+  // (e.g. wild civet cat coffee) only belong to one specific estate.
+  const availableProducts = estateProducts.filter(
+    (p) => !p.exclusiveFarmId || p.exclusiveFarmId === slug
+  );
+
   return (
     <div>
       {/* Hero */}
@@ -101,7 +107,7 @@ export default async function FarmProductsPage({
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
-            {estateProducts.map((product) => {
+            {availableProducts.map((product) => {
               const avail = availabilityStyles[product.availability];
               const totalPerKg = product.pricePerKg + product.shippingPerKg;
               return (

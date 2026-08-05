@@ -120,10 +120,15 @@ export function bulkDiscountForGrams(grams: number): number {
  * Effective ₹/kg for a resolved cart item. For estate lots this folds in the
  * lot's own shippingPerKg AND, when `grams` is given, the bulk discount for
  * that quantity — so the rest of the pipeline (cart/checkout/payment) always
- * charges the discounted rate rather than applying it only cosmetically.
+ * charges the discounted rate rather than applying it only cosmetically. A
+ * product's `customPricing` (if any) overrides the formula entirely for a
+ * given weight tier.
  */
 export function pricePerKgFor(resolved: ResolvedCartItem, grams?: number): number {
   if (resolved.kind !== "estate") return resolved.product.pricePerKg;
+  if (grams != null && resolved.product.customPricing?.[grams] != null) {
+    return resolved.product.customPricing[grams];
+  }
   const base = resolved.product.pricePerKg + resolved.product.shippingPerKg;
   if (grams == null) return roundToNearest5(base);
   return roundToNearest5(base * (1 - bulkDiscountForGrams(grams)));

@@ -32,6 +32,15 @@ function lineKey(productId: string, weight: string, farmId: string): string {
   return `${productId}::${weight}::${farmId}`;
 }
 
+// Mirrors lib/pricing.ts's pricePerKgFor, but works directly off an
+// EstateProduct (no ResolvedCartItem) since the card computes prices for
+// every weight chip up front, before any farm/cart resolution happens.
+function perKgFor(product: EstateProduct, grams: number): number {
+  if (product.customPricing?.[grams] != null) return product.customPricing[grams];
+  const base = product.pricePerKg + product.shippingPerKg;
+  return roundToNearest5(base * (1 - bulkDiscountForGrams(grams)));
+}
+
 // Selections (from "Select") are cached to the browser for 30 minutes, so a
 // reload or an accidental tab close doesn't lose them — mirrors the cart's
 // own localStorage persistence but with a hard expiry since these are meant
@@ -68,18 +77,17 @@ function ProductCard({
   hasSelection: boolean;
   onAddLine: (line: SelectionLine) => void;
 }) {
-  const [farmId, setFarmId] = useState(defaultFarmId);
+  const [farmId, setFarmId] = useState(product.exclusiveFarmId ?? defaultFarmId);
   const [selectedWeight, setSelectedWeight] = useState(product.weightOptions[2] ?? product.weightOptions[0]);
   const [justAdded, setJustAdded] = useState(false);
   const { add } = useCart();
+  const exclusiveFarm = product.exclusiveFarmId ? farms.find((f) => f.id === product.exclusiveFarmId) : undefined;
 
   useEffect(() => {
-    setFarmId(defaultFarmId);
-  }, [defaultFarmId]);
+    if (!product.exclusiveFarmId) setFarmId(defaultFarmId);
+  }, [defaultFarmId, product.exclusiveFarmId]);
 
-  const basePerKg = product.pricePerKg + product.shippingPerKg;
-  const discount = bulkDiscountForGrams(selectedWeight.grams);
-  const effectivePerKg = roundToNearest5(basePerKg * (1 - discount));
+  const effectivePerKg = perKgFor(product, selectedWeight.grams);
   const unitPrice = computeItemPrice(effectivePerKg, selectedWeight.grams);
 
   const handleSelect = () => {
@@ -161,8 +169,7 @@ function ProductCard({
           </span>
           <div className="grid grid-cols-4 gap-1.5">
             {product.weightOptions.map((opt) => {
-              const optDiscount = bulkDiscountForGrams(opt.grams);
-              const optPerKg = roundToNearest5(basePerKg * (1 - optDiscount));
+              const optPerKg = perKgFor(product, opt.grams);
               const active = selectedWeight.label === opt.label;
               return (
                 <button
@@ -200,23 +207,34 @@ function ProductCard({
           </span>
         </div>
 
-        {/* Farm selector */}
-        <label className="block mb-2">
-          <span className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1 block">
-            Select Farm
-          </span>
-          <select
-            value={farmId}
-            onChange={(e) => setFarmId(e.target.value)}
-            className="w-full border-2 border-odisha-black bg-white px-3 py-2 text-xs font-medium text-odisha-black focus:outline-none focus:border-odisha-red cursor-pointer"
-          >
-            {farms.map((f) => (
-              <option key={f.id} value={f.id}>
-                {f.name} — {f.region}
-              </option>
-            ))}
-          </select>
-        </label>
+        {/* Farm selector — locked to a single estate for exclusive lots */}
+        {exclusiveFarm ? (
+          <div className="block mb-2">
+            <span className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1 block">
+              Exclusively From
+            </span>
+            <div className="w-full border-2 border-odisha-black bg-odisha-offwhite px-3 py-2 text-xs font-semibold text-odisha-black">
+              {exclusiveFarm.name} — {exclusiveFarm.region}
+            </div>
+          </div>
+        ) : (
+          <label className="block mb-2">
+            <span className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1 block">
+              Select Farm
+            </span>
+            <select
+              value={farmId}
+              onChange={(e) => setFarmId(e.target.value)}
+              className="w-full border-2 border-odisha-black bg-white px-3 py-2 text-xs font-medium text-odisha-black focus:outline-none focus:border-odisha-red cursor-pointer"
+            >
+              {farms.map((f) => (
+                <option key={f.id} value={f.id}>
+                  {f.name} — {f.region}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
 
         {/* Select (adds this weight/farm as its own line) + Add to Cart */}
         <div className="flex gap-2">
@@ -297,6 +315,12 @@ export function ProductsCatalog() {
     : null;
 
   const defaultFarmId = selectedFarm?.id ?? farms[0].id;
+
+  // Exclusive lots (e.g. wild civet cat coffee) only ever belong to one
+  // farm, so hide them entirely when a *different* farm filter is active.
+  const visibleProducts = estateProducts.filter(
+    (p) => !p.exclusiveFarmId || !selectedFarmId || p.exclusiveFarmId === selectedFarmId
+  );
 
   const selectionLines = Object.values(selections);
   const selectionCount = selectionLines.length;
@@ -416,7 +440,7 @@ export function ProductsCatalog() {
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12 pb-28">
           <div className="mb-6 flex items-center justify-between">
             <p className="text-sm text-odisha-black/60">
-              {estateProducts.length} products · available from all {farms.length} partner farms
+              {estateProducts.length} products · most available from all {farms.length} partner farms
             </p>
             {selectedFarm && (
               <span className="text-xs font-medium text-odisha-red border border-odisha-red px-2 py-0.5">
@@ -426,7 +450,7 @@ export function ProductsCatalog() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {estateProducts.map((product) => (
+            {visibleProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
