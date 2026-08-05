@@ -6,6 +6,7 @@ import { estateProducts, getEstateProductById } from "@/data/estate-products";
 import { farms, processingColors, processingLabels } from "@/data/farms";
 import { computeItemPrice, bulkDiscountForGrams, roundToNearest5 } from "@/lib/pricing";
 import { generateTitle, generateDescription } from "@/lib/seo";
+import { ExclusiveOrderPanel } from "./order-panel";
 
 export async function generateStaticParams() {
   return estateProducts.map((p) => ({ productSlug: p.id }));
@@ -213,42 +214,40 @@ export default async function GreenCoffeeProductPage({
                   </div>
                 </div>
 
-                <div className="p-5">
-                  <div className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-3">
-                    Price by Quantity
-                  </div>
-                  <div className="space-y-1.5">
-                    {product.weightOptions.map((opt) => {
-                      const perKg =
-                        product.customPricing?.[opt.grams] ??
-                        roundToNearest5(rawBasePerKg * (1 - bulkDiscountForGrams(opt.grams)));
-                      const total = computeItemPrice(perKg, opt.grams);
-                      return (
-                        <div key={opt.label} className="flex items-center justify-between text-sm border-b border-odisha-black/10 pb-1.5">
-                          <span className="text-odisha-black/70">{opt.label}</span>
-                          <span className="text-odisha-black/50 text-xs">₹{perKg.toLocaleString("en-IN")}/kg</span>
-                          <span className="font-semibold text-odisha-black">₹{total.toLocaleString("en-IN")}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
+                {exclusiveFarm ? (
+                  <ExclusiveOrderPanel product={product} farm={exclusiveFarm} />
+                ) : (
+                  <div className="p-5">
+                    <div className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-3">
+                      Price by Quantity
+                    </div>
+                    <div className="space-y-1.5">
+                      {product.weightOptions.map((opt) => {
+                        const perKg =
+                          product.customPricing?.[opt.grams] ??
+                          roundToNearest5(rawBasePerKg * (1 - bulkDiscountForGrams(opt.grams)));
+                        const total = computeItemPrice(perKg, opt.grams);
+                        return (
+                          <div key={opt.label} className="flex items-center justify-between text-sm border-b border-odisha-black/10 pb-1.5">
+                            <span className="text-odisha-black/70">{opt.label}</span>
+                            <span className="text-odisha-black/50 text-xs">₹{perKg.toLocaleString("en-IN")}/kg</span>
+                            <span className="font-semibold text-odisha-black">₹{total.toLocaleString("en-IN")}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
 
-                  <Link
-                    href={
-                      exclusiveFarm
-                        ? `/farms/${exclusiveFarm.id}/products/${product.id}`
-                        : "/buy-green-beans"
-                    }
-                    className="mt-5 flex items-center justify-center gap-2 w-full px-4 py-3 bg-odisha-red text-white text-sm font-bold uppercase tracking-widest border-2 border-odisha-red hover:bg-odisha-black hover:border-odisha-black transition-colors"
-                  >
-                    {exclusiveFarm ? "Order This Lot" : "Select Farm & Order"}
-                  </Link>
-                  <p className="text-[10px] text-odisha-black/40 text-center mt-3 leading-relaxed">
-                    {exclusiveFarm
-                      ? `Exclusively sourced from ${exclusiveFarm.name}.`
-                      : "Choose your partner farm and quantity on the Buy Green Beans page."}
-                  </p>
-                </div>
+                    <Link
+                      href="/buy-green-beans"
+                      className="mt-5 flex items-center justify-center gap-2 w-full px-4 py-3 bg-odisha-red text-white text-sm font-bold uppercase tracking-widest border-2 border-odisha-red hover:bg-odisha-black hover:border-odisha-black transition-colors"
+                    >
+                      Select Farm & Order
+                    </Link>
+                    <p className="text-[10px] text-odisha-black/40 text-center mt-3 leading-relaxed">
+                      Choose your partner farm and quantity on the Buy Green Beans page.
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

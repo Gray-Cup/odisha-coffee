@@ -295,7 +295,7 @@ export const estateProducts: EstateProduct[] = [
   {
     id: "wild-civet-cat-coffee",
     name: "Wild Civet Cat Coffee (Kopi Luwak)",
-    variety: "Arabica S795",
+    variety: "Arabica Chandragiri",
     processing: "natural",
     roastLevel: "green",
     pricePerKg: 1840,

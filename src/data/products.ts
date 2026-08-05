@@ -55,7 +55,7 @@ export const products: Product[] = [
     farmName: "Multiple Gray Cup Partner Farms",
     region: "Koraput District",
     processing: "natural",
-    variety: "Arabica S795 & Robusta",
+    variety: "Arabica S795 & Chandragiri",
     roastLevel: "green",
     flavorNotes: ["Dark Fruit", "Chocolate", "Earthy", "Full Body"],
     description:
@@ -97,7 +97,7 @@ export const products: Product[] = [
     farmName: "Gray Cup Roastery",
     region: "Koraput District",
     processing: "natural",
-    variety: "Arabica S795 & Robusta",
+    variety: "Arabica S795 & Chandragiri",
     roastLevel: "medium",
     flavorNotes: ["Dark Cherry", "Dark Chocolate", "Dried Fruit", "Syrupy Body"],
     description:
@@ -152,16 +152,16 @@ export const products: Product[] = [
   },
   {
     id: "espresso-8020",
-    name: "Espresso 80/20",
+    name: "Espresso Blend",
     farmId: "koraput-a1-coffee",
     farmName: "Gray Cup Roastery",
     region: "Koraput District",
     processing: "washed",
-    variety: "80% Arabica S795 + 20% Robusta",
+    variety: "80% Arabica S795 + 20% Arabica Chandragiri",
     roastLevel: "medium-dark",
     flavorNotes: ["Dark Chocolate", "Caramel", "Hazelnut", "Thick Crema", "Low Acidity"],
     description:
-      "Our house espresso blend — 80% washed Arabica S795 for sweetness and structure, 20% Koraput Robusta for crema density and caffeine kick. Roasted medium-dark for a balanced, forgiving shot that works beautifully across all espresso machines and milk ratios.",
+      "Our house 100% Arabica espresso blend — 80% washed S795 for sweetness and structure, 20% Chandragiri for body and crema. Roasted medium-dark for a balanced, forgiving shot that works beautifully across all espresso machines and milk ratios.",
     brewingNotes:
       "Dial to 9 bars, 93°C, 25–28 seconds, 1:2 ratio. For milk drinks, pull slightly longer (30s) for extra sweetness. Forgiving on dose — ±2g from recipe still yields a good shot.",
     availability: "in-stock",
@@ -236,27 +236,6 @@ export const products: Product[] = [
     image: "koraput-coffee.png",
   },
   {
-    id: "koraput-a1-natural-robusta",
-    name: "Koraput A-1 Natural Robusta",
-    farmId: "koraput-a1-coffee",
-    farmName: "Koraput A-1 Coffee",
-    region: "Koraput",
-    processing: "natural",
-    variety: "Robusta",
-    roastLevel: "medium-dark",
-    flavorNotes: ["Dark Chocolate", "Dark Cherry", "Earthy", "Full Body"],
-    description:
-      "Natural-processed Robusta from one of Odisha's oldest estates. Cherries are dried whole for 25–30 days on raised beds, developing a rich, fruit-integrated profile that makes this an exceptional espresso base or dark roast blend ingredient. Export quantities available.",
-    brewingNotes:
-      "Exceptional as espresso or moka pot. The natural process creates crema density and sweetness that pairs brilliantly with milk. As filter, use medium-dark roast at 91°C for a chocolatey, smooth cup.",
-    availability: "in-stock",
-    weightOptions: ["100g", "250g", "500g", "1kg"],
-    exportAvailable: true,
-    minOrderExport: "500kg green beans",
-    pricePerKg: 2800,
-    image: "koraput-coffee.png",
-  },
-  {
     id: "annapurna-washed-arabica",
     name: "Annapurna Washed Arabica",
     farmId: "annapurna-coffee-estate",
@@ -305,11 +284,11 @@ export const products: Product[] = [
     farmName: "Brown Valley Coffee Estate",
     region: "Boipariguda, Koraput",
     processing: "honey",
-    variety: "Arabica S795 & Arabica Catimor",
+    variety: "Arabica S795 & Arabica Chandragiri",
     roastLevel: "medium",
     flavorNotes: ["Milk Chocolate", "Hazelnut", "Stone Fruit", "Smooth"],
     description:
-      "A carefully constructed honey-processed blend from Brown Valley Estate combining S795 and Catimor varieties. The blend balances S795's chocolate depth with Catimor's stone-fruit brightness, processed together on shared drying beds to create an integrated, harmonious cup.",
+      "A carefully constructed honey-processed blend from Brown Valley Estate combining S795 and Chandragiri varieties. The blend balances S795's chocolate depth with Chandragiri's stone-fruit brightness, processed together on shared drying beds to create an integrated, harmonious cup.",
     brewingNotes:
       "Versatile across espresso and filter. As espresso: water at 93°C, 25-second shot. As filter: V60 or Chemex at 93°C, medium grind for a smooth, satisfying cup.",
     availability: "in-stock",
@@ -359,28 +338,6 @@ export const products: Product[] = [
     exportAvailable: false,
     pricePerKg: 5500,
     image: "koraput-coffee.png",
-  },
-  {
-    id: "odisha-export-grade-green-robusta",
-    name: "Odisha Export Grade — Green Robusta",
-    farmId: "koraput-a1-coffee",
-    farmName: "Multiple Gray Cup Partner Farms",
-    region: "Koraput District",
-    processing: "washed",
-    variety: "Robusta",
-    roastLevel: "green",
-    flavorNotes: ["Neutral", "Clean", "Full Body", "Consistent"],
-    description:
-      "A pooled export-grade green bean offering sourced from multiple Gray Cup partner estates in Koraput. Lot-tested, screen-sorted, and moisture-certified (10–12%). Supplied as raw green beans, ideal for import roasters, commodity buyers, and specialty coffee businesses seeking consistent Indian Robusta at scale.",
-    brewingNotes:
-      "For roasters: recommended development time 20–22% in medium roast profile. Excellent for espresso blends, instant coffee production, and value-specialty blending.",
-    availability: "in-stock",
-    weightOptions: ["1kg", "5kg", "25kg"],
-    exportAvailable: true,
-    minOrderExport: "1000kg green beans",
-    pricePerKg: 1200,
-    isGreen: true,
-    image: "koraput-green.png",
   },
   {
     id: "odisha-export-grade-green-arabica",
