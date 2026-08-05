@@ -51,7 +51,7 @@ export default function BuyGreenBeansPage() {
               { value: estateProducts.length.toString(), label: "Grade Lots" },
               { value: farms.length.toString(), label: "Partner Farms" },
               { value: exportReadyFarms.length.toString(), label: "Export Ready" },
-              { value: "₹520–₹1060", label: "Per kg (incl. ship)" },
+              { value: "₹690–₹1060", label: "Per kg (incl. ship)" },
             ].map(({ value, label }) => (
               <div key={label} className="border-l-2 border-white/30 pl-4">
                 <div className="font-serif text-2xl font-bold text-white">{value}</div>
