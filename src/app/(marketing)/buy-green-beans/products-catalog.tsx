@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart, Check, Minus, Plus, Zap, X } from "lucide-react";
-import { farms, processingColors, processingLabels } from "@/data/farms";
+import { farms, processingColors, processingLabels, shortFarmName } from "@/data/farms";
 import { estateProducts } from "@/data/estate-products";
 import type { EstateProduct } from "@/data/estate-products";
 import { useCart } from "@/context/cart-context";
@@ -230,7 +230,7 @@ function ProductCard({
               <SelectContent>
                 {farms.map((f) => (
                   <SelectItem key={f.id} value={f.id}>
-                    {f.name} — {f.region}
+                    {shortFarmName(f.name)}
                   </SelectItem>
                 ))}
               </SelectContent>

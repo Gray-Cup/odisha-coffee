@@ -506,6 +506,13 @@ export function getFarmBySlug(slug: string): Farm | undefined {
   return farms.find((f) => f.id === slug);
 }
 
+// A few farm names carry a " — <plantation banner>" suffix (e.g. "Dream
+// Hill Coffee — Saptagiri Plantation"); compact UI like farm pickers just
+// need the estate's core name.
+export function shortFarmName(name: string): string {
+  return name.split(" — ")[0];
+}
+
 export const featuredFarms = farms.filter((f) => f.featured);
 
 export const processingColors: Record<ProcessingMethod, string> = {

@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Plus, Trash2, ArrowRight, Share2, Check } from "lucide-react";
 import { products } from "@/data/products";
 import { estateProducts } from "@/data/estate-products";
-import { farms, getFarmBySlug } from "@/data/farms";
+import { farms, getFarmBySlug, shortFarmName } from "@/data/farms";
 import {
   resolveCartProduct,
   tiersFor,
@@ -191,7 +191,7 @@ function BuilderContent() {
                       </SelectTrigger>
                       <SelectContent>
                         {farms.map((f) => (
-                          <SelectItem key={f.id} value={f.id}>{f.name} — {f.region}</SelectItem>
+                          <SelectItem key={f.id} value={f.id}>{shortFarmName(f.name)}</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>

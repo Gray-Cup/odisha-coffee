@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Minus, Plus, Zap, ShoppingCart } from "lucide-react";
 import type { EstateProduct } from "@/data/estate-products";
-import type { Farm } from "@/data/farms";
+import { shortFarmName, type Farm } from "@/data/farms";
 import { useCart } from "@/context/cart-context";
 import { pricePerKgFor, computeItemPrice, deliveryFeeForGrams } from "@/lib/pricing";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -62,7 +62,7 @@ export function OrderPanel({
             <SelectContent>
               {farms.map((f) => (
                 <SelectItem key={f.id} value={f.id}>
-                  {f.name} — {f.region}
+                  {shortFarmName(f.name)}
                 </SelectItem>
               ))}
             </SelectContent>
