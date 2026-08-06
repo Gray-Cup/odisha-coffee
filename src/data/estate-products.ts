@@ -230,6 +230,28 @@ export const estateProducts: EstateProduct[] = [
       "Recommended roast: light to medium-light. First crack +15–20s development to preserve the varietal's bright acidity and floral aromatics. Excellent on pour-over and filter brewers.",
   },
   {
+    id: "peaberry-specialty",
+    name: "Peaberry Specialty",
+    variety: "Arabica S795",
+    processing: "washed",
+    roastLevel: "green",
+    pricePerKg: 1190,
+    shippingPerKg: 60,
+    image: "koraput-washed.jpg",
+    description:
+      "Specialty-grade peaberry lot, exclusively hand-sorted at Brown Valley Coffee Estate — single round beans (naturally occurring in ~5% of cherries), fully washed and dried on raised beds for 14–18 days. Denser than flat beans and prized for a sweeter, more concentrated cup. Screen 12+ round-screen sorted, moisture 10–12%, cupped and lot-tested.",
+    flavorNotes: ["Concentrated Sweetness", "Citrus", "Honey", "Bright Acidity"],
+    availability: "limited",
+    weightOptions: WEIGHT_OPTIONS,
+    minOrder: "500 g",
+    exclusiveFarmId: "brown-valley-coffee-estate",
+    grade: "Specialty — Round Screen 12+",
+    moisture: "10–12%",
+    screenSize: "Round Screen 12+",
+    brewingNotes:
+      "Recommended roast: light to medium. The dense, round bean roasts more evenly than flat beans — reduce heat slightly to avoid scorching the surface. Outstanding on pour-over, where the concentrated sweetness and acidity come through clearly.",
+  },
+  {
     id: "naturals-commercial",
     name: "AA Arabica Naturals",
     variety: "Arabica S795",
