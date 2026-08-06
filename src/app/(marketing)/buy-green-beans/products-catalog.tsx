@@ -371,7 +371,7 @@ export function ProductsCatalog() {
   return (
     <div>
       {/* Farm filter switches */}
-      <div className="bg-white border-b-2 border-odisha-black sticky top-0 z-20 shadow-sm">
+      <div className="bg-white border-b-2 border-odisha-black sticky top-16 z-20 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-3">
           <div className="flex gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {/* ALL button */}

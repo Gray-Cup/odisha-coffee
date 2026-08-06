@@ -20,7 +20,7 @@ export function Navbar() {
 
   return (
     <>
-      <header className="w-full border-b-2 border-odisha-black bg-odisha-offwhite">
+      <header className="w-full border-b-2 border-odisha-black bg-odisha-offwhite sticky top-0 z-50">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-6">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
