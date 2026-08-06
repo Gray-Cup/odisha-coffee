@@ -4,7 +4,7 @@ import { Suspense, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Trash2, ArrowRight } from "lucide-react";
+import { Plus, Trash2, ArrowRight, Share2, Check } from "lucide-react";
 import { products } from "@/data/products";
 import { estateProducts } from "@/data/estate-products";
 import { farms, getFarmBySlug } from "@/data/farms";
@@ -16,6 +16,7 @@ import {
   deliveryFeeForGrams,
   type ResolvedCartItem,
 } from "@/lib/pricing";
+import { encodeShareItems, decodeShareItems, type ShareItem } from "@/lib/cart-share";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 // URL-only order builder: the whole cart lives in the query string as
@@ -23,33 +24,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 // needed) - no database, no localStorage. Reloading, sharing, or bookmarking
 // the URL reproduces the exact same cart. This page is intentionally only
 // linked from the footer and isn't part of the normal browse/buy flow.
+//
+// The Share button below builds a /o/[slug] link using the same encoding -
+// anyone who opens it gets these exact items dropped into their own cart
+// (see app/(marketing)/o/[slug]/page.tsx), no account or database involved.
 
-type BuilderItem = { productId: string; weight: string; farmId?: string; quantity: number };
+type BuilderItem = ShareItem;
 
 const catalogue = [
   ...products.map((p) => ({ id: p.id, name: p.name, kind: "product" as const })),
   ...estateProducts.map((p) => ({ id: p.id, name: p.name, kind: "estate" as const })),
 ];
 
-function encodeItem(it: BuilderItem): string {
-  const parts = [it.productId, it.weight, it.farmId ?? "", it.quantity > 1 ? String(it.quantity) : ""];
-  while (parts.length > 2 && parts[parts.length - 1] === "") parts.pop();
-  return parts.join(":");
-}
-
-function decodeItems(param: string): BuilderItem[] {
-  if (!param) return [];
-  return param.split(",").flatMap((entry) => {
-    const [productId, weight, farmId, qty] = entry.split(":");
-    if (!productId || !weight) return [];
-    const resolved = resolveCartProduct(productId, farmId || undefined);
-    if (!resolved) return [];
-    const tiers = tiersFor(resolved);
-    const tier = tiers.find((t) => t.label === weight) ?? tiers[0];
-    const quantity = qty ? Math.max(1, Math.floor(Number(qty)) || 1) : 1;
-    return [{ productId, weight: tier.label, farmId: farmId || undefined, quantity }];
-  });
-}
+const encodeItem = (it: BuilderItem) => encodeShareItems([it]);
+const decodeItems = decodeShareItems;
 
 function imageSrcFor(resolved: ResolvedCartItem): string | null {
   if (resolved.kind === "product") return resolved.product.image ? `/products/${resolved.product.image}` : null;
@@ -61,6 +49,7 @@ function BuilderContent() {
   const searchParams = useSearchParams();
 
   const [items, setItems] = useState<BuilderItem[]>(() => decodeItems(searchParams.get("items") || ""));
+  const [shareCopied, setShareCopied] = useState(false);
 
   // Add-item form state
   const [productId, setProductId] = useState(catalogue[0]?.id ?? "");
@@ -130,6 +119,23 @@ function BuilderContent() {
     if (rows.length === 0) return;
     const productsParam = items.map(encodeItem).join(",");
     router.push(`/checkout?products=${encodeURIComponent(productsParam)}&total=${total}`);
+  }
+
+  async function shareCart() {
+    if (rows.length === 0) return;
+    const slug = encodeURIComponent(encodeShareItems(items));
+    const url = `${window.location.origin}/o/${slug}`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "My Odisha Coffee order", url });
+        return;
+      } catch {
+        // user cancelled the native share sheet - fall through to copy
+      }
+    }
+    await navigator.clipboard.writeText(url);
+    setShareCopied(true);
+    setTimeout(() => setShareCopied(false), 2000);
   }
 
   return (
@@ -311,8 +317,27 @@ function BuilderContent() {
                 Proceed to Checkout
                 <ArrowRight className="w-4 h-4" />
               </button>
+              <button
+                type="button"
+                onClick={shareCart}
+                disabled={rows.length === 0}
+                className="w-full mt-2.5 flex items-center justify-center gap-2 h-11 bg-white text-odisha-black font-semibold text-xs uppercase tracking-widest border-2 border-odisha-black hover:bg-odisha-offwhite transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              >
+                {shareCopied ? (
+                  <>
+                    <Check className="w-4 h-4" />
+                    Link Copied
+                  </>
+                ) : (
+                  <>
+                    <Share2 className="w-4 h-4" />
+                    Share This Order
+                  </>
+                )}
+              </button>
               <p className="text-[10px] text-odisha-black/40 mt-3 text-center">
-                This cart isn&apos;t saved anywhere — bookmark or copy this page&apos;s URL to keep it.
+                This cart isn&apos;t saved anywhere — bookmark or copy this page&apos;s URL to keep it. Sharing
+                generates a link that loads these items into whoever opens it.
               </p>
             </div>
           </div>
