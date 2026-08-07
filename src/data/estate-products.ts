@@ -381,7 +381,7 @@ export const estateProducts: EstateProduct[] = [
     id: "wild-civet-cat-coffee",
     name: "Wild Civet Cat Coffee (Kopi Luwak)",
     variety: "Arabica Chandragiri",
-    processing: "natural",
+    processing: "washed",
     roastLevel: "green",
     pricePerKg: 1840,
     shippingPerKg: 60,
@@ -392,8 +392,8 @@ export const estateProducts: EstateProduct[] = [
       "civet-cat/cat2.jpg",
     ],
     description:
-      "A genuine rarity from Koraput, Odisha — wild civet cat coffee, exclusively foraged at Brown Valley Coffee Estate. Also known as Kopi Luwak, it's made by passing coffee cherries through the digestive tract of the wild Asian palm civet, where they undergo natural fermentation and enzymatic changes before being hand-collected from the animal's droppings, thoroughly cleaned, and sun-dried. Wild-foraged (never caged), seasonal, and available only in small quantities.",
-    flavorNotes: ["Earthy", "Low Acidity", "Syrupy Body", "Musky Sweetness"],
+      "A genuine rarity from Brown Valley, Koraput, Odisha, India — wild civet cat coffee, exclusively foraged at Brown Valley Coffee Estate. Also known as Kopi Luwak, it's made by passing coffee cherries through the digestive tract of the wild Asian palm civet, where they undergo natural fermentation and enzymatic changes before being hand-collected from the animal's droppings, thoroughly cleaned, and sun-dried. It's washed — a smooth, low-bitter cup with rich chocolate, earthy, and creamy dairy-like notes. Wild-foraged (never caged), seasonal, and available only in small quantities.",
+    flavorNotes: ["Chocolate", "Earthy", "Creamy", "Low Bitterness"],
     availability: "limited",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "100 g",
@@ -401,7 +401,7 @@ export const estateProducts: EstateProduct[] = [
     moisture: "10–12%",
     screenSize: "Hand-Sorted",
     brewingNotes:
-      "Recommended roast: medium, kept gentle to preserve the low-acid, syrupy body the fermentation produces. Best brewed as pour-over or French press, where the earthy sweetness has room to come through.",
+      "Recommended roast: medium, kept gentle to preserve the smooth, low-bitter cup the washed processing produces. Best brewed as pour-over or French press, where the chocolate and creamy dairy-like sweetness have room to come through.",
     exclusiveFarmId: "brown-valley-coffee-estate",
     customPricing: {
       100: 2100,

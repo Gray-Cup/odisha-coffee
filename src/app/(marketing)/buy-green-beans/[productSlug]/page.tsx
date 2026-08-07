@@ -1,11 +1,12 @@
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
+import { ProductImageZoom } from "@/components/product-image-zoom";
 import type { Metadata } from "next";
 import { estateProducts, getEstateProductById } from "@/data/estate-products";
 import { farms, processingColors, processingLabels } from "@/data/farms";
 import { roundToNearest5 } from "@/lib/pricing";
 import { generateTitle, generateDescription } from "@/lib/seo";
+import { ProductReviews } from "@/components/reviews/product-reviews";
 import { OrderPanel } from "./order-panel";
 
 export async function generateStaticParams() {
@@ -94,12 +95,12 @@ export default async function GreenCoffeeProductPage({
               {product.images && product.images.length > 0 ? (
                 <div className="grid grid-cols-3 gap-2">
                   <div className="relative h-64 col-span-3 sm:col-span-2 border-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
-                    <Image src={`/${product.images[0]}`} alt={product.name} fill className="object-cover" />
+                    <ProductImageZoom src={`/${product.images[0]}`} alt={product.name} />
                   </div>
                   <div className="col-span-3 sm:col-span-1 grid grid-cols-2 sm:grid-cols-1 gap-2">
                     {product.images.slice(1).map((src) => (
                       <div key={src} className="relative h-[123px] border-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
-                        <Image src={`/${src}`} alt={product.name} fill className="object-cover" />
+                        <ProductImageZoom src={`/${src}`} alt={product.name} />
                       </div>
                     ))}
                   </div>
@@ -107,7 +108,7 @@ export default async function GreenCoffeeProductPage({
               ) : (
                 product.image && (
                   <div className="relative h-64 border-2 border-odisha-black overflow-hidden bg-odisha-offwhite">
-                    <Image src={`/${product.image}`} alt={product.name} fill className="object-cover" />
+                    <ProductImageZoom src={`/${product.image}`} alt={product.name} />
                   </div>
                 )
               )}
@@ -224,6 +225,11 @@ export default async function GreenCoffeeProductPage({
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="max-w-7xl mx-auto px-4 lg:px-6">
+        <ProductReviews slug={product.id} catalog="estate" productName={product.name} />
       </section>
 
       {/* CTA */}

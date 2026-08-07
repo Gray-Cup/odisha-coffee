@@ -87,7 +87,7 @@ export const products: Product[] = [
     availability: "in-stock",
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
-    pricePerKg: 2800,
+    pricePerKg: 1372,
     image: "koraput-coffee.png",
   },
   {
@@ -107,7 +107,7 @@ export const products: Product[] = [
     availability: "in-stock",
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
-    pricePerKg: 3200,
+    pricePerKg: 1568,
     image: "koraput-coffee.png",
   },
   {
@@ -127,7 +127,7 @@ export const products: Product[] = [
     availability: "limited",
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
-    pricePerKg: 4200,
+    pricePerKg: 2058,
     image: "koraput-coffee.png",
   },
   {
@@ -147,7 +147,7 @@ export const products: Product[] = [
     availability: "limited",
     weightOptions: ["100g", "250g", "500g"],
     exportAvailable: false,
-    pricePerKg: 5200,
+    pricePerKg: 2548,
     image: "koraput-coffee.png",
   },
   {
@@ -167,7 +167,7 @@ export const products: Product[] = [
     availability: "in-stock",
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
-    pricePerKg: 2400,
+    pricePerKg: 1176,
     image: "koraput-coffee.png",
   },
   {
@@ -187,7 +187,7 @@ export const products: Product[] = [
     availability: "in-stock",
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
-    pricePerKg: 3000,
+    pricePerKg: 1470,
     image: "koraput-coffee.png",
   },
 
@@ -211,7 +211,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g", "500g"],
     exportAvailable: true,
     minOrderExport: "50kg green beans",
-    pricePerKg: 4500,
+    pricePerKg: 2205,
     image: "koraput-coffee.png",
   },
   {
@@ -232,7 +232,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: true,
     minOrderExport: "100kg green beans",
-    pricePerKg: 5000,
+    pricePerKg: 2450,
     image: "koraput-coffee.png",
   },
   {
@@ -253,7 +253,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: true,
     minOrderExport: "100kg green beans",
-    pricePerKg: 3800,
+    pricePerKg: 1862,
     image: "koraput-coffee.png",
   },
   {
@@ -274,7 +274,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: true,
     minOrderExport: "200kg green beans",
-    pricePerKg: 4000,
+    pricePerKg: 1960,
     image: "koraput-coffee.png",
   },
   {
@@ -295,7 +295,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: true,
     minOrderExport: "300kg green beans",
-    pricePerKg: 3500,
+    pricePerKg: 1715,
     image: "koraput-coffee.png",
   },
   {
@@ -316,7 +316,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: true,
     minOrderExport: "150kg green beans",
-    pricePerKg: 3800,
+    pricePerKg: 1862,
     image: "koraput-coffee.png",
   },
   {
@@ -336,7 +336,7 @@ export const products: Product[] = [
     availability: "seasonal",
     weightOptions: ["100g", "250g"],
     exportAvailable: false,
-    pricePerKg: 5500,
+    pricePerKg: 2695,
     image: "koraput-coffee.png",
   },
   {

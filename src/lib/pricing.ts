@@ -47,13 +47,14 @@ export function computeItemPrice(pricePerKg: number, grams: number): number {
 
 /**
  * Delivery is charged once per order, on the order's total weight (not per
- * item): flat ₹80 at or under 500g; ₹100 for the first kg, plus ₹60 for
- * every kg after that.
+ * item): flat ₹100 under 1kg; ₹70/kg from 1kg up to (but under) 3kg; ₹60/kg
+ * from 3kg up.
  */
 export function deliveryFeeForGrams(totalGrams: number): number {
-  if (totalGrams <= 500) return 80;
+  if (totalGrams < 1000) return 100;
   const kg = totalGrams / 1000;
-  return Math.round(100 + 60 * (kg - 1));
+  const ratePerKg = kg < 3 ? 70 : 60;
+  return Math.round(ratePerKg * kg);
 }
 
 // ─── Estate (per-farm green bean) lots ───────────────────────────────────

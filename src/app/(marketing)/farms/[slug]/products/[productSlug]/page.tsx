@@ -6,6 +6,7 @@ import { use, useState, Suspense } from "react";
 import { getFarmBySlug } from "@/data/farms";
 import { getEstateProductById, computeEstateProductTotal } from "@/data/estate-products";
 import { processingColors, processingLabels } from "@/data/farms";
+import { ProductReviews } from "@/components/reviews/product-reviews";
 
 // Static params are handled by the parent [slug] segment; this page is
 // fully dynamic at the productSlug level since products may be added at runtime.
@@ -289,6 +290,11 @@ function FarmProductDetailContent({
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="max-w-7xl mx-auto px-4 lg:px-6">
+        <ProductReviews slug={product.id} catalog="estate" productName={product.name} />
       </section>
 
       {/* Bottom nav */}

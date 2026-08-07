@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db, odishaCoffeeOrders } from "@/db";
+import { sendOrderConfirmationEmail } from "@/lib/email";
 import {
   computeOrderTotal,
   resolveCartProduct,
@@ -129,6 +130,25 @@ export async function POST(request: NextRequest) {
     // Human-friendly sequential order reference derived from the row's own
     // serial id (e.g. OD-0001, OD-0002, ...) — no separate counter needed.
     const orderRef = `OD-${String(insertedOrder.id).padStart(4, "0")}`;
+
+    if (email) {
+      // Fire-and-forget: sendOrderConfirmationEmail never throws, and a slow/failed
+      // email must never delay or block the Cashfree order creation below.
+      void sendOrderConfirmationEmail({
+        to: email,
+        name,
+        orderRef,
+        items: itemsDetail.map((item) => ({
+          name: item.name,
+          tier: item.tier,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+        totalAmount,
+        address,
+        pincode,
+      });
+    }
 
     const productSummary = products
       .map((p) => {
