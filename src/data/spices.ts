@@ -3,7 +3,8 @@ export type Spice = {
   name: string;
   pricePerKg: number;
   description: string;
-  image?: string; // filename relative to /public/ — e.g. "black-pepper/black-pepper.jpg"
+  image?: string; // filename relative to /public/ — used as the card/thumbnail image
+  images?: string[]; // optional extra gallery shots (paths relative to /public/)
   weightOptions: Array<{ label: string; grams: number }>;
 };
 
@@ -21,7 +22,8 @@ export const spices: Spice[] = [
     pricePerKg: 850,
     description:
       "Shade-grown black pepper from Brown Valley Coffee Estate in Koraput, Odisha — pepper vines are traditionally intercropped with silver oak and jackfruit shade trees across the estate. Sun-dried, hand-sorted, and sold by the kilogram.",
-    image: "black-pepper/black-pepper.jpg",
+    image: "black-pepper/black-pepper-1.webp",
+    images: ["black-pepper/black-pepper-1.webp", "black-pepper/black-pepper-2.webp"],
     weightOptions: SPICE_WEIGHT_OPTIONS,
   },
   {
@@ -30,7 +32,7 @@ export const spices: Spice[] = [
     pricePerKg: 1400,
     description:
       "Shade-grown white pepper from Brown Valley Coffee Estate in Koraput, Odisha — ripe berries are soaked and hulled to remove the outer skin, yielding a milder, cleaner heat than black pepper. Sun-dried, hand-sorted, and sold by the kilogram.",
-    image: "white-pepper/white-pepper.jpg",
+    image: "white-pepper/white-pepper-1.webp",
     weightOptions: SPICE_WEIGHT_OPTIONS,
   },
 ];
