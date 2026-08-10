@@ -111,9 +111,11 @@ export default function CartPage() {
                           {resolved.kind === "estate" && (
                             <p className="text-[10px] text-odisha-black/50 mt-0.5">From {resolved.farm.name}</p>
                           )}
-                          <span className={`text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 mt-1 inline-block ${availabilityColors[product.availability]}`}>
-                            {availabilityLabels[product.availability]}
-                          </span>
+                          {resolved.kind !== "spice" && (
+                            <span className={`text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 mt-1 inline-block ${availabilityColors[resolved.product.availability]}`}>
+                              {availabilityLabels[resolved.product.availability]}
+                            </span>
+                          )}
                         </div>
                         <button
                           onClick={() => remove(item.id)}

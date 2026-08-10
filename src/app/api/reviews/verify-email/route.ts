@@ -6,7 +6,7 @@ import { verifyTurnstileToken } from "@/lib/turnstile-verify";
 
 export type PurchasedItem = {
   slug: string;
-  catalog: "product" | "estate";
+  catalog: "product" | "estate" | "spice";
   name: string;
   image: string | null;
   orderLinkId: string;

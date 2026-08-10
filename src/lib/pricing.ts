@@ -1,5 +1,6 @@
 import { products, type Product } from "@/data/products";
 import { estateProducts, type EstateProduct } from "@/data/estate-products";
+import { spices, type Spice } from "@/data/spices";
 import { farms, getFarmBySlug, type Farm } from "@/data/farms";
 
 // Single source of truth for pricing, shared by every cart/checkout client
@@ -70,7 +71,8 @@ export function deliveryFeeForGrams(totalGrams: number): number {
 
 export type ResolvedCartItem =
   | { kind: "product"; product: Product }
-  | { kind: "estate"; product: EstateProduct; farm: Farm };
+  | { kind: "estate"; product: EstateProduct; farm: Farm }
+  | { kind: "spice"; product: Spice };
 
 export function resolveCartProduct(productId: string, farmId?: string): ResolvedCartItem | null {
   const product = products.find((p) => p.id === productId);
@@ -82,11 +84,15 @@ export function resolveCartProduct(productId: string, farmId?: string): Resolved
     return { kind: "estate", product: estate, farm };
   }
 
+  const spice = spices.find((s) => s.id === productId);
+  if (spice) return { kind: "spice", product: spice };
+
   return null;
 }
 
 export function tiersFor(resolved: ResolvedCartItem): Array<{ label: string; grams: number }> {
-  return resolved.kind === "estate" ? resolved.product.weightOptions : [...tiersForProduct(resolved.product)];
+  if (resolved.kind === "product") return [...tiersForProduct(resolved.product)];
+  return resolved.product.weightOptions;
 }
 
 /**

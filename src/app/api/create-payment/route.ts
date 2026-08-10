@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
       const image =
         resolved?.kind === "product" && resolved.product.image
           ? `${origin}/products/${resolved.product.image}`
-          : resolved?.kind === "estate" && resolved.product.image
+          : (resolved?.kind === "estate" || resolved?.kind === "spice") && resolved.product.image
           ? `${origin}/${resolved.product.image}`
           : null;
       return {
