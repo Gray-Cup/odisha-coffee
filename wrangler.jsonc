@@ -13,5 +13,25 @@
 			"binding": "WORKER_SELF_REFERENCE",
 			"service": "odisha-coffee"
 		}
-	]
+	],
+	// Plaintext config only — nothing here grants access to anything by
+	// itself (no passwords, tokens, or keys). Safe to commit and visible in
+	// the Cloudflare dashboard. Mirrors the non-secret keys in .env.example.
+	"vars": {
+		"NEXT_PUBLIC_TURNSTILE_SITE_KEY": "0x4AAAAAADgzhdeKIimaGjKV",
+		"RESEND_FROM_EMAIL": "odishacoffee@graycup.com",
+		"TURSO_DATABASE_URL": "libsql://odisha-coffee-graycup.aws-ap-south-1.turso.io",
+		"B2_BUCKET_NAME": "grayreviews",
+		"B2_ENDPOINT": "s3.eu-central-003.backblazeb2.com",
+		"B2_REGION": "eu-central-003",
+		"B2_PUBLIC_BASE_URL": "https://grayreviews.s3.eu-central-003.backblazeb2.com"
+	}
+	// Everything else in .env.example is a credential and must NEVER go in
+	// this file (it's committed to git). Set these as encrypted secrets
+	// instead — `wrangler secret put <NAME>` for direct CLI deploys, or as
+	// "Secret" type environment variables in the Cloudflare dashboard for
+	// Workers Builds (Settings → Environment variables):
+	//   TURNSTILE_SECRET_KEY, RESEND_API_KEY, TURSO_AUTH_TOKEN,
+	//   B2_KEY_ID, B2_APPLICATION_KEY, DATABASE_URL,
+	//   CASHFREE_CLIENT_ID, CASHFREE_CLIENT_SECRET
 }
