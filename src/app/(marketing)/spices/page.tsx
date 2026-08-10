@@ -5,7 +5,7 @@ import { spices } from "@/data/spices";
 export const metadata: Metadata = {
   title: "Spices from Koraput — Odisha Coffee",
   description:
-    "Shade-grown spices from Gray Cup's partner coffee estates in Koraput, Odisha — starting with black pepper at ₹850/kg.",
+    "Shade-grown spices from Brown Valley Coffee Estate in Koraput, Odisha — black pepper at ₹850/kg and white pepper at ₹1,400/kg.",
   alternates: { canonical: "/spices" },
 };
 
@@ -30,9 +30,9 @@ export default function SpicesPage() {
             Spices from Koraput
           </h1>
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed">
-            Our partner coffee estates in the Eastern Ghats also grow spices
-            under the same shade canopy as their coffee. Available alongside
-            our green and roasted coffee lots.
+            Brown Valley Coffee Estate in Koraput also grows spices under the
+            same shade canopy as its coffee. Available alongside our green
+            and roasted coffee lots.
           </p>
         </div>
       </section>

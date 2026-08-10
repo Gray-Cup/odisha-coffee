@@ -12,7 +12,14 @@ export const spices: Spice[] = [
     name: "Black Pepper",
     pricePerKg: 850,
     description:
-      "Shade-grown black pepper from the same Koraput estates that grow our coffee — pepper vines are traditionally intercropped with silver oak and jackfruit shade trees across the region. Sun-dried, hand-sorted, and sold by the kilogram.",
+      "Shade-grown black pepper from Brown Valley Coffee Estate in Koraput, Odisha — pepper vines are traditionally intercropped with silver oak and jackfruit shade trees across the estate. Sun-dried, hand-sorted, and sold by the kilogram.",
+  },
+  {
+    id: "white-pepper",
+    name: "White Pepper",
+    pricePerKg: 1400,
+    description:
+      "Shade-grown white pepper from Brown Valley Coffee Estate in Koraput, Odisha — ripe berries are soaked and hulled to remove the outer skin, yielding a milder, cleaner heat than black pepper. Sun-dried, hand-sorted, and sold by the kilogram.",
   },
 ];
 
