@@ -46,7 +46,7 @@ export const estateProducts: EstateProduct[] = [
     variety: "Arabica S795",
     processing: "washed",
     roastLevel: "green",
-    pricePerKg: 1045,
+    pricePerKg: 1135,
     shippingPerKg: 60,
     image: "koraput-washed.jpg",
     description:
