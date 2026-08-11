@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
     // the request body. computeOrderTotal throws if any product/weight is invalid.
     let totalAmount: number;
     try {
-      totalAmount = computeOrderTotal(orderItems);
+      totalAmount = computeOrderTotal(orderItems, country);
     } catch (err) {
       return NextResponse.json(
         { error: err instanceof Error ? err.message : "Invalid order items" },

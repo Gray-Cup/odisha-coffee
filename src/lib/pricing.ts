@@ -46,14 +46,29 @@ export function computeItemPrice(pricePerKg: number, grams: number): number {
   return roundToNearest5(Math.ceil((pricePerKg / 1000) * grams));
 }
 
+const INTERNATIONAL_DELIVERY_RATE_PER_KG = 350;
+
+/**
+ * Countries other than India (including blank/undetected, since that's the
+ * default before IP geolocation resolves) are billed at the flat
+ * international rate rather than the domestic tiers below.
+ */
+export function isDomesticCountry(country: string): boolean {
+  const c = country.trim().toLowerCase();
+  return c === "" || c === "india";
+}
+
 /**
  * Delivery is charged once per order, on the order's total weight (not per
- * item): flat ₹100 under 1kg; ₹70/kg from 1kg up to (but under) 3kg; ₹60/kg
- * from 3kg up.
+ * item). Domestic (India): flat ₹100 under 1kg; ₹70/kg from 1kg up to (but
+ * under) 3kg; ₹60/kg from 3kg up. International: flat ₹350/kg.
  */
-export function deliveryFeeForGrams(totalGrams: number): number {
-  if (totalGrams < 1000) return 100;
+export function deliveryFeeForGrams(totalGrams: number, country: string = "india"): number {
   const kg = totalGrams / 1000;
+  if (!isDomesticCountry(country)) {
+    return Math.round(INTERNATIONAL_DELIVERY_RATE_PER_KG * kg);
+  }
+  if (totalGrams < 1000) return 100;
   const ratePerKg = kg < 3 ? 70 : 60;
   return Math.round(ratePerKg * kg);
 }
@@ -154,7 +169,7 @@ export type OrderItem = { productId: string; weight: string; farmId?: string; qu
  * single line represent N units of the same product/weight/farm combo — used
  * by the buy-green-beans "Select" quick-buy flow, which skips the cart.
  */
-export function computeOrderTotal(items: OrderItem[]): number {
+export function computeOrderTotal(items: OrderItem[], country: string = "india"): number {
   if (items.length === 0) throw new Error("No items in order");
 
   let total = 0;
@@ -169,5 +184,5 @@ export function computeOrderTotal(items: OrderItem[]): number {
     totalGrams += grams * quantity;
   }
 
-  return total + deliveryFeeForGrams(totalGrams);
+  return total + deliveryFeeForGrams(totalGrams, country);
 }

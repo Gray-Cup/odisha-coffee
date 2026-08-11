@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, Suspense } from "react";
+import { useMemo, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -24,6 +24,7 @@ function imageSrcFor(resolved: ResolvedCartItem): string | null {
 function CheckoutContent() {
   const params = useSearchParams();
   const productsParam = params.get("products") || "";
+  const [country, setCountry] = useState("");
 
   const cartItems: CheckoutRow[] = useMemo(() => {
     if (!productsParam) return [];
@@ -42,7 +43,7 @@ function CheckoutContent() {
   const productStrings = cartItems.map((i) => i.entry);
   const subtotal = cartItems.reduce((s, i) => s + i.price, 0);
   const totalGrams = cartItems.reduce((s, i) => s + i.grams, 0);
-  const deliveryFee = deliveryFeeForGrams(totalGrams);
+  const deliveryFee = deliveryFeeForGrams(totalGrams, country);
   const total = subtotal + deliveryFee;
 
   return (
@@ -68,6 +69,8 @@ function CheckoutContent() {
             <CheckoutForm
               products={productStrings}
               totalAmount={total}
+              country={country}
+              onCountryChange={setCountry}
               onBack={() => window.history.back()}
             />
           </div>

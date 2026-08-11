@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -84,15 +84,16 @@ function validate(fields: { name: string; phone: string; email: string; address:
 type Props = {
   products: string[];      // "productId:weight" strings
   totalAmount: number;
+  country: string;
+  onCountryChange: (country: string) => void;
   renderSummary?: () => React.ReactNode;
   onBack?: () => void;
 };
 
-export function CheckoutForm({ products, totalAmount, renderSummary, onBack }: Props) {
+export function CheckoutForm({ products, totalAmount, country, onCountryChange: setCountry, renderSummary, onBack }: Props) {
   const turnstile = useTurnstile();
 
   const [customerType, setCustomerType] = useState<"individual" | "business">("individual");
-  const [country,      setCountry]      = useState("");
   const [name,         setName]         = useState("");
   const [phone,        setPhone]        = useState("");
   const [email,        setEmail]        = useState("");
@@ -131,18 +132,25 @@ export function CheckoutForm({ products, totalAmount, renderSummary, onBack }: P
     if (cached.businessType)  setBusinessType(cached.businessType);
   }, []);
 
+  // Country now lives in the parent (so the order summary can price
+  // delivery off it too), so this ref tracks the latest value for the geo
+  // effect below - it only fires once on mount and must still see whatever
+  // the buyer/cache have set by the time the fetch resolves.
+  const countryRef = useRef(country);
+  useEffect(() => { countryRef.current = country; }, [country]);
+
   useEffect(() => {
     fetch("/api/geo")
       .then((r) => r.json())
       .then((d) => {
         if (!d.country) return;
+        // Never overwrite an already-cached/user-entered country once this resolves.
+        if (countryRef.current) return;
         try {
           const detected = new Intl.DisplayNames(["en"], { type: "region" }).of(d.country);
-          // Functional update so an already-cached/user-entered country (set
-          // by the effect above) never gets overwritten once this resolves.
-          if (detected) setCountry((prev) => prev || detected);
+          setCountry(detected || d.country);
         } catch {
-          setCountry((prev) => prev || d.country);
+          setCountry(d.country);
         }
       })
       .catch(() => {});
