@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
-import { createDb, odishaCoffeeOrders } from "@/db";
+import { getOrdersDb, odishaCoffeeOrders } from "@/db/d1";
 import { sendOrderConfirmationEmail } from "@/lib/email";
 import {
   computeOrderTotal,
@@ -109,35 +109,25 @@ export async function POST(request: NextRequest) {
       };
     });
 
-    // A fresh connection per use, closed immediately after: on Cloudflare
-    // Workers a cached global connection gets reused across unrelated
-    // requests once the isolate is reused, which throws "Cannot perform I/O
-    // on behalf of a different request". Also don't hold this one open
-    // across the Cashfree round-trip below - open a separate one later for
-    // the cf_link_id update instead.
-    const insertDb = createDb();
-    let insertedOrder: { id: number };
-    try {
-      [insertedOrder] = await insertDb.db.insert(odishaCoffeeOrders).values({
-        name,
-        phone: phone.replace(/\D/g, "").slice(-12),
-        email: email || null,
-        country,
-        pincode,
-        address,
-        state: state || null,
-        gst_or_tax_id: gstOrTaxId || null,
-        business_type: businessType || null,
-        items_detail: JSON.stringify(itemsDetail),
-        products: JSON.stringify(products),
-        quantity_tier: "mixed",
-        total_amount: totalAmount,
-        link_id: linkId,
-        payment_status: "pending",
-      }).returning({ id: odishaCoffeeOrders.id });
-    } finally {
-      await insertDb.close();
-    }
+    const ordersDb = await getOrdersDb();
+    const [insertedOrder] = await ordersDb.insert(odishaCoffeeOrders).values({
+      created_at: Date.now(),
+      name,
+      phone: phone.replace(/\D/g, "").slice(-12),
+      email: email || null,
+      country,
+      pincode,
+      address,
+      state: state || null,
+      gst_or_tax_id: gstOrTaxId || null,
+      business_type: businessType || null,
+      items_detail: JSON.stringify(itemsDetail),
+      products: JSON.stringify(products),
+      quantity_tier: "mixed",
+      total_amount: totalAmount,
+      link_id: linkId,
+      payment_status: "pending",
+    }).returning({ id: odishaCoffeeOrders.id });
 
     // Human-friendly sequential order reference derived from the row's own
     // serial id (e.g. OD-0001, OD-0002, ...) — no separate counter needed.
@@ -229,14 +219,9 @@ export async function POST(request: NextRequest) {
     // `cf_link_id` originally tracked the Payment Links product's own id;
     // it's repurposed here to hold Cashfree's internal cf_order_id.
     if (data.cf_order_id) {
-      const updateDb = createDb();
-      try {
-        await updateDb.db.update(odishaCoffeeOrders)
-          .set({ cf_link_id: String(data.cf_order_id) })
-          .where(eq(odishaCoffeeOrders.link_id, linkId));
-      } finally {
-        await updateDb.close();
-      }
+      await ordersDb.update(odishaCoffeeOrders)
+        .set({ cf_link_id: String(data.cf_order_id) })
+        .where(eq(odishaCoffeeOrders.link_id, linkId));
     }
 
     return NextResponse.json({
@@ -248,9 +233,9 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("Payment creation error:", error);
-    // Drizzle wraps postgres.js errors as "Failed query: ... params: ..." and
-    // puts the real reason (constraint violation, connection error, etc.) on
-    // `.cause` - surface that instead of the generic wrapper message.
+    // Drizzle can wrap driver errors with the real reason (constraint
+    // violation, connection error, etc.) on `.cause` - surface that instead
+    // of the generic wrapper message when present.
     const cause = error instanceof Error && error.cause instanceof Error ? error.cause : null;
     const message = cause?.message ?? (error instanceof Error ? error.message : String(error));
     return NextResponse.json({ error: `Order creation failed: ${message}` }, { status: 500 });

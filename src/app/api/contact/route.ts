@@ -189,7 +189,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Parse request body
-    let body;
+    let body: any;
     try {
       body = await request.json();
     } catch (error) {

@@ -32,7 +32,7 @@ export function ReviewsPageClient() {
     setLoading(true);
     try {
       const res = await fetch("/api/reviews");
-      const data = await res.json();
+      const data = (await res.json()) as { reviews?: Review[] };
       setReviews(data.reviews ?? []);
     } finally {
       setLoading(false);

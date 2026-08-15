@@ -106,9 +106,9 @@ export function ContactForm() {
       });
 
       if (!response.ok) {
-        const errorData = await response
+        const errorData = (await response
           .json()
-          .catch(() => ({ error: "Unknown error occurred" }));
+          .catch(() => ({ error: "Unknown error occurred" }))) as { error?: string };
         throw new Error(errorData.error || `HTTP ${response.status}`);
       }
 

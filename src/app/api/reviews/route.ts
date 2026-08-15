@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { and, desc, eq, sql } from "drizzle-orm";
-import { createDb, odishaCoffeeOrders } from "@/db";
+import { getOrdersDb, odishaCoffeeOrders } from "@/db/d1";
 import { ensureReviewsTable, reviews, tursoDb } from "@/db/turso";
 import { resolveCartProduct } from "@/lib/pricing";
 import { verifyTurnstileToken } from "@/lib/turnstile-verify";
@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   await ensureReviewsTable();
 
-  const body = await request.json().catch(() => null);
+  const body = (await request.json().catch(() => null)) as Record<string, unknown> | null;
   const email = typeof body?.email === "string" ? body.email.trim() : "";
   const reviewerName = typeof body?.name === "string" ? body.name.trim() : "";
   const productSlug = typeof body?.productSlug === "string" ? body.productSlug : "";
@@ -84,18 +84,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unknown product." }, { status: 400 });
   }
 
-  const { db, close } = createDb();
-  let orders;
-  try {
-    orders = await db
-      .select({ linkId: odishaCoffeeOrders.link_id, itemsDetail: odishaCoffeeOrders.items_detail })
-      .from(odishaCoffeeOrders)
-      .where(
-        sql`lower(${odishaCoffeeOrders.email}) = lower(${email}) AND ${odishaCoffeeOrders.payment_status} = 'paid'`
-      );
-  } finally {
-    await close();
-  }
+  const ordersDb = await getOrdersDb();
+  const orders = await ordersDb
+    .select({ linkId: odishaCoffeeOrders.link_id, itemsDetail: odishaCoffeeOrders.items_detail })
+    .from(odishaCoffeeOrders)
+    .where(
+      sql`lower(${odishaCoffeeOrders.email}) = lower(${email}) AND ${odishaCoffeeOrders.payment_status} = 'paid'`
+    );
 
   let orderLinkId: string | null = null;
   for (const order of orders) {

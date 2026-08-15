@@ -3,9 +3,25 @@ import { NextResponse } from "next/server";
 // This should be your Discord webhook URL for enterprise inquiries
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_ENTERPRISE_WEBHOOK_URL;
 
+interface EnterpriseInquiryBody {
+  companyName?: string;
+  website?: string;
+  industry?: string;
+  teamSize?: string;
+  contactName?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  budgetRange?: string;
+  requirements?: string;
+  timeline?: string;
+  type?: string;
+  timestamp?: string;
+  step?: string;
+}
+
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const body = (await request.json()) as EnterpriseInquiryBody;
     const {
       companyName,
       website,
@@ -66,7 +82,7 @@ export async function POST(request: Request) {
             },
             {
               name: "📊 Form Info",
-              value: `**Type:** ${type}\n**Step Completed:** ${step || "All steps"}\n**Submitted:** ${new Date(timestamp).toLocaleString()}`,
+              value: `**Type:** ${type}\n**Step Completed:** ${step || "All steps"}\n**Submitted:** ${new Date(timestamp || Date.now()).toLocaleString()}`,
               inline: false,
             },
           ],

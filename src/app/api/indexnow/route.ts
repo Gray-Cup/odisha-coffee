@@ -1,6 +1,6 @@
 export async function POST(req: Request) {
   try {
-    const body = await req.json().catch(() => null);
+    const body = (await req.json().catch(() => null)) as { urlList?: unknown } | unknown[] | null;
     const urls: string[] =
       Array.isArray(body) ? body : Array.isArray(body?.urlList) ? body.urlList : [];
 

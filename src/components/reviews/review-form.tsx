@@ -48,9 +48,9 @@ export function ReviewForm({ lockedProduct, onClose }: ReviewFormProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, turnstileToken: turnstile.token }),
       });
-      const data = await res.json();
+      const data = (await res.json()) as { error?: string; verified?: boolean; items?: PurchasedItem[] };
       if (!res.ok) throw new Error(data.error || "Something went wrong.");
-      if (!data.verified || data.items.length === 0) {
+      if (!data.verified || !data.items || data.items.length === 0) {
         setError("We couldn't find a completed order under that email address.");
         return;
       }
@@ -86,12 +86,19 @@ export function ReviewForm({ lockedProduct, onClose }: ReviewFormProps) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ contentType: file.type }),
         });
-        const urlData = await urlRes.json();
-        if (!urlRes.ok) throw new Error(urlData.error || "Could not prepare upload.");
+        const urlData = (await urlRes.json()) as {
+          error?: string;
+          uploadUrl?: string;
+          fields?: Record<string, string>;
+          publicUrl?: string;
+        };
+        if (!urlRes.ok || !urlData.uploadUrl || !urlData.fields || !urlData.publicUrl) {
+          throw new Error(urlData.error || "Could not prepare upload.");
+        }
 
         const form = new FormData();
         for (const [key, value] of Object.entries(urlData.fields)) {
-          form.append(key, value as string);
+          form.append(key, value);
         }
         form.append("file", file);
 
@@ -130,7 +137,7 @@ export function ReviewForm({ lockedProduct, onClose }: ReviewFormProps) {
           turnstileToken: turnstile.token,
         }),
       });
-      const data = await res.json();
+      const data = (await res.json()) as { error?: string };
       if (!res.ok) throw new Error(data.error || "Something went wrong.");
       setStep("done");
     } catch (err) {

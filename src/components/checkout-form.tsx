@@ -141,7 +141,7 @@ export function CheckoutForm({ products, totalAmount, country, onCountryChange: 
 
   useEffect(() => {
     fetch("/api/geo")
-      .then((r) => r.json())
+      .then((r) => r.json() as Promise<{ country?: string }>)
       .then((d) => {
         if (!d.country) return;
         // Never overwrite an already-cached/user-entered country once this resolves.
@@ -194,8 +194,12 @@ export function CheckoutForm({ products, totalAmount, country, onCountryChange: 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to create payment");
+      const data = (await res.json()) as {
+        error?: string;
+        paymentSessionId?: string;
+        returnUrl?: string;
+      };
+      if (!res.ok || !data.paymentSessionId) throw new Error(data.error || "Failed to create payment");
 
       // Orders API + Checkout.js: renders Cashfree's hosted checkout for this
       // order's payment_session_id, rather than redirecting to a generic

@@ -37,7 +37,7 @@ export function ProductReviews({ slug, catalog, productName }: ProductReviewsPro
     setLoading(true);
     try {
       const res = await fetch(`/api/reviews?productId=${encodeURIComponent(slug)}&catalog=${catalog}`);
-      const data = await res.json();
+      const data = (await res.json()) as { reviews?: Review[] };
       setReviews(data.reviews ?? []);
     } finally {
       setLoading(false);

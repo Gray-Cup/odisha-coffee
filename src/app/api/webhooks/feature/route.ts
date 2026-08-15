@@ -3,10 +3,17 @@ import { NextResponse } from "next/server";
 // This should be your Discord webhook URL for feature requests
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_FEATURE_WEBHOOK_URL;
 
+interface FeatureRequestBody {
+  message?: string;
+  email?: string;
+  twitter?: string;
+  type?: string;
+}
+
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { message, email, twitter, type } = body;
+    const body = (await request.json()) as FeatureRequestBody;
+    const { message, email, twitter } = body;
 
     if (!message || !email) {
       return NextResponse.json(

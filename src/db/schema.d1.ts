@@ -1,8 +1,8 @@
-import { pgTable, serial, text, integer, timestamp } from "drizzle-orm/pg-core";
+import { sqliteTable, integer, text } from "drizzle-orm/sqlite-core";
 
-export const odishaCoffeeOrders = pgTable("odisha_coffee_orders", {
-  id:             serial("id").primaryKey(),
-  created_at:     timestamp("created_at").defaultNow().notNull(),
+export const odishaCoffeeOrders = sqliteTable("odisha_coffee_orders", {
+  id:             integer("id").primaryKey({ autoIncrement: true }),
+  created_at:     integer("created_at").notNull(), // unix ms
 
   // customer
   name:           text("name").notNull(),
@@ -25,4 +25,11 @@ export const odishaCoffeeOrders = pgTable("odisha_coffee_orders", {
   link_id:        text("link_id").notNull().unique(),
   cf_link_id:     text("cf_link_id"),   // Cashfree's own numeric link id, set after link creation
   payment_status: text("payment_status").notNull().default("pending"),
+
+  // shipping - set by orders-graycup admin
+  carrier:                text("carrier"),
+  delhivery_waybill:      text("delhivery_waybill"),
+  delhivery_pickup_date:  text("delhivery_pickup_date"),
+  shadowfax_request_id:   text("shadowfax_request_id"),
+  dispatch_status:        text("dispatch_status"),
 });
