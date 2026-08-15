@@ -42,19 +42,27 @@ const CartContext = createContext<CartCtx | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  // Guards the write effect below from firing with the initial (empty) state
+  // before the read effect has loaded whatever was actually in storage -
+  // without this, mount order between the two effects would overwrite a
+  // saved cart with [] on every fresh page load.
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     try {
       const raw = localStorage.getItem("odisha_cart");
-      if (!raw) return;
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) setItems(parsed);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) setItems(parsed);
+      }
     } catch {}
+    setHydrated(true);
   }, []);
 
   useEffect(() => {
+    if (!hydrated) return;
     localStorage.setItem("odisha_cart", JSON.stringify(items));
-  }, [items]);
+  }, [items, hydrated]);
 
   const add = useCallback((productId: string, weight: string, farmId?: string) => {
     const id = cartLineId(productId, weight, farmId);
