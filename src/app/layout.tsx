@@ -4,7 +4,6 @@ import { Inter, Playfair_Display, Public_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
 import RootProviders from "@/components/providers";
-import { Analytics } from "@vercel/analytics/next";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -162,7 +161,6 @@ export default function RootLayout({
             }),
           }}
         />
-        <Analytics />
         <RootProviders>{children}</RootProviders>
       </body>
     </html>
