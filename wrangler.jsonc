@@ -1,17 +1,16 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"main": ".open-next/worker.js",
-	"name": "odisha-coffee",
+	"main": "./workers/app.ts",
+	"name": "odisha-coffee-rr",
 	"compatibility_date": "2026-08-08",
 	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
 	"assets": {
-		"directory": ".open-next/assets",
-		"binding": "ASSETS"
+		"directory": "./build/client"
 	},
 	"services": [
 		{
 			"binding": "WORKER_SELF_REFERENCE",
-			"service": "odisha-coffee"
+			"service": "odisha-coffee-rr"
 		}
 	],
 	"d1_databases": [
@@ -40,7 +39,6 @@
 	// itself (no passwords, tokens, or keys). Safe to commit and visible in
 	// the Cloudflare dashboard. Mirrors the non-secret keys in .env.example.
 	"vars": {
-		"NEXT_PUBLIC_TURNSTILE_SITE_KEY": "0x4AAAAAADgzhdeKIimaGjKV",
 		"RESEND_FROM_EMAIL": "odishacoffee@graycup.com",
 		"TURSO_DATABASE_URL": "libsql://odisha-coffee-graycup.aws-ap-south-1.turso.io",
 		"B2_BUCKET_NAME": "grayreviews",
