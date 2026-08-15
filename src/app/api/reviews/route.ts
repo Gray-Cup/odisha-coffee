@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { and, desc, eq, sql } from "drizzle-orm";
-import { db, odishaCoffeeOrders } from "@/db";
+import { createDb, odishaCoffeeOrders } from "@/db";
 import { ensureReviewsTable, reviews, tursoDb } from "@/db/turso";
 import { resolveCartProduct } from "@/lib/pricing";
 import { verifyTurnstileToken } from "@/lib/turnstile-verify";
@@ -84,12 +84,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unknown product." }, { status: 400 });
   }
 
-  const orders = await db
-    .select({ linkId: odishaCoffeeOrders.link_id, itemsDetail: odishaCoffeeOrders.items_detail })
-    .from(odishaCoffeeOrders)
-    .where(
-      sql`lower(${odishaCoffeeOrders.email}) = lower(${email}) AND ${odishaCoffeeOrders.payment_status} = 'paid'`
-    );
+  const { db, close } = createDb();
+  let orders;
+  try {
+    orders = await db
+      .select({ linkId: odishaCoffeeOrders.link_id, itemsDetail: odishaCoffeeOrders.items_detail })
+      .from(odishaCoffeeOrders)
+      .where(
+        sql`lower(${odishaCoffeeOrders.email}) = lower(${email}) AND ${odishaCoffeeOrders.payment_status} = 'paid'`
+      );
+  } finally {
+    await close();
+  }
 
   let orderLinkId: string | null = null;
   for (const order of orders) {

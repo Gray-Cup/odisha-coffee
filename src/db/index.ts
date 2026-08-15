@@ -4,26 +4,27 @@ import * as schema from "./schema";
 
 export * from "./schema";
 
-let _client: ReturnType<typeof postgres> | null = null;
-let _db: ReturnType<typeof drizzle<typeof schema>> | null = null;
-
-function getDb() {
-  if (!_db) {
-    if (!process.env.DATABASE_URL) {
-      throw new Error("DATABASE_URL is not set");
-    }
-    _client = postgres(process.env.DATABASE_URL, {
-      max: 10,
-      idle_timeout: 20,
-      connect_timeout: 10,
-    });
-    _db = drizzle(_client, { schema });
+// This app runs as a Cloudflare Worker (OpenNext). Workers reuse isolates
+// across unrelated requests, but a raw TCP socket (which is what postgres.js
+// opens under nodejs_compat) is tied to the request that created it - reusing
+// one from a previous request throws "Cannot perform I/O on behalf of a
+// different request". So, unlike a long-running Node server, there must be
+// NO module-level cached client/pool here. Each caller creates a fresh
+// connection for the lifetime of its own request and closes it when done.
+export function createDb() {
+  if (!process.env.DATABASE_URL) {
+    throw new Error("DATABASE_URL is not set");
   }
-  return _db;
+  const client = postgres(process.env.DATABASE_URL, {
+    max: 1,
+    idle_timeout: 20,
+    connect_timeout: 10,
+    // Neon's pooled (-pooler) endpoint runs PgBouncer in transaction mode,
+    // which doesn't support protocol-level prepared statements.
+    prepare: false,
+  });
+  return {
+    db: drizzle(client, { schema }),
+    close: () => client.end({ timeout: 5 }),
+  };
 }
-
-export const db = new Proxy({} as ReturnType<typeof drizzle<typeof schema>>, {
-  get(_target, prop) {
-    return (getDb() as unknown as Record<string | symbol, unknown>)[prop];
-  },
-});
