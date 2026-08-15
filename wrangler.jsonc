@@ -1,7 +1,7 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"main": "./workers/app.ts",
-	"name": "odisha-coffee-rr",
+	"name": "odisha-coffee",
 	"compatibility_date": "2026-08-08",
 	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
 	"assets": {
