@@ -14,6 +14,21 @@
 			"service": "odisha-coffee"
 		}
 	],
+	"observability": {
+		"enabled": false,
+		"head_sampling_rate": 1,
+		"logs": {
+			"enabled": true,
+			"head_sampling_rate": 1,
+			"persist": true,
+			"invocation_logs": true
+		},
+		"traces": {
+			"enabled": true,
+			"persist": true,
+			"head_sampling_rate": 1
+		}
+	},
 	// Plaintext config only — nothing here grants access to anything by
 	// itself (no passwords, tokens, or keys). Safe to commit and visible in
 	// the Cloudflare dashboard. Mirrors the non-secret keys in .env.example.
