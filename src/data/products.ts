@@ -46,7 +46,7 @@ export const products: Product[] = [
     minOrderExport: "100kg green beans",
     pricePerKg: 1600,
     isGreen: true,
-    image: "koraput-green.png",
+    image: "koraput-green.webp",
   },
   {
     id: "koraput-naturals",
@@ -68,7 +68,7 @@ export const products: Product[] = [
     minOrderExport: "200kg green beans",
     pricePerKg: 1800,
     isGreen: true,
-    image: "koraput-green.png",
+    image: "koraput-green.webp",
   },
   {
     id: "hsd-roasted",
@@ -88,7 +88,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
     pricePerKg: 1372,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
   {
     id: "naturals-roasted",
@@ -108,7 +108,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
     pricePerKg: 1568,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
   {
     id: "strawberry-roasted",
@@ -128,7 +128,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
     pricePerKg: 2058,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
   {
     id: "whiskey-rum-roasted",
@@ -148,7 +148,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g", "500g"],
     exportAvailable: false,
     pricePerKg: 2548,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
   {
     id: "espresso-8020",
@@ -168,7 +168,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
     pricePerKg: 1176,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
   {
     id: "espresso-100-arabica",
@@ -188,7 +188,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
     pricePerKg: 1470,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
 
   // ── EXISTING PRODUCTS (with pricing added) ────────────────────────────────
@@ -212,7 +212,7 @@ export const products: Product[] = [
     exportAvailable: true,
     minOrderExport: "50kg green beans",
     pricePerKg: 2205,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
   {
     id: "dream-hill-honey-arabica",
@@ -233,7 +233,7 @@ export const products: Product[] = [
     exportAvailable: true,
     minOrderExport: "100kg green beans",
     pricePerKg: 2450,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
   {
     id: "annapurna-washed-arabica",
@@ -254,7 +254,7 @@ export const products: Product[] = [
     exportAvailable: true,
     minOrderExport: "100kg green beans",
     pricePerKg: 1862,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
   {
     id: "koraput-organic-natural",
@@ -275,7 +275,7 @@ export const products: Product[] = [
     exportAvailable: true,
     minOrderExport: "200kg green beans",
     pricePerKg: 1960,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
   {
     id: "brown-valley-honey-blend",
@@ -296,7 +296,7 @@ export const products: Product[] = [
     exportAvailable: true,
     minOrderExport: "300kg green beans",
     pricePerKg: 1715,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
   {
     id: "panigrahi-washed-s795",
@@ -317,7 +317,7 @@ export const products: Product[] = [
     exportAvailable: true,
     minOrderExport: "150kg green beans",
     pricePerKg: 1862,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
   {
     id: "maa-mangala-honey-arabica",
@@ -337,7 +337,7 @@ export const products: Product[] = [
     weightOptions: ["100g", "250g"],
     exportAvailable: false,
     pricePerKg: 2695,
-    image: "koraput-coffee.png",
+    image: "koraput-coffee.webp",
   },
   {
     id: "odisha-export-grade-green-arabica",
@@ -359,7 +359,7 @@ export const products: Product[] = [
     minOrderExport: "500kg green beans",
     pricePerKg: 1800,
     isGreen: true,
-    image: "koraput-green.png",
+    image: "koraput-green.webp",
   },
 ];
 

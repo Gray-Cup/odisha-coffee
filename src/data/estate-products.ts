@@ -48,7 +48,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 1135,
     shippingPerKg: 60,
-    image: "koraput-washed.jpg",
+    image: "koraput-washed.webp",
     description:
       "The finest grade from Koraput's Eastern Ghats — AAA-grade washed Arabica, screen 17+ sorted, moisture-tested at 10–12%. Fully washed and parchment-dried on raised beds for 14–18 days. Ideal for specialty roasters and importers seeking a consistent, traceable Indian Arabica with clean cup character.",
     flavorNotes: ["Clean", "Mild Citrus", "Chocolate", "Brown Sugar"],
@@ -69,7 +69,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 830,
     shippingPerKg: 60,
-    image: "koraput-washed.jpg",
+    image: "koraput-washed.webp",
     description:
       "AA-grade washed Arabica from verified Koraput estates. Screen 16+ sorted, moisture 10–12%, fully washed and raised-bed dried. A reliable workhorse lot for roasters seeking solid cup quality and honest traceability at a practical price point.",
     flavorNotes: ["Chocolate", "Mild Citrus", "Clean", "Medium Body"],
@@ -90,7 +90,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 765,
     shippingPerKg: 60,
-    image: "koraput-washed.jpg",
+    image: "koraput-washed.webp",
     description:
       "A-grade washed Arabica from Koraput partner estates. Screen 15+ sorted, moisture 10–12%. A good-value entry into Odisha washed Arabica — clean, approachable, and well-suited to medium roast profiles and espresso blending.",
     flavorNotes: ["Chocolate", "Mild Spice", "Nutty", "Clean Finish"],
@@ -111,7 +111,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 755,
     shippingPerKg: 60,
-    image: "koraput-washed.jpg",
+    image: "koraput-washed.webp",
     description:
       "B+ grade washed green beans — screen 15+, moisture 10–13%. A 100% Arabica lot combining S795 and Chandragiri from Koraput estates, fully washed and sun-dried. Suited for commodity blenders, large-volume roasters, and buyers seeking consistent Indian green beans at scale.",
     flavorNotes: ["Cocoa", "Earthy", "Full Body", "Low Acidity"],
@@ -132,7 +132,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 690,
     shippingPerKg: 60,
-    image: "koraput-washed.jpg",
+    image: "koraput-washed.webp",
     description:
       "B-grade washed green beans from Koraput — screen 13+ sorted, moisture 11–13%. A practical commodity lot for high-volume buyers, instant coffee producers, and blend manufacturers. Traceable origin with FSSAI documentation.",
     flavorNotes: ["Earthy", "Cocoa", "Woody", "Neutral"],
@@ -153,7 +153,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 630,
     shippingPerKg: 60,
-    image: "koraput-washed.jpg",
+    image: "koraput-washed.webp",
     description:
       "BB-grade washed green beans from Koraput — screen 12+ sorted, moisture 11–13%. Our lowest-grade washed commodity lot, priced for the most price-sensitive high-volume buyers, instant coffee producers, and blend manufacturers. Traceable origin with FSSAI documentation.",
     flavorNotes: ["Earthy", "Woody", "Neutral", "Full Body"],
@@ -174,7 +174,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 750,
     shippingPerKg: 60,
-    image: "koraput-naturals.jpg",
+    image: "koraput-naturals.webp",
     description:
       "B+ grade natural-processed green beans sun-dried whole on raised beds for 25–30 days. Cherries are dried with the fruit intact, developing a rich, fruit-integrated profile. Screen 15+ sorted, moisture 11–13%. A practical entry-point lot for roasters seeking Koraput naturals with character and honest traceability.",
     flavorNotes: ["Dark Fruit", "Chocolate", "Earthy", "Full Body"],
@@ -195,7 +195,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 1299,
     shippingPerKg: 60,
-    image: "koraput-washed.jpg",
+    image: "koraput-washed.webp",
     description:
       "AA-grade specialty HSD Arabica, hand-picked at peak ripeness, fully washed and dried on raised beds for 14–18 days. Screen 17+ sorted, moisture 10–12%, lot-tested for cup quality. Selected for specialty roasters seeking a traceable, high-scoring Koraput lot with bright, clean character.",
     flavorNotes: ["Bright Citrus", "Floral", "Brown Sugar", "Clean Finish"],
@@ -216,7 +216,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 1244,
     shippingPerKg: 60,
-    image: "koraput-washed.jpg",
+    image: "koraput-washed.webp",
     description:
       "A-grade specialty HSD Arabica, hand-picked and fully washed, dried on raised beds for 14–18 days. Screen 16+ sorted, moisture 10–12%, lot-tested for cup quality. A step below our AA HSD lot but still a traceable, high-scoring Koraput specialty offering.",
     flavorNotes: ["Citrus", "Floral", "Brown Sugar", "Clean Finish"],
@@ -237,7 +237,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 1190,
     shippingPerKg: 60,
-    image: "koraput-washed.jpg",
+    image: "koraput-washed.webp",
     description:
       "Specialty-grade peaberry lot, exclusively hand-sorted at Brown Valley Coffee Estate — single round beans (naturally occurring in ~5% of cherries), fully washed and dried on raised beds for 14–18 days. Denser than flat beans and prized for a sweeter, more concentrated cup. Screen 12+ round-screen sorted, moisture 10–12%, cupped and lot-tested.",
     flavorNotes: ["Concentrated Sweetness", "Citrus", "Honey", "Bright Acidity"],
@@ -259,7 +259,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 864,
     shippingPerKg: 60,
-    image: "koraput-naturals.jpg",
+    image: "koraput-naturals.webp",
     description:
       "AA-grade natural-processed 100% Arabica green beans from Koraput, Odisha, whole-cherry dried on raised beds for 25–30 days. Screen 14+ sorted, moisture 11–13%. A value-focused naturals lot for high-volume roasters and blenders who want fruit-forward character without specialty pricing.",
     flavorNotes: ["Dried Fruit", "Earthy", "Cocoa", "Full Body"],
@@ -280,7 +280,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 897,
     shippingPerKg: 60,
-    image: "koraput-naturals.jpg",
+    image: "koraput-naturals.webp",
     description:
       "AA-grade honey-processed green beans from Koraput, Odisha. Pulp is removed but mucilage is retained on the parchment through sun-drying on raised beds, producing a sweeter cup than washed lots at a commercial-friendly price. Screen 14+ sorted, moisture 11–13%.",
     flavorNotes: ["Honey Sweetness", "Caramel", "Stone Fruit", "Medium Body"],
@@ -301,7 +301,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 1000,
     shippingPerKg: 60,
-    image: "koraput-naturals.jpg",
+    image: "koraput-naturals.webp",
     description:
       "Specialty-grade natural Arabica, selectively hand-picked at full ripeness and dried whole on raised beds for 28–35 days with daily turning. Screen 16+ sorted, moisture 10–12%, cupped and lot-tested. Odisha's dry-season sun produces a dense, wine-like naturals lot for specialty roasters.",
     flavorNotes: ["Ripe Berry", "Red Wine", "Dark Chocolate", "Syrupy Body"],
@@ -322,7 +322,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 1290,
     shippingPerKg: 60,
-    image: "koraput-naturals.jpg",
+    image: "koraput-naturals.webp",
     description:
       "AA-grade extended anaerobic-fermentation naturals from Koraput — whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, intensifying the fruit and funk beyond a standard natural. Screen 16+ sorted, moisture 10–12%, cupped and lot-tested for consistency across the fermentation-driven profile.",
     flavorNotes: ["Tropical Fruit", "Wine", "Funky Ferment", "Heavy Body"],
@@ -343,7 +343,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 1245,
     shippingPerKg: 60,
-    image: "koraput-naturals.jpg",
+    image: "koraput-naturals.webp",
     description:
       "A-grade extended anaerobic-fermentation naturals from Koraput — whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, building fruit-forward funk on top of a standard natural. Screen 15+ sorted, moisture 10–12%, cupped and lot-tested for consistency across the fermentation-driven profile.",
     flavorNotes: ["Tropical Fruit", "Wine", "Funky Ferment", "Full Body"],
@@ -364,7 +364,7 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 1180,
     shippingPerKg: 60,
-    image: "koraput-naturals.jpg",
+    image: "koraput-naturals.webp",
     description:
       "B+ grade extended anaerobic-fermentation naturals from Koraput — whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, a value-focused entry point into the fermentation-driven funk profile. Screen 14+ sorted, moisture 10–12%, cupped and lot-tested for consistency.",
     flavorNotes: ["Tropical Fruit", "Wine", "Funky Ferment", "Full Body"],
@@ -385,11 +385,11 @@ export const estateProducts: EstateProduct[] = [
     roastLevel: "green",
     pricePerKg: 1940,
     shippingPerKg: 60,
-    image: "civet-cat/kopi-luwak-brown-valley.jpg",
+    image: "civet-cat/kopi-luwak-brown-valley.webp",
     images: [
-      "civet-cat/kopi-luwak-brown-valley.jpg",
-      "civet-cat/cat1.jpg",
-      "civet-cat/cat2.jpg",
+      "civet-cat/kopi-luwak-brown-valley.webp",
+      "civet-cat/cat1.webp",
+      "civet-cat/cat2.webp",
     ],
     description:
       "A genuine rarity from Brown Valley, Koraput, Odisha, India — wild civet cat coffee, exclusively foraged at Brown Valley Coffee Estate. Also known as Kopi Luwak, it's made by passing coffee cherries through the digestive tract of the wild Asian palm civet, where they undergo natural fermentation and enzymatic changes before being hand-collected from the animal's droppings, thoroughly cleaned, and sun-dried. It's washed — a smooth, low-bitter cup with rich chocolate, earthy, and creamy dairy-like notes. Wild-foraged (never caged), seasonal, and available only in small quantities.",

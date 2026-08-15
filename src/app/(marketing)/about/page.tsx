@@ -200,7 +200,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div className="flex flex-col border-2 border-odisha-black bg-white p-5">
               <Image
-                src="/arjun.png"
+                src="/arjun-2.webp"
                 alt="Arjun Aditya profile photo"
                 height={200}
                 width={200}

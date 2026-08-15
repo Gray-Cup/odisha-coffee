@@ -28,7 +28,7 @@ function buildSchema(product: (typeof products)[number]) {
     "@id": `${BASE_URL}/roasted-coffee#${product.id}`,
     name: product.name,
     description: product.description,
-    image: product.image ? `${BASE_URL}/products/${product.image}` : `${BASE_URL}/og.png`,
+    image: product.image ? `${BASE_URL}/products/${product.image}` : `${BASE_URL}/og.webp`,
     url: `${BASE_URL}/roasted-coffee`,
     sku: `OC-${product.id.toUpperCase()}`,
     brand: { "@type": "Brand", name: "Odisha Coffee" },

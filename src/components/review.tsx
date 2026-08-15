@@ -1,5 +1,5 @@
 import Image from "next/image";
-import arjun from "./arjun.jpg";
+import arjun from "./arjun.webp";
 import ruklist from "./ruklist.png";
 
 export const Review = () => (

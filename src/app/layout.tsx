@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: "Odisha Coffee — Wholesale, Export & Farm Sourcing",
     description:
       "Odisha Coffee — single-origin coffee from Koraput's Eastern Ghats. Wholesale green beans, traceable export lots, 24 verified partner farms. Sourced by Gray Cup Enterprises.",
-    images: [{ url: "https://odishacoffee.com/og.png", width: 1200, height: 630, alt: "Odisha Coffee — Koraput, Eastern Ghats" }],
+    images: [{ url: "https://odishacoffee.com/og.webp", width: 1200, height: 630, alt: "Odisha Coffee — Koraput, Eastern Ghats" }],
     type: "website",
     locale: "en_IN",
     siteName: "Odisha Coffee",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     title: "Odisha Coffee — Wholesale, Export & Farm Sourcing",
     description:
       "Odisha Coffee — single-origin coffee from the Eastern Ghats of Koraput. Wholesale, export, and direct farm sourcing.",
-    images: ["https://odishacoffee.com/og.png"],
+    images: ["https://odishacoffee.com/og.webp"],
   },
 };
 

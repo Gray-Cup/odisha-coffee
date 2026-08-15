@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://odishacoffee.com/og/future-of-coffee.png",
+        url: "https://odishacoffee.com/og/future-of-coffee.webp",
         width: 1200,
         height: 630,
         alt: "Every Cup Has a Climate Story - The Future of Coffee & Conservation",
@@ -35,7 +35,7 @@ export default function FutureOfCoffee() {
           </h1>
           <div className="mt-6">
           <Image
-          src="/nature/two-cats-by-rajneesh.jpg"
+          src="/nature/two-cats-by-rajneesh.webp"
           width="600"
           height="200"
           draggable="false"
