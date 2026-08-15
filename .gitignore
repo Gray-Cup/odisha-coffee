@@ -39,10 +39,12 @@ yarn-error.log*
 # vercel
 .vercel
 
-# cloudflare / opennext
+# cloudflare / opennext (legacy Next.js build) / react-router
 .open-next
 .wrangler
 cloudflare-env.d.ts
+worker-configuration.d.ts
+.react-router/
 
 # typescript
 *.tsbuildinfo
