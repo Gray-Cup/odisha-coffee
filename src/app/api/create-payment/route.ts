@@ -189,12 +189,27 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify(orderPayload),
     });
 
-    const data = await response.json();
+    // Cashfree returns JSON on both success and (normal) error, but on a
+    // gateway-level failure (5xx, WAF block, etc.) the body can be HTML/empty
+    // - read as text first so a non-JSON response surfaces its raw content
+    // instead of throwing inside this try block and falling through to the
+    // generic outer catch below.
+    const rawBody = await response.text();
+    let data: Record<string, unknown> = {};
+    try {
+      data = rawBody ? JSON.parse(rawBody) : {};
+    } catch {
+      console.error("Cashfree API returned non-JSON body:", response.status, rawBody.slice(0, 500));
+      return NextResponse.json(
+        { error: `Cashfree returned an unexpected response (status ${response.status}): ${rawBody.slice(0, 300) || "empty body"}` },
+        { status: 502 }
+      );
+    }
 
     if (!response.ok) {
-      console.error("Cashfree API error:", data);
+      console.error("Cashfree API error:", response.status, data);
       return NextResponse.json(
-        { error: data.message || "Failed to create payment order" },
+        { error: `Cashfree error (status ${response.status}): ${(data as { message?: string }).message || JSON.stringify(data)}` },
         { status: response.status }
       );
     }
@@ -216,6 +231,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("Payment creation error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    const message = error instanceof Error ? error.message : String(error);
+    return NextResponse.json({ error: `Order creation failed: ${message}` }, { status: 500 });
   }
 }
