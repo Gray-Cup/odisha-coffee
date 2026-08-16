@@ -409,7 +409,7 @@ export function CheckoutForm({ products, totalAmount, country, onCountryChange: 
         <button
           type="submit"
           disabled={!canSubmit}
-          className="w-full h-12 bg-odisha-red text-white font-semibold text-sm uppercase tracking-widest border-2 border-odisha-black hover:bg-odisha-red-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full cursor-pointer h-12 bg-odisha-red text-white font-semibold text-sm uppercase tracking-widest border-2 border-odisha-black hover:bg-odisha-red-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? "Processing…" : `Pay ₹${totalAmount.toLocaleString("en-IN")} & Order`}
         </button>
