@@ -130,7 +130,7 @@ export const estateProducts: EstateProduct[] = [
     variety: "Arabica S795 & Chandragiri",
     processing: "washed",
     roastLevel: "green",
-    pricePerKg: 690,
+    pricePerKg: 695,
     shippingPerKg: 60,
     image: "koraput-washed.webp",
     description:
@@ -146,12 +146,12 @@ export const estateProducts: EstateProduct[] = [
       "Recommended roast: medium-dark to dark. Suitable for espresso blends, instant production, and commercial dark roasts. The natural earthiness of Koraput terroir is retained even at darker roast levels.",
   },
   {
-    id: "bb-arabica-washed",
-    name: "BB Green Arabica Washed",
+    id: "bbb-arabica-washed",
+    name: "BBB Green Arabica Washed",
     variety: "Arabica S795 & Chandragiri",
     processing: "washed",
     roastLevel: "green",
-    pricePerKg: 630,
+    pricePerKg: 680,
     shippingPerKg: 60,
     image: "koraput-washed.webp",
     description:
