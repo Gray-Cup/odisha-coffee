@@ -1,0 +1,61 @@
+# Odisha Coffee
+
+> Odisha Coffee (odishacoffee.com) connects specialty coffee estates in the Koraput and Sunabeda highlands of Odisha, India to buyers of green (unroasted) coffee, roasted coffee, and Indian spices — offering farm-level traceability, direct export ready green beans, small-batch roasted coffee, and bulk/B2B ordering.
+
+Odisha's coffee belt sits in the Eastern Ghats at elevations above 900–1100m, producing washed, natural, honey, and pulped-natural Arabica lots. The site lists individual estates with farm profiles, lets buyers browse and order green coffee, roasted coffee, and spices by farm or by product, and supports both direct-to-consumer and bulk/export inquiries.
+
+See [/llms-full.txt](https://odishacoffee.com/llms-full.txt) for full inlined content — every farm profile, coffee/spice lot, and newsroom article in one file, auto-generated from `app/data/*.ts` on every commit.
+
+## Coffee & Products
+
+- [Buy Green Coffee Beans](https://odishacoffee.com/buy-green-beans): Catalog of export-ready green (unroasted) coffee lots.
+- [Roasted Coffee](https://odishacoffee.com/roasted-coffee): Small-batch roasted coffee for direct purchase.
+- [Spices](https://odishacoffee.com/spices): Black pepper, white pepper, and other Odisha-grown spices.
+- [Shop](https://odishacoffee.com/shop): General product catalog.
+- [Order Builder](https://odishacoffee.com/order-builder): Custom multi-product order tool.
+
+## Farms & Estates
+
+- [All Farms](https://odishacoffee.com/farms): Directory of 24+ coffee estates across Koraput and the Sunabeda plateau, each with its own profile, green coffee, roasted coffee, and product pages (`/farms/:slug`, `/farms/:slug/green-coffee`, `/farms/:slug/roasted-coffee`, `/farms/:slug/products`).
+- [Coffee Farms in Koraput](https://odishacoffee.com/coffee-farms-koraput): Overview of the Koraput growing region.
+- [Coffee Farms near Bhubaneswar](https://odishacoffee.com/coffee-farms-near-bhubaneswar): Regional farm access from Odisha's capital.
+- [Coffee Farms in Odisha](https://odishacoffee.com/coffee-farms-odisha): State-wide overview of Odisha coffee cultivation.
+- [Odisha Coffee Export](https://odishacoffee.com/odisha-coffee-export): Export process and bulk sourcing information.
+- [Odisha Coffee Varieties](https://odishacoffee.com/odisha-coffee-varieties): Arabica varieties and processing methods (washed, natural, honey, pulped-natural) grown in the region.
+
+## Buy by Location
+
+- [Buy In (city index)](https://odishacoffee.com/buy-in): Cities where Odisha Coffee ships/sells directly.
+- [Buy In a City](https://odishacoffee.com/buy-in/:city): City-specific buying page.
+- [Green Coffee by Indian State](https://odishacoffee.com/india/:state/green-coffee): State-level green coffee landing pages.
+- [Green Coffee by State & City](https://odishacoffee.com/india/:state/:city/green-coffee): City-level green coffee landing pages.
+- [Green Coffee by Country](https://odishacoffee.com/:country/green-coffee): Country-level export landing pages for international buyers.
+
+## Company
+
+- [About](https://odishacoffee.com/about): Company background.
+- [Sourcing](https://odishacoffee.com/sourcing): How coffee is sourced from Odisha estates.
+- [Social Responsibility](https://odishacoffee.com/social-responsibility): Farmer and community impact.
+- [Sites](https://odishacoffee.com/sites): Related Gray Cup sites and properties.
+- [Careers](https://odishacoffee.com/careers): Open roles.
+- [Newsroom](https://odishacoffee.com/newsroom): Articles and updates.
+- [Future of Coffee](https://odishacoffee.com/future-of-coffee): Long-form editorial content.
+- [Reviews](https://odishacoffee.com/reviews): Customer reviews.
+- [Contact](https://odishacoffee.com/contact): Contact form and methods.
+
+## Ordering & Policies
+
+- [Cart](https://odishacoffee.com/cart): Shopping cart.
+- [Checkout](https://odishacoffee.com/checkout): Checkout flow.
+- [Shipping](https://odishacoffee.com/shipping): Shipping policy.
+- [Refunds](https://odishacoffee.com/refunds): Refund policy.
+- [Privacy](https://odishacoffee.com/privacy): Privacy policy.
+- [Terms](https://odishacoffee.com/terms): Terms of service.
+- [Impressum](https://odishacoffee.com/impressum): Legal/company disclosure.
+
+## Optional
+
+- [graycup.in](https://graycup.in): Gray Cup's direct-to-consumer coffee and tea storefront.
+- [b2b.graycup.in](https://b2b.graycup.in): Gray Cup's bulk/B2B ordering platform.
+- [bulkgreencoffee.com](https://bulkgreencoffee.com): Bulk green coffee sourcing site.
+- [bulkctc.com](https://bulkctc.com): Bulk CTC tea sourcing site.
