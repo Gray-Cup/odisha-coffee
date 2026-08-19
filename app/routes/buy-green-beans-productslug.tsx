@@ -16,7 +16,7 @@ export function loader({ params }: Route.LoaderArgs) {
   return { product, productSlug: params.productSlug };
 }
 
-export function meta({ data }: Route.MetaArgs) {
+export function meta({ data, params }: Route.MetaArgs) {
   if (!data) return [{ title: "Product Not Found" }];
   const { product } = data;
   return [
@@ -27,12 +27,8 @@ export function meta({ data }: Route.MetaArgs) {
         `${product.name} — ${product.grade} green Arabica from Koraput, Odisha. ${product.description}`
       ),
     },
+    { tagName: "link", rel: "canonical", href: `${SITE_URL}/buy-green-beans/${params.productSlug}` },
   ];
-}
-
-export function links({ data }: { data?: any }) {
-  if (!data) return [];
-  return [{ rel: "canonical", href: `${SITE_URL}/buy-green-beans/${data.productSlug}` }];
 }
 
 const availabilityStyles = {

@@ -14,7 +14,7 @@ export function loader({ params }: Route.LoaderArgs) {
   return { country, countrySlug: params.country };
 }
 
-export function meta({ data }: Route.MetaArgs) {
+export function meta({ data, params }: Route.MetaArgs) {
   if (!data) return [{ title: "Not Found" }];
   const { country, countrySlug } = data;
   return [
@@ -32,12 +32,8 @@ export function meta({ data }: Route.MetaArgs) {
     },
     { property: "og:url", content: `${SITE_URL}/${countrySlug}/green-coffee` },
     { property: "og:locale", content: "en_IN" },
+    { tagName: "link", rel: "canonical", href: `${SITE_URL}/${params.country}/green-coffee` },
   ];
-}
-
-export function links({ data }: { data?: any }) {
-  if (!data) return [];
-  return [{ rel: "canonical", href: `${SITE_URL}/${data.countrySlug}/green-coffee` }];
 }
 
 export default function CountryGreenCoffeePage({ loaderData }: Route.ComponentProps) {
