@@ -11,7 +11,7 @@
   --color-odisha-blue: #1e3a8a;
   --color-odisha-green: #3a7d44;
   --color-odisha-orange: #c2410c;
-  --font-serif: var(--font-playfair);
+  --font-serif: var(--font-sans);
 }
 
 @theme inline {
