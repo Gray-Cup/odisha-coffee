@@ -103,6 +103,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
             }),
           }}
         />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9319508737367893"
+          crossOrigin="anonymous"
+        ></script>
         <Meta />
         <Links />
       </head>
