@@ -538,6 +538,10 @@ export function getIndiaCityBySlug(stateSlug: string, citySlug: string): IndiaCi
   return indiaCities.find((c) => c.stateSlug === stateSlug && c.citySlug === citySlug);
 }
 
+export function getIndiaCityBySlugAny(citySlug: string): IndiaCity | undefined {
+  return indiaCities.find((c) => c.citySlug === citySlug);
+}
+
 export function getRelatedIndiaCities(citySlug: string, stateSlug: string): IndiaCity[] {
   const sameState = indiaCities.filter((c) => c.stateSlug === stateSlug && c.citySlug !== citySlug);
   if (sameState.length >= 4) return sameState.slice(0, 4);
