@@ -166,7 +166,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-24 text-center">
         <h1 className="text-3xl font-bold mb-4">Country not found</h1>
-        <Link to="/buy-in" className="text-odisha-red underline">
+        <Link to="/buy-coffee" className="text-odisha-red underline">
           Browse countries we export to
         </Link>
       </div>

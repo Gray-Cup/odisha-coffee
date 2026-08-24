@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
-    "prebuild": "react-router typegen",
+    "prebuild": "react-router typegen && bun run scripts/generate-sitemap.ts",
+    "generate-sitemap": "bun run scripts/generate-sitemap.ts",
     "build": "react-router build",
     "typecheck": "react-router typegen && tsc -p tsconfig.cloudflare.json",
     "format": "prettier --write .",

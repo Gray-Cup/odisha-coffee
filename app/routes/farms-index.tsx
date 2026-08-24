@@ -4,13 +4,17 @@ import type { ProcessingMethod } from "@/data/farms";
 
 export function meta() {
   return [
-    { title: "Odisha Coffee Farms — All 24 Partner Estates, Koraput" },
+    { title: "Odisha Coffee Farms: All 24 Partner Estates in Koraput" },
     {
       name: "description",
       content:
-        "Browse all 24 Odisha coffee farms sourced by Gray Cup Enterprises. Single-origin Arabica lots from Koraput's Eastern Ghats — traceable, export-ready, and documented by farm.",
+        "Browse all 24 Odisha coffee farms sourced by Gray Cup Enterprises. Single-origin Arabica lots from Koraput's Eastern Ghats, traceable, export-ready, and documented by farm.",
     },
   ];
+}
+
+export function links() {
+  return [{ rel: "canonical", href: "https://odishacoffee.com/farms" }];
 }
 
 function ProcessingTag({ method }: { method: ProcessingMethod }) {
@@ -66,6 +70,50 @@ export default function FarmsPage() {
                 <div className="text-[10px] uppercase tracking-widest text-white/60">{label}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Koraput: unique context, not a repeat of /coffee-farms-koraput */}
+      <section className="bg-white border-b-2 border-odisha-black">
+        <div className="max-w-4xl mx-auto px-4 lg:px-6 py-12">
+          <h2 className="font-serif text-2xl font-bold text-odisha-black mb-4">
+            Why We Source From Koraput
+          </h2>
+          <div className="space-y-4 text-sm text-odisha-black/70 leading-relaxed">
+            <p>
+              Every farm below sits in or near Koraput district, a highland pocket of Odisha's
+              Eastern Ghats bordering Andhra Pradesh and Chhattisgarh. Commercial coffee here is
+              young by Indian standards, with cultivation taking root in the 1990s under the Coffee
+              Board of India's extension programmes, and several of our oldest partner estates
+              date to that first wave, 1992–1995.
+            </p>
+            <p>
+              What makes it worth sourcing from is the land itself: laterite and red loam soils
+              built up under Eastern Ghats forest canopy, farmed at elevations from roughly 800m
+              up past 1,400m by tribal farming communities who kept the shade-grown system
+              rather than clearing for sun cultivation. Cool nights and a slow ripening cycle at
+              that altitude give the cherry more time to develop density and flavor before
+              harvest, the same reason we document elevation and processing method for every
+              lot on every farm profile below, rather than selling Koraput coffee as one
+              undifferentiated origin.
+            </p>
+            <p>
+              For the full picture of the district, with sub-zones, climate, and how commercial
+              cultivation got started, see our{" "}
+              <Link to="/coffee-farms-koraput" className="text-odisha-red underline">
+                Koraput coffee region guide
+              </Link>
+              . To order directly from any of these estates, browse{" "}
+              <Link to="/buy-green-coffee" className="text-odisha-red underline">
+                green coffee
+              </Link>{" "}
+              or{" "}
+              <Link to="/buy-roasted-coffee" className="text-odisha-red underline">
+                roasted coffee
+              </Link>{" "}
+              lots below.
+            </p>
           </div>
         </div>
       </section>
@@ -157,15 +205,23 @@ export default function FarmsPage() {
       <section className="bg-odisha-red border-t-2 border-odisha-black">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h3 className="font-serif font-bold text-white text-lg">Looking to source from a specific farm?</h3>
-            <p className="text-white/60 text-sm mt-1">Contact Gray Cup with your requirements — we'll connect you directly.</p>
+            <h3 className="font-serif font-bold text-white text-lg">Ready to buy?</h3>
+            <p className="text-white/60 text-sm mt-1">Order green or roasted lots directly, or contact us with specific requirements.</p>
           </div>
-          <Link
-            to="/contact"
-            className="inline-block px-6 py-3 bg-white text-odisha-black text-sm font-semibold border-2 border-white hover:bg-odisha-yellow hover:border-odisha-yellow transition-colors whitespace-nowrap"
-          >
-            Get in Touch
-          </Link>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              to="/buy-green-coffee"
+              className="inline-block px-6 py-3 bg-white text-odisha-black text-sm font-semibold border-2 border-white hover:bg-odisha-yellow hover:border-odisha-yellow transition-colors whitespace-nowrap"
+            >
+              Buy Coffee
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-block px-6 py-3 bg-transparent text-white text-sm font-semibold border-2 border-white hover:bg-white/10 transition-colors whitespace-nowrap"
+            >
+              Get in Touch
+            </Link>
+          </div>
         </div>
       </section>
     </div>

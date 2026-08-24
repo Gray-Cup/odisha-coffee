@@ -1,10 +1,9 @@
 import { Link, data, isRouteErrorResponse } from "react-router";
-import type { Route } from "./+types/buy-green-coffee-location";
+import type { Route } from "./+types/buy-roasted-coffee-location";
 import { INDIA_STATES, getStateBySlug } from "@/data/locations/india-states";
 import { getCitiesByState, getIndiaCityBySlugAny, getRelatedIndiaCities } from "@/data/locations/india-cities";
-import { farms } from "@/data/farms";
-import { estateProducts } from "@/data/estate-products";
-import { ProductsCatalog } from "@/components/products/products-catalog";
+import { products } from "@/data/products";
+import { RoastedCatalog } from "@/components/products/roasted-catalog";
 import { generateTitle, generateDescription, SITE_URL } from "@/lib/seo";
 
 export function loader({ params }: Route.LoaderArgs) {
@@ -24,19 +23,20 @@ export function meta({ data: loaderData, params }: Route.MetaArgs) {
   if (!loaderData) return [{ title: "Not Found" }];
   const name = loaderData.kind === "state" ? loaderData.state.name : loaderData.city.city;
   return [
-    { title: generateTitle(`Wholesale Koraput Single-Origin Green Coffee Beans in ${name}, India`) },
+    { title: generateTitle(`Odisha Single Origin Roasted Coffee in ${name}, India`) },
     {
       name: "description",
       content: generateDescription(
-        `Buy Koraput, Odisha green Arabica coffee beans in ${name}. Traceable, tribal-farmed, Eastern Ghats single-origin lots for roasters, cafés, and exporters.`
+        `Specialty roasted Koraput Arabica for ${name}, roasted fresh to order and dispatched to buyers across India. Espresso blends, filter lots, and seasonal micro-lots.`
       ),
     },
-    { tagName: "link", rel: "canonical", href: `${SITE_URL}/buy-green-coffee/${params.location}` },
+    { tagName: "link", rel: "canonical", href: `${SITE_URL}/buy-roasted-coffee/${params.location}` },
   ];
 }
 
-export default function BuyGreenCoffeeLocationPage({ loaderData }: Route.ComponentProps) {
-  const exportReadyFarms = farms.filter((f) => f.exportReady);
+export default function BuyRoastedCoffeeLocationPage({ loaderData }: Route.ComponentProps) {
+  const roastedProducts = products.filter((p) => !p.isGreen && p.roastLevel !== "green");
+  const specialtyLots = products.filter((p) => p.availability === "limited" || p.availability === "seasonal");
   const name = loaderData.kind === "state" ? loaderData.state.name : loaderData.city.city;
   const otherStates = loaderData.kind === "state" ? INDIA_STATES.filter((s) => s.slug !== loaderData.state.slug).slice(0, 8) : [];
 
@@ -48,23 +48,23 @@ export default function BuyGreenCoffeeLocationPage({ loaderData }: Route.Compone
           <div className="flex items-center gap-2 mb-5 text-xs flex-wrap">
             <Link to="/" className="text-white/60 hover:text-white uppercase tracking-widest transition-colors">Home</Link>
             <span className="text-white/30">/</span>
-            <Link to="/buy-coffee" className="text-white/60 hover:text-white uppercase tracking-widest transition-colors">Buy Coffee</Link>
+            <Link to="/roasted-coffee" className="text-white/60 hover:text-white uppercase tracking-widest transition-colors">Roasted Coffee</Link>
             <span className="text-white/30">/</span>
             <span className="text-white uppercase tracking-widest">{name}</span>
           </div>
           <h1 className="font-serif text-3xl md:text-4xl font-bold text-white leading-tight max-w-3xl">
-            Green Coffee Beans in {name}, India
+            Roasted Coffee in {name}, India
           </h1>
           <p className="mt-4 text-white/80 max-w-2xl text-base">
-            Traceable, tribal-farmed Koraput Arabica from the Eastern Ghats, export-ready.
-            Select a grade below and order direct, with delivery anywhere in {name}
+            Small-batch roasted Koraput Arabica with single-origin, espresso blends, and limited seasonal
+            micro-lots. Roasted fresh to order and dispatched to {name}
             {loaderData.kind === "city" ? ` in ${loaderData.city.transitDays}` : ""}.
           </p>
           <div className="mt-6 flex flex-wrap gap-6">
             {[
-              { value: estateProducts.length.toString(), label: "Grade Lots" },
-              { value: farms.length.toString(), label: "Partner Farms" },
-              { value: exportReadyFarms.length.toString(), label: "Export Ready" },
+              { value: roastedProducts.length.toString(), label: "Roasted Lots" },
+              { value: specialtyLots.length.toString(), label: "Specialty / Seasonal" },
+              { value: "48h", label: "Roast-to-Dispatch Rest" },
               loaderData.kind === "state"
                 ? { value: loaderData.cities.length.toString(), label: `Cities in ${name}` }
                 : { value: loaderData.city.transitDays, label: `Transit to ${name}` },
@@ -81,9 +81,10 @@ export default function BuyGreenCoffeeLocationPage({ loaderData }: Route.Compone
       {/* Not-local disclaimer */}
       <section className="bg-odisha-offwhite border-b-2 border-odisha-black">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-4 text-xs text-odisha-black/60 leading-relaxed">
-          We are not physically based in {name}. This page exists so buyers here can order Koraput
-          green coffee directly. Beans ship from our Delhi facility to {name}
-          {loaderData.kind === "city" ? ` in ${loaderData.city.transitDays}` : ""}.
+          We are not physically based in {name}. This page exists so buyers here can order roasted
+          Koraput coffee directly. Every order is roasted on demand at our roastery, rested ~48h, then
+          dispatched to {name}
+          {loaderData.kind === "city" ? ` (arrives in ${loaderData.city.transitDays})` : ""}.
         </div>
       </section>
 
@@ -92,13 +93,13 @@ export default function BuyGreenCoffeeLocationPage({ loaderData }: Route.Compone
         <section className="bg-white border-b-2 border-odisha-black">
           <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
             <h2 className="font-serif text-2xl font-bold text-odisha-black mb-6">
-              Cities We Supply in {name}
+              Cities We Deliver Roasted Coffee To in {name}
             </h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {loaderData.cities.map((c) => (
                 <Link
                   key={c.citySlug}
-                  to={`/buy-green-coffee/${c.citySlug}`}
+                  to={`/buy-roasted-coffee/${c.citySlug}`}
                   className="group block border-2 border-odisha-black bg-odisha-offwhite hover:bg-white transition-colors p-5"
                 >
                   <div className="flex items-start justify-between gap-2 mb-2">
@@ -110,13 +111,6 @@ export default function BuyGreenCoffeeLocationPage({ loaderData }: Route.Compone
                     </span>
                   </div>
                   <p className="text-xs text-odisha-black/60">Min. order {c.moq}</p>
-                  <div className="mt-3 flex flex-wrap gap-1">
-                    {c.industries.slice(0, 2).map((ind) => (
-                      <span key={ind} className="text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 bg-odisha-black/5 text-odisha-black/60">
-                        {ind}
-                      </span>
-                    ))}
-                  </div>
                 </Link>
               ))}
             </div>
@@ -132,13 +126,12 @@ export default function BuyGreenCoffeeLocationPage({ loaderData }: Route.Compone
               <div className="lg:col-span-2 space-y-8">
                 <div>
                   <h2 className="font-serif text-2xl font-bold text-odisha-black mb-4">
-                    Who Buys Koraput Coffee in {name}
+                    Roasted Coffee Buyers in {name}
                   </h2>
                   <p className="text-odisha-black/80 leading-relaxed mb-4">
                     {name} is home to a growing base of {loaderData.city.industries.slice(0, 3).join(", ").toLowerCase()}{" "}
-                    buyers sourcing traceable, single-origin Indian green coffee. Koraput Arabica, shade-grown
-                    in the Eastern Ghats by tribal farming communities at 700–1,100m elevation, ships to{" "}
-                    {name} in {loaderData.city.transitDays}, with specialty lots from {loaderData.city.moq}.
+                    buyers wanting fresh-roasted, single-origin Koraput Arabica. Every order is roasted after
+                    purchase, rested ~48 hours, then dispatched to {name}, arriving in {loaderData.city.transitDays}.
                   </p>
                   <div className="grid sm:grid-cols-2 gap-3">
                     {loaderData.city.industries.map((ind) => (
@@ -153,16 +146,16 @@ export default function BuyGreenCoffeeLocationPage({ loaderData }: Route.Compone
               <aside className="space-y-6">
                 <div className="border-2 border-odisha-black bg-white p-5">
                   <h3 className="font-serif font-bold text-odisha-black text-lg mb-4">
-                    Logistics to {name}
+                    Delivery to {name}
                   </h3>
                   <div className="space-y-3 text-sm">
                     <div className="flex justify-between border-b border-odisha-black/10 pb-2">
-                      <span className="text-odisha-black/60">Transit Time</span>
-                      <span className="font-semibold text-odisha-black">{loaderData.city.transitDays}</span>
+                      <span className="text-odisha-black/60">Roast-to-Dispatch</span>
+                      <span className="font-semibold text-odisha-black">~48h</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-odisha-black/60">Minimum Order</span>
-                      <span className="font-semibold text-odisha-black">{loaderData.city.moq}</span>
+                      <span className="text-odisha-black/60">Transit Time</span>
+                      <span className="font-semibold text-odisha-black">{loaderData.city.transitDays}</span>
                     </div>
                   </div>
                 </div>
@@ -186,8 +179,26 @@ export default function BuyGreenCoffeeLocationPage({ loaderData }: Route.Compone
         </section>
       )}
 
-      {/* Interactive catalog: select a grade and buy */}
-      <ProductsCatalog />
+      {/* Interactive catalog: select a roast and buy */}
+      <RoastedCatalog roastedProducts={roastedProducts} specialtyLots={specialtyLots} />
+
+      {/* Green beans nudge */}
+      <section className="bg-odisha-offwhite border-b-2 border-odisha-black">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h3 className="font-serif font-bold text-odisha-black text-lg">Looking for green beans instead?</h3>
+            <p className="text-sm text-odisha-black/60 mt-1">
+              AAA to B grade washed and natural lots available from all partner estates.
+            </p>
+          </div>
+          <Link
+            to={`/buy-green-coffee/${loaderData.kind === "state" ? loaderData.state.slug : loaderData.city.citySlug}`}
+            className="inline-block px-6 py-3 bg-odisha-green text-white text-sm font-semibold border-2 border-odisha-green hover:bg-odisha-black hover:border-odisha-black transition-colors whitespace-nowrap"
+          >
+            Green Beans →
+          </Link>
+        </div>
+      </section>
 
       {/* FAQ */}
       <section className="bg-white border-t-2 border-odisha-black">
@@ -198,20 +209,21 @@ export default function BuyGreenCoffeeLocationPage({ loaderData }: Route.Compone
           <div className="space-y-6">
             <div className="border-l-4 border-odisha-red pl-5">
               <h3 className="font-semibold text-odisha-black mb-2">
-                Can buyers in {name} order Koraput green coffee online?
+                Is this coffee roasted in {name}?
               </h3>
               <p className="text-odisha-black/70 leading-relaxed">
-                Yes. Select a grade and farm above, choose your quantity, and either add it to your
-                cart or proceed straight to checkout. Specialty lots start from 250 g cupping samples.
+                No, we're not based in {name}. Every order is roasted on demand at our roastery, rested
+                for about 48 hours to let it degas, then dispatched to you.
               </p>
             </div>
             <div className="border-l-4 border-odisha-red pl-5">
               <h3 className="font-semibold text-odisha-black mb-2">
-                Is Gray Cup based in {name}?
+                How fast will roasted coffee reach {name}?
               </h3>
               <p className="text-odisha-black/70 leading-relaxed">
-                No. We source from Koraput, Odisha and ship green coffee from our Delhi facility to
-                buyers across India, including {name}. This page is a local ordering guide, not a branch office.
+                Add roast-to-dispatch rest (~48h) to transit time
+                {loaderData.kind === "city" ? ` (${loaderData.city.transitDays} to ${name})` : ""}.
+                Select a product and weight above to order.
               </p>
             </div>
           </div>
@@ -223,13 +235,13 @@ export default function BuyGreenCoffeeLocationPage({ loaderData }: Route.Compone
         <section className="border-t-2 border-odisha-black bg-odisha-offwhite">
           <div className="max-w-7xl mx-auto px-4 lg:px-6 py-14">
             <h2 className="font-serif text-2xl font-bold text-odisha-black mb-6">
-              Other Cities We Supply
+              Other Cities We Deliver To
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {loaderData.related.map((rc) => (
                 <Link
                   key={rc.citySlug}
-                  to={`/buy-green-coffee/${rc.citySlug}`}
+                  to={`/buy-roasted-coffee/${rc.citySlug}`}
                   className="group block border-2 border-odisha-black bg-white hover:bg-odisha-offwhite transition-colors p-4"
                 >
                   <h3 className="font-semibold text-odisha-black group-hover:text-odisha-red transition-colors">
@@ -246,13 +258,13 @@ export default function BuyGreenCoffeeLocationPage({ loaderData }: Route.Compone
         <section className="border-t-2 border-odisha-black bg-odisha-offwhite">
           <div className="max-w-7xl mx-auto px-4 lg:px-6 py-14">
             <h2 className="font-serif text-2xl font-bold text-odisha-black mb-6">
-              Other States We Supply
+              Other States We Deliver To
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {otherStates.map((s) => (
                 <Link
                   key={s.slug}
-                  to={`/buy-green-coffee/${s.slug}`}
+                  to={`/buy-roasted-coffee/${s.slug}`}
                   className="group block border-2 border-odisha-black bg-white hover:bg-odisha-offwhite transition-colors p-4"
                 >
                   <h3 className="font-semibold text-odisha-black group-hover:text-odisha-red transition-colors">
