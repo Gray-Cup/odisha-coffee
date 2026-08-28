@@ -185,6 +185,30 @@ export function GrayCupCard({ slug, label }: { slug: string; label?: string }) {
   );
 }
 
+// Full Gray Cup coffee list (accessories/samplers excluded) for the
+// "also roasted by Gray Cup" section on /roasted-coffee. Outbound dofollow
+// links only — no Product JSON-LD, since these aren't OdishaCoffee offers.
+export function GrayCupShowcase({
+  kinds,
+  limit,
+}: {
+  kinds?: string[];
+  limit?: number;
+}) {
+  let list = graycupProducts.filter(
+    (p) => !/sampler|accessor|pick-your-poison/i.test(`${p.slug} ${p.kind} ${p.name}`)
+  );
+  if (kinds) list = list.filter((p) => kinds.includes(p.kind));
+  if (limit) list = list.slice(0, limit);
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      {list.map((p) => (
+        <GrayCupCard key={p.slug} slug={p.slug} />
+      ))}
+    </div>
+  );
+}
+
 export function GrayCupRow({ slugs, label }: { slugs: string[]; label?: string }) {
   return (
     <div className="not-prose my-6 flex flex-col gap-3">
