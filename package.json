@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
-    "prebuild": "react-router typegen && bun run scripts/generate-sitemap.ts",
+    "prebuild": "react-router typegen && (bun run scripts/fetch-graycup-products.ts || echo 'graycup feed fetch failed, using committed copy') && bun run scripts/generate-sitemap.ts",
     "generate-sitemap": "bun run scripts/generate-sitemap.ts",
+    "fetch-graycup": "bun run scripts/fetch-graycup-products.ts",
     "build": "react-router build",
     "typecheck": "react-router typegen && tsc -p tsconfig.cloudflare.json",
     "format": "prettier --write .",

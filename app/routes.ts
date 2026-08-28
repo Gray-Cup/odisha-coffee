@@ -48,6 +48,8 @@ export default [
     route("reviews", "routes/reviews-index.tsx"),
     route("newsroom", "routes/newsroom-index.tsx"),
     route("newsroom/:slug", "routes/newsroom-slug.tsx"),
+    route("guides", "routes/guides-index.tsx"),
+    route("guides/:slug", "routes/guides-slug.tsx"),
 
     route("cart", "routes/cart.tsx"),
     route("checkout", "routes/checkout.tsx"),

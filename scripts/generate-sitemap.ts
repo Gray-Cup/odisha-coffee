@@ -3,7 +3,7 @@
 // and still listed /buy-in/:city and /india/:state/green-coffee, both now
 // 301 redirects, while missing /buy-coffee, /buy-green-coffee,
 // /buy-roasted-coffee, and every location page under them).
-import { writeFileSync } from "node:fs";
+import { writeFileSync, readdirSync } from "node:fs";
 import { farms } from "../app/data/farms";
 import { estateProducts } from "../app/data/estate-products";
 import { countryDestinations } from "../app/data/locations/countries";
@@ -26,7 +26,7 @@ for (const p of [
   "about", "careers", "cart", "checkout", "coffee-farms-koraput", "coffee-farms-near-bhubaneswar",
   "coffee-farms-odisha", "contact", "future-of-coffee", "impressum", "newsroom",
   "odisha-coffee-export", "odisha-coffee-varieties", "order-builder", "policy-coffee-recipe-extension",
-  "privacy", "refunds", "reviews", "roasted-coffee", "shipping", "shop", "sites",
+  "privacy", "refunds", "reviews", "roasted-coffee", "shipping", "shop", "sites", "guides",
   "social-responsibility", "sourcing", "spices", "terms",
 ]) add(`/${p}`, "monthly", "0.7");
 add("/farms", "monthly", "0.8");
@@ -55,6 +55,11 @@ for (const f of farms) {
   add(`/farms/${f.id}/green-coffee`, "weekly", "0.85");
   add(`/farms/${f.id}/products`, "weekly", "0.8");
   add(`/farms/${f.id}/roasted-coffee`, "weekly", "0.85");
+}
+
+// Guide articles (content/guides/*.mdx)
+for (const f of readdirSync(new URL("../content/guides", import.meta.url))) {
+  if (f.endsWith(".mdx")) add(`/guides/${f.replace(/\.mdx$/, "")}`, "monthly", "0.7");
 }
 
 // Countries we export to
