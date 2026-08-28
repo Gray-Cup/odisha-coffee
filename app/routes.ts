@@ -59,6 +59,7 @@ export default [
   ]),
 
   // Resource routes — raw responses, no page chrome
+  route("products.json", "routes/products-json.ts"),
   route("api/contact", "routes/api-contact.ts"),
   route("api/create-payment", "routes/create-payment.ts"),
   route("api/geo", "routes/geo.ts"),

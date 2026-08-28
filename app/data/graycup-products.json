@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-28T05:07:05.494Z",
+  "fetchedAt": "2026-08-28T09:25:43.578Z",
   "source": "https://graycup.in/products.json",
   "products": [
     {
@@ -300,6 +300,18 @@
       "priceMin": 450,
       "startVariant": "75g per sample",
       "startPrice": 150,
+      "availability": "in_stock"
+    },
+    {
+      "slug": "cotton-bags",
+      "name": "Cotton Bags",
+      "kind": "Coffee",
+      "description": "Eco-friendly, organic cotton bags - reusable and sustainable, made for brewing coffee. 150 GSM, holds up to 40g of ground coffee, sized for cold brew and filter coffee. Made to last up to 400 brews with proper care.",
+      "url": "https://graycup.in/products/cotton-bags",
+      "image": "https://graycup.in/accessories/cotton-bag/cotton-bag.webp",
+      "priceMin": 110,
+      "startVariant": "Pack of 5",
+      "startPrice": 110,
       "availability": "in_stock"
     }
   ]

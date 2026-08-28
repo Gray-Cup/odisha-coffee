@@ -27,7 +27,7 @@ if (!res.ok) throw new Error(`${FEED} -> ${res.status}`);
 const feed = (await res.json()) as { products: FeedProduct[] };
 
 const coffee = feed.products
-  .filter((p) => /coffee/i.test(`${p.category} ${p.categoryTwo ?? ""} ${p.name}`))
+  .filter((p) => /^(coffee|accessor)/i.test(p.category))
   .map((p) => ({
     slug: p.slug,
     name: p.name,
