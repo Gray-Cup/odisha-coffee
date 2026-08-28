@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { farms } from "@/data/farms";
 import { estateProducts } from "@/data/estate-products";
 import { ProductsCatalog } from "@/components/products/products-catalog";
+import { GrayCupShowcase } from "@/components/product-card";
 
 export function meta() {
   return [
@@ -72,6 +73,20 @@ export default function BuyGreenBeansPage() {
 
       {/* Interactive catalog — client component */}
       <ProductsCatalog />
+
+      {/* Rather buy it roasted? — outbound dofollow links to graycup.in, not buyable here */}
+      <section className="border-t-2 border-odisha-black bg-odisha-offwhite">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
+          <h2 className="font-serif text-2xl font-bold text-odisha-black mb-2">
+            Sold roasted by Gray Cup
+          </h2>
+          <p className="text-sm text-odisha-black/60 mb-6 max-w-2xl">
+            Not set up to roast? Gray Cup roasts these same Koraput lots in small batches and
+            ships them freshly roasted across India. Sold on graycup.in.
+          </p>
+          <GrayCupShowcase kinds={["Single Origin"]} />
+        </div>
+      </section>
     </div>
   );
 }

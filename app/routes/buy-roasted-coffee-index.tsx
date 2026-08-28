@@ -3,6 +3,7 @@ import { buyerCities } from "@/data/buyer-cities";
 import { INDIA_STATES } from "@/data/locations/india-states";
 import { products } from "@/data/products";
 import { RoastedCatalog } from "@/components/products/roasted-catalog";
+import { GrayCupShowcase } from "@/components/product-card";
 import { generateTitle, generateDescription, SITE_URL } from "@/lib/seo";
 
 export function meta() {
@@ -109,6 +110,21 @@ export default function BuyRoastedCoffeeIndexPage() {
 
       {/* Interactive catalog: select a roast and buy */}
       <RoastedCatalog roastedProducts={roastedProducts} specialtyLots={specialtyLots} />
+
+      {/* Also roasted by Gray Cup — outbound dofollow links to graycup.in, not buyable here */}
+      <section className="border-b-2 border-odisha-black bg-white">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
+          <h2 className="font-serif text-2xl font-bold text-odisha-black mb-2">
+            Also roasted by Gray Cup
+          </h2>
+          <p className="text-sm text-odisha-black/60 mb-6 max-w-2xl">
+            Gray Cup roasts our Koraput lots — plus South Indian and Northeast estates and
+            traditional filter blends — and ships them freshly roasted across India. Sold on
+            graycup.in.
+          </p>
+          <GrayCupShowcase />
+        </div>
+      </section>
 
       {/* Green beans nudge */}
       <section className="bg-odisha-offwhite border-t-2 border-odisha-black">
