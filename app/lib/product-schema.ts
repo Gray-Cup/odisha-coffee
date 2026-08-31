@@ -54,7 +54,7 @@ function base(id: string, name: string, description: string, image: string, url:
   };
 }
 
-export function roastedProductSchema(p: Product, pageUrl = `${SITE_URL}/roasted-coffee`) {
+export function roastedProductSchema(p: Product, pageUrl = `${SITE_URL}/roasted-coffee/${p.id}`) {
   const image = p.image ? `${SITE_URL}/products/${p.image}` : `${SITE_URL}/og.webp`;
   return {
     ...base(p.id, p.name, p.description, image, pageUrl),

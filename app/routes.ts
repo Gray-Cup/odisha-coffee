@@ -26,6 +26,7 @@ export default [
     route("odisha-coffee-varieties", "routes/odisha-coffee-varieties.tsx"),
 
     route("roasted-coffee", "routes/roasted-coffee.tsx"),
+    route("roasted-coffee/:productSlug", "routes/roasted-coffee-productslug.tsx"),
     route("spices", "routes/spices.tsx"),
     route("farms", "routes/farms-index.tsx"),
     route("farms/:slug", "routes/farms-slug.tsx"),

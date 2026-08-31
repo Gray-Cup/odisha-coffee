@@ -97,7 +97,11 @@ function RoastedProductCard({
       </div>
 
       <div className="p-4 flex flex-col flex-1">
-        <h3 className="font-serif font-bold text-odisha-black text-sm leading-snug mb-2">{product.name}</h3>
+        <h3 className="font-serif font-bold text-odisha-black text-sm leading-snug mb-2">
+          <Link to={`/roasted-coffee/${product.id}`} className="hover:text-odisha-red hover:underline transition-colors">
+            {product.name}
+          </Link>
+        </h3>
 
         <div className="flex flex-wrap gap-1.5 mb-2">
           <span className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 ${processingColors[product.processing]}`}>
@@ -232,7 +236,11 @@ function SpecialtyProductCard({
   return (
     <div className={`border-2 -ml-[2px] -mt-[2px] p-6 bg-odisha-offwhite transition-colors ${hasSelection ? "border-odisha-red" : "border-odisha-black"}`}>
       <div className="flex flex-wrap items-center gap-2 mb-3">
-        <h3 className="font-serif font-bold text-odisha-black text-lg">{product.name}</h3>
+        <h3 className="font-serif font-bold text-odisha-black text-lg">
+          <Link to={`/roasted-coffee/${product.id}`} className="hover:text-odisha-red hover:underline transition-colors">
+            {product.name}
+          </Link>
+        </h3>
         <span className={`text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 ${availabilityColors[product.availability]}`}>
           {availabilityLabels[product.availability]}
         </span>

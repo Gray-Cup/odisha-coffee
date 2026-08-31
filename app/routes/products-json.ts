@@ -108,7 +108,7 @@ function productToFeed(p: (typeof products)[number]): FeedProduct {
     category: p.isGreen ? "Green Coffee" : "Roasted Coffee",
     categoryTwo: p.isGreen ? "Green Beans" : p.roastLevel,
     description: p.description,
-    url: `${SITE_URL}/${p.isGreen ? "buy-green-beans" : "roasted-coffee"}`,
+    url: p.isGreen ? `${SITE_URL}/buy-green-beans` : `${SITE_URL}/roasted-coffee/${p.id}`,
     image: `${SITE_URL}/products/${p.image ?? "og.webp"}`,
     images: [`${SITE_URL}/products/${p.image ?? "og.webp"}`],
     currency: "INR",

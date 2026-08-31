@@ -45,6 +45,7 @@ function section(p: string) {
   if (p.startsWith("/farms/") && p.split("/").length > 3) return "Farm subpages";
   if (p.startsWith("/farms")) return "Farms";
   if (p.startsWith("/buy-green-beans/")) return "Green bean product pages";
+  if (/^\/roasted-coffee\/[a-z0-9-]+$/.test(p)) return "Roasted coffee product pages";
   if (p.startsWith("/buy-green-coffee/")) return "India — green coffee (state/city)";
   if (p.startsWith("/buy-roasted-coffee/")) return "India — roasted coffee (state/city)";
   if (/^\/[a-z-]+\/green-coffee$/.test(p)) return "Country — green coffee export";

@@ -57,7 +57,7 @@ function resolve(id: string): Resolved | null {
       name: p.name,
       blurb: `${roastLabel[p.roastLevel] ?? "Roasted"} · ${p.region} · ${p.flavorNotes.slice(0, 3).join(", ")}`,
       price: `₹${computeItemPrice(p.pricePerKg, 250).toLocaleString("en-IN")} · 250 g`,
-      href: "/roasted-coffee",
+      href: `/roasted-coffee/${p.id}`,
       image: `/products/${p.image ?? "og.webp"}`,
       cta: "Buy Now",
     };

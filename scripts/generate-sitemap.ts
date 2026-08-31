@@ -6,6 +6,7 @@
 import { writeFileSync, readdirSync } from "node:fs";
 import { farms } from "../app/data/farms";
 import { estateProducts } from "../app/data/estate-products";
+import { products } from "../app/data/products";
 import { countryDestinations } from "../app/data/locations/countries";
 import { INDIA_STATES } from "../app/data/locations/india-states";
 import { indiaCities } from "../app/data/locations/india-cities";
@@ -38,6 +39,9 @@ add("/buy-green-coffee", "monthly", "0.85");
 add("/buy-roasted-coffee", "monthly", "0.85");
 add("/buy-green-beans", "monthly", "0.7");
 for (const p of estateProducts) add(`/buy-green-beans/${p.id}`, "monthly", "0.7");
+for (const p of products) {
+  if (!p.isGreen && p.roastLevel !== "green") add(`/roasted-coffee/${p.id}`, "monthly", "0.8");
+}
 
 // One page per Indian state and city, for both green and roasted buying
 for (const s of INDIA_STATES) {
