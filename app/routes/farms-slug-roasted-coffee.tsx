@@ -2,16 +2,25 @@ import { Link, useParams } from "react-router";
 import { getFarmBySlug } from "@/data/farms";
 import { products } from "@/data/products";
 import { RoastedCatalog } from "@/components/products/roasted-catalog";
+import { FarmSubpageIntro } from "@/components/farm-subpage-intro";
+
+const SITE = "https://odishacoffee.com";
+const OG_IMAGE = `${SITE}/products/roasted-coffee-beans.webp`;
 
 export function meta({ params }: { params: { slug?: string } }) {
   const farm = params.slug ? getFarmBySlug(params.slug) : undefined;
   if (!farm) return [{ title: "Farm Not Found" }];
+  const url = `${SITE}/farms/${params.slug}/roasted-coffee`;
+  const desc = `Small-batch roasted Arabica traceable to ${farm.name}, ${farm.region}, Koraput — grown at ${farm.elevation}, ${farm.varieties.join(", ")}. ${farm.description}`.slice(0, 300);
   return [
     { title: `${farm.name} Roasted Coffee - Koraput, Odisha` },
-    {
-      name: "description",
-      content: `Small-batch roasted coffee from ${farm.name}, ${farm.region}, Koraput. Single-origin Arabica, roasted by Gray Cup, order online or add to your cart.`,
-    },
+    { name: "description", content: desc },
+    { tagName: "link", rel: "canonical", href: url },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: url },
+    { property: "og:image", content: OG_IMAGE },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: OG_IMAGE },
   ];
 }
 
@@ -88,6 +97,8 @@ export default function FarmRoastedCoffeePage() {
           </div>
         </div>
       </section>
+
+      <FarmSubpageIntro farm={farm} kind="roasted" />
 
       {farmProducts.length > 0 ? (
         <RoastedCatalog roastedProducts={roastedProducts} specialtyLots={specialtyLots} />

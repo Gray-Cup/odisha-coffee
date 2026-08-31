@@ -44,14 +44,14 @@ export function meta({ data: d, params }: Route.MetaArgs) {
   if (!d) return [{ title: "Not Found" }];
   const { country, ex, countrySlug } = d;
   const url = `${SITE_URL}/${countrySlug}/green-coffee`;
-  const title = generateTitle(`Green Coffee Export to ${country.name}: Koraput Arabica`);
+  const title = `Wholesale Green Coffee Koraput, Odisha, India to ${country.name}`;
   const desc = generateDescription(
-    `Wholesale Koraput, Odisha green Arabica for roasters and importers in ${country.name}. ${ex.transit} sea transit to ${ex.port}, ${ex.duty} Traceable, tribal-farmed Eastern Ghats lots with EUDR-ready GPS data.`
+    `Buy wholesale green coffee from Koraput, Odisha (India) for roasters and importers in ${country.name}. Traceable Eastern Ghats Arabica, about ${ex.transit} by sea to ${ex.port}, with EUDR-ready GPS traceability on every lot.`
   );
   return [
     { title },
     { name: "description", content: desc },
-    { property: "og:title", content: `Green Coffee Export to ${country.name} ${country.flag}` },
+    { property: "og:title", content: `Wholesale Green Coffee: Koraput, Odisha to ${country.name} ${country.flag}` },
     { property: "og:description", content: desc },
     { property: "og:type", content: "website" },
     { property: "og:url", content: url },
@@ -107,7 +107,7 @@ export default function CountryGreenCoffeePage({ loaderData }: Route.ComponentPr
             <span className="text-white uppercase tracking-widest">{country.flag} {country.name}</span>
           </div>
           <h1 className="font-serif text-3xl md:text-4xl font-bold text-white leading-tight max-w-3xl">
-            Green Coffee Export to {country.name} {country.flag}
+            Wholesale Green Coffee: Koraput, Odisha to {country.name} {country.flag}
           </h1>
           <p className="mt-4 text-white/80 max-w-2xl text-base">
             Koraput Arabica from Odisha's Eastern Ghats, shipped to roasters and importers

@@ -1,16 +1,25 @@
 import { Link, useParams } from "react-router";
 import { getFarmBySlug, processingColors, processingLabels } from "@/data/farms";
 import { estateProducts } from "@/data/estate-products";
+import { FarmSubpageIntro } from "@/components/farm-subpage-intro";
+
+const SITE = "https://odishacoffee.com";
+const OG_IMAGE = `${SITE}/products/koraput-coffee.webp`;
 
 export function meta({ params }: { params: { slug?: string } }) {
   const farm = params.slug ? getFarmBySlug(params.slug) : undefined;
   if (!farm) return [{ title: "Farm Not Found" }];
+  const url = `${SITE}/farms/${params.slug}/products`;
+  const desc = `Single-origin coffee lots from ${farm.name}, ${farm.region}, Koraput — ${farm.varieties.join(", ")}, ${farm.processing.join(", ")} processed, grown at ${farm.elevation}. ${farm.description}`.slice(0, 300);
   return [
     { title: `Buy Coffee from ${farm.name} - Koraput, Odisha` },
-    {
-      name: "description",
-      content: `Browse and buy single-origin coffee lots directly from ${farm.name}, ${farm.region}, Koraput.`,
-    },
+    { name: "description", content: desc },
+    { tagName: "link", rel: "canonical", href: url },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: url },
+    { property: "og:image", content: OG_IMAGE },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: OG_IMAGE },
   ];
 }
 
@@ -102,11 +111,13 @@ export default function FarmProductsPage() {
         </div>
       </section>
 
+      <FarmSubpageIntro farm={farm} kind="products" />
+
       {/* Product grid */}
       <section className="bg-white border-b-2 border-odisha-black">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
           <h2 className="font-serif text-xl font-bold text-odisha-black mb-6">
-            Available Green Beans
+            Coffee lots from {farm.name}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">

@@ -1,16 +1,25 @@
 import { Link, useParams } from "react-router";
 import { getFarmBySlug, processingColors, processingLabels } from "@/data/farms";
 import { estateProducts } from "@/data/estate-products";
+import { FarmSubpageIntro } from "@/components/farm-subpage-intro";
+
+const SITE = "https://odishacoffee.com";
+const OG_IMAGE = `${SITE}/products/green-coffee-beans.webp`;
 
 export function meta({ params }: { params: { slug?: string } }) {
   const farm = params.slug ? getFarmBySlug(params.slug) : undefined;
   if (!farm) return [{ title: "Farm Not Found" }];
+  const url = `${SITE}/farms/${params.slug}/green-coffee`;
+  const desc = `Green (unroasted) Arabica from ${farm.name}, ${farm.region}, Koraput — grown at ${farm.elevation}, ${farm.varieties.join(", ")}, ${farm.processing.join(", ")} processed. Traceable, export-ready. ${farm.description}`.slice(0, 300);
   return [
     { title: `${farm.name} Green Coffee Beans - Koraput, Odisha` },
-    {
-      name: "description",
-      content: `Buy green (unroasted) Arabica coffee beans direct from ${farm.name}, ${farm.region}, Koraput. AAA-grade washed and natural lots, traceable, export-ready. Select a grade and order online.`,
-    },
+    { name: "description", content: desc },
+    { tagName: "link", rel: "canonical", href: url },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: url },
+    { property: "og:image", content: OG_IMAGE },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: OG_IMAGE },
   ];
 }
 
@@ -102,12 +111,18 @@ export default function FarmGreenCoffeePage() {
         </div>
       </section>
 
+      <FarmSubpageIntro farm={farm} kind="green" />
+
       {/* Product grid */}
       <section className="bg-white border-b-2 border-odisha-black">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
           <h2 className="font-serif text-xl font-bold text-odisha-black mb-6">
-            Available Green Beans
+            Green bean lots &mdash; pair any grade with {farm.name}
           </h2>
+          <p className="text-sm text-odisha-black/60 -mt-4 mb-6 max-w-2xl">
+            Choose a grade below and select {farm.name} as your source farm at checkout. Lots
+            are cup-tested and shipped with full documentation.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
             {availableProducts.map((product) => {
