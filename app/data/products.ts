@@ -361,6 +361,71 @@ export const products: Product[] = [
     isGreen: true,
     image: "koraput-green.webp",
   },
+
+  // ── NEW ROASTED LOTS ─────────────────────────────────────────────────────
+
+  {
+    id: "brown-valley-wild-civet-roasted",
+    name: "Brown Valley Wild Civet Coffee (Roasted)",
+    farmId: "brown-valley-coffee-estate",
+    farmName: "Brown Valley Coffee Estate × Gray Cup Roastery",
+    region: "Boipariguda, Koraput",
+    processing: "washed",
+    variety: "Arabica Chandragiri",
+    roastLevel: "medium",
+    flavorNotes: ["Chocolate", "Earthy", "Creamy", "Low Bitterness"],
+    description:
+      "Wild-foraged civet coffee (Kopi Luwak) from Brown Valley Coffee Estate, roasted. Coffee cherries pass through the digestive tract of the wild Asian palm civet, ferment naturally, and are hand-collected, cleaned and sun-dried — then roasted medium to keep the smooth, low-bitter cup the washed processing produces. Wild-foraged, never caged; seasonal and available only in small quantities.",
+    brewingNotes:
+      "Pour-over or French press at 92–94°C, medium grind, 1:15 ratio. The chocolate and creamy, dairy-like sweetness need room — avoid over-extraction. Excellent as a slow cold brew.",
+    availability: "limited",
+    weightOptions: ["100g", "250g", "500g"],
+    exportAvailable: false,
+    pricePerKg: 4800,
+    image: "civet-cat/kopi-luwak-brown-valley.webp",
+  },
+  {
+    id: "dream-hill-aaa-washed-roasted",
+    name: "Dream Hill AAA Washed (Roasted)",
+    farmId: "dream-hill-coffee",
+    farmName: "Dream Hill Coffee — Saptagiri Plantation × Gray Cup Roastery",
+    region: "Pottangi, Koraput",
+    processing: "washed",
+    variety: "Arabica SLN 9 & Chandragiri",
+    roastLevel: "medium",
+    flavorNotes: ["Jasmine", "Citrus Zest", "Golden Raisin", "Clean Finish"],
+    description:
+      "AAA-grade (screen 17+) washed Arabica from Dream Hill, positioned at the highest elevations in Odisha's coffee belt at over 1100m. Clean fermentation and extended raised-bed drying, roasted medium to balance the estate's bright acidity with a rounded, sweet body. The benchmark washed lot from Odisha's most refined high-altitude estate.",
+    brewingNotes:
+      "Pour-over, V60 or Chemex at 92–93°C, medium-fine grind, 1:16 ratio. Full 3–4 minute brew time rewards the floral aromatics and citrus clarity. Also excellent as a bright, clean cold brew.",
+    availability: "in-stock",
+    weightOptions: ["100g", "250g", "500g", "1kg"],
+    exportAvailable: true,
+    minOrderExport: "100kg green beans",
+    pricePerKg: 2600,
+    image: "koraput-coffee.webp",
+  },
+  {
+    id: "brown-valley-hsd-roasted",
+    name: "Brown Valley HSD (Roasted)",
+    farmId: "brown-valley-coffee-estate",
+    farmName: "Brown Valley Coffee Estate × Gray Cup Roastery",
+    region: "Boipariguda, Koraput",
+    processing: "honey",
+    variety: "Arabica HSD (Hibrido de Timor)",
+    roastLevel: "medium",
+    flavorNotes: ["Milk Chocolate", "Stone Fruit", "Honey", "Smooth Body"],
+    description:
+      "HSD (honey/semi-dry) processed Arabica from Brown Valley Estate, one of the few Odisha farms running all three processing styles with micro-lot traceability. The HSD process strikes a balance between the brightness of washed and the fruitiness of natural — a cup with balanced sweetness and a smooth, rounded body. Roasted medium; great for filter and cold brew.",
+    brewingNotes:
+      "Versatile across filter and espresso. Filter: V60 or Chemex at 93°C, medium grind. Espresso: 93°C, 25–28 second shot. The honey process gives a syrupy body that holds up well with milk.",
+    availability: "in-stock",
+    weightOptions: ["100g", "250g", "500g", "1kg"],
+    exportAvailable: true,
+    minOrderExport: "100kg green beans",
+    pricePerKg: 2600,
+    image: "koraput-coffee.webp",
+  },
 ];
 
 export function getProductById(id: string): Product | undefined {
