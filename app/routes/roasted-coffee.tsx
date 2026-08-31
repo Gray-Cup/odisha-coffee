@@ -5,20 +5,20 @@ import { GrayCupShowcase } from "@/components/product-card";
 
 export function meta() {
   return [
-    { title: "Roasted Koraput Coffee: Dream Hill & Brown Valley Estates" },
+    { title: "Freshly Roasted Commercial & Specialty Koraput, Odisha Coffee | Odisha Coffee" },
     {
       name: "description",
       content:
-        "Freshly roasted single-origin Koraput, Odisha coffee, led by Dream Hill and Brown Valley estates — washed, natural, honey and barrel-aged lots, roasted to order by Gray Cup.",
+        "Buy freshly roasted Odisha coffee from Koraput and other regions of Odisha. Explore commercial and specialty roasted coffee, freshly roasted coffee available online.",
     },
        {
       property: "og:title",
-      content: "Roasted Koraput Coffee: Dream Hill & Brown Valley",
+      content: "Roasted Odisha Coffee & Koraput Coffee",
     },
     {
       property: "og:description",
       content:
-        "Small-batch roasted Koraput Arabica from Dream Hill and Brown Valley estates, plus barrel-aged and co-fermented lots.",
+        "Shop freshly roasted commercial and specialty coffee from Koraput and across Odisha.",
     },
     {
       property: "og:type",
@@ -115,18 +115,9 @@ function buildSchema(product: (typeof products)[number]) {
   };
 }
 
-const FEATURED_FARMS = ["dream-hill-coffee", "brown-valley-coffee-estate"];
-
 export default function RoastedCoffeePage() {
-  const allRoasted = products.filter((p) => !p.isGreen && p.roastLevel !== "green");
-  // Lead with Dream Hill and Brown Valley, then everything else.
-  const roastedProducts = [...allRoasted].sort((a, b) => {
-    const ra = FEATURED_FARMS.indexOf(a.farmId);
-    const rb = FEATURED_FARMS.indexOf(b.farmId);
-    return (ra === -1 ? 99 : ra) - (rb === -1 ? 99 : rb);
-  });
-  const featured = allRoasted.filter((p) => FEATURED_FARMS.includes(p.farmId));
-  const specialtyLots = allRoasted.filter((p) => p.availability === "limited" || p.availability === "seasonal");
+  const roastedProducts = products.filter((p) => !p.isGreen && p.roastLevel !== "green");
+  const specialtyLots   = products.filter((p) => p.availability === "limited" || p.availability === "seasonal");
   const schemas = roastedProducts.map(buildSchema);
 
   return (
@@ -146,55 +137,26 @@ export default function RoastedCoffeePage() {
             </div>
 
             <h1 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              Roasted Koraput Coffee: Dream Hill &amp; Brown Valley
+              Roasted Koraput, Odisha Coffee
             </h1>
             <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
-              Our roasted range is built around two Koraput estates: <strong className="text-white">Dream Hill</strong>,
-              Odisha's highest-elevation specialty farm, and <strong className="text-white">Brown Valley</strong>,
-              the estate running all three processing styles plus a barrel-ageing programme. Washed, natural,
-              honey and barrel-aged lots, roasted to order by Gray Cup and rested 48 hours before dispatch.
+              Small-batch roasted coffee from Koraput partner estates, single-origin Arabica,
+              specialty espresso blends, and limited seasonal micro-lots. All beans are sourced directly
+              from verified farms and roasted by Gray Cup.
             </p>
 
             <div className="flex flex-wrap gap-6">
               {[
-                { value: featured.length.toString(), label: "Dream Hill & Brown Valley Lots" },
-                { value: roastedProducts.length.toString(), label: "Roasted Lots Total" },
+                { value: roastedProducts.length.toString(), label: "Roasted Lots" },
                 { value: specialtyLots.length.toString(), label: "Specialty / Seasonal" },
                 { value: "48h", label: "Roast-to-Dispatch Rest" },
+                { value: "Koraput", label: "Single Origin" },
               ].map(({ value, label }) => (
                 <div key={label} className="border-l-2 border-white/30 pl-4">
                   <div className="font-serif text-2xl font-bold text-white">{value}</div>
                   <div className="text-[10px] uppercase tracking-widest text-white/60">{label}</div>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* The two lead estates */}
-        <section className="bg-white border-b-2 border-odisha-black">
-          <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12 grid md:grid-cols-2 gap-8">
-            <div>
-              <h2 className="font-serif text-2xl font-bold text-odisha-black mb-2">Dream Hill Estate</h2>
-              <p className="text-sm text-odisha-black/70 leading-relaxed mb-3">
-                Saptagiri Plantation, Pottangi — the highest-elevation coffee in Odisha at 1,100–1,450 m.
-                Arabica SLN 9 and Chandragiri, washed and honey processed, with a jasmine-and-citrus
-                clarity that is rare in Indian coffee. Also the base for our whiskey and rum barrel lots.
-              </p>
-              <Link to="/farms/dream-hill-coffee" className="text-sm text-odisha-red underline">
-                Dream Hill farm profile →
-              </Link>
-            </div>
-            <div>
-              <h2 className="font-serif text-2xl font-bold text-odisha-black mb-2">Brown Valley Estate</h2>
-              <p className="text-sm text-odisha-black/70 leading-relaxed mb-3">
-                Boipariguda, 1,050–1,300 m. One of the few Koraput estates producing washed, natural
-                and honey lots with micro-lot traceability, plus a rare wild-foraged civet coffee and
-                a HSD barrel-ageing programme. Milk chocolate, hazelnut and stone-fruit character.
-              </p>
-              <Link to="/farms/brown-valley-coffee-estate" className="text-sm text-odisha-red underline">
-                Brown Valley farm profile →
-              </Link>
             </div>
           </div>
         </section>
