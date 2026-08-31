@@ -1,4 +1,4 @@
-import { getGuide, getRelatedGuides } from "@/lib/guides";
+import { getGuide, getRelatedGuides, guideImageUrl } from "@/lib/guides";
 import { Link, data, isRouteErrorResponse, useParams } from "react-router";
 import type { Route } from "./+types/guides-slug";
 import { guideMdxComponents } from "@/components/product-card";
@@ -16,15 +16,48 @@ export function loader({ params }: Route.LoaderArgs) {
 
 export function meta({ data: post, params }: Route.MetaArgs) {
   if (!post) return [{ title: generateTitle("Guide Not Found") }];
+  const url = `${SITE_URL}/guides/${params.slug}`;
+  const image = guideImageUrl(post);
   return [
     { title: generateTitle(post.title) },
     { name: "description", content: generateDescription(post.description) },
     { name: "keywords", content: post.tags?.join(", ") },
-    { tagName: "link", rel: "canonical", href: `${SITE_URL}/guides/${params.slug}` },
+    { tagName: "link", rel: "canonical", href: url },
     { property: "og:title", content: generateTitle(post.title) },
     { property: "og:description", content: generateDescription(post.description) },
     { property: "og:type", content: "article" },
+    { property: "og:url", content: url },
+    { property: "og:image", content: image },
+    { property: "og:image:width", content: "1200" },
+    { property: "og:image:height", content: "630" },
+    { property: "og:image:alt", content: post.title },
     { property: "article:published_time", content: post.date },
+    { property: "article:section", content: post.category },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: generateTitle(post.title) },
+    { name: "twitter:description", content: generateDescription(post.description) },
+    { name: "twitter:image", content: image },
+    {
+      "script:ld+json": {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": `${url}#article`,
+        headline: post.title,
+        description: post.description,
+        image: [image],
+        datePublished: post.date,
+        dateModified: post.date,
+        author: { "@type": "Organization", name: "Odisha Coffee", url: SITE_URL },
+        publisher: {
+          "@type": "Organization",
+          name: "Odisha Coffee",
+          logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp` },
+        },
+        mainEntityOfPage: { "@type": "WebPage", "@id": url },
+        articleSection: post.category,
+        keywords: post.tags?.join(", "),
+      },
+    },
   ];
 }
 
@@ -33,6 +66,7 @@ export default function GuidePage({ loaderData: post }: Route.ComponentProps) {
   const full = getGuide(slug ?? "");
   if (!full) return null;
   const Content = full.Content;
+  const heroImage = guideImageUrl(post);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 lg:px-6">
@@ -59,6 +93,14 @@ export default function GuidePage({ loaderData: post }: Route.ComponentProps) {
           <span>{post.readingTime}</span>
         </div>
       </header>
+
+      <img
+        src={heroImage}
+        alt={post.title}
+        width={1200}
+        height={630}
+        className="mb-10 aspect-[1200/630] w-full rounded-lg border-2 border-odisha-black object-cover"
+      />
 
       <article className="prose prose-lg prose-neutral max-w-none dark:prose-invert">
         <Content components={guideMdxComponents} />

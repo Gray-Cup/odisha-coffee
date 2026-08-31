@@ -1,8 +1,9 @@
-import { getGuides } from "@/lib/guides";
+import { getGuides, guideImageUrl } from "@/lib/guides";
 import { Link } from "react-router";
 import { generateTitle, generateDescription, SITE_URL } from "@/lib/seo";
 
 export function meta() {
+  const guides = getGuides();
   return [
     { title: generateTitle("Coffee Guides: Best Indian Coffee, Koraput & Green Beans") },
     {
@@ -12,6 +13,35 @@ export function meta() {
       ),
     },
     { tagName: "link", rel: "canonical", href: `${SITE_URL}/guides` },
+    { property: "og:title", content: generateTitle("Coffee Guides") },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: `${SITE_URL}/guides` },
+    { property: "og:image", content: `${SITE_URL}/products/koraput-coffee.webp` },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: `${SITE_URL}/products/koraput-coffee.webp` },
+    {
+      "script:ld+json": {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "@id": `${SITE_URL}/guides#blog`,
+        name: "Odisha Coffee Guides",
+        url: `${SITE_URL}/guides`,
+        publisher: {
+          "@type": "Organization",
+          name: "Odisha Coffee",
+          logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp` },
+        },
+        blogPost: guides.map((g) => ({
+          "@type": "BlogPosting",
+          headline: g.title,
+          description: g.description,
+          url: `${SITE_URL}/guides/${g.slug}`,
+          image: [guideImageUrl(g)],
+          datePublished: g.date,
+          author: { "@type": "Organization", name: "Odisha Coffee" },
+        })),
+      },
+    },
   ];
 }
 

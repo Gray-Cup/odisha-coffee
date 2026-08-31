@@ -55,7 +55,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               },
               logo: {
                 "@type": "ImageObject",
-                url: "https://odishacoffee.com/logo.png",
+                url: "https://odishacoffee.com/logo.webp",
                 width: 512,
                 height: 512,
               },
@@ -95,7 +95,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               "@id": "https://graycup.in/#organization",
               name: "Gray Cup",
               url: "https://graycup.in",
-              logo: "https://graycup.in/logo.png",
+              logo: "https://graycup.in/logo.webp",
               sameAs: [
                 "https://www.instagram.com/thegraycup",
                 "https://www.linkedin.com/company/gray-cup",

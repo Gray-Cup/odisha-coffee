@@ -17,6 +17,7 @@ export interface GuideFrontmatter {
   published?: boolean;
   readingTime?: string;
   category?: string;
+  image?: string;
 }
 
 export interface GuidePost {
@@ -30,7 +31,32 @@ export interface GuidePost {
   published: boolean;
   readingTime: string;
   category: string;
+  image: string;
   Content: MDXComponent;
+}
+
+// Absolute URL of the article's share/snippet image. Uses the frontmatter
+// `image` if set, otherwise a category-based default. Google needs a real
+// image in structured data (og:image alone isn't enough) to show a thumbnail
+// next to a search result.
+// 1200x630 WebP banners generated from product photos (see scripts / public/og/guides).
+const CATEGORY_IMAGE: Record<string, string> = {
+  "Green Coffee for Roasters": "/og/guides/green.webp",
+  "Filter Coffee": "/og/guides/filter.webp",
+  "Odisha & Koraput": "/og/guides/odisha.webp",
+  "Black Coffee & Fitness": "/og/guides/fitness.webp",
+  "Best Coffee in India": "/og/guides/best.webp",
+  "Farm & Traceability": "/og/guides/farm.webp",
+};
+
+export const GUIDE_IMAGE_W = 1200;
+export const GUIDE_IMAGE_H = 630;
+
+export function guideImageUrl(g: Pick<GuidePost, "image" | "category">): string {
+  const path = g.image?.trim() || CATEGORY_IMAGE[g.category] || "/og/guides/default.webp";
+  return path.startsWith("http")
+    ? path
+    : `https://odishacoffee.com${path.startsWith("/") ? "" : "/"}${path}`;
 }
 
 const modules = import.meta.glob("/content/guides/*.mdx", { eager: true }) as Record<
@@ -57,6 +83,7 @@ function allGuides(): GuidePost[] {
         featured: fm.featured || false,
         readingTime: fm.readingTime || "6 min read",
         category: fm.category || "Guides",
+        image: fm.image || "",
         Content: mod.default,
       };
     })
