@@ -1,3 +1,11 @@
+export function meta() {
+  return [
+    { title: "Careers at Gray Cup - Odisha Coffee" },
+    { name: "description", content: "Work with Gray Cup Enterprises on sourcing, export and retail of Koraput, Odisha coffee." },
+    { name: "robots", content: "noindex, follow" },
+  ];
+}
+
 export default function CareersPage() {
   return (
     <div className="min-h-screen py-20">

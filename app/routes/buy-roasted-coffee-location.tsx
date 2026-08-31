@@ -4,7 +4,13 @@ import { INDIA_STATES, getStateBySlug } from "@/data/locations/india-states";
 import { getCitiesByState, getIndiaCityBySlugAny, getRelatedIndiaCities } from "@/data/locations/india-cities";
 import { products } from "@/data/products";
 import { RoastedCatalog } from "@/components/products/roasted-catalog";
-import { generateTitle, generateDescription, SITE_URL } from "@/lib/seo";
+import { generateDescription, SITE_URL } from "@/lib/seo";
+import {
+  roastedCityTitle,
+  roastedCityDescription,
+  roastedStateTitle,
+  roastedStateDescription,
+} from "@/data/locations/india-seo";
 
 export function loader({ params }: Route.LoaderArgs) {
   const slug = params.location ?? "";
@@ -19,18 +25,31 @@ export function loader({ params }: Route.LoaderArgs) {
   throw data("Not found", { status: 404 });
 }
 
+const OG_IMAGE = `${SITE_URL}/products/roasted-coffee-beans.webp`;
+
 export function meta({ data: loaderData, params }: Route.MetaArgs) {
   if (!loaderData) return [{ title: "Not Found" }];
-  const name = loaderData.kind === "state" ? loaderData.state.name : loaderData.city.city;
+  const url = `${SITE_URL}/buy-roasted-coffee/${params.location}`;
+  const title =
+    loaderData.kind === "state"
+      ? roastedStateTitle(loaderData.state.name)
+      : roastedCityTitle(loaderData.city);
+  const description =
+    loaderData.kind === "state"
+      ? roastedStateDescription(loaderData.state.slug, loaderData.state.name)
+      : roastedCityDescription(loaderData.city);
   return [
-    { title: generateTitle(`Odisha Single Origin Roasted Coffee in ${name}, India`) },
-    {
-      name: "description",
-      content: generateDescription(
-        `Specialty roasted Koraput Arabica for ${name}, roasted fresh to order and dispatched to buyers across India. Espresso blends, filter lots, and seasonal micro-lots.`
-      ),
-    },
-    { tagName: "link", rel: "canonical", href: `${SITE_URL}/buy-roasted-coffee/${params.location}` },
+    { title },
+    { name: "description", content: generateDescription(description) },
+    { tagName: "link", rel: "canonical", href: url },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: url },
+    { property: "og:image", content: OG_IMAGE },
+    { property: "og:locale", content: "en_IN" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: OG_IMAGE },
   ];
 }
 

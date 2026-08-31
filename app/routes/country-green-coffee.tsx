@@ -139,7 +139,7 @@ export default function CountryGreenCoffeePage({ loaderData }: Route.ComponentPr
           <p className="text-odisha-black/80 leading-relaxed">{ex.note}</p>
           <p className="text-odisha-black/80 leading-relaxed mt-4">
             Koraput sits at 700–1,100 m in the Eastern Ghats and is one of India's youngest
-            traceable origins — washed, natural and honey Arabica (S795, SLN 9, Chandragiri, HSD)
+            traceable origins: washed, natural and honey Arabica (S795, SLN 9, Chandragiri, HSD)
             grown by tribal farming communities across {farms.length} partner estates. For a
             {" "}{country.name} roaster it offers a distinctive Indian profile with clean cup
             character and documentation that stands up to scrutiny at import.
@@ -196,7 +196,7 @@ export default function CountryGreenCoffeePage({ loaderData }: Route.ComponentPr
           <p className="text-odisha-black/80 leading-relaxed mt-4">
             Every export lot ships with a phytosanitary certificate, certificate of origin, ICO
             mark, APEDA registration, FSSAI documentation and GPS polygon data for each partner
-            plot. Rules change — confirm the current position with your customs broker before you
+            plot. Rules change, so confirm the current position with your customs broker before you
             order.
           </p>
         </div>
@@ -209,7 +209,7 @@ export default function CountryGreenCoffeePage({ loaderData }: Route.ComponentPr
             Koraput green coffee lots for {country.name}
           </h2>
           <p className="text-sm text-odisha-black/60 mt-1">
-            Select a grade and partner farm, choose your quantity, and order online — or contact
+            Select a grade and partner farm, choose your quantity, and order online, or contact
             us for FOB pricing and full-container volumes.
           </p>
         </div>

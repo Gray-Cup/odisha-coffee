@@ -23,9 +23,9 @@ function add(path: string, changefreq: string, priority: string) {
 // Static marketing pages
 add("", "weekly", "1");
 for (const p of [
-  "about", "careers", "cart", "checkout", "coffee-farms-koraput", "coffee-farms-near-bhubaneswar",
+  "about", "coffee-farms-koraput", "coffee-farms-near-bhubaneswar",
   "coffee-farms-odisha", "contact", "future-of-coffee", "impressum", "newsroom",
-  "odisha-coffee-export", "odisha-coffee-varieties", "order-builder", "policy-coffee-recipe-extension",
+  "odisha-coffee-export", "odisha-coffee-varieties", "policy-coffee-recipe-extension",
   "privacy", "refunds", "reviews", "roasted-coffee", "shipping", "shop", "sites", "guides",
   "social-responsibility", "sourcing", "spices", "terms",
 ]) add(`/${p}`, "monthly", "0.7");

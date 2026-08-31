@@ -5,7 +5,13 @@ import { getCitiesByState, getIndiaCityBySlugAny, getRelatedIndiaCities } from "
 import { farms } from "@/data/farms";
 import { estateProducts } from "@/data/estate-products";
 import { ProductsCatalog } from "@/components/products/products-catalog";
-import { generateTitle, generateDescription, SITE_URL } from "@/lib/seo";
+import { generateDescription, SITE_URL } from "@/lib/seo";
+import {
+  greenCityTitle,
+  greenCityDescription,
+  greenStateTitle,
+  greenStateDescription,
+} from "@/data/locations/india-seo";
 
 export function loader({ params }: Route.LoaderArgs) {
   const slug = params.location ?? "";
@@ -20,18 +26,31 @@ export function loader({ params }: Route.LoaderArgs) {
   throw data("Not found", { status: 404 });
 }
 
+const OG_IMAGE = `${SITE_URL}/products/green-coffee-beans.webp`;
+
 export function meta({ data: loaderData, params }: Route.MetaArgs) {
   if (!loaderData) return [{ title: "Not Found" }];
-  const name = loaderData.kind === "state" ? loaderData.state.name : loaderData.city.city;
+  const url = `${SITE_URL}/buy-green-coffee/${params.location}`;
+  const title =
+    loaderData.kind === "state"
+      ? greenStateTitle(loaderData.state.name)
+      : greenCityTitle(loaderData.city);
+  const description =
+    loaderData.kind === "state"
+      ? greenStateDescription(loaderData.state.slug, loaderData.state.name)
+      : greenCityDescription(loaderData.city);
   return [
-    { title: generateTitle(`Wholesale Koraput Single-Origin Green Coffee Beans in ${name}, India`) },
-    {
-      name: "description",
-      content: generateDescription(
-        `Buy Koraput, Odisha green Arabica coffee beans in ${name}. Traceable, tribal-farmed, Eastern Ghats single-origin lots for roasters, cafés, and exporters.`
-      ),
-    },
-    { tagName: "link", rel: "canonical", href: `${SITE_URL}/buy-green-coffee/${params.location}` },
+    { title },
+    { name: "description", content: generateDescription(description) },
+    { tagName: "link", rel: "canonical", href: url },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: url },
+    { property: "og:image", content: OG_IMAGE },
+    { property: "og:locale", content: "en_IN" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: OG_IMAGE },
   ];
 }
 

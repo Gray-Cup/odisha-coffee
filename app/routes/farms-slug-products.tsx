@@ -10,7 +10,7 @@ export function meta({ params }: { params: { slug?: string } }) {
   const farm = params.slug ? getFarmBySlug(params.slug) : undefined;
   if (!farm) return [{ title: "Farm Not Found" }];
   const url = `${SITE}/farms/${params.slug}/products`;
-  const desc = `Single-origin coffee lots from ${farm.name}, ${farm.region}, Koraput — ${farm.varieties.join(", ")}, ${farm.processing.join(", ")} processed, grown at ${farm.elevation}. ${farm.description}`.slice(0, 300);
+  const desc = `Buy single-origin coffee lots from ${farm.name}, ${farm.region}, Koraput, ${farm.varieties.join(" & ")}, ${farm.processing.join("/")} processed, grown at ${farm.elevation}. Green and roasted, order online.`.slice(0, 158);
   return [
     { title: `Buy Coffee from ${farm.name} - Koraput, Odisha` },
     { name: "description", content: desc },

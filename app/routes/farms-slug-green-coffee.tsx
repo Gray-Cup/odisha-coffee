@@ -10,7 +10,7 @@ export function meta({ params }: { params: { slug?: string } }) {
   const farm = params.slug ? getFarmBySlug(params.slug) : undefined;
   if (!farm) return [{ title: "Farm Not Found" }];
   const url = `${SITE}/farms/${params.slug}/green-coffee`;
-  const desc = `Green (unroasted) Arabica from ${farm.name}, ${farm.region}, Koraput — grown at ${farm.elevation}, ${farm.varieties.join(", ")}, ${farm.processing.join(", ")} processed. Traceable, export-ready. ${farm.description}`.slice(0, 300);
+  const desc = `Buy green (unroasted) Arabica from ${farm.name}, ${farm.region}, Koraput, grown at ${farm.elevation}, ${farm.varieties.join(" & ")}, ${farm.processing.join("/")} processed. Traceable, export-ready, order online.`.slice(0, 158);
   return [
     { title: `${farm.name} Green Coffee Beans - Koraput, Odisha` },
     { name: "description", content: desc },

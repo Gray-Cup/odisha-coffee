@@ -11,7 +11,7 @@ export function meta({ params }: { params: { slug?: string } }) {
   const farm = params.slug ? getFarmBySlug(params.slug) : undefined;
   if (!farm) return [{ title: "Farm Not Found" }];
   const url = `${SITE}/farms/${params.slug}/roasted-coffee`;
-  const desc = `Small-batch roasted Arabica traceable to ${farm.name}, ${farm.region}, Koraput — grown at ${farm.elevation}, ${farm.varieties.join(", ")}. ${farm.description}`.slice(0, 300);
+  const desc = `Small-batch roasted Arabica traceable to ${farm.name}, ${farm.region}, Koraput, grown at ${farm.elevation}, ${farm.varieties.join(" & ")}. Roasted to order by Gray Cup, delivered India-wide.`.slice(0, 158);
   return [
     { title: `${farm.name} Roasted Coffee - Koraput, Odisha` },
     { name: "description", content: desc },

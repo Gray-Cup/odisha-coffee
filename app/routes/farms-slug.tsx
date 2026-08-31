@@ -3,12 +3,25 @@ import { farms, getFarmBySlug, processingColors, processingLabels } from "@/data
 import type { ProcessingMethod } from "@/data/farms";
 import { products } from "@/data/products";
 
+const SITE = "https://odishacoffee.com";
+
 export function meta({ params }: { params: { slug?: string } }) {
   const farm = params.slug ? getFarmBySlug(params.slug) : undefined;
   if (!farm) return [{ title: "Farm Not Found" }];
+  const url = `${SITE}/farms/${params.slug}`;
+  const desc =
+    `${farm.name}: ${farm.varieties.join(" & ")} Arabica grown at ${farm.elevation} in ${farm.region}, Koraput, ${farm.processing.join("/")} processed. ${farm.description}`
+      .slice(0, 157)
+      .replace(/[\s,.]+\S*$/, "") + ".";
   return [
-    { title: `${farm.name} - ${farm.region}, ${farm.district}` },
-    { name: "description", content: farm.description },
+    { title: `${farm.name} - ${farm.region}, ${farm.district} Coffee Estate` },
+    { name: "description", content: desc },
+    { tagName: "link", rel: "canonical", href: url },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: url },
+    { property: "og:image", content: `${SITE}/products/koraput-washed.webp` },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: `${SITE}/products/koraput-washed.webp` },
   ];
 }
 
