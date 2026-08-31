@@ -5,11 +5,52 @@ import { GrayCupShowcase } from "@/components/product-card";
 
 export function meta() {
   return [
-    { title: "Roasted Coffee - Odisha Single Origin & Specialty Lots" },
+    { title: "Freshly Roasted Commercial & Specialty Koraput, Odisha Coffee | Odisha Coffee" },
     {
       name: "description",
       content:
-        "Specialty roasted coffee from Koraput's Eastern Ghats, washed, natural and honey processed Arabica, roasted in small batches by Gray Cup. Espresso blends, filter lots, and seasonal micro-lots.",
+        "Buy freshly roasted Odisha coffee from Koraput and other regions of Odisha. Explore commercial and specialty roasted coffee, freshly roasted coffee available online.",
+    },
+       {
+      property: "og:title",
+      content: "Roasted Odisha Coffee & Koraput Coffee",
+    },
+    {
+      property: "og:description",
+      content:
+        "Shop freshly roasted commercial and specialty coffee from Koraput and across Odisha.",
+    },
+    {
+      property: "og:type",
+      content: "website",
+    },
+    {
+      property: "og:url",
+      content: "https://odishacoffee.com/roasted-coffee",
+    },
+    {
+      property: "og:image",
+      content: "https://odishacoffee.com/products/roasted-coffee-beans.webp",
+    },
+    { property: "og:image:alt", content: "Freshly roasted Koraput, Odisha coffee beans" },
+
+    // Twitter/X sharing
+    {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+    {
+      name: "twitter:image",
+      content: "https://odishacoffee.com/products/roasted-coffee-beans.webp",
+    },
+    {
+      name: "twitter:title",
+      content: "Roasted Odisha Coffee & Koraput Coffee",
+    },
+    {
+      name: "twitter:description",
+      content:
+        "Shop freshly roasted commercial and specialty coffee from Koraput and across Odisha.",
     },
   ];
 }
@@ -96,7 +137,7 @@ export default function RoastedCoffeePage() {
             </div>
 
             <h1 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              Roasted Coffee
+              Roasted Koraput, Odisha Coffee
             </h1>
             <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
               Small-batch roasted coffee from Koraput partner estates, single-origin Arabica,
