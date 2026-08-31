@@ -1,5 +1,30 @@
 import { Link } from "react-router";
 import { farms } from "@/data/farms";
+import { products } from "@/data/products";
+import { estateProducts } from "@/data/estate-products";
+import { ProductRow } from "@/components/product-card";
+
+// Match catalogue items to a variety by its `variety` string. Roasted lots
+// first, then green, capped so each variety card stays tidy.
+const VARIETY_PATTERNS: Record<string, RegExp> = {
+  s795: /s\s?795/i,
+  sln9: /sln\s?9/i,
+  catuai: /chandragiri|catuai/i,
+  hsd: /hsd|h[iy]brido de timor/i,
+};
+
+function productIdsForVariety(varietyId: string): string[] {
+  const re = VARIETY_PATTERNS[varietyId];
+  if (!re) return [];
+  const roasted = products
+    .filter((p) => !p.isGreen && re.test(p.variety))
+    .map((p) => p.id);
+  const green = [
+    ...products.filter((p) => p.isGreen && re.test(p.variety)).map((p) => p.id),
+    ...estateProducts.filter((p) => re.test(p.variety)).map((p) => p.id),
+  ];
+  return [...roasted.slice(0, 3), ...green.slice(0, 3)];
+}
 
 export function meta() {
   return [
@@ -158,7 +183,9 @@ export default function OdishaCoffeeVarietiesPage() {
       {/* Variety detail cards */}
       <section className="bg-odisha-offwhite pattachitra-pattern">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12 space-y-0">
-          {varieties.map((variety, idx) => (
+          {varieties.map((variety, idx) => {
+            const buyIds = productIdsForVariety(variety.id);
+            return (
             <div
               key={variety.id}
               id={variety.id}
@@ -256,11 +283,21 @@ export default function OdishaCoffeeVarietiesPage() {
                         ))}
                       </div>
                     </div>
+
+                    {buyIds.length > 0 && (
+                      <div className="mt-6">
+                        <div className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-2">
+                          Buy {variety.name}
+                        </div>
+                        <ProductRow ids={buyIds} />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
