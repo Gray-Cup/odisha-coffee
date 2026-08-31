@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import type { Route } from "./+types/create-payment";
 import { getOrdersDb, odishaCoffeeOrders } from "@/db/d1";
 import { sendOrderConfirmationEmail } from "@/lib/email";
+import { getFarmBySlug } from "@/data/farms";
 import {
   computeOrderTotal,
   resolveCartProduct,
@@ -96,6 +97,13 @@ export async function action({ request, context }: Route.ActionArgs) {
           : (resolved?.kind === "estate" || resolved?.kind === "spice") && resolved.product.image
           ? `${origin}/${resolved.product.image}`
           : null;
+      // Green (estate) lots carry the chosen partner farm on `resolved.farm`.
+      // Roasted lots (kind "product") are also farm-selectable in the UI —
+      // the choice arrives as `item.farmId` and must reach the admin too.
+      const roastedFarm =
+        resolved?.kind === "product" && !resolved.product.isGreen && item.farmId
+          ? getFarmBySlug(item.farmId)
+          : undefined;
       return {
         slug: item.productId,
         name: resolved?.product.name ?? item.productId,
@@ -108,6 +116,7 @@ export async function action({ request, context }: Route.ActionArgs) {
           farmId: resolved.farm.id,
           farmName: resolved.farm.name,
         }),
+        ...(roastedFarm && { farmId: roastedFarm.id, farmName: roastedFarm.name }),
       };
     });
 

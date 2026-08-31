@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart, Check, Minus, Plus, Zap, X } from "lucide-react";
-import { processingColors, processingLabels } from "@/data/farms";
-import { roastLabels, availabilityColors, availabilityLabels, type Product } from "@/data/products";
+import { processingColors, processingLabels, farms, shortFarmName } from "@/data/farms";
+import { roastLabels, availabilityColors, availabilityLabels, roastedFarmIdFor, type Product } from "@/data/products";
 import { useCart, ROASTED_TIERS } from "@/context/cart-context";
 import { computeItemPrice, deliveryFeeForGrams } from "@/lib/pricing";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const MAX_QUANTITY = 20;
 
@@ -21,13 +22,54 @@ type SelectionLine = {
   key: string;
   productId: string;
   weight: string;
+  farmId: string;
   grams: number;
   quantity: number;
   unitPrice: number;
 };
 
-function lineKey(productId: string, weight: string): string {
-  return `${productId}::${weight}`;
+function lineKey(productId: string, weight: string, farmId: string): string {
+  return `${productId}::${weight}::${farmId}`;
+}
+
+// Compact estate picker shared by both roasted cards. Locked to one estate
+// for exclusive lots (e.g. wild civet coffee → Brown Valley).
+function EstatePicker({
+  product,
+  farmId,
+  setFarmId,
+}: {
+  product: Product;
+  farmId: string;
+  setFarmId: (id: string) => void;
+}) {
+  if (product.exclusiveFarmId) {
+    return (
+      <div className="text-[10px] uppercase tracking-widest text-odisha-black/50">
+        Estate: <span className="text-odisha-black font-semibold normal-case">
+          {shortFarmName(farms.find((f) => f.id === farmId)?.name ?? "Brown Valley")}
+        </span>{" "}
+        (exclusive)
+      </div>
+    );
+  }
+  return (
+    <div>
+      <span className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-1 block">Estate</span>
+      <Select value={farmId} onValueChange={setFarmId}>
+        <SelectTrigger className="h-8 text-xs">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {farms.map((f) => (
+            <SelectItem key={f.id} value={f.id}>
+              {shortFarmName(f.name)}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
 }
 
 const SELECTIONS_STORAGE_KEY = "odisha_roasted_selections";
@@ -61,6 +103,7 @@ function RoastedProductCard({
   onAddLine: (line: SelectionLine) => void;
 }) {
   const [selectedWeight, setSelectedWeight] = useState<(typeof ROASTED_TIERS)[number]>(ROASTED_TIERS[2] ?? ROASTED_TIERS[0]);
+  const [farmId, setFarmId] = useState(roastedFarmIdFor(product));
   const [justAdded, setJustAdded] = useState(false);
   const { add } = useCart();
 
@@ -68,9 +111,10 @@ function RoastedProductCard({
 
   const handleSelect = () => {
     onAddLine({
-      key: lineKey(product.id, selectedWeight.label),
+      key: lineKey(product.id, selectedWeight.label, farmId),
       productId: product.id,
       weight: selectedWeight.label,
+      farmId,
       grams: selectedWeight.grams,
       quantity: 1,
       unitPrice,
@@ -78,7 +122,7 @@ function RoastedProductCard({
   };
 
   const handleAddToCart = () => {
-    add(product.id, selectedWeight.label);
+    add(product.id, selectedWeight.label, farmId);
     setJustAdded(true);
     window.setTimeout(() => setJustAdded(false), 1800);
   };
@@ -121,6 +165,7 @@ function RoastedProductCard({
         </div>
 
         <div className="border-t-2 border-odisha-black pt-3 mt-auto space-y-2">
+          <EstatePicker product={product} farmId={farmId} setFarmId={setFarmId} />
           {/* Weight chips */}
           <div className="grid grid-cols-4 gap-1.5">
             {ROASTED_TIERS.map((opt) => {
@@ -211,6 +256,7 @@ function SpecialtyProductCard({
   onAddLine: (line: SelectionLine) => void;
 }) {
   const [selectedWeight, setSelectedWeight] = useState<(typeof ROASTED_TIERS)[number]>(ROASTED_TIERS[2] ?? ROASTED_TIERS[0]);
+  const [farmId, setFarmId] = useState(roastedFarmIdFor(product));
   const [justAdded, setJustAdded] = useState(false);
   const { add } = useCart();
 
@@ -218,9 +264,10 @@ function SpecialtyProductCard({
 
   const handleSelect = () => {
     onAddLine({
-      key: lineKey(product.id, selectedWeight.label),
+      key: lineKey(product.id, selectedWeight.label, farmId),
       productId: product.id,
       weight: selectedWeight.label,
+      farmId,
       grams: selectedWeight.grams,
       quantity: 1,
       unitPrice,
@@ -228,7 +275,7 @@ function SpecialtyProductCard({
   };
 
   const handleAddToCart = () => {
-    add(product.id, selectedWeight.label);
+    add(product.id, selectedWeight.label, farmId);
     setJustAdded(true);
     window.setTimeout(() => setJustAdded(false), 1800);
   };
@@ -253,11 +300,12 @@ function SpecialtyProductCard({
       </div>
 
       <div className="text-xs text-odisha-black/60 space-y-1 mb-3">
-        <p><span className="font-medium text-odisha-black/80">Farm:</span>{" "}
-          <Link to={`/farms/${product.farmId}`} className="hover:text-odisha-red transition-colors">{product.farmName}</Link>
-        </p>
         <p><span className="font-medium text-odisha-black/80">Variety:</span> {product.variety}</p>
         <p><span className="font-medium text-odisha-black/80">Roast:</span> {roastLabels[product.roastLevel]}</p>
+      </div>
+
+      <div className="mb-3">
+        <EstatePicker product={product} farmId={farmId} setFarmId={setFarmId} />
       </div>
 
       <p className="text-xs text-odisha-black/60 leading-relaxed mb-3">{product.description}</p>
@@ -411,7 +459,7 @@ export function RoastedCatalog({
 
   const handleProceedToCheckout = () => {
     const products = selectionLines
-      .map((l) => `${l.productId}:${l.weight}::${l.quantity}`)
+      .map((l) => `${l.productId}:${l.weight}:${l.farmId}:${l.quantity}`)
       .join(",");
     navigate(`/checkout?products=${encodeURIComponent(products)}&total=${selectionTotal}`);
   };
@@ -579,7 +627,9 @@ export function RoastedCatalog({
                           <p className="font-serif font-bold text-odisha-black text-xs leading-snug line-clamp-2 mb-0.5">
                             {product?.name ?? line.productId}
                           </p>
-                          <p className="text-[10px] text-odisha-black/50 mb-2">{line.weight}</p>
+                          <p className="text-[10px] text-odisha-black/50 mb-2">
+                            {line.weight} · {shortFarmName(farms.find((f) => f.id === line.farmId)?.name ?? "")}
+                          </p>
 
                           <div className="mt-auto flex items-center justify-between gap-1">
                             <div className="flex items-center gap-1">

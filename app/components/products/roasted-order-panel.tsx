@@ -4,8 +4,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Minus, Plus, ShoppingCart, Zap } from "lucide-react";
 import type { Product } from "@/data/products";
+import { roastedFarmIdFor } from "@/data/products";
+import { farms, shortFarmName } from "@/data/farms";
 import { useCart } from "@/context/cart-context";
 import { ROASTED_TIERS, computeItemPrice, deliveryFeeForGrams } from "@/lib/pricing";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const MAX_QUANTITY = 10;
 
@@ -13,30 +16,57 @@ export function RoastedOrderPanel({ product }: { product: Product }) {
   const tiers = ROASTED_TIERS.filter((t) => product.weightOptions.includes(t.label));
   const [weight, setWeight] = useState(tiers[1] ?? tiers[0]);
   const [qty, setQty] = useState(1);
+  const [farmId, setFarmId] = useState(roastedFarmIdFor(product));
   const [added, setAdded] = useState(false);
   const navigate = useNavigate();
   const { add } = useCart();
 
+  const locked = Boolean(product.exclusiveFarmId);
   const unit = computeItemPrice(product.pricePerKg, weight.grams);
   const subtotal = unit * qty;
   const delivery = deliveryFeeForGrams(weight.grams * qty);
 
   const buyNow = () => {
     const params = new URLSearchParams({
-      products: `${product.id}:${weight.label}::${qty}`,
+      products: `${product.id}:${weight.label}:${farmId}:${qty}`,
       total: String(subtotal + delivery),
     });
     navigate(`/checkout?${params.toString()}`);
   };
 
   const addToCart = () => {
-    add(product.id, weight.label);
+    add(product.id, weight.label, farmId);
     setAdded(true);
     window.setTimeout(() => setAdded(false), 1800);
   };
 
   return (
     <div className="border-2 border-odisha-black bg-white p-5">
+      <div className="mb-4">
+        <span className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-1.5 block">
+          Estate
+        </span>
+        {locked ? (
+          <div className="border-2 border-odisha-black/20 bg-odisha-offwhite px-3 py-2 text-sm font-medium text-odisha-black">
+            {shortFarmName(farms.find((f) => f.id === farmId)?.name ?? "Brown Valley")}
+            <span className="ml-2 text-[10px] uppercase tracking-widest text-odisha-black/40">Exclusive</span>
+          </div>
+        ) : (
+          <Select value={farmId} onValueChange={setFarmId}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {farms.map((f) => (
+                <SelectItem key={f.id} value={f.id}>
+                  {shortFarmName(f.name)}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+      </div>
+
       <div className="mb-4">
         <span className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-1.5 block">Weight</span>
         <div className="flex flex-wrap gap-2">

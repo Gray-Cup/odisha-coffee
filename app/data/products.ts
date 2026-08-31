@@ -21,7 +21,19 @@ export type Product = {
   pricePerKg: number; // INR
   isGreen?: boolean;  // green/unroasted bean
   image?: string;     // path under /products/
+  // Roasted lots are farm-agnostic in the buy flow: the buyer picks which
+  // partner estate supplies the beans (default: Dream Hill). A few lots only
+  // exist at one estate — e.g. wild civet coffee at Brown Valley — and lock
+  // the farm choice via exclusiveFarmId.
+  exclusiveFarmId?: string;
 };
+
+// Default estate shown for a roasted lot when the buyer hasn't chosen one.
+export const ROASTED_DEFAULT_FARM_ID = "dream-hill-coffee";
+
+export function roastedFarmIdFor(product: Pick<Product, "exclusiveFarmId">): string {
+  return product.exclusiveFarmId ?? ROASTED_DEFAULT_FARM_ID;
+}
 
 export const products: Product[] = [
   // ── NEW PRODUCTS ─────────────────────────────────────────────────────────
@@ -369,6 +381,7 @@ export const products: Product[] = [
     name: "Brown Valley Wild Civet Coffee (Roasted)",
     farmId: "brown-valley-coffee-estate",
     farmName: "Brown Valley Coffee Estate × Gray Cup Roastery",
+    exclusiveFarmId: "brown-valley-coffee-estate",
     region: "Boipariguda, Koraput",
     processing: "washed",
     variety: "Arabica Chandragiri",

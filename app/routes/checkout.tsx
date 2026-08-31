@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useSearchParams, Link } from "react-router";
 import { CheckoutForm } from "@/components/checkout-form";
+import { getFarmBySlug } from "@/data/farms";
 import {
   resolveCartProduct,
   tiersFor,
@@ -12,7 +13,7 @@ import {
   type ResolvedCartItem,
 } from "@/lib/pricing";
 
-type CheckoutRow = { resolved: ResolvedCartItem; weight: string; quantity: number; price: number; grams: number; entry: string };
+type CheckoutRow = { resolved: ResolvedCartItem; weight: string; quantity: number; price: number; grams: number; entry: string; farmId?: string };
 
 function imageSrcFor(resolved: ResolvedCartItem): string | null {
   if (resolved.kind === "product") return resolved.product.image ? `/products/${resolved.product.image}` : null;
@@ -34,7 +35,7 @@ function CheckoutContent() {
       const tier  = tiers.find((t) => t.label === weight) ?? tiers[0];
       const quantity = qty ? Math.max(1, Math.floor(Number(qty)) || 1) : 1;
       const price = computeItemPrice(pricePerKgFor(resolved, tier.grams), tier.grams) * quantity;
-      return [{ resolved, weight: tier.label, quantity, price, grams: tier.grams * quantity, entry }];
+      return [{ resolved, weight: tier.label, quantity, price, grams: tier.grams * quantity, entry, farmId }];
     });
   }, [productsParam]);
 
@@ -80,9 +81,13 @@ function CheckoutContent() {
                 Your Order
               </h2>
               <div className="space-y-4 mb-5">
-                {cartItems.map(({ resolved, weight, quantity, price }) => {
+                {cartItems.map(({ resolved, weight, quantity, price, farmId }) => {
                   const product = resolved.product;
                   const image = imageSrcFor(resolved);
+                  const roastedFarm =
+                    resolved.kind === "product" && !resolved.product.isGreen && farmId
+                      ? getFarmBySlug(farmId)
+                      : undefined;
                   return (
                     <div key={`${product.id}:${weight}`} className="flex gap-3">
                       <div className="w-12 h-12 border-2 border-odisha-black shrink-0 overflow-hidden relative bg-odisha-offwhite">
@@ -94,6 +99,9 @@ function CheckoutContent() {
                         <p className="text-xs font-semibold text-odisha-black leading-snug">{product.name}</p>
                         {resolved.kind === "estate" && (
                           <p className="text-[10px] text-odisha-black/50">From {resolved.farm.name}</p>
+                        )}
+                        {roastedFarm && (
+                          <p className="text-[10px] text-odisha-black/50">Estate: {roastedFarm.name}</p>
                         )}
                         <p className="text-[10px] text-odisha-black/50 mt-0.5">
                           {weight}{quantity > 1 ? ` × ${quantity}` : ""}

@@ -12,6 +12,7 @@ import {
   type ResolvedCartItem,
 } from "@/lib/pricing";
 import { availabilityColors, availabilityLabels } from "@/data/products";
+import { getFarmBySlug } from "@/data/farms";
 
 type CartRow = {
   resolved: ResolvedCartItem;
@@ -107,6 +108,11 @@ export default function CartPage() {
                           <h3 className="font-serif font-bold text-odisha-black text-sm leading-snug">{product.name}</h3>
                           {resolved.kind === "estate" && (
                             <p className="text-[10px] text-odisha-black/50 mt-0.5">From {resolved.farm.name}</p>
+                          )}
+                          {resolved.kind === "product" && !resolved.product.isGreen && item.farmId && (
+                            <p className="text-[10px] text-odisha-black/50 mt-0.5">
+                              Estate: {getFarmBySlug(item.farmId)?.name ?? item.farmId}
+                            </p>
                           )}
                           {resolved.kind !== "spice" && (
                             <span className={`text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 mt-1 inline-block ${availabilityColors[resolved.product.availability]}`}>
