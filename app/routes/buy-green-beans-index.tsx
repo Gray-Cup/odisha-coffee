@@ -3,6 +3,10 @@ import { farms } from "@/data/farms";
 import { estateProducts } from "@/data/estate-products";
 import { ProductsCatalog } from "@/components/products/products-catalog";
 import { GrayCupShowcase } from "@/components/product-card";
+import { greenProductSchema, itemListSchema, jsonLdScript } from "@/lib/product-schema";
+import { SITE_URL } from "@/lib/seo";
+
+const OG_IMAGE = `${SITE_URL}/products/green-coffee-beans.webp`;
 
 export function meta() {
   return [
@@ -20,6 +24,17 @@ export function meta() {
     },
     { property: "og:url", content: "https://odishacoffee.com/buy-green-beans" },
     { property: "og:locale", content: "en_IN" },
+    { property: "og:image", content: OG_IMAGE },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: OG_IMAGE },
+    jsonLdScript(
+      itemListSchema(
+        `${SITE_URL}/buy-green-beans`,
+        "Koraput, Odisha Green Coffee Beans",
+        estateProducts.map((p) => ({ url: `${SITE_URL}/buy-green-beans/${p.id}`, name: p.name }))
+      )
+    ),
+    ...estateProducts.map((p) => jsonLdScript(greenProductSchema(p))),
   ];
 }
 

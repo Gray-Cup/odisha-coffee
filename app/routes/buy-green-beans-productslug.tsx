@@ -5,6 +5,7 @@ import { getEstateProductById } from "@/data/estate-products";
 import { farms, processingColors, processingLabels } from "@/data/farms";
 import { roundToNearest5 } from "@/lib/pricing";
 import { generateTitle, generateDescription, SITE_URL } from "@/lib/seo";
+import { greenProductSchema, jsonLdScript } from "@/lib/product-schema";
 import { ProductReviews } from "@/components/reviews/product-reviews";
 import { OrderPanel } from "@/components/products/order-panel";
 
@@ -19,6 +20,9 @@ export function loader({ params }: Route.LoaderArgs) {
 export function meta({ data, params }: Route.MetaArgs) {
   if (!data) return [{ title: "Product Not Found" }];
   const { product } = data;
+  const image = product.image
+    ? `${SITE_URL}/${product.image}`
+    : `${SITE_URL}/products/green-coffee-beans.webp`;
   return [
     { title: generateTitle(`${product.name} Green Coffee from Koraput, Odisha`) },
     {
@@ -28,6 +32,13 @@ export function meta({ data, params }: Route.MetaArgs) {
       ),
     },
     { tagName: "link", rel: "canonical", href: `${SITE_URL}/buy-green-beans/${params.productSlug}` },
+    { property: "og:type", content: "product" },
+    { property: "og:url", content: `${SITE_URL}/buy-green-beans/${params.productSlug}` },
+    { property: "og:image", content: image },
+    { property: "og:image:alt", content: product.name },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: image },
+    jsonLdScript(greenProductSchema(product)),
   ];
 }
 

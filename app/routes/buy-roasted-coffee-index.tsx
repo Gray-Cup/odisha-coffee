@@ -5,6 +5,10 @@ import { products } from "@/data/products";
 import { RoastedCatalog } from "@/components/products/roasted-catalog";
 import { GrayCupShowcase } from "@/components/product-card";
 import { generateTitle, generateDescription, SITE_URL } from "@/lib/seo";
+import { roastedProductSchema, itemListSchema, jsonLdScript } from "@/lib/product-schema";
+
+const OG_IMAGE = `${SITE_URL}/products/roasted-coffee-beans.webp`;
+const ROASTED = products.filter((p) => !p.isGreen && p.roastLevel !== "green");
 
 export function meta() {
   return [
@@ -15,6 +19,21 @@ export function meta() {
         "Specialty roasted coffee from Koraput's Eastern Ghats, with washed, natural and honey processed Arabica, roasted fresh to order and delivered anywhere in India."
       ),
     },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: `${SITE_URL}/buy-roasted-coffee` },
+    { property: "og:image", content: OG_IMAGE },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: OG_IMAGE },
+    jsonLdScript(
+      itemListSchema(
+        `${SITE_URL}/buy-roasted-coffee`,
+        "Odisha Roasted Coffee",
+        ROASTED.map((p) => ({ url: `${SITE_URL}/roasted-coffee#${p.id}`, name: p.name }))
+      )
+    ),
+    ...ROASTED.map((p) =>
+      jsonLdScript(roastedProductSchema(p, `${SITE_URL}/buy-roasted-coffee`))
+    ),
   ];
 }
 
