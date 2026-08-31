@@ -63,14 +63,16 @@ export function isDomesticCountry(country: string): boolean {
  * item). Domestic (India): flat ₹100 under 1kg; ₹70/kg from 1kg up to (but
  * under) 3kg; ₹60/kg from 3kg up. International: flat ₹350/kg.
  */
+// Flat handling surcharge added to every order's delivery fee.
+const DELIVERY_SURCHARGE = 30;
+
 export function deliveryFeeForGrams(totalGrams: number, country: string = "india"): number {
   const kg = totalGrams / 1000;
   if (!isDomesticCountry(country)) {
-    return Math.round(INTERNATIONAL_DELIVERY_RATE_PER_KG * kg);
+    return Math.round(INTERNATIONAL_DELIVERY_RATE_PER_KG * kg) + DELIVERY_SURCHARGE;
   }
-  if (totalGrams < 1000) return 100;
-  const ratePerKg = kg < 3 ? 70 : 60;
-  return Math.round(ratePerKg * kg);
+  const base = totalGrams < 1000 ? 100 : Math.round((kg < 3 ? 70 : 60) * kg);
+  return base + DELIVERY_SURCHARGE;
 }
 
 // ─── Estate (per-farm green bean) lots ───────────────────────────────────
