@@ -1,6 +1,7 @@
 import { Link, data, isRouteErrorResponse } from "react-router";
 import type { Route } from "./+types/country-green-coffee";
-import { getCountryBySlug, getRelatedCountries } from "@/data/locations/countries";
+import { getCountryBySlug } from "@/data/locations/countries";
+import { getCountryExport, countriesInRegion } from "@/data/locations/country-export";
 import { farms } from "@/data/farms";
 import { estateProducts } from "@/data/estate-products";
 import { ProductsCatalog } from "@/components/products/products-catalog";
@@ -8,73 +9,117 @@ import { generateTitle, generateDescription, SITE_URL } from "@/lib/seo";
 
 export function loader({ params }: Route.LoaderArgs) {
   const country = getCountryBySlug(params.country);
-  if (!country) {
+  const ex = getCountryExport(params.country);
+  if (!country || !ex) {
     throw data("Country not found", { status: 404 });
   }
-  return { country, countrySlug: params.country };
+  return { country, ex, countrySlug: params.country };
 }
 
-export function meta({ data, params }: Route.MetaArgs) {
-  if (!data) return [{ title: "Not Found" }];
-  const { country, countrySlug } = data;
+const OG_IMAGE = `${SITE_URL}/products/green-coffee-beans.webp`;
+
+function faqs(name: string, ex: ReturnType<typeof getCountryExport>) {
+  if (!ex) return [];
   return [
-    { title: generateTitle(`Green Coffee Exporter to ${country.name}`) },
     {
-      name: "description",
-      content: generateDescription(
-        `Export-ready Koraput, Odisha green Arabica coffee for roasters and importers in ${country.name}. Traceable, tribal-farmed, Eastern Ghats single-origin lots, select a grade and order online.`
-      ),
+      q: `How long does green coffee take to ship from India to ${name}?`,
+      a: `Typical sea transit is ${ex.transit}. ${ex.route} Loading is from ${ex.originPorts}, discharging at ${ex.port}.`,
     },
-    { property: "og:title", content: `Green Coffee Exporter to ${country.name} ${country.flag} | Odisha Coffee` },
     {
-      property: "og:description",
-      content: `Wholesale Koraput green coffee exported to ${country.name}. APEDA, phytosanitary, and ICO documentation included.`,
+      q: `Is there an import duty on green coffee in ${name}?`,
+      a: `${ex.duty} Always confirm the current rate against your own tariff classification (HS 0901.11) before ordering.`,
     },
-    { property: "og:url", content: `${SITE_URL}/${countrySlug}/green-coffee` },
+    {
+      q: `What documentation and compliance is needed to import into ${name}?`,
+      a: `${ex.compliance} Every lot also ships with a phytosanitary certificate, certificate of origin, ICO mark, APEDA registration and FSSAI documentation, plus farm-level GPS traceability.`,
+    },
+    {
+      q: `Can a roaster in ${name} order Koraput green coffee directly online?`,
+      a: `Yes. Choose a grade and partner farm from the catalogue below, set your quantity, and order online or request an FOB quote for full-container volumes. ${ex.container}`,
+    },
+  ];
+}
+
+export function meta({ data: d, params }: Route.MetaArgs) {
+  if (!d) return [{ title: "Not Found" }];
+  const { country, ex, countrySlug } = d;
+  const url = `${SITE_URL}/${countrySlug}/green-coffee`;
+  const title = generateTitle(`Green Coffee Export to ${country.name}: Koraput Arabica`);
+  const desc = generateDescription(
+    `Wholesale Koraput, Odisha green Arabica for roasters and importers in ${country.name}. ${ex.transit} sea transit to ${ex.port}, ${ex.duty} Traceable, tribal-farmed Eastern Ghats lots with EUDR-ready GPS data.`
+  );
+  return [
+    { title },
+    { name: "description", content: desc },
+    { property: "og:title", content: `Green Coffee Export to ${country.name} ${country.flag}` },
+    { property: "og:description", content: desc },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: url },
+    { property: "og:image", content: OG_IMAGE },
     { property: "og:locale", content: "en_IN" },
-    { tagName: "link", rel: "canonical", href: `${SITE_URL}/${params.country}/green-coffee` },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: OG_IMAGE },
+    { tagName: "link", rel: "canonical", href: url },
+    {
+      "script:ld+json": {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: "Export", item: `${SITE_URL}/odisha-coffee-export` },
+          { "@type": "ListItem", position: 3, name: country.name, item: url },
+        ],
+      },
+    },
+    {
+      "script:ld+json": {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs(country.name, ex).map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+    },
   ];
 }
 
 export default function CountryGreenCoffeePage({ loaderData }: Route.ComponentProps) {
-  const { country, countrySlug } = loaderData;
-  const related = getRelatedCountries(countrySlug);
+  const { country, ex, countrySlug } = loaderData;
   const exportReadyFarms = farms.filter((f) => f.exportReady);
-
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name: country.name, item: `${SITE_URL}/${countrySlug}/green-coffee` },
-    ],
-  };
+  const sameRegion = countriesInRegion(ex.region, countrySlug)
+    .map((s) => getCountryBySlug(s))
+    .filter((c): c is NonNullable<typeof c> => Boolean(c))
+    .slice(0, 8);
+  const list = faqs(country.name, ex);
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-
       {/* Hero */}
       <section className="bg-odisha-red pattachitra-pattern-red border-b-2 border-odisha-black">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-14">
           <div className="flex items-center gap-2 mb-5 text-xs flex-wrap">
             <Link to="/" className="text-white/60 hover:text-white uppercase tracking-widest transition-colors">Home</Link>
             <span className="text-white/30">/</span>
+            <Link to="/odisha-coffee-export" className="text-white/60 hover:text-white uppercase tracking-widest transition-colors">Export</Link>
+            <span className="text-white/30">/</span>
             <span className="text-white uppercase tracking-widest">{country.flag} {country.name}</span>
           </div>
           <h1 className="font-serif text-3xl md:text-4xl font-bold text-white leading-tight max-w-3xl">
-            Green Coffee Exporter to {country.name} {country.flag}
+            Green Coffee Export to {country.name} {country.flag}
           </h1>
           <p className="mt-4 text-white/80 max-w-2xl text-base">
-            Koraput Arabica from the Eastern Ghats, traceable, tribal-farmed, and export-ready.
-            Select a grade below, choose your farm, and order direct for shipment to {country.name}.
+            Koraput Arabica from Odisha's Eastern Ghats, shipped to roasters and importers
+            across {ex.label}. Roughly {ex.transit} by sea to {ex.port}, with full
+            farm-level traceability and EUDR-ready GPS data on every lot.
           </p>
           <div className="mt-6 flex flex-wrap gap-6">
             {[
+              { value: ex.transit.split("–")[0].replace(/\D/g, "") + "d+", label: "Sea Transit" },
               { value: estateProducts.length.toString(), label: "Grade Lots" },
               { value: farms.length.toString(), label: "Partner Farms" },
               { value: exportReadyFarms.length.toString(), label: "Export Ready" },
-              { value: country.currency, label: "Settled In INR, Quoted For " + country.currency + " Buyers" },
             ].map(({ value, label }) => (
               <div key={label} className="border-l-2 border-white/30 pl-4">
                 <div className="font-serif text-2xl font-bold text-white">{value}</div>
@@ -85,74 +130,133 @@ export default function CountryGreenCoffeePage({ loaderData }: Route.ComponentPr
         </div>
       </section>
 
-      {/* Export context */}
+      {/* Market context */}
       <section className="bg-white border-b-2 border-odisha-black">
         <div className="max-w-4xl mx-auto px-4 lg:px-6 py-12">
           <h2 className="font-serif text-2xl font-bold text-odisha-black mb-4">
-            Exporting Koraput Green Coffee to {country.name}
+            The {country.name} coffee market
           </h2>
-          <p className="text-odisha-black/80 leading-relaxed">
-            Gray Cup Enterprises exports Koraput, Odisha green Arabica directly from our {farms.length}{" "}
-            partner estates in the Eastern Ghats to roasters, importers, and traders in {country.name}. Every
-            export-ready lot ships with APEDA registration, a phytosanitary certificate, FSSAI documentation,
-            an ICO stamp, and full farm-level traceability, grown by tribal farming communities at 700–1,100m
-            elevation.
+          <p className="text-odisha-black/80 leading-relaxed">{ex.note}</p>
+          <p className="text-odisha-black/80 leading-relaxed mt-4">
+            Koraput sits at 700–1,100 m in the Eastern Ghats and is one of India's youngest
+            traceable origins — washed, natural and honey Arabica (S795, SLN 9, Chandragiri, HSD)
+            grown by tribal farming communities across {farms.length} partner estates. For a
+            {" "}{country.name} roaster it offers a distinctive Indian profile with clean cup
+            character and documentation that stands up to scrutiny at import.
           </p>
         </div>
       </section>
 
-      {/* Interactive catalog */}
-      <ProductsCatalog />
+      {/* Shipping */}
+      <section className="bg-odisha-offwhite border-b-2 border-odisha-black">
+        <div className="max-w-4xl mx-auto px-4 lg:px-6 py-12">
+          <h2 className="font-serif text-2xl font-bold text-odisha-black mb-4">
+            Shipping green coffee from India to {country.name}
+          </h2>
+          <dl className="space-y-4 text-odisha-black/80">
+            <div>
+              <dt className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1">Route</dt>
+              <dd className="leading-relaxed">{ex.route}</dd>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-4">
+              <div>
+                <dt className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1">Load port</dt>
+                <dd>{ex.originPorts}</dd>
+              </div>
+              <div>
+                <dt className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1">Discharge</dt>
+                <dd>{ex.port}</dd>
+              </div>
+              <div>
+                <dt className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1">Transit</dt>
+                <dd>{ex.transit}</dd>
+              </div>
+            </div>
+            <div>
+              <dt className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1">Container</dt>
+              <dd className="leading-relaxed">{ex.container}</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      {/* Import & compliance */}
+      <section className="bg-white border-b-2 border-odisha-black">
+        <div className="max-w-4xl mx-auto px-4 lg:px-6 py-12">
+          <h2 className="font-serif text-2xl font-bold text-odisha-black mb-4">
+            Import duty &amp; compliance in {country.name}
+          </h2>
+          <p className="text-odisha-black/80 leading-relaxed">
+            <strong>Tariff line:</strong> green, unroasted, non-decaffeinated coffee classifies
+            under HS 0901.11. {ex.duty}
+          </p>
+          <p className="text-odisha-black/80 leading-relaxed mt-4">
+            <strong>Compliance:</strong> {ex.compliance}
+          </p>
+          <p className="text-odisha-black/80 leading-relaxed mt-4">
+            Every export lot ships with a phytosanitary certificate, certificate of origin, ICO
+            mark, APEDA registration, FSSAI documentation and GPS polygon data for each partner
+            plot. Rules change — confirm the current position with your customs broker before you
+            order.
+          </p>
+        </div>
+      </section>
+
+      {/* Catalog */}
+      <section className="border-b-2 border-odisha-black">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 pt-10">
+          <h2 className="font-serif text-2xl font-bold text-odisha-black">
+            Koraput green coffee lots for {country.name}
+          </h2>
+          <p className="text-sm text-odisha-black/60 mt-1">
+            Select a grade and partner farm, choose your quantity, and order online — or contact
+            us for FOB pricing and full-container volumes.
+          </p>
+        </div>
+        <ProductsCatalog />
+      </section>
 
       {/* FAQ */}
-      <section className="bg-white border-t-2 border-odisha-black">
+      <section className="bg-white border-b-2 border-odisha-black">
         <div className="max-w-4xl mx-auto px-4 lg:px-6 py-14">
           <h2 className="font-serif text-2xl font-bold text-odisha-black mb-6">
-            Frequently Asked Questions
+            Importing to {country.name}: FAQ
           </h2>
           <div className="space-y-6">
-            <div className="border-l-4 border-odisha-red pl-5">
-              <h3 className="font-semibold text-odisha-black mb-2">
-                Can roasters in {country.name} order Koraput green coffee directly online?
-              </h3>
-              <p className="text-odisha-black/70 leading-relaxed">
-                Yes, select a grade and farm above, choose your quantity, and either add it to your cart
-                or proceed straight to checkout. For larger export quantities, contact us for FOB pricing
-                and FCL/LCL options.
-              </p>
-            </div>
-            <div className="border-l-4 border-odisha-red pl-5">
-              <h3 className="font-semibold text-odisha-black mb-2">
-                What certification comes with green coffee exported to {country.name}?
-              </h3>
-              <p className="text-odisha-black/70 leading-relaxed">
-                Every export-ready lot ships with APEDA registration, phytosanitary certificate, FSSAI,
-                ICO stamp, and full farm-level traceability documents.
-              </p>
-            </div>
+            {list.map((f) => (
+              <div key={f.q} className="border-l-4 border-odisha-red pl-5">
+                <h3 className="font-semibold text-odisha-black mb-2">{f.q}</h3>
+                <p className="text-odisha-black/70 leading-relaxed">{f.a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Related countries */}
-      {related.length > 0 && (
+      {/* Related */}
+      {sameRegion.length > 0 && (
         <section className="border-t-2 border-odisha-black bg-odisha-offwhite">
           <div className="max-w-7xl mx-auto px-4 lg:px-6 py-14">
             <h2 className="font-serif text-2xl font-bold text-odisha-black mb-6">
-              Other Countries We Export To
+              Green coffee export across {ex.label}
             </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {related.map((c) => (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {sameRegion.map((c) => (
                 <Link
                   key={c.slug}
                   to={`/${c.slug}/green-coffee`}
                   className="group block border-2 border-odisha-black bg-white hover:bg-odisha-offwhite transition-colors p-4"
                 >
-                  <h3 className="font-semibold text-odisha-black group-hover:text-odisha-red transition-colors">
+                  <span className="font-semibold text-odisha-black group-hover:text-odisha-red transition-colors">
                     {c.flag} {c.name}
-                  </h3>
+                  </span>
                 </Link>
               ))}
+            </div>
+            <div className="mt-6">
+              <Link to="/odisha-coffee-export" className="text-sm text-odisha-red underline">
+                All export destinations →
+              </Link>
             </div>
           </div>
         </section>
@@ -166,8 +270,8 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-24 text-center">
         <h1 className="text-3xl font-bold mb-4">Country not found</h1>
-        <Link to="/buy-coffee" className="text-odisha-red underline">
-          Browse countries we export to
+        <Link to="/odisha-coffee-export" className="text-odisha-red underline">
+          Browse export destinations
         </Link>
       </div>
     );
