@@ -15,16 +15,16 @@ export type EstateProduct = {
   moisture: string;
   screenSize: string;
   brewingNotes: string;
-  image?: string; // filename relative to /public/ — used as the card/thumbnail image
+  image?: string; // filename relative to /public/, used as the card/thumbnail image
   images?: string[]; // optional extra gallery shots (paths relative to /public/) for the product's own page
-  // Most lots are farm-agnostic — the buyer pairs any lot with any partner
+  // Most lots are farm-agnostic, the buyer pairs any lot with any partner
   // farm via the dropdown. A handful of genuinely rare items (e.g. wild
   // civet cat coffee) only exist at one specific estate, so this locks the
   // product to that farm instead of offering a farm choice.
   exclusiveFarmId?: string;
   // Grams -> exact ₹/kg override. When set for a given weight tier, this
   // replaces the standard base+bulkDiscountForGrams formula entirely for
-  // that tier — used for one-off lots priced by hand rather than by the
+  // that tier, used for one-off lots priced by hand rather than by the
   // shared percentage schedule (e.g. wild civet cat coffee).
   customPricing?: Record<number, number>;
 };
@@ -50,16 +50,16 @@ export const estateProducts: EstateProduct[] = [
     shippingPerKg: 60,
     image: "koraput-washed.webp",
     description:
-      "The finest grade from Koraput's Eastern Ghats — AAA-grade washed Arabica, screen 17+ sorted, moisture-tested at 10–12%. Fully washed and parchment-dried on raised beds for 14–18 days. Ideal for specialty roasters and importers seeking a consistent, traceable Indian Arabica with clean cup character.",
+      "The finest grade from Koraput's Eastern Ghats, AAA-grade washed Arabica, screen 17+ sorted, moisture-tested at 10–12%. Fully washed and parchment-dried on raised beds for 14–18 days. Ideal for specialty roasters and importers seeking a consistent, traceable Indian Arabica with clean cup character.",
     flavorNotes: ["Clean", "Mild Citrus", "Chocolate", "Brown Sugar"],
     availability: "in-stock",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
-    grade: "AAA — Screen 17+",
+    grade: "AAA, Screen 17+",
     moisture: "10–12%",
     screenSize: "Screen 17+",
     brewingNotes:
-      "Recommended roast: medium-light to medium. First crack +20–30s development. The washed process transparency rewards a careful ramp — expect clean citrus on light roasts, chocolate and brown sugar on medium.",
+      "Recommended roast: medium-light to medium. First crack +20–30s development. The washed process transparency rewards a careful ramp, expect clean citrus on light roasts, chocolate and brown sugar on medium.",
   },
   {
     id: "aa-arabica-washed",
@@ -76,7 +76,7 @@ export const estateProducts: EstateProduct[] = [
     availability: "in-stock",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
-    grade: "AA — Screen 16+",
+    grade: "AA, Screen 16+",
     moisture: "10–12%",
     screenSize: "Screen 16+",
     brewingNotes:
@@ -92,12 +92,12 @@ export const estateProducts: EstateProduct[] = [
     shippingPerKg: 60,
     image: "koraput-washed.webp",
     description:
-      "A-grade washed Arabica from Koraput partner estates. Screen 15+ sorted, moisture 10–12%. A good-value entry into Odisha washed Arabica — clean, approachable, and well-suited to medium roast profiles and espresso blending.",
+      "A-grade washed Arabica from Koraput partner estates. Screen 15+ sorted, moisture 10–12%. A good-value entry into Odisha washed Arabica, clean, approachable, and well-suited to medium roast profiles and espresso blending.",
     flavorNotes: ["Chocolate", "Mild Spice", "Nutty", "Clean Finish"],
     availability: "in-stock",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
-    grade: "A — Screen 15+",
+    grade: "A, Screen 15+",
     moisture: "10–12%",
     screenSize: "Screen 15+",
     brewingNotes:
@@ -113,16 +113,16 @@ export const estateProducts: EstateProduct[] = [
     shippingPerKg: 60,
     image: "koraput-washed.webp",
     description:
-      "B+ grade washed green beans — screen 15+, moisture 10–13%. A 100% Arabica lot combining S795 and Chandragiri from Koraput estates, fully washed and sun-dried. Suited for commodity blenders, large-volume roasters, and buyers seeking consistent Indian green beans at scale.",
+      "B+ grade washed green beans, screen 15+, moisture 10–13%. A 100% Arabica lot combining S795 and Chandragiri from Koraput estates, fully washed and sun-dried. Suited for commodity blenders, large-volume roasters, and buyers seeking consistent Indian green beans at scale.",
     flavorNotes: ["Cocoa", "Earthy", "Full Body", "Low Acidity"],
     availability: "in-stock",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
-    grade: "B+ — Screen 15+",
+    grade: "B+, Screen 15+",
     moisture: "10–13%",
     screenSize: "Screen 15+",
     brewingNotes:
-      "Recommended roast: medium-dark to dark. Full-bodied and low-acid straight out of the washed process — well-suited to espresso blends and commercial roast profiles.",
+      "Recommended roast: medium-dark to dark. Full-bodied and low-acid straight out of the washed process, well-suited to espresso blends and commercial roast profiles.",
   },
   {
     id: "b-arabica-washed",
@@ -134,12 +134,12 @@ export const estateProducts: EstateProduct[] = [
     shippingPerKg: 60,
     image: "koraput-washed.webp",
     description:
-      "B-grade washed green beans from Koraput — screen 13+ sorted, moisture 11–13%. A practical commodity lot for high-volume buyers, instant coffee producers, and blend manufacturers. Traceable origin with FSSAI documentation.",
+      "B-grade washed green beans from Koraput, screen 13+ sorted, moisture 11–13%. A practical commodity lot for high-volume buyers, instant coffee producers, and blend manufacturers. Traceable origin with FSSAI documentation.",
     flavorNotes: ["Earthy", "Cocoa", "Woody", "Neutral"],
     availability: "in-stock",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "5 kg",
-    grade: "B — Screen 13+",
+    grade: "B, Screen 13+",
     moisture: "11–13%",
     screenSize: "Screen 13+",
     brewingNotes:
@@ -155,12 +155,12 @@ export const estateProducts: EstateProduct[] = [
     shippingPerKg: 60,
     image: "koraput-washed.webp",
     description:
-      "BB-grade washed green beans from Koraput — screen 12+ sorted, moisture 11–13%. Our lowest-grade washed commodity lot, priced for the most price-sensitive high-volume buyers, instant coffee producers, and blend manufacturers. Traceable origin with FSSAI documentation.",
+      "BB-grade washed green beans from Koraput, screen 12+ sorted, moisture 11–13%. Our lowest-grade washed commodity lot, priced for the most price-sensitive high-volume buyers, instant coffee producers, and blend manufacturers. Traceable origin with FSSAI documentation.",
     flavorNotes: ["Earthy", "Woody", "Neutral", "Full Body"],
     availability: "in-stock",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "5 kg",
-    grade: "BB — Screen 12+",
+    grade: "BB, Screen 12+",
     moisture: "11–13%",
     screenSize: "Screen 12+",
     brewingNotes:
@@ -181,7 +181,7 @@ export const estateProducts: EstateProduct[] = [
     availability: "in-stock",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
-    grade: "B+ — Screen 15+",
+    grade: "B+, Screen 15+",
     moisture: "11–13%",
     screenSize: "Screen 15+",
     brewingNotes:
@@ -202,7 +202,7 @@ export const estateProducts: EstateProduct[] = [
     availability: "limited",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
-    grade: "AA — Screen 17+",
+    grade: "AA, Screen 17+",
     moisture: "10–12%",
     screenSize: "Screen 17+",
     brewingNotes:
@@ -223,7 +223,7 @@ export const estateProducts: EstateProduct[] = [
     availability: "limited",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
-    grade: "A — Screen 16+",
+    grade: "A, Screen 16+",
     moisture: "10–12%",
     screenSize: "Screen 16+",
     brewingNotes:
@@ -239,17 +239,17 @@ export const estateProducts: EstateProduct[] = [
     shippingPerKg: 60,
     image: "koraput-washed.webp",
     description:
-      "Specialty-grade peaberry lot, exclusively hand-sorted at Brown Valley Coffee Estate — single round beans (naturally occurring in ~5% of cherries), fully washed and dried on raised beds for 14–18 days. Denser than flat beans and prized for a sweeter, more concentrated cup. Screen 12+ round-screen sorted, moisture 10–12%, cupped and lot-tested.",
+      "Specialty-grade peaberry lot, exclusively hand-sorted at Brown Valley Coffee Estate, single round beans (naturally occurring in ~5% of cherries), fully washed and dried on raised beds for 14–18 days. Denser than flat beans and prized for a sweeter, more concentrated cup. Screen 12+ round-screen sorted, moisture 10–12%, cupped and lot-tested.",
     flavorNotes: ["Concentrated Sweetness", "Citrus", "Honey", "Bright Acidity"],
     availability: "limited",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "500 g",
     exclusiveFarmId: "brown-valley-coffee-estate",
-    grade: "Specialty — Round Screen 12+",
+    grade: "Specialty, Round Screen 12+",
     moisture: "10–12%",
     screenSize: "Round Screen 12+",
     brewingNotes:
-      "Recommended roast: light to medium. The dense, round bean roasts more evenly than flat beans — reduce heat slightly to avoid scorching the surface. Outstanding on pour-over, where the concentrated sweetness and acidity come through clearly.",
+      "Recommended roast: light to medium. The dense, round bean roasts more evenly than flat beans, reduce heat slightly to avoid scorching the surface. Outstanding on pour-over, where the concentrated sweetness and acidity come through clearly.",
   },
   {
     id: "naturals-commercial",
@@ -266,7 +266,7 @@ export const estateProducts: EstateProduct[] = [
     availability: "in-stock",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "5 kg",
-    grade: "AA — Screen 14+",
+    grade: "AA, Screen 14+",
     moisture: "11–13%",
     screenSize: "Screen 14+",
     brewingNotes:
@@ -287,7 +287,7 @@ export const estateProducts: EstateProduct[] = [
     availability: "in-stock",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "5 kg",
-    grade: "AA — Screen 14+",
+    grade: "AA, Screen 14+",
     moisture: "11–13%",
     screenSize: "Screen 14+",
     brewingNotes:
@@ -308,7 +308,7 @@ export const estateProducts: EstateProduct[] = [
     availability: "limited",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
-    grade: "Specialty — Screen 16+",
+    grade: "Specialty, Screen 16+",
     moisture: "10–12%",
     screenSize: "Screen 16+",
     brewingNotes:
@@ -324,12 +324,12 @@ export const estateProducts: EstateProduct[] = [
     shippingPerKg: 60,
     image: "koraput-naturals.webp",
     description:
-      "AA-grade extended anaerobic-fermentation naturals from Koraput — whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, intensifying the fruit and funk beyond a standard natural. Screen 16+ sorted, moisture 10–12%, cupped and lot-tested for consistency across the fermentation-driven profile.",
+      "AA-grade extended anaerobic-fermentation naturals from Koraput, whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, intensifying the fruit and funk beyond a standard natural. Screen 16+ sorted, moisture 10–12%, cupped and lot-tested for consistency across the fermentation-driven profile.",
     flavorNotes: ["Tropical Fruit", "Wine", "Funky Ferment", "Heavy Body"],
     availability: "limited",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
-    grade: "AA — Screen 16+",
+    grade: "AA, Screen 16+",
     moisture: "10–12%",
     screenSize: "Screen 16+",
     brewingNotes:
@@ -345,12 +345,12 @@ export const estateProducts: EstateProduct[] = [
     shippingPerKg: 60,
     image: "koraput-naturals.webp",
     description:
-      "A-grade extended anaerobic-fermentation naturals from Koraput — whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, building fruit-forward funk on top of a standard natural. Screen 15+ sorted, moisture 10–12%, cupped and lot-tested for consistency across the fermentation-driven profile.",
+      "A-grade extended anaerobic-fermentation naturals from Koraput, whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, building fruit-forward funk on top of a standard natural. Screen 15+ sorted, moisture 10–12%, cupped and lot-tested for consistency across the fermentation-driven profile.",
     flavorNotes: ["Tropical Fruit", "Wine", "Funky Ferment", "Full Body"],
     availability: "limited",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
-    grade: "A — Screen 15+",
+    grade: "A, Screen 15+",
     moisture: "10–12%",
     screenSize: "Screen 15+",
     brewingNotes:
@@ -366,12 +366,12 @@ export const estateProducts: EstateProduct[] = [
     shippingPerKg: 60,
     image: "koraput-naturals.webp",
     description:
-      "B+ grade extended anaerobic-fermentation naturals from Koraput — whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, a value-focused entry point into the fermentation-driven funk profile. Screen 14+ sorted, moisture 10–12%, cupped and lot-tested for consistency.",
+      "B+ grade extended anaerobic-fermentation naturals from Koraput, whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, a value-focused entry point into the fermentation-driven funk profile. Screen 14+ sorted, moisture 10–12%, cupped and lot-tested for consistency.",
     flavorNotes: ["Tropical Fruit", "Wine", "Funky Ferment", "Full Body"],
     availability: "limited",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "1 kg",
-    grade: "B+ — Screen 14+",
+    grade: "B+, Screen 14+",
     moisture: "10–12%",
     screenSize: "Screen 14+",
     brewingNotes:
@@ -392,12 +392,12 @@ export const estateProducts: EstateProduct[] = [
       "civet-cat/cat2.webp",
     ],
     description:
-      "A genuine rarity from Brown Valley, Koraput, Odisha, India — wild civet cat coffee, exclusively foraged at Brown Valley Coffee Estate. Also known as Kopi Luwak, it's made by passing coffee cherries through the digestive tract of the wild Asian palm civet, where they undergo natural fermentation and enzymatic changes before being hand-collected from the animal's droppings, thoroughly cleaned, and sun-dried. It's washed — a smooth, low-bitter cup with rich chocolate, earthy, and creamy dairy-like notes. Wild-foraged (never caged), seasonal, and available only in small quantities.",
+      "A genuine rarity from Brown Valley, Koraput, Odisha, India, wild civet cat coffee, exclusively foraged at Brown Valley Coffee Estate. Also known as Kopi Luwak, it's made by passing coffee cherries through the digestive tract of the wild Asian palm civet, where they undergo natural fermentation and enzymatic changes before being hand-collected from the animal's droppings, thoroughly cleaned, and sun-dried. It's washed, a smooth, low-bitter cup with rich chocolate, earthy, and creamy dairy-like notes. Wild-foraged (never caged), seasonal, and available only in small quantities.",
     flavorNotes: ["Chocolate", "Earthy", "Creamy", "Low Bitterness"],
     availability: "limited",
     weightOptions: WEIGHT_OPTIONS,
     minOrder: "100 g",
-    grade: "Wild Kopi Luwak — Hand-Collected",
+    grade: "Wild Kopi Luwak, Hand-Collected",
     moisture: "10–12%",
     screenSize: "Hand-Sorted",
     brewingNotes:

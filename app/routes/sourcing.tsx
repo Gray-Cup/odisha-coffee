@@ -4,7 +4,7 @@ import { Link } from "react-router";
 export function meta() {
   return [
     { title: generateTitle("Sourcing & White Label") },
-    { name: "description", content: generateDescription("Source premium teas, coffees, and spices through Gray Cup. We offer raw material sourcing and white label products — packaging is not included.") },
+    { name: "description", content: generateDescription("Source premium teas, coffees, and spices through Gray Cup. We offer raw material sourcing and white label products, packaging is not included.") },
   ];
 }
 
@@ -16,7 +16,7 @@ export default function SourcingPage() {
       </h1>
       <p className="text-md md:text-lg text-muted-foreground mb-10">
         Partner with Gray Cup to source high-quality teas, coffees, and spices
-        — under your brand or ours.
+, under your brand or ours.
       </p>
 
       <div className="prose prose-neutral space-y-10">
@@ -34,7 +34,7 @@ export default function SourcingPage() {
           </p>
           <ul className="list-disc pl-6 space-y-2">
             <li>
-              <strong>Sourcing:</strong> Bulk raw materials — whole-leaf teas,
+              <strong>Sourcing:</strong> Bulk raw materials, whole-leaf teas,
               green/roasted coffee beans, whole or ground spices.
             </li>
             <li>
@@ -47,7 +47,7 @@ export default function SourcingPage() {
         {/* What we do NOT offer */}
         <section>
           <h2 className="text-xl font-semibold text-neutral-800 mb-3">
-            Packaging — We Don&apos;t Do That
+            Packaging, We Don&apos;t Do That
           </h2>
           <p className="mb-4">
             We do <strong>not</strong> offer packaging services. If you are
@@ -56,15 +56,15 @@ export default function SourcingPage() {
             responsibility.
           </p>
           <p className="mb-4">
-            If you need packaging — pouches, canisters, sachets, or custom
-            printed bags — we recommend reaching out to{" "}
+            If you need packaging, pouches, canisters, sachets, or custom
+            printed bags, we recommend reaching out to{" "}
             <strong>Swiss Pac</strong>, a specialist flexible packaging
             supplier that many of our partners work with:
           </p>
           <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-5">
             <p className="font-semibold text-neutral-800 mb-1">Swiss Pac</p>
             <p className="text-sm text-muted-foreground mb-3">
-              Custom flexible packaging — pouches, zipper bags, stand-up packs,
+              Custom flexible packaging, pouches, zipper bags, stand-up packs,
               and more.
             </p>
             <a

@@ -22,7 +22,7 @@ export type Farm = {
 export const farms: Farm[] = [
   {
     id: "dream-hill-coffee",
-    name: "Dream Hill Coffee — Saptagiri Plantation",
+    name: "Dream Hill Coffee - Saptagiri Plantation",
     region: "Pottangi",
     district: "Koraput",
     elevation: "1100–1450m",
@@ -35,7 +35,7 @@ export const farms: Farm[] = [
     description:
       "Dream Hill Coffee, operating under the Saptagiri Plantation banner, is positioned at the highest elevations in Odisha's coffee belt. At over 1100 metres, the estate produces some of the most refined Arabica coffees from the region, with a bright acidity and aromatic complexity rare in Indian coffees.",
     story:
-      "Founded with a singular focus on high-altitude specialty production, Dream Hill Coffee has become a benchmark for Odisha Arabica. The founder's background in agronomy brought scientific rigour to cultivation — from soil health monitoring to canopy management — resulting in consistently high cupping scores.",
+      "Founded with a singular focus on high-altitude specialty production, Dream Hill Coffee has become a benchmark for Odisha Arabica. The founder's background in agronomy brought scientific rigour to cultivation (from soil health monitoring to canopy management) resulting in consistently high cupping scores.",
     certifications: ["FSSAI", "APEDA", "Rainforest Alliance"],
     exportReady: true,
     featured: true,
@@ -53,7 +53,7 @@ export const farms: Farm[] = [
     harvestSeason: "November – February",
     established: 1995,
     description:
-      "Brown Valley is one of the larger estates in Koraput, spread across the undulating terrain of Boipariguda. The estate runs a fully equipped wet processing station and is one of the few farms in Odisha producing all three major processing styles — washed, natural, and honey.",
+      "Brown Valley is one of the larger estates in Koraput, spread across the undulating terrain of Boipariguda. The estate runs a fully equipped wet processing station and is one of the few farms in Odisha producing all three major processing styles, washed, natural, and honey.",
     story:
       "With over 25 years in cultivation, Brown Valley has become a reference point for quality in Odisha coffee. The estate has invested significantly in post-harvest infrastructure, enabling lot separation by variety and processing method for traceability to individual micro-lots.",
     certifications: ["FSSAI", "APEDA", "ISO 22000"],
@@ -115,7 +115,7 @@ export const farms: Farm[] = [
     description:
       "Bighneswari Plantation operates in the tribal heartland of Narayanpatna, where coffee cultivation has deep roots in the local agrarian economy. The plantation practices integrated farming alongside traditional crops, preserving biodiversity while producing robust, full-bodied coffees.",
     story:
-      "The plantation takes its name from the local deity Bighneswari, and the family maintains the tradition of offering the first harvest at the village temple before processing begins — a practice that connects the estate to the cultural rhythms of Koraput.",
+      "The plantation takes its name from the local deity Bighneswari, and the family maintains the tradition of offering the first harvest at the village temple before processing begins, a practice that connects the estate to the cultural rhythms of Koraput.",
     certifications: ["FSSAI"],
     exportReady: false,
     featured: false,
@@ -135,7 +135,7 @@ export const farms: Farm[] = [
     description:
       "Dash Plantation is a focused, well-managed estate specialising in clean washed coffees. Located near Koraput town, the farm benefits from proximity to processing infrastructure while maintaining the altitude and forest cover essential for quality bean development.",
     story:
-      "Run by the Dash family, this estate represents the new generation of Odisha coffee farmers — technically informed and quality-focused. The decision to specialise in washed processing was deliberate, aimed at producing transparent, terroir-driven cups that communicate Koraput's distinct mineral character.",
+      "Run by the Dash family, this estate represents the new generation of Odisha coffee farmers, technically informed and quality-focused. The decision to specialise in washed processing was deliberate, aimed at producing transparent, terroir-driven cups that communicate Koraput's distinct mineral character.",
     certifications: ["FSSAI"],
     exportReady: false,
     featured: false,
@@ -175,7 +175,7 @@ export const farms: Farm[] = [
     description:
       "Ekayani Plantation is a progressive estate in Lamtaput, experimenting with pulped-natural processing alongside conventional washed lots. The estate has been active in farmer collective programmes and contributes to Gray Cup's partner training initiatives for new growers in the region.",
     story:
-      "Ekayani — meaning 'the singular one' in Odia — reflects the farm's identity as a distinct voice in Odisha coffee. The estate has positioned itself as a training ground for younger farmers, hosting demonstration processing days and sharing fermentation data across the Gray Cup partner network.",
+      "Ekayani (meaning 'the singular one' in Odia) reflects the farm's identity as a distinct voice in Odisha coffee. The estate has positioned itself as a training ground for younger farmers, hosting demonstration processing days and sharing fermentation data across the Gray Cup partner network.",
     certifications: ["FSSAI", "APEDA"],
     exportReady: true,
     featured: false,
@@ -193,9 +193,9 @@ export const farms: Farm[] = [
     harvestSeason: "November – January",
     established: 2004,
     description:
-      "Jayadhar Garden is a smaller, artisanal estate specialising exclusively in natural-processed Arabica. The farm's low-intervention approach — long cherry drying on raised beds, no additives — produces exceptionally fruit-forward, full-bodied cups.",
+      "Jayadhar Garden is a smaller, artisanal estate specialising exclusively in natural-processed Arabica. The farm's low-intervention approach (long cherry drying on raised beds, no additives) produces exceptionally fruit-forward, full-bodied cups.",
     story:
-      "Jayadhar Nayak inherited this plot from his grandfather and converted it to coffee after seeing neighbours' success. His deep attention to drying consistency — turning cherries hourly during peak sun, covering at night — has become a model for natural processing within the Odisha coffee community.",
+      "Jayadhar Nayak inherited this plot from his grandfather and converted it to coffee after seeing neighbours' success. His deep attention to drying consistency (turning cherries hourly during peak sun, covering at night) has become a model for natural processing within the Odisha coffee community.",
     certifications: ["FSSAI"],
     exportReady: false,
     featured: false,
@@ -235,7 +235,7 @@ export const farms: Farm[] = [
     description:
       "Koraput A-1 Coffee is one of the oldest and most established estates in Odisha, with a history stretching back over three decades. The estate's scale and infrastructure enable comprehensive lot separation across varieties and processing methods, making it a key supplier for export buyers seeking consistency and volume.",
     story:
-      "Established before Odisha coffee had any formal identity, Koraput A-1 helped build the foundation of the region's reputation. The current management — third generation in the same family — has modernised the processing facility while maintaining the estate's commitment to shade-grown, chemical-free cultivation.",
+      "Established before Odisha coffee had any formal identity, Koraput A-1 helped build the foundation of the region's reputation. The current management (third generation in the same family) has modernised the processing facility while maintaining the estate's commitment to shade-grown, chemical-free cultivation.",
     certifications: ["FSSAI", "APEDA", "Organic India", "ISO 22000"],
     exportReady: true,
     featured: true,
@@ -313,7 +313,7 @@ export const farms: Farm[] = [
     harvestSeason: "November – January",
     established: 2003,
     description:
-      "Maa Sarala Plantation operates in the adjacent Nabarangpur district, extending Odisha's coffee belt beyond Koraput. The estate brings a slightly different terroir to the Gray Cup sourcing network — lower elevation with distinct seasonal rains — producing coffees with a heavier body and pronounced fruit character.",
+      "Maa Sarala Plantation operates in the adjacent Nabarangpur district, extending Odisha's coffee belt beyond Koraput. The estate brings a slightly different terroir to the Gray Cup sourcing network (lower elevation with distinct seasonal rains) producing coffees with a heavier body and pronounced fruit character.",
     story:
       "This plantation was one of the first to bring coffee cultivation to Nabarangpur, inspired by success stories from neighbouring Koraput. The family has worked closely with Gray Cup to adapt best practices to the slightly different conditions of their district.",
     certifications: ["FSSAI"],
@@ -335,7 +335,7 @@ export const farms: Farm[] = [
     description:
       "Madhu Agro Plantation is a mid-size estate known for well-balanced, consistent coffees. The farm operates a dual processing setup, producing both fully washed and natural lots from the same season's harvest, enabling comparison and buyer choice across the same terroir.",
     story:
-      "Madhu Panda established this farm after two decades working in agricultural extension services in Odisha. His technical background is reflected in the estate's meticulous record-keeping — each lot is documented from cherry to bag, with moisture, defect, and cupping data retained for traceability.",
+      "Madhu Panda established this farm after two decades working in agricultural extension services in Odisha. His technical background is reflected in the estate's meticulous record-keeping, each lot is documented from cherry to bag, with moisture, defect, and cupping data retained for traceability.",
     certifications: ["FSSAI", "APEDA"],
     exportReady: true,
     featured: false,
@@ -395,7 +395,7 @@ export const farms: Farm[] = [
     description:
       "Odisi Advance Telematic System is a technology-forward enterprise that integrates sensor-based monitoring into the growing and processing workflow. The estate uses IoT humidity and temperature sensors in the drying station and fermentation tanks to achieve unprecedented consistency in its washed lots.",
     story:
-      "This estate started as a pilot programme to test whether precision agriculture technologies could be applied to small-holder coffee farming in Odisha. The results — lower defect rates, more consistent moisture content — have encouraged other partner farms to adopt similar monitoring tools.",
+      "This estate started as a pilot programme to test whether precision agriculture technologies could be applied to small-holder coffee farming in Odisha. The results (lower defect rates, more consistent moisture content) have encouraged other partner farms to adopt similar monitoring tools.",
     certifications: ["FSSAI", "APEDA"],
     exportReady: true,
     featured: false,
@@ -415,7 +415,7 @@ export const farms: Farm[] = [
     description:
       "Panigrahi Agro Foundation operates as both an estate and a training centre for coffee quality in Odisha. The foundation has partnered with Gray Cup to run cupping labs and grower workshops, elevating the technical standards of the region's coffee sector.",
     story:
-      "Established as a family estate, the Panigrahi Foundation has evolved into a knowledge hub for Odisha coffee. Their cupping lab — one of the few operational in the region — has trained over 50 farmers in sensory evaluation, helping growers connect processing decisions to final cup quality.",
+      "Established as a family estate, the Panigrahi Foundation has evolved into a knowledge hub for Odisha coffee. Their cupping lab (one of the few operational in the region) has trained over 50 farmers in sensory evaluation, helping growers connect processing decisions to final cup quality.",
     certifications: ["FSSAI", "APEDA", "ISO 22000"],
     exportReady: true,
     featured: true,
@@ -435,7 +435,7 @@ export const farms: Farm[] = [
     description:
       "SM Plantation is a compact, well-run estate in the Boipariguda belt known for its fruit-forward natural lots. The estate focuses on selective hand-picking at optimum ripeness, a factor that significantly elevates the quality of naturally processed coffees by reducing underripe and overripe cherry in the drying batch.",
     story:
-      "The SM Plantation team has been a quiet but consistent presence in Odisha coffee circles. Their methodical approach to cherry selection — sorting by float before any processing begins — has been highlighted in Gray Cup sourcing documentation as a model practice.",
+      "The SM Plantation team has been a quiet but consistent presence in Odisha coffee circles. Their methodical approach to cherry selection (sorting by float before any processing begins) has been highlighted in Gray Cup sourcing documentation as a model practice.",
     certifications: ["FSSAI"],
     exportReady: false,
     featured: false,
@@ -475,7 +475,7 @@ export const farms: Farm[] = [
     description:
       "Trinetra Agro is a mid-size estate in Narayanpatna known for its well-structured, chocolatey coffees. Both washed and natural lots are produced, with the natural processing taking place on purpose-built raised beds that allow optimal airflow during the Koraput dry season.",
     story:
-      "Trinetra — meaning 'three-eyed', a reference to Lord Shiva — reflects the triple focus the estate places on cultivation, processing, and people. The founders believe quality coffee begins with the seed, continues through thoughtful processing, and is only complete when the farmer who grew it is fairly compensated.",
+      "Trinetra (meaning 'three-eyed', a reference to Lord Shiva) reflects the triple focus the estate places on cultivation, processing, and people. The founders believe quality coffee begins with the seed, continues through thoughtful processing, and is only complete when the farmer who grew it is fairly compensated.",
     certifications: ["FSSAI"],
     exportReady: false,
     featured: false,
@@ -493,7 +493,7 @@ export const farms: Farm[] = [
     harvestSeason: "December – February",
     established: 2008,
     description:
-      "Urbara Plantation — 'Urbara' meaning fertile land in Sanskrit — lives up to its name with a diverse portfolio of varieties and processing methods. The estate has invested in a full wet mill and covered drying infrastructure, enabling year-round lot production and consistent quality across seasons.",
+      "Urbara Plantation ('Urbara' meaning fertile land in Sanskrit) lives up to its name with a diverse portfolio of varieties and processing methods. The estate has invested in a full wet mill and covered drying infrastructure, enabling year-round lot production and consistent quality across seasons.",
     story:
       "Co-founded by a husband-wife team from agricultural backgrounds, Urbara Plantation has brought a scientific and entrepreneurial energy to Odisha coffee. Their approach to varietal separation and lot documentation has set a benchmark for traceability within the Odisha coffee farming community.",
     certifications: ["FSSAI", "APEDA", "Organic India"],
@@ -506,11 +506,11 @@ export function getFarmBySlug(slug: string): Farm | undefined {
   return farms.find((f) => f.id === slug);
 }
 
-// A few farm names carry a " — <plantation banner>" suffix (e.g. "Dream
-// Hill Coffee — Saptagiri Plantation"); compact UI like farm pickers just
+// A few farm names carry a ", <plantation banner>" suffix (e.g. "Dream
+// Hill Coffee, Saptagiri Plantation"); compact UI like farm pickers just
 // need the estate's core name.
 export function shortFarmName(name: string): string {
-  return name.split(" — ")[0];
+  return name.split(", ")[0];
 }
 
 export const featuredFarms = farms.filter((f) => f.featured);

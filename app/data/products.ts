@@ -39,7 +39,7 @@ export const products: Product[] = [
     description:
       "Export-grade HSD Arabica green beans, washed-processed from Koraput's high-altitude estates. Screen 15+ sorted, moisture 10–12%, lot-tested. Ideal for specialty roasters seeking traceable Indian-origin Arabica with consistent cup clarity and bright character.",
     brewingNotes:
-      "Roasters: recommend medium-light profile, first crack +20s. HSD responds well to a gentle development phase — highlight the citrus and clean acidity.",
+      "Roasters: recommend medium-light profile, first crack +20s. HSD responds well to a gentle development phase, highlight the citrus and clean acidity.",
     availability: "in-stock",
     weightOptions: ["250g", "1kg", "5kg"],
     exportAvailable: true,
@@ -59,7 +59,7 @@ export const products: Product[] = [
     roastLevel: "green",
     flavorNotes: ["Dark Fruit", "Chocolate", "Earthy", "Full Body"],
     description:
-      "Natural-processed green bean lots from Koraput — cherries sun-dried whole for 25–30 days on raised beds. Fruit-integrated and complex, these lots are excellent for espresso blends, natural roast profiles, and buyers seeking Indian naturals with depth.",
+      "Natural-processed green bean lots from Koraput, cherries sun-dried whole for 25–30 days on raised beds. Fruit-integrated and complex, these lots are excellent for espresso blends, natural roast profiles, and buyers seeking Indian naturals with depth.",
     brewingNotes:
       "Roasters: medium to medium-dark roast profiles work best. Allow longer development time (DTR 22–25%) to unlock the fruit-chocolate complexity. Blends beautifully with washed Arabica.",
     availability: "in-stock",
@@ -83,7 +83,7 @@ export const products: Product[] = [
     description:
       "Our washed HSD Arabica from Koraput, roasted light to preserve the variety's natural brightness. Slow-roasted in small batches, rested 48 hours before dispatch. A remarkably clean, floral cup that showcases what Eastern Ghats Arabica can offer at its best.",
     brewingNotes:
-      "Ideal for pour-over, V60, or Chemex. Water at 90–92°C, 1:16 ratio. Grind medium-fine. The light roast rewards slow extraction — allow full 3–4 minute brew time.",
+      "Ideal for pour-over, V60, or Chemex. Water at 90–92°C, 1:16 ratio. Grind medium-fine. The light roast rewards slow extraction, allow full 3–4 minute brew time.",
     availability: "in-stock",
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
@@ -101,7 +101,7 @@ export const products: Product[] = [
     roastLevel: "medium",
     flavorNotes: ["Dark Cherry", "Dark Chocolate", "Dried Fruit", "Syrupy Body"],
     description:
-      "Natural-processed Koraput coffee roasted to medium, where the fruit-integration of the drying process reaches its peak. Rich, syrupy, and deeply satisfying — this is an exceptional everyday filter coffee or a crowd-pleasing espresso base.",
+      "Natural-processed Koraput coffee roasted to medium, where the fruit-integration of the drying process reaches its peak. Rich, syrupy, and deeply satisfying, this is an exceptional everyday filter coffee or a crowd-pleasing espresso base.",
     brewingNotes:
       "Excellent as filter or espresso. Pour-over at 93°C, 1:15 ratio. As espresso: 25–28 second extraction. The natural sweetness pairs brilliantly with milk-based drinks.",
     availability: "in-stock",
@@ -121,7 +121,7 @@ export const products: Product[] = [
     roastLevel: "light",
     flavorNotes: ["Fresh Strawberry", "Rose Hip", "Hibiscus", "Tropical Sweetness"],
     description:
-      "A rare anaerobic natural lot from Oak Winds Farm, processed with extended cherry fermentation that produces vivid strawberry and floral notes. Roasted light to let the process-driven character sing. Each batch is limited — when it's gone, it's gone until next season.",
+      "A rare anaerobic natural lot from Oak Winds Farm, processed with extended cherry fermentation that produces vivid strawberry and floral notes. Roasted light to let the process-driven character sing. Each batch is limited, when it's gone, it's gone until next season.",
     brewingNotes:
       "Best as pour-over or AeroPress at 88–90°C (lower temp amplifies the strawberry). 1:15 ratio, medium grind. Try as a cold brew for a stunning no-heat-needed strawberry sweetness.",
     availability: "limited",
@@ -141,9 +141,9 @@ export const products: Product[] = [
     roastLevel: "medium-dark",
     flavorNotes: ["Toasted Oak", "Molasses", "Vanilla", "Dark Fruit", "Spirit Warmth"],
     description:
-      "Honey-processed Catuai aged in reclaimed whiskey and rum barrels from Odisha distilleries. The 30-day barrel rest imparts layers of vanilla, oak, and spirit warmth onto the coffee's natural sweetness. A conversation piece roast — complex, bold, and absolutely unmistakable.",
+      "Honey-processed Catuai aged in reclaimed whiskey and rum barrels from Odisha distilleries. The 30-day barrel rest imparts layers of vanilla, oak, and spirit warmth onto the coffee's natural sweetness. A conversation piece roast, complex, bold, and absolutely unmistakable.",
     brewingNotes:
-      "Moka pot or espresso for the full barrel intensity. French press at 94°C, 4-minute steep — the oils and body come through beautifully. Pairs exceptionally with a drop of cream.",
+      "Moka pot or espresso for the full barrel intensity. French press at 94°C, 4-minute steep, the oils and body come through beautifully. Pairs exceptionally with a drop of cream.",
     availability: "limited",
     weightOptions: ["100g", "250g", "500g"],
     exportAvailable: false,
@@ -161,9 +161,9 @@ export const products: Product[] = [
     roastLevel: "medium-dark",
     flavorNotes: ["Dark Chocolate", "Caramel", "Hazelnut", "Thick Crema", "Low Acidity"],
     description:
-      "Our house 100% Arabica espresso blend — 80% washed S795 for sweetness and structure, 20% Chandragiri for body and crema. Roasted medium-dark for a balanced, forgiving shot that works beautifully across all espresso machines and milk ratios.",
+      "Our house 100% Arabica espresso blend, 80% washed S795 for sweetness and structure, 20% Chandragiri for body and crema. Roasted medium-dark for a balanced, forgiving shot that works beautifully across all espresso machines and milk ratios.",
     brewingNotes:
-      "Dial to 9 bars, 93°C, 25–28 seconds, 1:2 ratio. For milk drinks, pull slightly longer (30s) for extra sweetness. Forgiving on dose — ±2g from recipe still yields a good shot.",
+      "Dial to 9 bars, 93°C, 25–28 seconds, 1:2 ratio. For milk drinks, pull slightly longer (30s) for extra sweetness. Forgiving on dose, ±2g from recipe still yields a good shot.",
     availability: "in-stock",
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
@@ -181,9 +181,9 @@ export const products: Product[] = [
     roastLevel: "medium",
     flavorNotes: ["Milk Chocolate", "Brown Sugar", "Almond", "Smooth Finish"],
     description:
-      "A single-origin 100% Arabica espresso from Koraput's Sunabeda plateau. Roasted medium to preserve the variety's natural sweetness while building espresso body. Clean, smooth, and approachable — a perfect gateway to Indian specialty espresso.",
+      "A single-origin 100% Arabica espresso from Koraput's Sunabeda plateau. Roasted medium to preserve the variety's natural sweetness while building espresso body. Clean, smooth, and approachable, a perfect gateway to Indian specialty espresso.",
     brewingNotes:
-      "Best at 93°C, 9 bars, 27–30 seconds, 1:2.2 ratio. The all-Arabica character shines brightest as a straight espresso or flat white. Avoid over-extraction — the sweetness lives in the first half of the shot.",
+      "Best at 93°C, 9 bars, 27–30 seconds, 1:2.2 ratio. The all-Arabica character shines brightest as a straight espresso or flat white. Avoid over-extraction, the sweetness lives in the first half of the shot.",
     availability: "in-stock",
     weightOptions: ["100g", "250g", "500g", "1kg"],
     exportAvailable: false,
@@ -218,7 +218,7 @@ export const products: Product[] = [
     id: "dream-hill-honey-arabica",
     name: "Dream Hill Honey Arabica",
     farmId: "dream-hill-coffee",
-    farmName: "Dream Hill Coffee — Saptagiri Plantation",
+    farmName: "Dream Hill Coffee - Saptagiri Plantation",
     region: "Pottangi, Koraput",
     processing: "honey",
     variety: "Chandragiri",
@@ -309,7 +309,7 @@ export const products: Product[] = [
     roastLevel: "medium",
     flavorNotes: ["Dark Cherry", "Walnut", "Caramel", "Balanced"],
     description:
-      "Lot-separated washed S795 from Panigrahi Agro Foundation, processed through their state-of-the-art wet mill with careful fermentation control monitored via pH testing. This is Odisha washed coffee at its most refined — structured, balanced, and deeply expressive of the Semiliguda terroir.",
+      "Lot-separated washed S795 from Panigrahi Agro Foundation, processed through their state-of-the-art wet mill with careful fermentation control monitored via pH testing. This is Odisha washed coffee at its most refined, structured, balanced, and deeply expressive of the Semiliguda terroir.",
     brewingNotes:
       "Ideal for pour-over or filter coffee. Medium-light roast recommended. Water at 92°C, medium grind. The balanced acidity and caramel sweetness make this an excellent all-day filter coffee.",
     availability: "in-stock",
@@ -341,7 +341,7 @@ export const products: Product[] = [
   },
   {
     id: "odisha-export-grade-green-arabica",
-    name: "Odisha Export Grade — Green Arabica",
+    name: "Odisha Export Grade - Green Arabica",
     farmId: "koraput-a1-coffee",
     farmName: "Multiple Gray Cup Partner Farms",
     region: "Koraput District",
@@ -375,9 +375,9 @@ export const products: Product[] = [
     roastLevel: "medium",
     flavorNotes: ["Chocolate", "Earthy", "Creamy", "Low Bitterness"],
     description:
-      "Wild-foraged civet coffee (Kopi Luwak) from Brown Valley Coffee Estate, roasted. Coffee cherries pass through the digestive tract of the wild Asian palm civet, ferment naturally, and are hand-collected, cleaned and sun-dried — then roasted medium to keep the smooth, low-bitter cup the washed processing produces. Wild-foraged, never caged; seasonal and available only in small quantities.",
+      "Wild-foraged civet coffee (Kopi Luwak) from Brown Valley Coffee Estate, roasted. Coffee cherries pass through the digestive tract of the wild Asian palm civet, ferment naturally, and are hand-collected, cleaned and sun-dried, then roasted medium to keep the smooth, low-bitter cup the washed processing produces. Wild-foraged, never caged; seasonal and available only in small quantities.",
     brewingNotes:
-      "Pour-over or French press at 92–94°C, medium grind, 1:15 ratio. The chocolate and creamy, dairy-like sweetness need room — avoid over-extraction. Excellent as a slow cold brew.",
+      "Pour-over or French press at 92–94°C, medium grind, 1:15 ratio. The chocolate and creamy, dairy-like sweetness need room, avoid over-extraction. Excellent as a slow cold brew.",
     availability: "limited",
     weightOptions: ["100g", "250g", "500g"],
     exportAvailable: false,
@@ -388,7 +388,7 @@ export const products: Product[] = [
     id: "dream-hill-aaa-washed-roasted",
     name: "Dream Hill AAA Washed (Roasted)",
     farmId: "dream-hill-coffee",
-    farmName: "Dream Hill Coffee — Saptagiri Plantation × Gray Cup Roastery",
+    farmName: "Dream Hill Coffee - Saptagiri Plantation × Gray Cup Roastery",
     region: "Pottangi, Koraput",
     processing: "washed",
     variety: "Arabica SLN 9 & Chandragiri",
@@ -416,7 +416,7 @@ export const products: Product[] = [
     roastLevel: "medium",
     flavorNotes: ["Milk Chocolate", "Stone Fruit", "Honey", "Smooth Body"],
     description:
-      "HSD (honey/semi-dry) processed Arabica from Brown Valley Estate, one of the few Odisha farms running all three processing styles with micro-lot traceability. The HSD process strikes a balance between the brightness of washed and the fruitiness of natural — a cup with balanced sweetness and a smooth, rounded body. Roasted medium; great for filter and cold brew.",
+      "HSD (honey/semi-dry) processed Arabica from Brown Valley Estate, one of the few Odisha farms running all three processing styles with micro-lot traceability. The HSD process strikes a balance between the brightness of washed and the fruitiness of natural, a cup with balanced sweetness and a smooth, rounded body. Roasted medium; great for filter and cold brew.",
     brewingNotes:
       "Versatile across filter and espresso. Filter: V60 or Chemex at 93°C, medium grind. Espresso: 93°C, 25–28 second shot. The honey process gives a syrupy body that holds up well with milk.",
     availability: "in-stock",

@@ -24,7 +24,7 @@ export function meta({ data, params }: Route.MetaArgs) {
     {
       name: "description",
       content: generateDescription(
-        `${product.name} — ${product.grade} green Arabica from Koraput, Odisha. ${product.description}`
+        `${product.name}, ${product.grade} green Arabica from Koraput, Odisha. ${product.description}`
       ),
     },
     { tagName: "link", rel: "canonical", href: `${SITE_URL}/buy-green-beans/${params.productSlug}` },
@@ -196,7 +196,7 @@ export default function GreenCoffeeProductPage({ loaderData }: Route.ComponentPr
               </div>
             </div>
 
-            {/* Right — pricing table */}
+            {/* Right, pricing table */}
             <div className="space-y-4">
               <div className="border-2 border-odisha-black bg-white sticky top-4">
                 <div className="border-b-2 border-odisha-black px-5 py-3 bg-odisha-offwhite">
@@ -234,7 +234,7 @@ export default function GreenCoffeeProductPage({ loaderData }: Route.ComponentPr
               Sourcing at scale from Koraput, Odisha?
             </h3>
             <p className="text-white/60 text-sm mt-1">
-              {exportReadyFarms.length} of our {farms.length} partner farms are export-ready — talk to us about bulk quantities.
+              {exportReadyFarms.length} of our {farms.length} partner farms are export-ready, talk to us about bulk quantities.
             </p>
           </div>
           <Link

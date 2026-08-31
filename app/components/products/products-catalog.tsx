@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 const MAX_QUANTITY = 20;
 
-// A line picked with "Select" for the multi-product quick-checkout flow —
+// A line picked with "Select" for the multi-product quick-checkout flow,
 // kept entirely separate from the persistent cart. Keyed by product+weight+
 // farm (see `lineKey`) so 1kg and 500g of the same product are two
 // independent lines instead of one overwriting the other.
@@ -41,7 +41,7 @@ function perKgFor(product: EstateProduct, grams: number): number {
 }
 
 // Selections (from "Select") are cached to the browser for 30 minutes, so a
-// reload or an accidental tab close doesn't lose them — mirrors the cart's
+// reload or an accidental tab close doesn't lose them, mirrors the cart's
 // own localStorage persistence but with a hard expiry since these are meant
 // to be a short-lived quick-checkout list, not a permanent cart.
 const SELECTIONS_STORAGE_KEY = "odisha_selections";
@@ -160,7 +160,7 @@ function ProductCard({
           </Link>
         </h3>
 
-        {/* Weight chips — each shows its own discounted ₹/kg rate */}
+        {/* Weight chips, each shows its own discounted ₹/kg rate */}
         <div className="mb-3">
           <span className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1.5 block">
             Select Weight
@@ -205,14 +205,14 @@ function ProductCard({
           </span>
         </div>
 
-        {/* Farm selector — locked to a single estate for exclusive lots */}
+        {/* Farm selector, locked to a single estate for exclusive lots */}
         {exclusiveFarm ? (
           <div className="block mb-2">
             <span className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1 block">
               Exclusively From
             </span>
             <div className="w-full border-2 border-odisha-black bg-odisha-offwhite px-3 py-2 text-xs font-semibold text-odisha-black">
-              {exclusiveFarm.name} — {exclusiveFarm.region}
+              {exclusiveFarm.name}, {exclusiveFarm.region}
             </div>
           </div>
         ) : (
@@ -483,7 +483,7 @@ export function ProductsCatalog() {
         </div>
       </section>
 
-      {/* Multi-select checkout bar — everything picked with "Select" across
+      {/* Multi-select checkout bar, everything picked with "Select" across
           any number of cards (and any number of weights per card), checked
           out together, never touching the cart. */}
       <AnimatePresence>

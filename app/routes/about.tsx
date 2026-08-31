@@ -6,7 +6,7 @@ import { IoIosMail } from "react-icons/io";
 
 export function meta() {
   return [
-    { title: "About Us — Odisha Coffee" },
+    { title: "About Us - Odisha Coffee" },
     {
       name: "description",
       content:
@@ -40,7 +40,7 @@ export default function AboutPage() {
             About Odisha Coffee
           </h1>
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed">
-            A directory and marketplace for every coffee estate in Koraput —
+            A directory and marketplace for every coffee estate in Koraput,
             built to put Odisha&apos;s coffee on the map and get it into more
             hands, faster.
           </p>
@@ -55,7 +55,7 @@ export default function AboutPage() {
           </h2>
           <p className="text-odisha-black/70 leading-relaxed mb-4">
             Odisha Coffee (odishacoffee.com) is where we&apos;ve listed all{" "}
-            {farms.length} coffee farms of Koraput, Odisha — one place to see
+            {farms.length} coffee farms of Koraput, Odisha, one place to see
             every estate in the region, its elevation, processing methods,
             and the lots it has available. Koraput&apos;s Eastern Ghats have
             been growing exceptional Arabica for decades, but very few buyers
@@ -63,7 +63,7 @@ export default function AboutPage() {
             fix that.
           </p>
           <p className="text-odisha-black/70 leading-relaxed mb-4">
-            We work closely with each partner farm — visiting the estates,
+            We work closely with each partner farm, visiting the estates,
             documenting their processing and harvest data, and representing
             them directly to buyers. In turn, that gives Koraput coffee real
             visibility, and helps these farms sell faster to roasters,
@@ -169,7 +169,7 @@ export default function AboutPage() {
             </div>
             <div className="border-2 border-odisha-black p-5">
               <p className="text-[10px] uppercase tracking-widest text-odisha-black/50 mb-1">
-                Origin Guide — Green Coffee
+                Origin Guide, Green Coffee
               </p>
               <a
                 href="https://indiangreencoffee.com/"

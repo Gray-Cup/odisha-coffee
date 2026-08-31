@@ -27,7 +27,7 @@ export default function Footer() {
       <div className="bg-odisha-red border-b-2 border-odisha-black">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           <p className="text-white text-sm font-medium">
-            Sourcing exceptional Odisha coffee from the Eastern Ghats — export &amp; wholesale available worldwide.
+            Sourcing exceptional Odisha coffee from the Eastern Ghats, export &amp; wholesale available worldwide.
           </p>
           <Link
             to="/contact"
@@ -53,7 +53,7 @@ export default function Footer() {
                 Gray Cup Enterprises Pvt. Ltd.
               </div>
               <p className="text-xs text-odisha-black/60 leading-relaxed">
-                We source and export single-origin coffee from verified farms across Koraput and Odisha's Eastern Ghats — connecting India's finest highland coffee with buyers worldwide.
+                We source and export single-origin coffee from verified farms across Koraput and Odisha's Eastern Ghats, connecting India's finest highland coffee with buyers worldwide.
               </p>
             </div>
             <div className="flex items-center gap-1 mt-4">
@@ -118,7 +118,7 @@ export default function Footer() {
               ))}
             </ul>
             <div className="text-xs text-odisha-black/50 space-y-1">
-              <p>Koraput, Odisha — India</p>
+              <p>Koraput, Odisha, India</p>
               <p>CIN: U47211DL2025PTC457808</p>
               <p>IEC: AAMCG4985H</p>
             </div>
@@ -129,7 +129,7 @@ export default function Footer() {
         <div className="mt-10 pt-6 border-t border-odisha-black/10 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-xs text-odisha-black/40">
           <p>© {new Date().getFullYear()} Gray Cup Enterprises Private Limited. All rights reserved.</p>
           <p>
-            Koraput Arabica — Eastern Ghats, Odisha, India &nbsp;·&nbsp; FSSAI Licensed &nbsp;·&nbsp; APEDA Registered &nbsp;·&nbsp; IEC Certified
+            Koraput Arabica, Eastern Ghats, Odisha, India &nbsp;·&nbsp; FSSAI Licensed &nbsp;·&nbsp; APEDA Registered &nbsp;·&nbsp; IEC Certified
           </p>
         </div>
       </div>

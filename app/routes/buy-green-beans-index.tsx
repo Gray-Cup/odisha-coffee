@@ -6,13 +6,13 @@ import { GrayCupShowcase } from "@/components/product-card";
 
 export function meta() {
   return [
-    { title: "Koraput, Odisha Green Coffee Beans — All Grades, All Farms" },
+    { title: "Koraput, Odisha Green Coffee Beans - All Grades, All Farms" },
     {
       name: "description",
       content:
-        "Buy Koraput, Odisha green Arabica from all 24 partner estates. AAA, AA, A, B+ and B grade washed, natural and honey lots — select your farm, choose your grade, order direct. Gray Cup Enterprises.",
+        "Buy Koraput, Odisha green Arabica from all 24 partner estates. AAA, AA, A, B+ and B grade washed, natural and honey lots, select your farm, choose your grade, order direct. Gray Cup Enterprises.",
     },
-    { property: "og:title", content: "Koraput, Odisha Green Coffee Beans — All Grades, All Farms" },
+    { property: "og:title", content: "Koraput, Odisha Green Coffee Beans, All Grades, All Farms" },
     {
       property: "og:description",
       content:
@@ -52,7 +52,7 @@ export default function BuyGreenBeansPage() {
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
             {estateProducts.length} grade lots available from every one of our {farms.length} partner
             estates in Koraput. Select a grade, pick your farm from the dropdown on the card, and
-            proceed to order — or use the farm switches to filter by estate first.
+            proceed to order, or use the farm switches to filter by estate first.
           </p>
 
           <div className="flex flex-wrap gap-6">
@@ -71,10 +71,10 @@ export default function BuyGreenBeansPage() {
         </div>
       </section>
 
-      {/* Interactive catalog — client component */}
+      {/* Interactive catalog, client component */}
       <ProductsCatalog />
 
-      {/* Rather buy it roasted? — outbound dofollow links to graycup.in, not buyable here */}
+      {/* Rather buy it roasted?, outbound dofollow links to graycup.in, not buyable here */}
       <section className="border-t-2 border-odisha-black bg-odisha-offwhite">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
           <h2 className="font-serif text-2xl font-bold text-odisha-black mb-2">

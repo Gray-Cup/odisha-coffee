@@ -1,10 +1,10 @@
 # Odisha Coffee
 
-> Odisha Coffee (odishacoffee.com) connects specialty coffee estates in the Koraput and Sunabeda highlands of Odisha, India to buyers of green (unroasted) coffee, roasted coffee, and Indian spices — offering farm-level traceability, direct export ready green beans, small-batch roasted coffee, and bulk/B2B ordering.
+> Odisha Coffee (odishacoffee.com) connects specialty coffee estates in the Koraput and Sunabeda highlands of Odisha, India to buyers of green (unroasted) coffee, roasted coffee, and Indian spices, offering farm-level traceability, direct export ready green beans, small-batch roasted coffee, and bulk/B2B ordering.
 
 Odisha's coffee belt sits in the Eastern Ghats at elevations above 900–1100m, producing washed, natural, honey, and pulped-natural Arabica lots. The site lists individual estates with farm profiles, lets buyers browse and order green coffee, roasted coffee, and spices by farm or by product, and supports both direct-to-consumer and bulk/export inquiries.
 
-See [/llms-full.txt](https://odishacoffee.com/llms-full.txt) for full inlined content — every farm profile, coffee/spice lot, and newsroom article in one file, auto-generated from `app/data/*.ts` on every commit.
+See [/llms-full.txt](https://odishacoffee.com/llms-full.txt) for full inlined content, every farm profile, coffee/spice lot, and newsroom article in one file, auto-generated from `app/data/*.ts` on every commit.
 
 ## Coffee & Products
 

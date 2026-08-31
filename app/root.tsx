@@ -60,7 +60,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 height: 512,
               },
               description:
-                "Single-origin Odisha coffee from the Eastern Ghats of Koraput — wholesale green beans, export lots, and direct farm sourcing.",
+                "Single-origin Odisha coffee from the Eastern Ghats of Koraput, wholesale green beans, export lots, and direct farm sourcing.",
               email: "office@graycup.org",
               foundingDate: "2019",
               sameAs: [

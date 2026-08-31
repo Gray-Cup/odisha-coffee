@@ -89,7 +89,7 @@ export function ProductReviews({ slug, catalog, productName }: ProductReviewsPro
       </div>
 
       {!loading && reviews.length === 0 && (
-        <p className="mt-4 text-sm text-gray-500">No reviews yet — be the first to review this product.</p>
+        <p className="mt-4 text-sm text-gray-500">No reviews yet, be the first to review this product.</p>
       )}
 
       <ul className="mt-6 space-y-6">

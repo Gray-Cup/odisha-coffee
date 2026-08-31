@@ -4,13 +4,13 @@ import type { ProcessingMethod } from "@/data/farms";
 
 export function meta() {
   return [
-    { title: "Odisha Coffee — Wholesale, Export & Farm Sourcing" },
+    { title: "Odisha Coffee - Wholesale, Export & Farm Sourcing" },
     {
       name: "description",
       content:
-        "Buy Odisha Coffee wholesale — traceable Arabica from 24 verified farms in Koraput's Eastern Ghats. Export lots, green bean wholesale, and direct farm sourcing by Gray Cup Enterprises.",
+        "Buy Odisha Coffee wholesale, traceable Arabica from 24 verified farms in Koraput's Eastern Ghats. Export lots, green bean wholesale, and direct farm sourcing by Gray Cup Enterprises.",
     },
-    { property: "og:title", content: "Odisha Coffee — Wholesale, Export & Farm Sourcing" },
+    { property: "og:title", content: "Odisha Coffee, Wholesale, Export & Farm Sourcing" },
     {
       property: "og:description",
       content:
@@ -100,7 +100,7 @@ const processingMethods = [
     title: "Washed",
     subtitle: "Transparency & Terroir",
     description:
-      "Cherry pulp is removed before fermentation. The bean is then fermented in water tanks, washed thoroughly, and dried on raised beds. This method produces clean, bright cups where the origin terroir shines clearly — the definitive expression of Koraput's mineral highland soils.",
+      "Cherry pulp is removed before fermentation. The bean is then fermented in water tanks, washed thoroughly, and dried on raised beds. This method produces clean, bright cups where the origin terroir shines clearly, the definitive expression of Koraput's mineral highland soils.",
     farms: farms.filter((f) => f.processing.includes("washed")).length,
     bgColor: "bg-[#1E3A8A]",
     textColor: "text-white",
@@ -201,7 +201,7 @@ export default function HomePage() {
               What makes Odisha coffee exceptional
             </h2>
             <p className="mt-4 text-sm text-odisha-black/60 leading-relaxed">
-              The Eastern Ghats of southern Odisha create one of India's most distinctive yet under-recognised coffee growing environments — a combination of altitude, soil, tribal agricultural tradition, and climate that produces coffees of remarkable character.
+              The Eastern Ghats of southern Odisha create one of India's most distinctive yet under-recognised coffee growing environments, a combination of altitude, soil, tribal agricultural tradition, and climate that produces coffees of remarkable character.
             </p>
           </div>
 
@@ -365,7 +365,7 @@ export default function HomePage() {
                 },
                 {
                   title: "Full Lot Traceability",
-                  desc: "Each export lot is documented by estate, processing date, variety, and moisture content — available to buyers on request.",
+                  desc: "Each export lot is documented by estate, processing date, variety, and moisture content, available to buyers on request.",
                 },
                 {
                   title: "Minimum Order Flexibility",

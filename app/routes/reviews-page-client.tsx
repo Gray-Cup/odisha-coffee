@@ -64,7 +64,7 @@ export function ReviewsPageClient() {
       </Dialog>
 
       {!loading && reviews.length === 0 && (
-        <p className="mt-6 text-sm text-gray-500">No reviews yet — be the first to write one.</p>
+        <p className="mt-6 text-sm text-gray-500">No reviews yet, be the first to write one.</p>
       )}
 
       <ul className="mt-8 space-y-6">

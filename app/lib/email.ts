@@ -74,7 +74,7 @@ export async function sendOrderConfirmationEmail(
   await send(
     env,
     to,
-    `Order received — ${orderRef} — Odisha Coffee`,
+    `Order received (${orderRef}) Odisha Coffee`,
     `
       <div style="margin:0;padding:32px 16px;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#171717;">
         <div style="max-width:520px;margin:0 auto;">

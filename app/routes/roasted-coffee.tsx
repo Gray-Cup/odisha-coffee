@@ -5,11 +5,11 @@ import { GrayCupShowcase } from "@/components/product-card";
 
 export function meta() {
   return [
-    { title: "Roasted Coffee — Odisha Single Origin & Specialty Lots" },
+    { title: "Roasted Coffee - Odisha Single Origin & Specialty Lots" },
     {
       name: "description",
       content:
-        "Specialty roasted coffee from Koraput's Eastern Ghats — washed, natural and honey processed Arabica, roasted in small batches by Gray Cup. Espresso blends, filter lots, and seasonal micro-lots.",
+        "Specialty roasted coffee from Koraput's Eastern Ghats, washed, natural and honey processed Arabica, roasted in small batches by Gray Cup. Espresso blends, filter lots, and seasonal micro-lots.",
     },
   ];
 }
@@ -99,7 +99,7 @@ export default function RoastedCoffeePage() {
               Roasted Coffee
             </h1>
             <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
-              Small-batch roasted coffee from Koraput partner estates — single-origin Arabica,
+              Small-batch roasted coffee from Koraput partner estates, single-origin Arabica,
               specialty espresso blends, and limited seasonal micro-lots. All beans are sourced directly
               from verified farms and roasted by Gray Cup.
             </p>
@@ -122,15 +122,15 @@ export default function RoastedCoffeePage() {
 
         <RoastedCatalog roastedProducts={roastedProducts} specialtyLots={specialtyLots} />
 
-        {/* Also roasted by Gray Cup — outbound dofollow links, not buyable here */}
+        {/* Also roasted by Gray Cup, outbound dofollow links, not buyable here */}
         <section className="border-b-2 border-odisha-black">
           <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
             <h2 className="font-serif text-2xl font-bold text-odisha-black mb-2">
               Also roasted by Gray Cup
             </h2>
             <p className="text-sm text-odisha-black/60 mb-6 max-w-2xl">
-              Gray Cup roasts our Koraput lots — plus South Indian and Northeast estates
-              and traditional filter blends — and ships them freshly roasted across India.
+              Gray Cup roasts our Koraput lots, plus South Indian and Northeast estates
+              and traditional filter blends, and ships them freshly roasted across India.
               These are sold on graycup.in.
             </p>
             <GrayCupShowcase />

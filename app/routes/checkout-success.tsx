@@ -2,7 +2,7 @@ import { Link, useSearchParams } from "react-router";
 
 export function meta() {
   return [
-    { title: "Order Placed — Odisha Coffee" },
+    { title: "Order Placed - Odisha Coffee" },
     { name: "description", content: "Your Odisha Coffee order has been placed successfully." },
   ];
 }

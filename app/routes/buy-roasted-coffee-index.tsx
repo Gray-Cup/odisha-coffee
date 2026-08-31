@@ -111,15 +111,15 @@ export default function BuyRoastedCoffeeIndexPage() {
       {/* Interactive catalog: select a roast and buy */}
       <RoastedCatalog roastedProducts={roastedProducts} specialtyLots={specialtyLots} />
 
-      {/* Also roasted by Gray Cup — outbound dofollow links to graycup.in, not buyable here */}
+      {/* Also roasted by Gray Cup, outbound dofollow links to graycup.in, not buyable here */}
       <section className="border-b-2 border-odisha-black bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
           <h2 className="font-serif text-2xl font-bold text-odisha-black mb-2">
             Also roasted by Gray Cup
           </h2>
           <p className="text-sm text-odisha-black/60 mb-6 max-w-2xl">
-            Gray Cup roasts our Koraput lots — plus South Indian and Northeast estates and
-            traditional filter blends — and ships them freshly roasted across India. Sold on
+            Gray Cup roasts our Koraput lots, plus South Indian and Northeast estates and
+            traditional filter blends, and ships them freshly roasted across India. Sold on
             graycup.in.
           </p>
           <GrayCupShowcase />

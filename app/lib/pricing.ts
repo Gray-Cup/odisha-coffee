@@ -35,7 +35,7 @@ export function gramsForWeight(product: Pick<Product, "isGreen">, weight: string
 
 /**
  * Every customer-facing rupee amount (₹/kg rates and line totals) is rounded
- * to the nearest 5 so prices never end in an odd single digit — e.g. 754
+ * to the nearest 5 so prices never end in an odd single digit, e.g. 754
  * becomes 755, 752 becomes 750.
  */
 export function roundToNearest5(amount: number): number {
@@ -114,8 +114,8 @@ export function tiersFor(resolved: ResolvedCartItem): Array<{ label: string; gra
  * Bulk discount schedule for estate (green bean) lots: the more you buy, the
  * lower the effective ₹/kg rate, up to MAX_BULK_DISCOUNT. Small retail packs
  * (100g/500g) actually carry a premium (negative discount) over the base
- * per-kg rate — packing and handling a 100g bag costs more per kg than a
- * 20kg sack — and the bulk discount itself is capped modestly rather than
+ * per-kg rate, packing and handling a 100g bag costs more per kg than a
+ * 20kg sack, and the bulk discount itself is capped modestly rather than
  * stacking up to a steep markdown at the top end.
  */
 export const MAX_BULK_DISCOUNT = 0.08;
@@ -141,7 +141,7 @@ export function bulkDiscountForGrams(grams: number): number {
 /**
  * Effective ₹/kg for a resolved cart item. For estate lots this folds in the
  * lot's own shippingPerKg AND, when `grams` is given, the bulk discount for
- * that quantity — so the rest of the pipeline (cart/checkout/payment) always
+ * that quantity, so the rest of the pipeline (cart/checkout/payment) always
  * charges the discounted rate rather than applying it only cosmetically. A
  * product's `customPricing` (if any) overrides the formula entirely for a
  * given weight tier.
@@ -166,7 +166,7 @@ export type OrderItem = { productId: string; weight: string; farmId?: string; qu
  * Recomputes the full order total (product prices + one order-level delivery
  * fee based on total weight) from raw items. Throws if any item is invalid so
  * the caller can reject the request outright. `quantity` (default 1) lets a
- * single line represent N units of the same product/weight/farm combo — used
+ * single line represent N units of the same product/weight/farm combo, used
  * by the buy-green-beans "Select" quick-buy flow, which skips the cart.
  */
 export function computeOrderTotal(items: OrderItem[], country: string = "india"): number {

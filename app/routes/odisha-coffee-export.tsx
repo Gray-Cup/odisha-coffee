@@ -5,10 +5,10 @@ import type { ProcessingMethod } from "@/data/farms";
 
 export function meta() {
   return [
-    { title: "Odisha Coffee Export — Green Beans, FOB India, Gray Cup" },
-    { name: "description", content: "Export Odisha coffee through Gray Cup Enterprises. APEDA-registered, phytosanitary certified green bean lots from Koraput's Eastern Ghats — Arabica S795, SLN 9, and HSD. FCL and LCL quantities." },
-    { property: "og:title", content: "Odisha Coffee Export — Green Beans, FOB India" },
-    { property: "og:description", content: "APEDA-registered export green beans from 24 verified Koraput estates. Arabica S795, SLN 9, and HSD — traceable, certified, available in FCL and LCL. Gray Cup Enterprises." },
+    { title: "Odisha Coffee Export - Green Beans, FOB India, Gray Cup" },
+    { name: "description", content: "Export Odisha coffee through Gray Cup Enterprises. APEDA-registered, phytosanitary certified green bean lots from Koraput's Eastern Ghats, Arabica S795, SLN 9, and HSD. FCL and LCL quantities." },
+    { property: "og:title", content: "Odisha Coffee Export, Green Beans, FOB India" },
+    { property: "og:description", content: "APEDA-registered export green beans from 24 verified Koraput estates. Arabica S795, SLN 9, and HSD, traceable, certified, available in FCL and LCL. Gray Cup Enterprises." },
     { property: "og:url", content: "https://odishacoffee.com/odisha-coffee-export" },
     { property: "og:locale", content: "en_IN" },
   ];
@@ -34,7 +34,7 @@ const exportProducts = products.filter((p) => p.exportAvailable);
 const certifications = [
   {
     name: "APEDA Registration",
-    desc: "Agricultural and Processed Food Products Export Development Authority — mandatory for Indian coffee export.",
+    desc: "Agricultural and Processed Food Products Export Development Authority, mandatory for Indian coffee export.",
   },
   {
     name: "Phytosanitary Certificate",
@@ -42,7 +42,7 @@ const certifications = [
   },
   {
     name: "FSSAI",
-    desc: "Food Safety and Standards Authority of India — all Gray Cup partner farms hold FSSAI registration.",
+    desc: "Food Safety and Standards Authority of India, all Gray Cup partner farms hold FSSAI registration.",
   },
   {
     name: "ICO Registration",
@@ -67,7 +67,7 @@ const exportProcess = [
   {
     step: "02",
     title: "Sample Dispatch",
-    body: "We dispatch cupping samples (200g per lot) with full traceability documentation — farm name, elevation, harvest date, processing method, moisture content, and screen size.",
+    body: "We dispatch cupping samples (200g per lot) with full traceability documentation, farm name, elevation, harvest date, processing method, moisture content, and screen size.",
   },
   {
     step: "03",
@@ -115,7 +115,7 @@ export default function OdishaCoffeeExportPage() {
           </h1>
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
             Gray Cup Enterprises exports verified green coffee from {exportFarms.length} APEDA-registered
-            farms across Koraput district, Odisha. Arabica S795, SLN 9, HSD, and Catuai —
+            farms across Koraput district, Odisha. Arabica S795, SLN 9, HSD, and Catuai,
             all fully traceable to the farm level, with phytosanitary certification and ICO
             registration. Available in LCL and FCL quantities, FOB Visakhapatnam or Chennai.
           </p>
@@ -145,7 +145,7 @@ export default function OdishaCoffeeExportPage() {
           </h2>
           <p className="text-sm text-odisha-black/60 mb-8 max-w-2xl">
             Current export lots with minimum order quantities. All lots are available as raw green
-            beans — screened, moisture-tested, and lot-documented.
+            beans, screened, moisture-tested, and lot-documented.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
@@ -319,7 +319,7 @@ export default function OdishaCoffeeExportPage() {
             How the Export Process Works
           </h2>
           <p className="text-sm text-odisha-black/60 mb-10 max-w-2xl">
-            From first enquiry to arrival at your roastery — here&apos;s what the Gray Cup
+            From first enquiry to arrival at your roastery, here&apos;s what the Gray Cup
             export process looks like.
           </p>
 
@@ -368,7 +368,7 @@ export default function OdishaCoffeeExportPage() {
               },
               {
                 q: "Are organic-certified lots available for export?",
-                a: "Yes. Koraput Organic and Ekayani Plantation hold India Organic (NPOP) certification; Koraput Organic additionally holds EU Organic certification. These are available in limited quantities — contact us for current-season volumes.",
+                a: "Yes. Koraput Organic and Ekayani Plantation hold India Organic (NPOP) certification; Koraput Organic additionally holds EU Organic certification. These are available in limited quantities, contact us for current-season volumes.",
               },
               {
                 q: "What currencies do you invoice in?",
@@ -423,7 +423,7 @@ export default function OdishaCoffeeExportPage() {
               Ready to source Odisha coffee for export?
             </h3>
             <p className="text-white/60 text-sm mt-1">
-              Share your requirements — variety, volume, processing, target market. We&apos;ll
+              Share your requirements, variety, volume, processing, target market. We&apos;ll
               respond with available lots and pricing within 24 hours.
             </p>
           </div>

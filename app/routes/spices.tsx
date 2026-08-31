@@ -4,8 +4,8 @@ import { SpicesCatalog } from "@/components/products/spices-catalog";
 
 export function meta() {
   return [
-    { title: "Spices from Koraput — Odisha Coffee" },
-    { name: "description", content: "Shade-grown spices from Brown Valley Coffee Estate in Koraput, Odisha — black pepper at ₹850/kg and white pepper at ₹1,400/kg." },
+    { title: "Spices from Koraput - Odisha Coffee" },
+    { name: "description", content: "Shade-grown spices from Brown Valley Coffee Estate in Koraput, Odisha, black pepper at ₹850/kg and white pepper at ₹1,400/kg." },
   ];
 }
 

@@ -3,7 +3,7 @@ import type { ComponentType } from "react";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type MDXComponent = ComponentType<any>;
 
-// SEO guide articles — same MDX-at-build-time setup as lib/mdx.ts (newsroom),
+// SEO guide articles, same MDX-at-build-time setup as lib/mdx.ts (newsroom),
 // just a separate content folder so listicles/buying guides don't pollute the
 // press-style newsroom feed. See vite.config.ts for the @mdx-js/rollup plugin.
 

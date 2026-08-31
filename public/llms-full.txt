@@ -6,7 +6,7 @@ Generated from app/data/*.ts and content/newsroom/*.mdx — do not hand-edit; ru
 
 ## Farms & Estates (24)
 
-### Dream Hill Coffee — Saptagiri Plantation
+### Dream Hill Coffee - Saptagiri Plantation
 
 - URL: https://odishacoffee.com/farms/dream-hill-coffee
 - Region: Pottangi, Koraput district
@@ -22,7 +22,7 @@ Generated from app/data/*.ts and content/newsroom/*.mdx — do not hand-edit; ru
 
 Dream Hill Coffee, operating under the Saptagiri Plantation banner, is positioned at the highest elevations in Odisha's coffee belt. At over 1100 metres, the estate produces some of the most refined Arabica coffees from the region, with a bright acidity and aromatic complexity rare in Indian coffees.
 
-Founded with a singular focus on high-altitude specialty production, Dream Hill Coffee has become a benchmark for Odisha Arabica. The founder's background in agronomy brought scientific rigour to cultivation — from soil health monitoring to canopy management — resulting in consistently high cupping scores.
+Founded with a singular focus on high-altitude specialty production, Dream Hill Coffee has become a benchmark for Odisha Arabica. The founder's background in agronomy brought scientific rigour to cultivation (from soil health monitoring to canopy management) resulting in consistently high cupping scores.
 
 ### Brown Valley Coffee Estate
 
@@ -38,7 +38,7 @@ Founded with a singular focus on high-altitude specialty production, Dream Hill 
 - Certifications: FSSAI, APEDA, ISO 22000
 - Export ready: Yes
 
-Brown Valley is one of the larger estates in Koraput, spread across the undulating terrain of Boipariguda. The estate runs a fully equipped wet processing station and is one of the few farms in Odisha producing all three major processing styles — washed, natural, and honey.
+Brown Valley is one of the larger estates in Koraput, spread across the undulating terrain of Boipariguda. The estate runs a fully equipped wet processing station and is one of the few farms in Odisha producing all three major processing styles, washed, natural, and honey.
 
 With over 25 years in cultivation, Brown Valley has become a reference point for quality in Odisha coffee. The estate has invested significantly in post-harvest infrastructure, enabling lot separation by variety and processing method for traceability to individual micro-lots.
 
@@ -94,7 +94,7 @@ Named after the goddess of harvest, Annapurna Estate was established with a visi
 
 Bighneswari Plantation operates in the tribal heartland of Narayanpatna, where coffee cultivation has deep roots in the local agrarian economy. The plantation practices integrated farming alongside traditional crops, preserving biodiversity while producing robust, full-bodied coffees.
 
-The plantation takes its name from the local deity Bighneswari, and the family maintains the tradition of offering the first harvest at the village temple before processing begins — a practice that connects the estate to the cultural rhythms of Koraput.
+The plantation takes its name from the local deity Bighneswari, and the family maintains the tradition of offering the first harvest at the village temple before processing begins, a practice that connects the estate to the cultural rhythms of Koraput.
 
 ### Dash Plantation
 
@@ -112,7 +112,7 @@ The plantation takes its name from the local deity Bighneswari, and the family m
 
 Dash Plantation is a focused, well-managed estate specialising in clean washed coffees. Located near Koraput town, the farm benefits from proximity to processing infrastructure while maintaining the altitude and forest cover essential for quality bean development.
 
-Run by the Dash family, this estate represents the new generation of Odisha coffee farmers — technically informed and quality-focused. The decision to specialise in washed processing was deliberate, aimed at producing transparent, terroir-driven cups that communicate Koraput's distinct mineral character.
+Run by the Dash family, this estate represents the new generation of Odisha coffee farmers, technically informed and quality-focused. The decision to specialise in washed processing was deliberate, aimed at producing transparent, terroir-driven cups that communicate Koraput's distinct mineral character.
 
 ### Durga Madhav Coffee Estate
 
@@ -148,7 +148,7 @@ Named in reverence to both the local deity Durga and the family patriarch Madhav
 
 Ekayani Plantation is a progressive estate in Lamtaput, experimenting with pulped-natural processing alongside conventional washed lots. The estate has been active in farmer collective programmes and contributes to Gray Cup's partner training initiatives for new growers in the region.
 
-Ekayani — meaning 'the singular one' in Odia — reflects the farm's identity as a distinct voice in Odisha coffee. The estate has positioned itself as a training ground for younger farmers, hosting demonstration processing days and sharing fermentation data across the Gray Cup partner network.
+Ekayani (meaning 'the singular one' in Odia) reflects the farm's identity as a distinct voice in Odisha coffee. The estate has positioned itself as a training ground for younger farmers, hosting demonstration processing days and sharing fermentation data across the Gray Cup partner network.
 
 ### Jayadhar Garden
 
@@ -164,9 +164,9 @@ Ekayani — meaning 'the singular one' in Odia — reflects the farm's identity 
 - Certifications: FSSAI
 - Export ready: No
 
-Jayadhar Garden is a smaller, artisanal estate specialising exclusively in natural-processed Arabica. The farm's low-intervention approach — long cherry drying on raised beds, no additives — produces exceptionally fruit-forward, full-bodied cups.
+Jayadhar Garden is a smaller, artisanal estate specialising exclusively in natural-processed Arabica. The farm's low-intervention approach (long cherry drying on raised beds, no additives) produces exceptionally fruit-forward, full-bodied cups.
 
-Jayadhar Nayak inherited this plot from his grandfather and converted it to coffee after seeing neighbours' success. His deep attention to drying consistency — turning cherries hourly during peak sun, covering at night — has become a model for natural processing within the Odisha coffee community.
+Jayadhar Nayak inherited this plot from his grandfather and converted it to coffee after seeing neighbours' success. His deep attention to drying consistency (turning cherries hourly during peak sun, covering at night) has become a model for natural processing within the Odisha coffee community.
 
 ### Kakinada Plantation
 
@@ -202,7 +202,7 @@ The Kakinada family have been a sourcing partner of Gray Cup since the early day
 
 Koraput A-1 Coffee is one of the oldest and most established estates in Odisha, with a history stretching back over three decades. The estate's scale and infrastructure enable comprehensive lot separation across varieties and processing methods, making it a key supplier for export buyers seeking consistency and volume.
 
-Established before Odisha coffee had any formal identity, Koraput A-1 helped build the foundation of the region's reputation. The current management — third generation in the same family — has modernised the processing facility while maintaining the estate's commitment to shade-grown, chemical-free cultivation.
+Established before Odisha coffee had any formal identity, Koraput A-1 helped build the foundation of the region's reputation. The current management (third generation in the same family) has modernised the processing facility while maintaining the estate's commitment to shade-grown, chemical-free cultivation.
 
 ### Koraput Organic
 
@@ -272,7 +272,7 @@ The Mahapatra family named the estate after the revered goddess Maa Mangala, who
 - Certifications: FSSAI
 - Export ready: No
 
-Maa Sarala Plantation operates in the adjacent Nabarangpur district, extending Odisha's coffee belt beyond Koraput. The estate brings a slightly different terroir to the Gray Cup sourcing network — lower elevation with distinct seasonal rains — producing coffees with a heavier body and pronounced fruit character.
+Maa Sarala Plantation operates in the adjacent Nabarangpur district, extending Odisha's coffee belt beyond Koraput. The estate brings a slightly different terroir to the Gray Cup sourcing network (lower elevation with distinct seasonal rains) producing coffees with a heavier body and pronounced fruit character.
 
 This plantation was one of the first to bring coffee cultivation to Nabarangpur, inspired by success stories from neighbouring Koraput. The family has worked closely with Gray Cup to adapt best practices to the slightly different conditions of their district.
 
@@ -292,7 +292,7 @@ This plantation was one of the first to bring coffee cultivation to Nabarangpur,
 
 Madhu Agro Plantation is a mid-size estate known for well-balanced, consistent coffees. The farm operates a dual processing setup, producing both fully washed and natural lots from the same season's harvest, enabling comparison and buyer choice across the same terroir.
 
-Madhu Panda established this farm after two decades working in agricultural extension services in Odisha. His technical background is reflected in the estate's meticulous record-keeping — each lot is documented from cherry to bag, with moisture, defect, and cupping data retained for traceability.
+Madhu Panda established this farm after two decades working in agricultural extension services in Odisha. His technical background is reflected in the estate's meticulous record-keeping, each lot is documented from cherry to bag, with moisture, defect, and cupping data retained for traceability.
 
 ### Mutiyalumma Coffee Estate
 
@@ -346,7 +346,7 @@ Founded by a former IT professional who left Bangalore to return to his Koraput 
 
 Odisi Advance Telematic System is a technology-forward enterprise that integrates sensor-based monitoring into the growing and processing workflow. The estate uses IoT humidity and temperature sensors in the drying station and fermentation tanks to achieve unprecedented consistency in its washed lots.
 
-This estate started as a pilot programme to test whether precision agriculture technologies could be applied to small-holder coffee farming in Odisha. The results — lower defect rates, more consistent moisture content — have encouraged other partner farms to adopt similar monitoring tools.
+This estate started as a pilot programme to test whether precision agriculture technologies could be applied to small-holder coffee farming in Odisha. The results (lower defect rates, more consistent moisture content) have encouraged other partner farms to adopt similar monitoring tools.
 
 ### Panigrahi Agro Foundation
 
@@ -364,7 +364,7 @@ This estate started as a pilot programme to test whether precision agriculture t
 
 Panigrahi Agro Foundation operates as both an estate and a training centre for coffee quality in Odisha. The foundation has partnered with Gray Cup to run cupping labs and grower workshops, elevating the technical standards of the region's coffee sector.
 
-Established as a family estate, the Panigrahi Foundation has evolved into a knowledge hub for Odisha coffee. Their cupping lab — one of the few operational in the region — has trained over 50 farmers in sensory evaluation, helping growers connect processing decisions to final cup quality.
+Established as a family estate, the Panigrahi Foundation has evolved into a knowledge hub for Odisha coffee. Their cupping lab (one of the few operational in the region) has trained over 50 farmers in sensory evaluation, helping growers connect processing decisions to final cup quality.
 
 ### SM Plantation
 
@@ -382,7 +382,7 @@ Established as a family estate, the Panigrahi Foundation has evolved into a know
 
 SM Plantation is a compact, well-run estate in the Boipariguda belt known for its fruit-forward natural lots. The estate focuses on selective hand-picking at optimum ripeness, a factor that significantly elevates the quality of naturally processed coffees by reducing underripe and overripe cherry in the drying batch.
 
-The SM Plantation team has been a quiet but consistent presence in Odisha coffee circles. Their methodical approach to cherry selection — sorting by float before any processing begins — has been highlighted in Gray Cup sourcing documentation as a model practice.
+The SM Plantation team has been a quiet but consistent presence in Odisha coffee circles. Their methodical approach to cherry selection (sorting by float before any processing begins) has been highlighted in Gray Cup sourcing documentation as a model practice.
 
 ### Sri Sai Plantation
 
@@ -418,7 +418,7 @@ Named after the beloved saint Sai Baba, this plantation reflects the family's de
 
 Trinetra Agro is a mid-size estate in Narayanpatna known for its well-structured, chocolatey coffees. Both washed and natural lots are produced, with the natural processing taking place on purpose-built raised beds that allow optimal airflow during the Koraput dry season.
 
-Trinetra — meaning 'three-eyed', a reference to Lord Shiva — reflects the triple focus the estate places on cultivation, processing, and people. The founders believe quality coffee begins with the seed, continues through thoughtful processing, and is only complete when the farmer who grew it is fairly compensated.
+Trinetra (meaning 'three-eyed', a reference to Lord Shiva) reflects the triple focus the estate places on cultivation, processing, and people. The founders believe quality coffee begins with the seed, continues through thoughtful processing, and is only complete when the farmer who grew it is fairly compensated.
 
 ### Urbara Plantation
 
@@ -434,7 +434,7 @@ Trinetra — meaning 'three-eyed', a reference to Lord Shiva — reflects the tr
 - Certifications: FSSAI, APEDA, Organic India
 - Export ready: Yes
 
-Urbara Plantation — 'Urbara' meaning fertile land in Sanskrit — lives up to its name with a diverse portfolio of varieties and processing methods. The estate has invested in a full wet mill and covered drying infrastructure, enabling year-round lot production and consistent quality across seasons.
+Urbara Plantation ('Urbara' meaning fertile land in Sanskrit) lives up to its name with a diverse portfolio of varieties and processing methods. The estate has invested in a full wet mill and covered drying infrastructure, enabling year-round lot production and consistent quality across seasons.
 
 Co-founded by a husband-wife team from agricultural backgrounds, Urbara Plantation has brought a scientific and entrepreneurial energy to Odisha coffee. Their approach to varietal separation and lot documentation has set a benchmark for traceability within the Odisha coffee farming community.
 
@@ -454,7 +454,7 @@ Co-founded by a husband-wife team from agricultural backgrounds, Urbara Plantati
 
 Export-grade HSD Arabica green beans, washed-processed from Koraput's high-altitude estates. Screen 15+ sorted, moisture 10–12%, lot-tested. Ideal for specialty roasters seeking traceable Indian-origin Arabica with consistent cup clarity and bright character.
 
-Brewing/roasting notes: Roasters: recommend medium-light profile, first crack +20s. HSD responds well to a gentle development phase — highlight the citrus and clean acidity.
+Brewing/roasting notes: Roasters: recommend medium-light profile, first crack +20s. HSD responds well to a gentle development phase, highlight the citrus and clean acidity.
 
 ### Koraput Naturals
 
@@ -468,7 +468,7 @@ Brewing/roasting notes: Roasters: recommend medium-light profile, first crack +2
 - Price: ₹1800/kg
 - Export available: Yes (min 200kg green beans)
 
-Natural-processed green bean lots from Koraput — cherries sun-dried whole for 25–30 days on raised beds. Fruit-integrated and complex, these lots are excellent for espresso blends, natural roast profiles, and buyers seeking Indian naturals with depth.
+Natural-processed green bean lots from Koraput, cherries sun-dried whole for 25–30 days on raised beds. Fruit-integrated and complex, these lots are excellent for espresso blends, natural roast profiles, and buyers seeking Indian naturals with depth.
 
 Brewing/roasting notes: Roasters: medium to medium-dark roast profiles work best. Allow longer development time (DTR 22–25%) to unlock the fruit-chocolate complexity. Blends beautifully with washed Arabica.
 
@@ -486,7 +486,7 @@ Brewing/roasting notes: Roasters: medium to medium-dark roast profiles work best
 
 Our washed HSD Arabica from Koraput, roasted light to preserve the variety's natural brightness. Slow-roasted in small batches, rested 48 hours before dispatch. A remarkably clean, floral cup that showcases what Eastern Ghats Arabica can offer at its best.
 
-Brewing/roasting notes: Ideal for pour-over, V60, or Chemex. Water at 90–92°C, 1:16 ratio. Grind medium-fine. The light roast rewards slow extraction — allow full 3–4 minute brew time.
+Brewing/roasting notes: Ideal for pour-over, V60, or Chemex. Water at 90–92°C, 1:16 ratio. Grind medium-fine. The light roast rewards slow extraction, allow full 3–4 minute brew time.
 
 ### Naturals Roasted
 
@@ -500,7 +500,7 @@ Brewing/roasting notes: Ideal for pour-over, V60, or Chemex. Water at 90–92°C
 - Price: ₹1568/kg
 - Export available: No
 
-Natural-processed Koraput coffee roasted to medium, where the fruit-integration of the drying process reaches its peak. Rich, syrupy, and deeply satisfying — this is an exceptional everyday filter coffee or a crowd-pleasing espresso base.
+Natural-processed Koraput coffee roasted to medium, where the fruit-integration of the drying process reaches its peak. Rich, syrupy, and deeply satisfying, this is an exceptional everyday filter coffee or a crowd-pleasing espresso base.
 
 Brewing/roasting notes: Excellent as filter or espresso. Pour-over at 93°C, 1:15 ratio. As espresso: 25–28 second extraction. The natural sweetness pairs brilliantly with milk-based drinks.
 
@@ -516,7 +516,7 @@ Brewing/roasting notes: Excellent as filter or espresso. Pour-over at 93°C, 1:1
 - Price: ₹2058/kg
 - Export available: No
 
-A rare anaerobic natural lot from Oak Winds Farm, processed with extended cherry fermentation that produces vivid strawberry and floral notes. Roasted light to let the process-driven character sing. Each batch is limited — when it's gone, it's gone until next season.
+A rare anaerobic natural lot from Oak Winds Farm, processed with extended cherry fermentation that produces vivid strawberry and floral notes. Roasted light to let the process-driven character sing. Each batch is limited, when it's gone, it's gone until next season.
 
 Brewing/roasting notes: Best as pour-over or AeroPress at 88–90°C (lower temp amplifies the strawberry). 1:15 ratio, medium grind. Try as a cold brew for a stunning no-heat-needed strawberry sweetness.
 
@@ -532,9 +532,9 @@ Brewing/roasting notes: Best as pour-over or AeroPress at 88–90°C (lower temp
 - Price: ₹2548/kg
 - Export available: No
 
-Honey-processed Catuai aged in reclaimed whiskey and rum barrels from Odisha distilleries. The 30-day barrel rest imparts layers of vanilla, oak, and spirit warmth onto the coffee's natural sweetness. A conversation piece roast — complex, bold, and absolutely unmistakable.
+Honey-processed Catuai aged in reclaimed whiskey and rum barrels from Odisha distilleries. The 30-day barrel rest imparts layers of vanilla, oak, and spirit warmth onto the coffee's natural sweetness. A conversation piece roast, complex, bold, and absolutely unmistakable.
 
-Brewing/roasting notes: Moka pot or espresso for the full barrel intensity. French press at 94°C, 4-minute steep — the oils and body come through beautifully. Pairs exceptionally with a drop of cream.
+Brewing/roasting notes: Moka pot or espresso for the full barrel intensity. French press at 94°C, 4-minute steep, the oils and body come through beautifully. Pairs exceptionally with a drop of cream.
 
 ### Espresso Blend
 
@@ -548,9 +548,9 @@ Brewing/roasting notes: Moka pot or espresso for the full barrel intensity. Fren
 - Price: ₹1176/kg
 - Export available: No
 
-Our house 100% Arabica espresso blend — 80% washed S795 for sweetness and structure, 20% Chandragiri for body and crema. Roasted medium-dark for a balanced, forgiving shot that works beautifully across all espresso machines and milk ratios.
+Our house 100% Arabica espresso blend, 80% washed S795 for sweetness and structure, 20% Chandragiri for body and crema. Roasted medium-dark for a balanced, forgiving shot that works beautifully across all espresso machines and milk ratios.
 
-Brewing/roasting notes: Dial to 9 bars, 93°C, 25–28 seconds, 1:2 ratio. For milk drinks, pull slightly longer (30s) for extra sweetness. Forgiving on dose — ±2g from recipe still yields a good shot.
+Brewing/roasting notes: Dial to 9 bars, 93°C, 25–28 seconds, 1:2 ratio. For milk drinks, pull slightly longer (30s) for extra sweetness. Forgiving on dose, ±2g from recipe still yields a good shot.
 
 ### Espresso 100 Arabica
 
@@ -564,9 +564,9 @@ Brewing/roasting notes: Dial to 9 bars, 93°C, 25–28 seconds, 1:2 ratio. For m
 - Price: ₹1470/kg
 - Export available: No
 
-A single-origin 100% Arabica espresso from Koraput's Sunabeda plateau. Roasted medium to preserve the variety's natural sweetness while building espresso body. Clean, smooth, and approachable — a perfect gateway to Indian specialty espresso.
+A single-origin 100% Arabica espresso from Koraput's Sunabeda plateau. Roasted medium to preserve the variety's natural sweetness while building espresso body. Clean, smooth, and approachable, a perfect gateway to Indian specialty espresso.
 
-Brewing/roasting notes: Best at 93°C, 9 bars, 27–30 seconds, 1:2.2 ratio. The all-Arabica character shines brightest as a straight espresso or flat white. Avoid over-extraction — the sweetness lives in the first half of the shot.
+Brewing/roasting notes: Best at 93°C, 9 bars, 27–30 seconds, 1:2.2 ratio. The all-Arabica character shines brightest as a straight espresso or flat white. Avoid over-extraction, the sweetness lives in the first half of the shot.
 
 ### Oak Winds Washed Arabica
 
@@ -586,7 +586,7 @@ Brewing/roasting notes: Best as pour-over or V60. Use water at 90–92°C. Ratio
 
 ### Dream Hill Honey Arabica
 
-- Farm: Dream Hill Coffee — Saptagiri Plantation (Pottangi, Koraput)
+- Farm: Dream Hill Coffee - Saptagiri Plantation (Pottangi, Koraput)
 - Variety: Chandragiri
 - Processing: honey
 - Roast level: medium
@@ -660,7 +660,7 @@ Brewing/roasting notes: Versatile across espresso and filter. As espresso: water
 - Price: ₹1862/kg
 - Export available: Yes (min 150kg green beans)
 
-Lot-separated washed S795 from Panigrahi Agro Foundation, processed through their state-of-the-art wet mill with careful fermentation control monitored via pH testing. This is Odisha washed coffee at its most refined — structured, balanced, and deeply expressive of the Semiliguda terroir.
+Lot-separated washed S795 from Panigrahi Agro Foundation, processed through their state-of-the-art wet mill with careful fermentation control monitored via pH testing. This is Odisha washed coffee at its most refined, structured, balanced, and deeply expressive of the Semiliguda terroir.
 
 Brewing/roasting notes: Ideal for pour-over or filter coffee. Medium-light roast recommended. Water at 92°C, medium grind. The balanced acidity and caramel sweetness make this an excellent all-day filter coffee.
 
@@ -680,7 +680,7 @@ Honey-processed S795 from the Maa Mangala estate in Jeypore. The tropical microc
 
 Brewing/roasting notes: Best as AeroPress or Chemex. Water at 92°C. The honey processing creates a thick, syrupy body. Experiment with finer grind settings to unlock the full tropical sweetness.
 
-### Odisha Export Grade — Green Arabica
+### Odisha Export Grade - Green Arabica
 
 - Farm: Multiple Gray Cup Partner Farms (Koraput District)
 - Variety: Arabica S795
@@ -708,13 +708,13 @@ Brewing/roasting notes: For roasters: well-suited to medium and medium-light roa
 - Price: ₹4800/kg
 - Export available: No
 
-Wild-foraged civet coffee (Kopi Luwak) from Brown Valley Coffee Estate, roasted. Coffee cherries pass through the digestive tract of the wild Asian palm civet, ferment naturally, and are hand-collected, cleaned and sun-dried — then roasted medium to keep the smooth, low-bitter cup the washed processing produces. Wild-foraged, never caged; seasonal and available only in small quantities.
+Wild-foraged civet coffee (Kopi Luwak) from Brown Valley Coffee Estate, roasted. Coffee cherries pass through the digestive tract of the wild Asian palm civet, ferment naturally, and are hand-collected, cleaned and sun-dried, then roasted medium to keep the smooth, low-bitter cup the washed processing produces. Wild-foraged, never caged; seasonal and available only in small quantities.
 
-Brewing/roasting notes: Pour-over or French press at 92–94°C, medium grind, 1:15 ratio. The chocolate and creamy, dairy-like sweetness need room — avoid over-extraction. Excellent as a slow cold brew.
+Brewing/roasting notes: Pour-over or French press at 92–94°C, medium grind, 1:15 ratio. The chocolate and creamy, dairy-like sweetness need room, avoid over-extraction. Excellent as a slow cold brew.
 
 ### Dream Hill AAA Washed (Roasted)
 
-- Farm: Dream Hill Coffee — Saptagiri Plantation × Gray Cup Roastery (Pottangi, Koraput)
+- Farm: Dream Hill Coffee - Saptagiri Plantation × Gray Cup Roastery (Pottangi, Koraput)
 - Variety: Arabica SLN 9 & Chandragiri
 - Processing: washed
 - Roast level: medium
@@ -740,7 +740,7 @@ Brewing/roasting notes: Pour-over, V60 or Chemex at 92–93°C, medium-fine grin
 - Price: ₹2600/kg
 - Export available: Yes (min 100kg green beans)
 
-HSD (honey/semi-dry) processed Arabica from Brown Valley Estate, one of the few Odisha farms running all three processing styles with micro-lot traceability. The HSD process strikes a balance between the brightness of washed and the fruitiness of natural — a cup with balanced sweetness and a smooth, rounded body. Roasted medium; great for filter and cold brew.
+HSD (honey/semi-dry) processed Arabica from Brown Valley Estate, one of the few Odisha farms running all three processing styles with micro-lot traceability. The HSD process strikes a balance between the brightness of washed and the fruitiness of natural, a cup with balanced sweetness and a smooth, rounded body. Roasted medium; great for filter and cold brew.
 
 Brewing/roasting notes: Versatile across filter and espresso. Filter: V60 or Chemex at 93°C, medium grind. Espresso: 93°C, 25–28 second shot. The honey process gives a syrupy body that holds up well with milk.
 
@@ -750,7 +750,7 @@ Brewing/roasting notes: Versatile across filter and espresso. Filter: V60 or Che
 
 - Variety: Arabica S795
 - Processing: washed
-- Grade: AAA — Screen 17+
+- Grade: AAA, Screen 17+
 - Moisture: 10–12%
 - Screen size: Screen 17+
 - Flavor notes: Clean, Mild Citrus, Chocolate, Brown Sugar
@@ -758,15 +758,15 @@ Brewing/roasting notes: Versatile across filter and espresso. Filter: V60 or Che
 - Min order: 1 kg
 - Price: ₹1135/kg (+₹60/kg shipping)
 
-The finest grade from Koraput's Eastern Ghats — AAA-grade washed Arabica, screen 17+ sorted, moisture-tested at 10–12%. Fully washed and parchment-dried on raised beds for 14–18 days. Ideal for specialty roasters and importers seeking a consistent, traceable Indian Arabica with clean cup character.
+The finest grade from Koraput's Eastern Ghats, AAA-grade washed Arabica, screen 17+ sorted, moisture-tested at 10–12%. Fully washed and parchment-dried on raised beds for 14–18 days. Ideal for specialty roasters and importers seeking a consistent, traceable Indian Arabica with clean cup character.
 
-Brewing notes: Recommended roast: medium-light to medium. First crack +20–30s development. The washed process transparency rewards a careful ramp — expect clean citrus on light roasts, chocolate and brown sugar on medium.
+Brewing notes: Recommended roast: medium-light to medium. First crack +20–30s development. The washed process transparency rewards a careful ramp, expect clean citrus on light roasts, chocolate and brown sugar on medium.
 
 ### AA Green Arabica Washed
 
 - Variety: Arabica S795
 - Processing: washed
-- Grade: AA — Screen 16+
+- Grade: AA, Screen 16+
 - Moisture: 10–12%
 - Screen size: Screen 16+
 - Flavor notes: Chocolate, Mild Citrus, Clean, Medium Body
@@ -782,7 +782,7 @@ Brewing notes: Recommended roast: medium-light to medium-dark. Versatile across 
 
 - Variety: Arabica S795 & Chandragiri
 - Processing: washed
-- Grade: A — Screen 15+
+- Grade: A, Screen 15+
 - Moisture: 10–12%
 - Screen size: Screen 15+
 - Flavor notes: Chocolate, Mild Spice, Nutty, Clean Finish
@@ -790,7 +790,7 @@ Brewing notes: Recommended roast: medium-light to medium-dark. Versatile across 
 - Min order: 1 kg
 - Price: ₹765/kg (+₹60/kg shipping)
 
-A-grade washed Arabica from Koraput partner estates. Screen 15+ sorted, moisture 10–12%. A good-value entry into Odisha washed Arabica — clean, approachable, and well-suited to medium roast profiles and espresso blending.
+A-grade washed Arabica from Koraput partner estates. Screen 15+ sorted, moisture 10–12%. A good-value entry into Odisha washed Arabica, clean, approachable, and well-suited to medium roast profiles and espresso blending.
 
 Brewing notes: Recommended roast: medium to medium-dark. Works well as an espresso base or blend anchor. The Chandragiri component adds structure; roast to first crack +30s for best balance.
 
@@ -798,7 +798,7 @@ Brewing notes: Recommended roast: medium to medium-dark. Works well as an espres
 
 - Variety: Arabica S795 & Chandragiri
 - Processing: washed
-- Grade: B+ — Screen 15+
+- Grade: B+, Screen 15+
 - Moisture: 10–13%
 - Screen size: Screen 15+
 - Flavor notes: Cocoa, Earthy, Full Body, Low Acidity
@@ -806,15 +806,15 @@ Brewing notes: Recommended roast: medium to medium-dark. Works well as an espres
 - Min order: 1 kg
 - Price: ₹755/kg (+₹60/kg shipping)
 
-B+ grade washed green beans — screen 15+, moisture 10–13%. A 100% Arabica lot combining S795 and Chandragiri from Koraput estates, fully washed and sun-dried. Suited for commodity blenders, large-volume roasters, and buyers seeking consistent Indian green beans at scale.
+B+ grade washed green beans, screen 15+, moisture 10–13%. A 100% Arabica lot combining S795 and Chandragiri from Koraput estates, fully washed and sun-dried. Suited for commodity blenders, large-volume roasters, and buyers seeking consistent Indian green beans at scale.
 
-Brewing notes: Recommended roast: medium-dark to dark. Full-bodied and low-acid straight out of the washed process — well-suited to espresso blends and commercial roast profiles.
+Brewing notes: Recommended roast: medium-dark to dark. Full-bodied and low-acid straight out of the washed process, well-suited to espresso blends and commercial roast profiles.
 
 ### B Green Arabica Washed
 
 - Variety: Arabica S795 & Chandragiri
 - Processing: washed
-- Grade: B — Screen 13+
+- Grade: B, Screen 13+
 - Moisture: 11–13%
 - Screen size: Screen 13+
 - Flavor notes: Earthy, Cocoa, Woody, Neutral
@@ -822,7 +822,7 @@ Brewing notes: Recommended roast: medium-dark to dark. Full-bodied and low-acid 
 - Min order: 5 kg
 - Price: ₹695/kg (+₹60/kg shipping)
 
-B-grade washed green beans from Koraput — screen 13+ sorted, moisture 11–13%. A practical commodity lot for high-volume buyers, instant coffee producers, and blend manufacturers. Traceable origin with FSSAI documentation.
+B-grade washed green beans from Koraput, screen 13+ sorted, moisture 11–13%. A practical commodity lot for high-volume buyers, instant coffee producers, and blend manufacturers. Traceable origin with FSSAI documentation.
 
 Brewing notes: Recommended roast: medium-dark to dark. Suitable for espresso blends, instant production, and commercial dark roasts. The natural earthiness of Koraput terroir is retained even at darker roast levels.
 
@@ -830,7 +830,7 @@ Brewing notes: Recommended roast: medium-dark to dark. Suitable for espresso ble
 
 - Variety: Arabica S795 & Chandragiri
 - Processing: washed
-- Grade: BB — Screen 12+
+- Grade: BB, Screen 12+
 - Moisture: 11–13%
 - Screen size: Screen 12+
 - Flavor notes: Earthy, Woody, Neutral, Full Body
@@ -838,7 +838,7 @@ Brewing notes: Recommended roast: medium-dark to dark. Suitable for espresso ble
 - Min order: 5 kg
 - Price: ₹680/kg (+₹60/kg shipping)
 
-BB-grade washed green beans from Koraput — screen 12+ sorted, moisture 11–13%. Our lowest-grade washed commodity lot, priced for the most price-sensitive high-volume buyers, instant coffee producers, and blend manufacturers. Traceable origin with FSSAI documentation.
+BB-grade washed green beans from Koraput, screen 12+ sorted, moisture 11–13%. Our lowest-grade washed commodity lot, priced for the most price-sensitive high-volume buyers, instant coffee producers, and blend manufacturers. Traceable origin with FSSAI documentation.
 
 Brewing notes: Recommended roast: dark. Best suited to instant production and value commercial dark roasts, where cost per kg matters more than cup complexity.
 
@@ -846,7 +846,7 @@ Brewing notes: Recommended roast: dark. Best suited to instant production and va
 
 - Variety: Arabica S795 & Chandragiri
 - Processing: natural
-- Grade: B+ — Screen 15+
+- Grade: B+, Screen 15+
 - Moisture: 11–13%
 - Screen size: Screen 15+
 - Flavor notes: Dark Fruit, Chocolate, Earthy, Full Body
@@ -862,7 +862,7 @@ Brewing notes: Recommended roast: medium to medium-dark. Allow extended developm
 
 - Variety: Arabica HSD (Hibrido de Timor)
 - Processing: washed
-- Grade: AA — Screen 17+
+- Grade: AA, Screen 17+
 - Moisture: 10–12%
 - Screen size: Screen 17+
 - Flavor notes: Bright Citrus, Floral, Brown Sugar, Clean Finish
@@ -878,7 +878,7 @@ Brewing notes: Recommended roast: light to medium-light. First crack +15–20s d
 
 - Variety: Arabica HSD (Hibrido de Timor)
 - Processing: washed
-- Grade: A — Screen 16+
+- Grade: A, Screen 16+
 - Moisture: 10–12%
 - Screen size: Screen 16+
 - Flavor notes: Citrus, Floral, Brown Sugar, Clean Finish
@@ -894,7 +894,7 @@ Brewing notes: Recommended roast: light to medium-light. First crack +15–20s d
 
 - Variety: Arabica S795
 - Processing: washed
-- Grade: Specialty — Round Screen 12+
+- Grade: Specialty, Round Screen 12+
 - Moisture: 10–12%
 - Screen size: Round Screen 12+
 - Flavor notes: Concentrated Sweetness, Citrus, Honey, Bright Acidity
@@ -902,15 +902,15 @@ Brewing notes: Recommended roast: light to medium-light. First crack +15–20s d
 - Min order: 500 g
 - Price: ₹1190/kg (+₹60/kg shipping)
 
-Specialty-grade peaberry lot, exclusively hand-sorted at Brown Valley Coffee Estate — single round beans (naturally occurring in ~5% of cherries), fully washed and dried on raised beds for 14–18 days. Denser than flat beans and prized for a sweeter, more concentrated cup. Screen 12+ round-screen sorted, moisture 10–12%, cupped and lot-tested.
+Specialty-grade peaberry lot, exclusively hand-sorted at Brown Valley Coffee Estate, single round beans (naturally occurring in ~5% of cherries), fully washed and dried on raised beds for 14–18 days. Denser than flat beans and prized for a sweeter, more concentrated cup. Screen 12+ round-screen sorted, moisture 10–12%, cupped and lot-tested.
 
-Brewing notes: Recommended roast: light to medium. The dense, round bean roasts more evenly than flat beans — reduce heat slightly to avoid scorching the surface. Outstanding on pour-over, where the concentrated sweetness and acidity come through clearly.
+Brewing notes: Recommended roast: light to medium. The dense, round bean roasts more evenly than flat beans, reduce heat slightly to avoid scorching the surface. Outstanding on pour-over, where the concentrated sweetness and acidity come through clearly.
 
 ### AA Arabica Naturals
 
 - Variety: Arabica S795
 - Processing: natural
-- Grade: AA — Screen 14+
+- Grade: AA, Screen 14+
 - Moisture: 11–13%
 - Screen size: Screen 14+
 - Flavor notes: Dried Fruit, Earthy, Cocoa, Full Body
@@ -926,7 +926,7 @@ Brewing notes: Recommended roast: medium-dark to dark. The whole-cherry drying b
 
 - Variety: Arabica S795
 - Processing: honey
-- Grade: AA — Screen 14+
+- Grade: AA, Screen 14+
 - Moisture: 11–13%
 - Screen size: Screen 14+
 - Flavor notes: Honey Sweetness, Caramel, Stone Fruit, Medium Body
@@ -942,7 +942,7 @@ Brewing notes: Recommended roast: medium to medium-dark. The retained mucilage s
 
 - Variety: Arabica S795
 - Processing: natural
-- Grade: Specialty — Screen 16+
+- Grade: Specialty, Screen 16+
 - Moisture: 10–12%
 - Screen size: Screen 16+
 - Flavor notes: Ripe Berry, Red Wine, Dark Chocolate, Syrupy Body
@@ -958,7 +958,7 @@ Brewing notes: Recommended roast: medium, extended development (DTR 22–26%) to
 
 - Variety: Arabica S795 & Chandragiri
 - Processing: natural
-- Grade: AA — Screen 16+
+- Grade: AA, Screen 16+
 - Moisture: 10–12%
 - Screen size: Screen 16+
 - Flavor notes: Tropical Fruit, Wine, Funky Ferment, Heavy Body
@@ -966,7 +966,7 @@ Brewing notes: Recommended roast: medium, extended development (DTR 22–26%) to
 - Min order: 1 kg
 - Price: ₹1290/kg (+₹60/kg shipping)
 
-AA-grade extended anaerobic-fermentation naturals from Koraput — whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, intensifying the fruit and funk beyond a standard natural. Screen 16+ sorted, moisture 10–12%, cupped and lot-tested for consistency across the fermentation-driven profile.
+AA-grade extended anaerobic-fermentation naturals from Koraput, whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, intensifying the fruit and funk beyond a standard natural. Screen 16+ sorted, moisture 10–12%, cupped and lot-tested for consistency across the fermentation-driven profile.
 
 Brewing notes: Recommended roast: medium, gentle development to keep the anaerobic fermentation character bright rather than overripe. Excellent as a single-origin espresso or French press; the funk carries well in milk drinks.
 
@@ -974,7 +974,7 @@ Brewing notes: Recommended roast: medium, gentle development to keep the anaerob
 
 - Variety: Arabica S795 & Chandragiri
 - Processing: natural
-- Grade: A — Screen 15+
+- Grade: A, Screen 15+
 - Moisture: 10–12%
 - Screen size: Screen 15+
 - Flavor notes: Tropical Fruit, Wine, Funky Ferment, Full Body
@@ -982,7 +982,7 @@ Brewing notes: Recommended roast: medium, gentle development to keep the anaerob
 - Min order: 1 kg
 - Price: ₹1245/kg (+₹60/kg shipping)
 
-A-grade extended anaerobic-fermentation naturals from Koraput — whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, building fruit-forward funk on top of a standard natural. Screen 15+ sorted, moisture 10–12%, cupped and lot-tested for consistency across the fermentation-driven profile.
+A-grade extended anaerobic-fermentation naturals from Koraput, whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, building fruit-forward funk on top of a standard natural. Screen 15+ sorted, moisture 10–12%, cupped and lot-tested for consistency across the fermentation-driven profile.
 
 Brewing notes: Recommended roast: medium, gentle development to keep the anaerobic fermentation character bright rather than overripe. Excellent as a single-origin espresso or French press; the funk carries well in milk drinks.
 
@@ -990,7 +990,7 @@ Brewing notes: Recommended roast: medium, gentle development to keep the anaerob
 
 - Variety: Arabica S795 & Chandragiri
 - Processing: natural
-- Grade: B+ — Screen 14+
+- Grade: B+, Screen 14+
 - Moisture: 10–12%
 - Screen size: Screen 14+
 - Flavor notes: Tropical Fruit, Wine, Funky Ferment, Full Body
@@ -998,7 +998,7 @@ Brewing notes: Recommended roast: medium, gentle development to keep the anaerob
 - Min order: 1 kg
 - Price: ₹1180/kg (+₹60/kg shipping)
 
-B+ grade extended anaerobic-fermentation naturals from Koraput — whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, a value-focused entry point into the fermentation-driven funk profile. Screen 14+ sorted, moisture 10–12%, cupped and lot-tested for consistency.
+B+ grade extended anaerobic-fermentation naturals from Koraput, whole cherries sealed in airtight tanks for 72–96 hours before raised-bed sun drying, a value-focused entry point into the fermentation-driven funk profile. Screen 14+ sorted, moisture 10–12%, cupped and lot-tested for consistency.
 
 Brewing notes: Recommended roast: medium, gentle development to keep the anaerobic fermentation character bright rather than overripe. Excellent as a single-origin espresso or French press; the funk carries well in milk drinks.
 
@@ -1006,7 +1006,7 @@ Brewing notes: Recommended roast: medium, gentle development to keep the anaerob
 
 - Variety: Arabica Chandragiri
 - Processing: washed
-- Grade: Wild Kopi Luwak — Hand-Collected
+- Grade: Wild Kopi Luwak, Hand-Collected
 - Moisture: 10–12%
 - Screen size: Hand-Sorted
 - Flavor notes: Chocolate, Earthy, Creamy, Low Bitterness
@@ -1014,7 +1014,7 @@ Brewing notes: Recommended roast: medium, gentle development to keep the anaerob
 - Min order: 100 g
 - Price: ₹1940/kg (+₹60/kg shipping)
 
-A genuine rarity from Brown Valley, Koraput, Odisha, India — wild civet cat coffee, exclusively foraged at Brown Valley Coffee Estate. Also known as Kopi Luwak, it's made by passing coffee cherries through the digestive tract of the wild Asian palm civet, where they undergo natural fermentation and enzymatic changes before being hand-collected from the animal's droppings, thoroughly cleaned, and sun-dried. It's washed — a smooth, low-bitter cup with rich chocolate, earthy, and creamy dairy-like notes. Wild-foraged (never caged), seasonal, and available only in small quantities.
+A genuine rarity from Brown Valley, Koraput, Odisha, India, wild civet cat coffee, exclusively foraged at Brown Valley Coffee Estate. Also known as Kopi Luwak, it's made by passing coffee cherries through the digestive tract of the wild Asian palm civet, where they undergo natural fermentation and enzymatic changes before being hand-collected from the animal's droppings, thoroughly cleaned, and sun-dried. It's washed, a smooth, low-bitter cup with rich chocolate, earthy, and creamy dairy-like notes. Wild-foraged (never caged), seasonal, and available only in small quantities.
 
 Brewing notes: Recommended roast: medium, kept gentle to preserve the smooth, low-bitter cup the washed processing produces. Best brewed as pour-over or French press, where the chocolate and creamy dairy-like sweetness have room to come through.
 
@@ -1025,11 +1025,11 @@ Brewing notes: Recommended roast: medium, kept gentle to preserve the smooth, lo
 - Price: ₹850/kg
 - Weight options: 100g, 250g, 500g, 1kg
 
-Shade-grown black pepper from Brown Valley Coffee Estate in Koraput, Odisha — pepper vines are traditionally intercropped with silver oak and jackfruit shade trees across the estate. Sun-dried, hand-sorted, and sold by the kilogram.
+Shade-grown black pepper from Brown Valley Coffee Estate in Koraput, Odisha, pepper vines are traditionally intercropped with silver oak and jackfruit shade trees across the estate. Sun-dried, hand-sorted, and sold by the kilogram.
 
 ### White Pepper
 
 - Price: ₹1400/kg
 - Weight options: 100g, 250g, 500g, 1kg
 
-Shade-grown white pepper from Brown Valley Coffee Estate in Koraput, Odisha — ripe berries are soaked and hulled to remove the outer skin, yielding a milder, cleaner heat than black pepper. Sun-dried, hand-sorted, and sold by the kilogram.
+Shade-grown white pepper from Brown Valley Coffee Estate in Koraput, Odisha, ripe berries are soaked and hulled to remove the outer skin, yielding a milder, cleaner heat than black pepper. Sun-dried, hand-sorted, and sold by the kilogram.

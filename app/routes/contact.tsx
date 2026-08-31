@@ -3,11 +3,11 @@ import { MapPin, Phone, Mail, Building2 } from "lucide-react";
 
 export function meta() {
   return [
-    { title: "Contact Us — Odisha Coffee" },
+    { title: "Contact Us - Odisha Coffee" },
     {
       name: "description",
       content:
-        "Get in touch with Gray Cup Enterprises Private Limited — office address, phone, email and WhatsApp.",
+        "Get in touch with Gray Cup Enterprises Private Limited, office address, phone, email and WhatsApp.",
     },
   ];
 }

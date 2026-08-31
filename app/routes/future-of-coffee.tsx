@@ -55,7 +55,7 @@ export default function FutureOfCoffee() {
           unpredictable rainfall, droughts, pest outbreaks, and sea-level changes
           are putting one of the world's most loved beverages at risk. Today,
           nearly <span className="font-semibold">60% of all coffee species</span>{" "}
-          are threatened with extinction — one of the highest risk levels recorded
+          are threatened with extinction, one of the highest risk levels recorded
           for any plant group.
         </p>
 
@@ -67,13 +67,13 @@ export default function FutureOfCoffee() {
         </p>
           <ul className="space-y-2">
             <li>
-              - <span className="font-medium">Very Strong / Strong</span> — Critically Endangered species
+              - <span className="font-medium">Very Strong / Strong</span>, Critically Endangered species
             </li>
             <li>
-              - <span className="font-medium">Medium</span> — Endangered species
+              - <span className="font-medium">Medium</span>, Endangered species
             </li>
             <li>
-              - <span className="font-medium">Mild</span> — Vulnerable species
+              - <span className="font-medium">Mild</span>, Vulnerable species
             </li>
           </ul>
 

@@ -7,10 +7,10 @@ export function meta({ params }: { params: { slug?: string } }) {
   const farm = params.slug ? getFarmBySlug(params.slug) : undefined;
   if (!farm) return [{ title: "Farm Not Found" }];
   return [
-    { title: `${farm.name} Roasted Coffee — Koraput, Odisha` },
+    { title: `${farm.name} Roasted Coffee - Koraput, Odisha` },
     {
       name: "description",
-      content: `Small-batch roasted coffee from ${farm.name}, ${farm.region}, Koraput. Single-origin Arabica, roasted by Gray Cup — order online or add to your cart.`,
+      content: `Small-batch roasted coffee from ${farm.name}, ${farm.region}, Koraput. Single-origin Arabica, roasted by Gray Cup, order online or add to your cart.`,
     },
   ];
 }
@@ -125,7 +125,7 @@ export default function FarmRoastedCoffeePage() {
           <div>
             <h3 className="font-serif font-bold text-white text-lg">Need a custom roast from {farm.name}?</h3>
             <p className="text-white/60 text-sm mt-1">
-              Custom roast profiles, private labelling, or bulk quantities — contact us directly.
+              Custom roast profiles, private labelling, or bulk quantities, contact us directly.
             </p>
           </div>
           <Link

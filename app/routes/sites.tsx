@@ -16,7 +16,7 @@ export default function SitesPage() {
         <h1 className="text-4xl font-bold text-gray-900">Our Sites</h1>
         <p className="mt-4 max-w-3xl text-lg text-gray-600">
           GrayCup operates a group of informational websites focused on
-          different aspects of tea — from bulk chai usage to CTC grading and
+          different aspects of tea, from bulk chai usage to CTC grading and
           loose-leaf tea education. All sites listed below are owned and
           operated by GrayCup.
         </p>
@@ -45,7 +45,7 @@ export default function SitesPage() {
         <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
           <h2 className="text-lg font-semibold text-gray-900">BulkCTC</h2>
           <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-            Dedicated to explaining CTC tea — grades, particle size, colour
+            Dedicated to explaining CTC tea, grades, particle size, colour
             output, and consistency in bulk chai preparation.
           </p>
           <Link
@@ -62,7 +62,7 @@ export default function SitesPage() {
         <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
           <h2 className="text-lg font-semibold text-gray-900">PureCha</h2>
           <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-            Loose-leaf and orthodox tea education — purity, processing methods,
+            Loose-leaf and orthodox tea education, purity, processing methods,
             and leaf quality explained.
           </p>
           <Link
@@ -96,8 +96,8 @@ export default function SitesPage() {
         <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
           <h2 className="text-lg font-semibold text-gray-900">Indian Green Coffee</h2>
           <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-            Origin guide to India&apos;s green coffee — including Koraput,
-            Odisha — with processing methods, grading, and a catalogue of
+            Origin guide to India&apos;s green coffee, including Koraput,
+            Odisha, with processing methods, grading, and a catalogue of
             current lots.
           </p>
           <Link

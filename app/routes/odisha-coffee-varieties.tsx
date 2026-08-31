@@ -3,9 +3,9 @@ import { farms } from "@/data/farms";
 
 export function meta() {
   return [
-    { title: "Coffee Varieties in Odisha — Arabica Variety Guide" },
-    { name: "description", content: "A complete guide to Arabica coffee varieties grown in Odisha. S795, SLN 9, Catuai, HSD and Chandragiri — flavor profiles, elevations, and which Koraput farms grow each variety." },
-    { property: "og:title", content: "Coffee Varieties in Odisha — Arabica Variety Guide" },
+    { title: "Coffee Varieties in Odisha - Arabica Variety Guide" },
+    { name: "description", content: "A complete guide to Arabica coffee varieties grown in Odisha. S795, SLN 9, Catuai, HSD and Chandragiri, flavor profiles, elevations, and which Koraput farms grow each variety." },
+    { property: "og:title", content: "Coffee Varieties in Odisha, Arabica Variety Guide" },
     { property: "og:description", content: "Arabica S795, SLN 9, Catuai, HSD and Chandragiri from Koraput's Eastern Ghats. Cup profiles, growing conditions, and farm sources for every variety." },
     { property: "og:url", content: "https://odishacoffee.com/odisha-coffee-varieties" },
     { property: "og:locale", content: "en_IN" },
@@ -21,7 +21,7 @@ const varieties = [
     id: "s795",
     name: "Arabica S795",
     type: "Arabica",
-    origin: "Coffee Board of India hybrid — Mysore × Hybrido de Timor lineage",
+    origin: "Coffee Board of India hybrid, Mysore × Hybrido de Timor lineage",
     elevation: "800–1200m",
     cupProfile: ["Dark Chocolate", "Caramel", "Mild Citrus", "Clean Finish"],
     harvest: "November – February",
@@ -42,21 +42,21 @@ const varieties = [
     characteristics:
       "SLN 9 is the high-altitude specialty variety of Odisha's coffee belt, planted primarily in the Pottangi highlands where it reaches its full aromatic potential. Slow development at elevation above 1100m concentrates sugars and intensifies floral notes, producing some of the most complex cups from Indian-origin coffee available to specialty buyers.",
     processing: ["Washed", "Honey"],
-    farmExamples: ["Oak Winds Farm", "Dream Hill Coffee — Saptagiri Plantation", "Koraput A-1 Coffee"],
+    farmExamples: ["Oak Winds Farm", "Dream Hill Coffee, Saptagiri Plantation", "Koraput A-1 Coffee"],
     exportAvailable: true,
   },
   {
     id: "catuai",
     name: "Chandragiri",
     type: "Arabica",
-    origin: "Brazilian Catuai selection — Mundo Novo × Caturra",
+    origin: "Brazilian Catuai selection, Mundo Novo × Caturra",
     elevation: "900–1200m",
     cupProfile: ["Golden Raisin", "Honey", "Floral", "Sweet Body"],
     harvest: "December – February",
     characteristics:
       "Catuai is a compact, high-yielding Arabica that performs particularly well under honey and natural processing in Odisha. The variety's high cherry sugar content makes it well-suited to mucilage retention drying, producing cups with pronounced sweetness and honeyed body. Annapurna Estate on the Sunabeda plateau produces some of the most refined Catuai lots in the region.",
     processing: ["Honey", "Washed", "Natural"],
-    farmExamples: ["Annapurna Coffee Estate", "Dream Hill Coffee — Saptagiri Plantation"],
+    farmExamples: ["Annapurna Coffee Estate", "Dream Hill Coffee, Saptagiri Plantation"],
     exportAvailable: true,
   },
   {
@@ -82,7 +82,7 @@ const varieties = [
     cupProfile: ["Red Apple", "Brown Sugar", "Mild Citrus", "Medium Body"],
     harvest: "November – February",
     characteristics:
-      "Chandragiri is valued in Odisha for its robust disease resistance and consistent yield, making it a practical choice for estates expanding into coffee without specialist infrastructure. The cup quality, while less complex than S795 or SLN 9 at equivalent processing, can be elevated significantly through careful washed or pulped-natural processing — as Ekayani Plantation has demonstrated.",
+      "Chandragiri is valued in Odisha for its robust disease resistance and consistent yield, making it a practical choice for estates expanding into coffee without specialist infrastructure. The cup quality, while less complex than S795 or SLN 9 at equivalent processing, can be elevated significantly through careful washed or pulped-natural processing, as Ekayani Plantation has demonstrated.",
     processing: ["Washed", "Pulped Natural"],
     farmExamples: ["Ekayani Plantation", "Brown Valley Coffee Estate", "Maa Sarala Plantation"],
     exportAvailable: false,
@@ -117,7 +117,7 @@ export default function OdishaCoffeeVarietiesPage() {
           </h1>
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
             Odisha&apos;s coffee belt in Koraput district grows a diverse range of Arabica
-            varieties — from the widely planted S795 to the rare high-altitude SLN 9 of
+            varieties, from the widely planted S795 to the rare high-altitude SLN 9 of
             Pottangi. Each variety expresses the Eastern Ghats terroir differently, and processing
             method compounds the variation further. This guide covers every variety in the Gray Cup
             sourcing network.
@@ -166,7 +166,7 @@ export default function OdishaCoffeeVarietiesPage() {
             >
               <div className="p-6 md:p-8">
                 <div className="flex flex-col md:flex-row md:items-start gap-6">
-                  {/* Left — identity */}
+                  {/* Left, identity */}
                   <div className="md:w-64 shrink-0">
                     <div className="flex items-center gap-2 mb-1">
                       <span
@@ -230,7 +230,7 @@ export default function OdishaCoffeeVarietiesPage() {
                     </div>
                   </div>
 
-                  {/* Right — detail */}
+                  {/* Right, detail */}
                   <div className="flex-1">
                     <div className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-1">
                       Origin

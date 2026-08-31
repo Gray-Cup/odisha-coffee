@@ -4,10 +4,10 @@ import type { ProcessingMethod } from "@/data/farms";
 
 export function meta() {
   return [
-    { title: "Coffee Farms in Koraput — Odisha's Eastern Ghats Coffee Belt" },
-    { name: "description", content: "Discover coffee farms in Koraput district, Odisha. 23 verified estates across Jeypore, Pottangi, Semiliguda and Sunabeda — Arabica from 800–1450m elevation. Sourced by Gray Cup Enterprises." },
-    { property: "og:title", content: "Coffee Farms in Koraput — Odisha's Eastern Ghats Coffee Belt" },
-    { property: "og:description", content: "23 verified coffee estates in Koraput district. Arabica S795, SLN 9, Catuai and Chandragiri at 800–1450m — traceable, export-ready lots from Odisha's highland coffee belt." },
+    { title: "Coffee Farms in Koraput - Odisha's Eastern Ghats Coffee Belt" },
+    { name: "description", content: "Discover coffee farms in Koraput district, Odisha. 23 verified estates across Jeypore, Pottangi, Semiliguda and Sunabeda, Arabica from 800–1450m elevation. Sourced by Gray Cup Enterprises." },
+    { property: "og:title", content: "Coffee Farms in Koraput, Odisha's Eastern Ghats Coffee Belt" },
+    { property: "og:description", content: "23 verified coffee estates in Koraput district. Arabica S795, SLN 9, Catuai and Chandragiri at 800–1450m, traceable, export-ready lots from Odisha's highland coffee belt." },
     { property: "og:url", content: "https://odishacoffee.com/coffee-farms-koraput" },
     { property: "og:locale", content: "en_IN" },
   ];
@@ -32,7 +32,7 @@ const koraputZones = [
     name: "Pottangi Highlands",
     elevation: "1100–1450m",
     character: "Odisha's highest coffee zone. Intense aromatics, bright acidity, jasmine and citrus notes. Arabica-dominant.",
-    farms: ["Dream Hill Coffee — Saptagiri Plantation", "Oak Winds Farm"],
+    farms: ["Dream Hill Coffee, Saptagiri Plantation", "Oak Winds Farm"],
   },
   {
     name: "Sunabeda Plateau",
@@ -100,7 +100,7 @@ export default function CoffeeFarmsKoraputPage() {
             Coffee Farms in Koraput
           </h1>
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
-            Koraput district is the core of Odisha&apos;s coffee belt — a highland territory in
+            Koraput district is the core of Odisha&apos;s coffee belt, a highland territory in
             the southern Eastern Ghats where over two dozen estates cultivate Arabica
             at elevations from 800 to 1450 metres. Gray Cup Enterprises sources from{" "}
             {koraputFarms.length} verified farms here, spanning the full range of Koraput&apos;s
@@ -131,7 +131,7 @@ export default function CoffeeFarmsKoraputPage() {
             Koraput Growing Zones
           </h2>
           <p className="text-sm text-odisha-black/60 mb-8 max-w-2xl">
-            Koraput&apos;s coffee landscape is not uniform — each sub-zone has distinct elevation,
+            Koraput&apos;s coffee landscape is not uniform, each sub-zone has distinct elevation,
             soil character, and microclimate that shapes cup quality.
           </p>
 
@@ -175,7 +175,7 @@ export default function CoffeeFarmsKoraputPage() {
             All Koraput Partner Farms
           </h2>
           <p className="text-sm text-odisha-black/60 mb-8">
-            {koraputFarms.length} verified estates — click any farm for the full profile including
+            {koraputFarms.length} verified estates, click any farm for the full profile including
             elevation, varieties, processing methods, flavor character, and export status.
           </p>
 
@@ -255,7 +255,7 @@ export default function CoffeeFarmsKoraputPage() {
               Koraput is a highland district in the southernmost corner of Odisha, bordering
               Andhra Pradesh and Chhattisgarh. The district headquarters, Koraput town, lies
               at approximately 853 metres elevation. The broader district encompasses valleys,
-              plateaus, and peaks of the Eastern Ghats that rise to over 1500 metres — creating
+              plateaus, and peaks of the Eastern Ghats that rise to over 1500 metres, creating
               a climate far cooler and more variable than the Odisha coastal plain.
             </p>
             <p>
@@ -271,8 +271,8 @@ export default function CoffeeFarmsKoraputPage() {
               Koraput sits on ancient laterite and red loam soils enriched by the decomposition
               of Eastern Ghats forest canopy. The district&apos;s tribal farming traditions mean
               most estates have maintained shade-grown systems, with significant biodiversity in
-              the farm ecosystem. Combined with the high-altitude cool climate — average
-              temperature ranging from 10°C in winter nights to 30°C in summer afternoons —
+              the farm ecosystem. Combined with the high-altitude cool climate, average
+              temperature ranging from 10°C in winter nights to 30°C in summer afternoons,
               the beans develop slowly and accumulate density and complexity unusual in Indian
               lowland coffees.
             </p>
@@ -321,7 +321,7 @@ export default function CoffeeFarmsKoraputPage() {
               Looking to source from a specific Koraput farm?
             </h3>
             <p className="text-white/60 text-sm mt-1">
-              Share your cup profile requirements — we&apos;ll match you with the right estate.
+              Share your cup profile requirements, we&apos;ll match you with the right estate.
             </p>
           </div>
           <Link

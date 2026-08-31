@@ -11,7 +11,7 @@ import {
   type OrderItem,
 } from "@/lib/pricing";
 
-// Orders API + Checkout.js — NOT the Payment Links API (/pg/links). Links are
+// Orders API + Checkout.js, NOT the Payment Links API (/pg/links). Links are
 // Cashfree's no-code/shareable-link product (email/SMS/WhatsApp collection);
 // Orders + a payment_session_id is the actual storefront checkout flow, and
 // lets the frontend render Cashfree's checkout via the cashfree-js SDK
@@ -132,7 +132,7 @@ export async function action({ request, context }: Route.ActionArgs) {
     }).returning({ id: odishaCoffeeOrders.id });
 
     // Human-friendly sequential order reference derived from the row's own
-    // serial id (e.g. OD-0001, OD-0002, ...) — no separate counter needed.
+    // serial id (e.g. OD-0001, OD-0002, ...), no separate counter needed.
     const orderRef = `OD-${String(insertedOrder.id).padStart(4, "0")}`;
 
     if (email) {
@@ -163,7 +163,7 @@ export async function action({ request, context }: Route.ActionArgs) {
 
     const returnUrl = `${origin}/checkout/success?link_id=${linkId}&order_ref=${orderRef}`;
 
-    // `linkId` doubles as Cashfree's order_id — it's already alphanumeric
+    // `linkId` doubles as Cashfree's order_id, it's already alphanumeric
     // with underscores, well within the 3-50 char limit, and unique per order.
     const orderPayload = {
       order_id: linkId,
@@ -178,7 +178,7 @@ export async function action({ request, context }: Route.ActionArgs) {
       order_meta: {
         return_url: returnUrl,
       },
-      order_note: `Odisha Coffee ${orderRef} — ${productSummary}`,
+      order_note: `Odisha Coffee ${orderRef}, ${productSummary}`,
       order_expiry_time: expiryTime.toISOString(),
     };
 

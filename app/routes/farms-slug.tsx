@@ -7,7 +7,7 @@ export function meta({ params }: { params: { slug?: string } }) {
   const farm = params.slug ? getFarmBySlug(params.slug) : undefined;
   if (!farm) return [{ title: "Farm Not Found" }];
   return [
-    { title: `${farm.name} — ${farm.region}, ${farm.district}` },
+    { title: `${farm.name} - ${farm.region}, ${farm.district}` },
     { name: "description", content: farm.description },
   ];
 }
@@ -127,7 +127,7 @@ export default function FarmDetailPage() {
       <section className="bg-white border-b-2 border-odisha-black">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left column — about + story */}
+            {/* Left column, about + story */}
             <div className="lg:col-span-2 space-y-10">
               {/* About the farm */}
               <div>
@@ -196,7 +196,7 @@ export default function FarmDetailPage() {
               </div>
             </div>
 
-            {/* Right column — sidebar */}
+            {/* Right column, sidebar */}
             <div className="space-y-6">
               {/* Flavor profile card */}
               <div className="border-2 border-odisha-black bg-white p-6">

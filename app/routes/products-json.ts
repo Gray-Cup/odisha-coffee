@@ -10,7 +10,7 @@ import {
 } from "@/lib/pricing";
 import { SITE_URL } from "@/lib/seo";
 
-// Public product feed at /products.json — same shape as graycup.in/products.json
+// Public product feed at /products.json, same shape as graycup.in/products.json
 // so Gray Cup (and any other partner) can pull OdishaCoffee's green + roasted
 // catalogue directly. Prices come from the shared pricing module, so this
 // never drifts from checkout.

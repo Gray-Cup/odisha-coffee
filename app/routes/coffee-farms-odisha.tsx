@@ -4,9 +4,9 @@ import type { ProcessingMethod } from "@/data/farms";
 
 export function meta() {
   return [
-    { title: "Coffee Farms of Odisha — Estates, Regions & Varieties" },
-    { name: "description", content: "Explore all coffee farms of Odisha sourced by Gray Cup Enterprises. 24 verified estates across Koraput, Nabarangpur and the Eastern Ghats — Arabica, washed and natural lots." },
-    { property: "og:title", content: "Coffee Farms of Odisha — Estates, Regions & Varieties" },
+    { title: "Coffee Farms of Odisha - Estates, Regions & Varieties" },
+    { name: "description", content: "Explore all coffee farms of Odisha sourced by Gray Cup Enterprises. 24 verified estates across Koraput, Nabarangpur and the Eastern Ghats, Arabica, washed and natural lots." },
+    { property: "og:title", content: "Coffee Farms of Odisha, Estates, Regions & Varieties" },
     { property: "og:description", content: "24 verified coffee estates across Koraput and the Eastern Ghats. Traceable Arabica from Odisha's highland coffee belt, sourced by Gray Cup Enterprises." },
     { property: "og:url", content: "https://odishacoffee.com/coffee-farms-odisha" },
     { property: "og:locale", content: "en_IN" },
@@ -32,7 +32,7 @@ const regions = [
     name: "Koraput District",
     subtitle: "Odisha's Primary Coffee Belt",
     description:
-      "Koraput is the heartland of Odisha coffee — a highland district in the southern Eastern Ghats where elevations between 800 and 1450 metres create ideal conditions for Arabica cultivation. The district encompasses distinct growing pockets across Jeypore, Pottangi, Semiliguda, Sunabeda, Boipariguda, Similiguda, Narayanpatna, and Koraput town.",
+      "Koraput is the heartland of Odisha coffee, a highland district in the southern Eastern Ghats where elevations between 800 and 1450 metres create ideal conditions for Arabica cultivation. The district encompasses distinct growing pockets across Jeypore, Pottangi, Semiliguda, Sunabeda, Boipariguda, Similiguda, Narayanpatna, and Koraput town.",
     farmCount: farms.filter((f) => f.district === "Koraput").length,
   },
   {
@@ -76,7 +76,7 @@ export default function CoffeeFarmsOdishaPage() {
             Odisha is one of India&apos;s least-known yet most distinctive coffee-growing
             states. Nestled in the Eastern Ghats, farms across Koraput and Nabarangpur
             districts produce Arabica at elevations between 800 and 1450 metres
-            — under forest shade, with minimal chemical inputs, and with growing
+, under forest shade, with minimal chemical inputs, and with growing
             traceability. Gray Cup Enterprises sources directly from{" "}
             {farms.length} verified estates here.
           </p>
@@ -148,7 +148,7 @@ export default function CoffeeFarmsOdishaPage() {
               <div className="space-y-4 text-sm text-odisha-black/70 leading-relaxed">
                 <p>
                   Unlike better-known South Indian coffee regions, Odisha&apos;s coffee belt
-                  remains largely undiscovered by specialty buyers — which means exceptional
+                  remains largely undiscovered by specialty buyers, which means exceptional
                   lots are still available at honest prices. The Eastern Ghats provide
                   altitude, seasonal temperature variation, and rich laterite soils that
                   impart a distinct mineral quality to the cup.
@@ -156,7 +156,7 @@ export default function CoffeeFarmsOdishaPage() {
                 <p>
                   Coffee cultivation in Koraput dates back to the 1990s and early 2000s, with
                   estates now in their second and third generation. Processing infrastructure
-                  has evolved steadily — today, farms across the district produce washed,
+                  has evolved steadily, today, farms across the district produce washed,
                   natural, and honey lots, with some estates achieving cupping scores
                   consistently above 82.
                 </p>
@@ -219,7 +219,7 @@ export default function CoffeeFarmsOdishaPage() {
         </div>
       </section>
 
-      {/* Farm grid — Koraput estates */}
+      {/* Farm grid, Koraput estates */}
       <section className="bg-white border-b-2 border-odisha-black">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
           <div className="flex items-end justify-between mb-6">
@@ -305,7 +305,7 @@ export default function CoffeeFarmsOdishaPage() {
         </div>
       </section>
 
-      {/* SEO content — long-form */}
+      {/* SEO content, long-form */}
       <section className="bg-odisha-offwhite pattachitra-pattern border-b-2 border-odisha-black">
         <div className="max-w-4xl mx-auto px-4 lg:px-6 py-12">
           <h2 className="font-serif text-2xl font-bold text-odisha-black mb-6">
@@ -319,7 +319,7 @@ export default function CoffeeFarmsOdishaPage() {
               Within Koraput district, key growing pockets include Jeypore, Pottangi, Semiliguda,
               Sunabeda, Boipariguda, Similiguda, Narayanpatna, Lamtaput, and Kotpad. Elevation
               across these zones ranges from 800 metres at the lower valleys to over 1450 metres
-              in the Pottangi highlands — the latter being among the highest coffee-growing land
+              in the Pottangi highlands, the latter being among the highest coffee-growing land
               in peninsular India.
             </p>
             <p>
@@ -333,8 +333,8 @@ export default function CoffeeFarmsOdishaPage() {
               <strong className="text-odisha-black">How is Odisha coffee processed?</strong>{" "}
               The region supports all major processing methods. Washed processing is most common
               on estates with wet mill access; natural processing (whole-cherry sun drying) is
-              widely practised across the region; honey processing —
-              drying with mucilage intact — has been adopted by several forward-looking estates
+              widely practised across the region; honey processing,
+              drying with mucilage intact, has been adopted by several forward-looking estates
               seeking differentiated cup profiles. A few farms also produce pulped-natural lots.
             </p>
             <p>
@@ -356,7 +356,7 @@ export default function CoffeeFarmsOdishaPage() {
               Source Odisha coffee directly from the farm
             </h3>
             <p className="text-white/60 text-sm mt-1">
-              Green beans, roasted lots, or export containers — we connect buyers to verified farms.
+              Green beans, roasted lots, or export containers, we connect buyers to verified farms.
             </p>
           </div>
           <div className="flex gap-3">

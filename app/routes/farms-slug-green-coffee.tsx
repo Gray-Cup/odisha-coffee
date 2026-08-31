@@ -6,10 +6,10 @@ export function meta({ params }: { params: { slug?: string } }) {
   const farm = params.slug ? getFarmBySlug(params.slug) : undefined;
   if (!farm) return [{ title: "Farm Not Found" }];
   return [
-    { title: `${farm.name} Green Coffee Beans — Koraput, Odisha` },
+    { title: `${farm.name} Green Coffee Beans - Koraput, Odisha` },
     {
       name: "description",
-      content: `Buy green (unroasted) Arabica coffee beans direct from ${farm.name}, ${farm.region}, Koraput. AAA-grade washed and natural lots — traceable, export-ready. Select a grade and order online.`,
+      content: `Buy green (unroasted) Arabica coffee beans direct from ${farm.name}, ${farm.region}, Koraput. AAA-grade washed and natural lots, traceable, export-ready. Select a grade and order online.`,
     },
   ];
 }
@@ -195,7 +195,7 @@ export default function FarmGreenCoffeePage() {
           <div>
             <h3 className="font-serif font-bold text-white text-lg">Need a custom lot from {farm.name}?</h3>
             <p className="text-white/60 text-sm mt-1">
-              Large volumes, specific screen sizes, or cupping samples — contact us directly.
+              Large volumes, specific screen sizes, or cupping samples, contact us directly.
             </p>
           </div>
           <Link

@@ -106,7 +106,7 @@ export default function NewsroomPostPage({ loaderData: post }: Route.ComponentPr
         </div>
       </header>
 
-      {/* Article Content — real compiled MDX, not a raw-text dump */}
+      {/* Article Content, real compiled MDX, not a raw-text dump */}
       <article className="prose prose-lg max-w-none prose-neutral dark:prose-invert">
         <Content />
       </article>

@@ -8,7 +8,7 @@ export function meta() {
     {
       name: "description",
       content: generateDescription(
-        "Buying guides and deep-dives on Indian coffee — best coffee brands in India, Koraput and Odisha single-origin, filter coffee, and green coffee beans for roasters."
+        "Buying guides and deep-dives on Indian coffee, best coffee brands in India, Koraput and Odisha single-origin, filter coffee, and green coffee beans for roasters."
       ),
     },
     { tagName: "link", rel: "canonical", href: `${SITE_URL}/guides` },
@@ -29,7 +29,7 @@ export default function GuidesIndexPage() {
       <div className="mb-12">
         <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">Coffee Guides</h1>
         <p className="max-w-3xl text-muted-foreground md:text-lg">
-          Honest buying guides on Indian coffee — from the best beans to drink to the green
+          Honest buying guides on Indian coffee, from the best beans to drink to the green
           lots roasters source from Koraput, Odisha.
         </p>
       </div>

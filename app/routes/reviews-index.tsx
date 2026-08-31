@@ -7,7 +7,7 @@ export function meta() {
     {
       name: "description",
       content: generateDescription(
-        "Read what buyers say about Gray Cup's Odisha coffee — green beans and roasted lots straight from Koraput's partner estates."
+        "Read what buyers say about Gray Cup's Odisha coffee, green beans and roasted lots straight from Koraput's partner estates."
       ),
     },
   ];

@@ -148,7 +148,7 @@ function BuilderContent() {
           <h1 className="font-serif text-3xl md:text-4xl font-bold text-white">Order Builder</h1>
           <p className="text-white/70 text-sm mt-2 max-w-xl">
             Build a custom order across any of our products or estate lots. Your selection lives entirely in this
-            page&apos;s URL — share or bookmark the link to save it, no account needed.
+            page&apos;s URL, share or bookmark the link to save it, no account needed.
           </p>
         </div>
       </section>
@@ -334,7 +334,7 @@ function BuilderContent() {
                 )}
               </button>
               <p className="text-[10px] text-odisha-black/40 mt-3 text-center">
-                This cart isn&apos;t saved anywhere — bookmark or copy this page&apos;s URL to keep it. Sharing
+                This cart isn&apos;t saved anywhere, bookmark or copy this page&apos;s URL to keep it. Sharing
                 generates a link that loads these items into whoever opens it.
               </p>
             </div>

@@ -19,7 +19,7 @@ type GrayCupProduct = {
 const graycupProducts = graycupFeed.products as GrayCupProduct[];
 
 // Horizontal product cards for guide articles (content/guides/*.mdx).
-// Every link here is a plain <Link>/<a> with NO rel="nofollow" — internal
+// Every link here is a plain <Link>/<a> with NO rel="nofollow", internal
 // links to our own catalogue and dofollow outbound links to Gray Cup.
 
 type Resolved = {
@@ -187,7 +187,7 @@ export function GrayCupCard({ slug, label }: { slug: string; label?: string }) {
 
 // Full Gray Cup coffee list (accessories/samplers excluded) for the
 // "also roasted by Gray Cup" section on /roasted-coffee. Outbound dofollow
-// links only — no Product JSON-LD, since these aren't OdishaCoffee offers.
+// links only, no Product JSON-LD, since these aren't OdishaCoffee offers.
 export function GrayCupShowcase({
   kinds,
   limit,
@@ -220,7 +220,7 @@ export function GrayCupRow({ slugs, label }: { slugs: string[]; label?: string }
 }
 
 // Dofollow outbound link to Gray Cup (the roastery that buys OdishaCoffee
-// green beans and sells them roasted). No rel="nofollow" — link equity is
+// green beans and sells them roasted). No rel="nofollow", link equity is
 // meant to pass to our sister site.
 export function GrayCupLink({
   href = "https://graycup.in",

@@ -3,9 +3,9 @@ import { farms } from "@/data/farms";
 
 export function meta() {
   return [
-    { title: "Coffee Farms Near Bhubaneswar — Odisha Coffee Belt, Koraput" },
-    { name: "description", content: "Looking for coffee farms near Bhubaneswar? Odisha's coffee belt is in Koraput district — 400km from Bhubaneswar. Gray Cup sources from 24 verified estates there. Explore farm profiles, visiting information, and direct sourcing." },
-    { property: "og:title", content: "Coffee Farms Near Bhubaneswar — Odisha Coffee Belt, Koraput" },
+    { title: "Coffee Farms Near Bhubaneswar - Odisha Coffee Belt, Koraput" },
+    { name: "description", content: "Looking for coffee farms near Bhubaneswar? Odisha's coffee belt is in Koraput district, 400km from Bhubaneswar. Gray Cup sources from 24 verified estates there. Explore farm profiles, visiting information, and direct sourcing." },
+    { property: "og:title", content: "Coffee Farms Near Bhubaneswar, Odisha Coffee Belt, Koraput" },
     { property: "og:description", content: "Odisha's coffee farms are in Koraput, ~400km from Bhubaneswar. 24 verified estates growing Arabica at 800–1450m elevation. Sourced by Gray Cup Enterprises." },
     { property: "og:url", content: "https://odishacoffee.com/coffee-farms-near-bhubaneswar" },
     { property: "og:locale", content: "en_IN" },
@@ -62,7 +62,7 @@ export default function CoffeeFarmsNearBhubaneswarPage() {
             Coffee Farms Near Bhubaneswar
           </h1>
           <p className="text-white/70 text-sm max-w-2xl leading-relaxed mb-8">
-            Odisha&apos;s coffee country lies in Koraput district — approximately 400 kilometres
+            Odisha&apos;s coffee country lies in Koraput district, approximately 400 kilometres
             south of Bhubaneswar in the Eastern Ghats highlands. This is where Gray Cup
             Enterprises sources from {farms.length} verified coffee estates growing Arabica
             at elevations between 800 and 1450 metres. Whether you&apos;re looking to
@@ -98,7 +98,7 @@ export default function CoffeeFarmsNearBhubaneswarPage() {
                 <p>
                   Unlike states such as Karnataka or Kerala where coffee is grown across much of
                   the state, Odisha&apos;s coffee cultivation is concentrated in a single highland
-                  district — <strong className="text-odisha-black">Koraput</strong> — in the far
+                  district (<strong className="text-odisha-black">Koraput</strong>) in the far
                   south of the state. This is where the Eastern Ghats reach their highest
                   elevations in Odisha, creating a cool, highland climate ideal for Arabica
                   cultivation.
@@ -106,14 +106,14 @@ export default function CoffeeFarmsNearBhubaneswarPage() {
                 <p>
                   Koraput district lies roughly 390–420 kilometres from Bhubaneswar by road,
                   depending on the route. The terrain changes dramatically from the Odisha coastal
-                  plain — as you approach Koraput, the landscape climbs through forests and river
+                  plain, as you approach Koraput, the landscape climbs through forests and river
                   valleys into the hills where coffee estates are scattered across slopes and
                   plateaus.
                 </p>
                 <p>
                   Key growing pockets within Koraput include Jeypore (the commercial hub),
                   Pottangi (the highest zone, up to 1450m), Semiliguda, Sunabeda plateau, and
-                  Boipariguda. The district headquarters — Koraput town — sits at about 850
+                  Boipariguda. The district headquarters (Koraput town) sits at about 850
                   metres elevation and serves as the base for most farm visits.
                 </p>
               </div>
@@ -153,7 +153,7 @@ export default function CoffeeFarmsNearBhubaneswarPage() {
             What to Expect at a Koraput Coffee Farm
           </h2>
           <p className="text-sm text-odisha-black/60 mb-8 max-w-2xl">
-            A visit to Odisha&apos;s coffee belt is unlike most tourist coffee experiences — these
+            A visit to Odisha&apos;s coffee belt is unlike most tourist coffee experiences, these
             are working farms, not curated estates, and the experience is direct and authentic.
           </p>
 
@@ -177,11 +177,11 @@ export default function CoffeeFarmsNearBhubaneswarPage() {
               },
               {
                 title: "High-Altitude Scenery",
-                body: "Koraput's coffee zones are strikingly beautiful — forested hills, misty mornings at elevation, the Saberi and Kolab rivers cutting through valleys. Pottangi (Odisha's highest growing zone) offers views across the Eastern Ghats into Andhra Pradesh.",
+                body: "Koraput's coffee zones are strikingly beautiful, forested hills, misty mornings at elevation, the Saberi and Kolab rivers cutting through valleys. Pottangi (Odisha's highest growing zone) offers views across the Eastern Ghats into Andhra Pradesh.",
               },
               {
                 title: "Direct Purchase",
-                body: "Many Gray Cup partner farms will sell directly if you visit in person. For green bean buyers — importers, roasters — farm visits can include lot inspection and sample approval on-site before finalising export contracts.",
+                body: "Many Gray Cup partner farms will sell directly if you visit in person. For green bean buyers (importers, roasters) farm visits can include lot inspection and sample approval on-site before finalising export contracts.",
               },
             ].map((card) => (
               <div
@@ -205,7 +205,7 @@ export default function CoffeeFarmsNearBhubaneswarPage() {
             Featured Koraput Farms
           </h2>
           <p className="text-sm text-odisha-black/60 mb-8">
-            Well-established estates — a good starting point for farm visits or sourcing enquiries.
+            Well-established estates, a good starting point for farm visits or sourcing enquiries.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
@@ -258,7 +258,7 @@ export default function CoffeeFarmsNearBhubaneswarPage() {
           <p className="text-sm text-odisha-black/70 leading-relaxed mb-6">
             You don&apos;t need to visit the farms to experience Odisha coffee. Gray Cup ships
             roasted coffee directly from Koraput-sourced lots to anywhere in India. For business
-            buyers — roasters, cafes, importers — we can arrange sample sets, cupping lot
+            buyers (roasters, cafes, importers) we can arrange sample sets, cupping lot
             documentation, and farm visit coordination remotely.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
@@ -286,7 +286,7 @@ export default function CoffeeFarmsNearBhubaneswarPage() {
               Explore Odisha&apos;s coffee belt in detail
             </h3>
             <p className="text-white/60 text-sm mt-1">
-              Farm profiles, varieties guide, export information — it&apos;s all here.
+              Farm profiles, varieties guide, export information, it&apos;s all here.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

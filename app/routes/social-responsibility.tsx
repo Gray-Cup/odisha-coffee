@@ -24,7 +24,7 @@ export default function SocialResponsibilityPage() {
             What we stand for.
           </h1>
           <p className="mt-4 text-sm sm:text-base text-neutral-500 max-w-xl leading-relaxed">
-            What goes in your cup should be traceable, fair, and transparent —
+            What goes in your cup should be traceable, fair, and transparent,
             from the farm to your hands.
           </p>
         </div>
@@ -38,7 +38,7 @@ export default function SocialResponsibilityPage() {
             Know where your tea and coffee comes from.
           </h2>
           <p className="mt-4 text-sm sm:text-base text-neutral-500 max-w-xl leading-relaxed">
-            Coffee and tea farms have long operated in the background — but we
+            Coffee and tea farms have long operated in the background, but we
             think they deserve to be seen. That's why we built{" "}
             <span className="font-medium text-neutral-700">Gray Farms</span>, a
             public directory of tea and coffee farms so growers can be found,

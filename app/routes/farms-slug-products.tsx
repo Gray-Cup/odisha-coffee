@@ -6,7 +6,7 @@ export function meta({ params }: { params: { slug?: string } }) {
   const farm = params.slug ? getFarmBySlug(params.slug) : undefined;
   if (!farm) return [{ title: "Farm Not Found" }];
   return [
-    { title: `Buy Coffee from ${farm.name} — Koraput, Odisha` },
+    { title: `Buy Coffee from ${farm.name} - Koraput, Odisha` },
     {
       name: "description",
       content: `Browse and buy single-origin coffee lots directly from ${farm.name}, ${farm.region}, Koraput.`,
@@ -195,7 +195,7 @@ export default function FarmProductsPage() {
           <div>
             <h3 className="font-serif font-bold text-white text-lg">Need a custom lot from {farm.name}?</h3>
             <p className="text-white/60 text-sm mt-1">
-              Large volumes, specific screen sizes, or cupping samples — contact us directly.
+              Large volumes, specific screen sizes, or cupping samples, contact us directly.
             </p>
           </div>
           <Link

@@ -94,7 +94,7 @@ export default function FarmProductDetailPage() {
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-            {/* Left — product details */}
+            {/* Left, product details */}
             <div className="lg:col-span-2 space-y-8">
 
               {/* Description */}
@@ -196,7 +196,7 @@ export default function FarmProductDetailPage() {
               </div>
             </div>
 
-            {/* Right — order panel */}
+            {/* Right, order panel */}
             <div className="space-y-4">
 
               {/* Pricing card */}
@@ -240,7 +240,7 @@ export default function FarmProductDetailPage() {
                   {/* Price breakdown */}
                   <div className="border-2 border-odisha-black/10 bg-odisha-offwhite p-4 space-y-2">
                     <div className="text-[10px] uppercase tracking-widest text-odisha-black/40 mb-3">
-                      Price Breakdown — {selectedWeight.label}
+                      Price Breakdown: {selectedWeight.label}
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-odisha-black/60">

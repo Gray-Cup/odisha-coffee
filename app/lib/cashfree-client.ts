@@ -1,6 +1,6 @@
 // Loads Cashfree's Checkout.js SDK (the Orders/Payment Session product) as a
 // plain <script> tag rather than an npm dependency, mirroring how
-// components/ui/turnstile.tsx loads Cloudflare Turnstile — one script tag,
+// components/ui/turnstile.tsx loads Cloudflare Turnstile, one script tag,
 // checked for before re-adding, no build-time SDK dependency.
 
 export type CashfreeCheckoutResult = {

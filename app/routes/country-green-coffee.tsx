@@ -22,7 +22,7 @@ export function meta({ data, params }: Route.MetaArgs) {
     {
       name: "description",
       content: generateDescription(
-        `Export-ready Koraput, Odisha green Arabica coffee for roasters and importers in ${country.name}. Traceable, tribal-farmed, Eastern Ghats single-origin lots — select a grade and order online.`
+        `Export-ready Koraput, Odisha green Arabica coffee for roasters and importers in ${country.name}. Traceable, tribal-farmed, Eastern Ghats single-origin lots, select a grade and order online.`
       ),
     },
     { property: "og:title", content: `Green Coffee Exporter to ${country.name} ${country.flag} | Odisha Coffee` },
@@ -66,7 +66,7 @@ export default function CountryGreenCoffeePage({ loaderData }: Route.ComponentPr
             Green Coffee Exporter to {country.name} {country.flag}
           </h1>
           <p className="mt-4 text-white/80 max-w-2xl text-base">
-            Koraput Arabica from the Eastern Ghats — traceable, tribal-farmed, and export-ready.
+            Koraput Arabica from the Eastern Ghats, traceable, tribal-farmed, and export-ready.
             Select a grade below, choose your farm, and order direct for shipment to {country.name}.
           </p>
           <div className="mt-6 flex flex-wrap gap-6">
@@ -95,7 +95,7 @@ export default function CountryGreenCoffeePage({ loaderData }: Route.ComponentPr
             Gray Cup Enterprises exports Koraput, Odisha green Arabica directly from our {farms.length}{" "}
             partner estates in the Eastern Ghats to roasters, importers, and traders in {country.name}. Every
             export-ready lot ships with APEDA registration, a phytosanitary certificate, FSSAI documentation,
-            an ICO stamp, and full farm-level traceability — grown by tribal farming communities at 700–1,100m
+            an ICO stamp, and full farm-level traceability, grown by tribal farming communities at 700–1,100m
             elevation.
           </p>
         </div>
@@ -116,7 +116,7 @@ export default function CountryGreenCoffeePage({ loaderData }: Route.ComponentPr
                 Can roasters in {country.name} order Koraput green coffee directly online?
               </h3>
               <p className="text-odisha-black/70 leading-relaxed">
-                Yes — select a grade and farm above, choose your quantity, and either add it to your cart
+                Yes, select a grade and farm above, choose your quantity, and either add it to your cart
                 or proceed straight to checkout. For larger export quantities, contact us for FOB pricing
                 and FCL/LCL options.
               </p>
