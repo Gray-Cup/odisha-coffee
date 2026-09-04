@@ -14,6 +14,7 @@ const PATCHABLE_FIELDS = [
   "shadowfax_request_id",
   "dispatch_status",
   "payment_status",
+  "cf_payment_id",
 ] as const;
 
 // Resource routes dispatch every non-GET method through one `action` - PATCH

@@ -24,6 +24,7 @@ export const odishaCoffeeOrders = sqliteTable("odisha_coffee_orders", {
   // cashfree
   link_id:        text("link_id").notNull().unique(),
   cf_link_id:     text("cf_link_id"),   // Cashfree's own numeric link id, set after link creation
+  cf_payment_id:  text("cf_payment_id"),  // Cashfree payment/transaction id, set by the PAYMENT_SUCCESS webhook
   payment_status: text("payment_status").notNull().default("pending"),
 
   // shipping - set by orders-graycup admin

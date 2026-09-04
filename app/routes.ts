@@ -70,6 +70,7 @@ export default [
   route("api/reviews", "routes/reviews.ts"),
   route("api/reviews/upload-url", "routes/reviews-upload-url.ts"),
   route("api/reviews/verify-email", "routes/reviews-verify-email.ts"),
+  route("api/webhooks/cashfree", "routes/api-webhooks-cashfree.ts"),
   route("api/webhooks/enterprise", "routes/api-webhooks-enterprise.ts"),
   route("api/webhooks/feedback", "routes/api-webhooks-feedback.ts"),
   route("api/webhooks/feature", "routes/api-webhooks-feature.ts"),
